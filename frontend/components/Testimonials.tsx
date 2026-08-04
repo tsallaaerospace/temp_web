@@ -34,8 +34,8 @@ const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
   return (
     <motion.li
       className={`relative w-full overflow-hidden border border-[#505051]/10
-        md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] h-[400px] lg:h-[450px] 3xl:h-[450px] uw:h-[500px] mb-8 lg:mb-0 group cursor-pointer`}
-      /* PREVIOUS UI: h-[400px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] */
+        md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] h-[400px] lg:h-[450px] 3xl:h-[380px] uw:h-[420px] mb-8 lg:mb-0 group cursor-pointer`}
+      /* PREVIOUS UI: 3xl:h-[450px] uw:h-[500px] */
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -230,8 +230,8 @@ const Testimonials: React.FC = () => {
           <ChevronLeft size={24} />
         </motion.button>
 
-        {/* PREVIOUS UI: h-[420px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] */}
-        <div className="flex-1 relative h-[420px] lg:h-[450px] 3xl:h-[450px] uw:h-[500px] overflow-hidden px-2 md:px-4">
+        {/* PREVIOUS UI: 3xl:h-[450px] uw:h-[500px] */}
+        <div className="flex-1 relative h-[420px] lg:h-[450px] 3xl:h-[380px] uw:h-[420px] overflow-hidden px-2 md:px-4">
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.ul
               key={currentPage}
