@@ -254,7 +254,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
             className={cn(
+                /* PREVIOUS UI (vh-based card height - causes size difference between localhost and production):
                 "group relative aspect-[2/3] lg:aspect-auto lg:h-[62vh] 3xl:h-[68vh] uw:h-[72vh] overflow-hidden rounded-none bg-black border border-white/20 hover:border-white/40 transition-all duration-500 shadow-[inset_0_0_30px_rgba(255,255,255,0.05)]",
+                */
+                "group relative aspect-[2/3] lg:aspect-auto lg:h-[480px] 3xl:h-[520px] uw:h-[560px] overflow-hidden rounded-none bg-black border border-white/20 hover:border-white/40 transition-all duration-500 shadow-[inset_0_0_30px_rgba(255,255,255,0.05)]",
                 isFenix && "cursor-pointer hover:border-[#5ce1e6]/60"
             )}
         >
