@@ -37,7 +37,14 @@ const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* PREVIOUS UI (Direct navigation on card click):
       <Link href={readMoreLink} className="block text-black no-underline h-full relative">
+      */}
+      <Link
+        href="#"
+        onClick={(e) => e.preventDefault()}
+        className="block text-black no-underline h-full relative"
+      >
         <div className={`absolute inset-0 z-0 ${bgColor}`}>
           <Image
             className={`w-full h-full ${objectFit === "contain" ? "object-contain" : "object-cover"} transition-all duration-700 ease-in-out ${isHovered ? 'scale-110 opacity-0' : 'scale-100 opacity-100'}`}

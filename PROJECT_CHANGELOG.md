@@ -65,8 +65,11 @@
 - ⏭️ **AFTER UI STATE**: Unchanged (Operating normally).
 
 #### 📍 Section 6: Testimonials / News & Media Section ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
-- ⏮️ **BEFORE UI STATE**: News cards carousel.
-- ⏭️ **AFTER UI STATE**: Unchanged (Operating normally).
+- ⏮️ **BEFORE UI STATE**:
+  - Clicking cards in the News and Media carousel navigated to `/newsroom` or external links.
+- ⏭️ **AFTER UI STATE**:
+  - Disabled navigation on click for all News and Media cards (`e.preventDefault()`), preventing users from leaving the page when clicking any card.
+  - *Previous link navigation code preserved as comment block in `Testimonials.tsx`.*
 
 #### 📍 Section 7: Footer Section ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx))
 - ⏮️ **BEFORE UI STATE**:
