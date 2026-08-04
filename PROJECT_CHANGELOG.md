@@ -39,7 +39,7 @@
 - **Status**: No changes requested (Operating normally).
 
 #### 📍 Section 4: Product Section ([ProductSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/ProductSection.tsx))
-- **Status**: No changes requested (Operating normally - FENIX, T-BAT, TEAMING, and STORM cards active).
+- **Prevent Navigation on Click**: Updated all product card buttons (**Learn More** and **Explore** buttons for FENIX, T-BAT, TEAMING / DEXTER, STORM, and MAVERICK) to trigger `e.preventDefault()` on click, ensuring users remain on the Home Page when pressing any product button.
 
 #### 📍 Section 5: Velocity Complex Section ([VelocityComplex.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/VelocityComplex.tsx))
 - **Status**: No changes requested (Operating normally).

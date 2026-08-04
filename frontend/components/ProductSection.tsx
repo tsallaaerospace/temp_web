@@ -233,7 +233,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                     </div>
 
                     <div className="mt-2 flex flex-col md:flex-row justify-end items-end gap-4">
-                        <Link href={product.href}>
+                        <Link href="#" onClick={(e) => e.preventDefault()}>
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
@@ -271,7 +271,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                         <h3 className="text-2xl lg:text-base xl:text-lg 2xl:text-2xl uw:text-3xl font-black text-white uppercase tracking-tighter truncate" style={{ fontFamily: PONTANO_SANS }}>
                             {product.title}
                         </h3>
-                        <Link href={product.href} className="shrink-0">
+                        <Link href="#" onClick={(e) => e.preventDefault()} className="shrink-0">
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
@@ -335,7 +335,7 @@ export default function ProductSection() {
                                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                                     Drone As First Responder
                                 </span>
-                                <Link href="/uncrewedsystems/fenix">
+                                <Link href="#" onClick={(e) => e.preventDefault()}>
                                     <button className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-bold text-white/50 hover:text-white transition-colors">
                                         Explore <ChevronRight className="w-3.5 h-3.5" />
                                     </button>
@@ -392,7 +392,7 @@ export default function ProductSection() {
                                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                                     Outdoor Tactical
                                 </span>
-                                <Link href="/uncrewedsystems/bat">
+                                <Link href="#" onClick={(e) => e.preventDefault()}>
                                     <button className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-bold text-white/50 hover:text-white transition-colors">
                                         Explore <ChevronRight className="w-3.5 h-3.5" />
                                     </button>
@@ -431,7 +431,7 @@ export default function ProductSection() {
                                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                                     Outdoor Overwatch
                                 </span>
-                                <Link href="/uncrewedsystems/dexter">
+                                <Link href="#" onClick={(e) => e.preventDefault()}>
                                     <button className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-bold text-white/50 hover:text-white transition-colors">
                                         Explore <ChevronRight className="w-3.5 h-3.5" />
                                     </button>
@@ -469,7 +469,7 @@ export default function ProductSection() {
                                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                                     Crisis Communications
                                 </span>
-                                <Link href="/uncrewedsystems/storm">
+                                <Link href="#" onClick={(e) => e.preventDefault()}>
                                     <button className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-bold text-white/50 hover:text-white transition-colors">
                                         Explore <ChevronRight className="w-3.5 h-3.5" />
                                     </button>
