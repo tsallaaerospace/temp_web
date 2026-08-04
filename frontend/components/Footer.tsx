@@ -14,6 +14,33 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  /* PREVIOUS UI (Original Placeholder Products & Links):
+  const footerLinks = {
+    company: [
+      { name: "About Us", href: "/about" },
+      { name: "Mission Autonomy", href: "/mission-autonomy" },
+      { name: "Our Team", href: "/our-team" },
+      { name: "Our Culture", href: "/careers/culture" },
+      { name: "Careers", href: "/careers" },
+    ],
+    products: [
+      { name: "Roadrunner", href: "/products/roadrunner" },
+      { name: "Hardware", href: "/products/hardware" },
+      { name: "Mission Systems", href: "/products/mission-systems" },
+    ],
+    media: [
+      { name: "Media Coverage", href: "/newsroom" },
+      { name: "Press Releases", href: "/press-releases" },
+      { name: "Blog", href: "/blog" },
+    ],
+    legal: [
+      { name: "Security", href: "/legal/security" },
+      { name: "Privacy", href: "/legal/privacy" },
+      { name: "Suppliers", href: "/legal/suppliers" },
+    ],
+  };
+  */
+
   const footerLinks = {
     company: [
       { name: "About Us", href: "/about" },

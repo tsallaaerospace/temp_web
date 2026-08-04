@@ -1,84 +1,108 @@
 # Tsalla Aerospace - Project Change Log & Activity Record
 
 > **Purpose**: This document maintains a clear, human-understandable record of all changes, updates, feature additions, and temporary feature disables across all prompts and chat sessions starting from **August 04, 2026**.
-> All changes are organized hierarchically by **Page Name** and **Specific Section** so anyone reviewing this repository can immediately understand what was modified.
+> All changes are organized hierarchically by **Page Name** and **Specific Section**, explicitly detailing the **Before UI State** vs **After UI State** so anyone reviewing this repository can immediately understand what was modified and how to restore previous states if desired.
 
 ---
 
 ## 📌 Rules for Logging Future Updates (For AI Assistants)
 1. **Mandatory Logging**: For every prompt/chat, log all changes in this document under the current date.
 2. **Page & Section Breakdown**: Group changes strictly by Page (e.g., `Home Page (/)`) and Section (e.g., `Section 1: Top Navigation Bar`, `Section 2: Hero Section`, etc.).
-3. **Understandable Language**: Write simple, non-cryptic descriptions so non-technical team members and future developers can easily follow along.
+3. **Before UI & After UI Detail**: Every section change MUST document:
+   - ⏮️ **BEFORE UI STATE**: Exactly how the component/layout looked and behaved before the prompt.
+   - ⏭️ **AFTER UI STATE**: Exactly how the component/layout looks and behaves after the prompt.
+4. **Code Preservation**: NEVER delete old code when modifying files. Comment out the previous code block (e.g. `{/* PREVIOUS UI: ... */}`) in the source file so it can easily be restored if requested.
 
 ---
 
 ## 📅 Session Log: August 04, 2026
 
 ### 🎯 Overview of User Request
-- Temporarily disable and completely hide 4 specific navigation buttons on the Home Page (`/`):
-  1. **"JOIN THE MISSION"**
-  2. **"COMPANY"**
-  3. **"SPACE SYSTEMS"**
-  4. **"COUNTER SYSTEMS"**
-- Prevent users from accessing these pages from the Home Page.
+- Temporarily disable and hide 4 specific navigation buttons on the Home Page (`/`): `JOIN THE MISSION`, `COMPANY`, `SPACE SYSTEMS`, `COUNTER SYSTEMS`.
 - Center the remaining active navigation items (**MAVERICK** & **UNCREWED SYSTEMS**) in the header.
-- Establish a permanent, easy-to-read change log document tracking all updates from today onwards.
+- Hide the `Learn More` button in the Hero Section.
+- Fix incorrect product names in the Footer (`PRODUCTS` column) and populate the `COMPANY` column.
+- Prevent page navigation on click for all Footer links, Footer buttons, and Product Section buttons on the Home Page.
+- Preserve all previous code in comments in source files for future restoration.
 
 ---
 
 ### 🌐 PAGE: Home Page (`/`)
 
 #### 📍 Section 1: Top Navigation Bar ([Navbar.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Navbar.tsx))
-- **Hidden Disabled Buttons**: Completely hid **"JOIN THE MISSION"**, **"COMPANY"**, **"SPACE SYSTEMS"**, and **"COUNTER SYSTEMS"** from the UI (in both Desktop navbar and Mobile navigation menu drawer) so users cannot see or click them while on the Home Page.
-- **Centered Active Items**: Moved the active navigation buttons (**"MAVERICK"** and **"UNCREWED SYSTEMS"**) directly into the **Center** of the header bar (`absolute left-1/2 -translate-x-1/2`).
+- ⏮️ **BEFORE UI STATE**:
+  - Top header displayed 6 menu items right-aligned: `MAVERICK`, `UNCREWED SYSTEMS`, `COUNTER SYSTEMS`, `SPACE SYSTEMS`, `COMPANY`, `JOIN THE MISSION`.
+  - All items opened hover MegaMenus or navigated to subpages.
+- ⏭️ **AFTER UI STATE**:
+  - Hidden `COUNTER SYSTEMS`, `SPACE SYSTEMS`, `COMPANY`, `JOIN THE MISSION` from the UI on the Home Page (both Desktop bar & Mobile drawer).
+  - Only **MAVERICK** and **UNCREWED SYSTEMS** are visible, and they are horizontally **Centered** in the top header (`absolute left-1/2 -translate-x-1/2`).
+  - *Previous code preserved as comment block in `Navbar.tsx`.*
 
 #### 📍 Section 2: Hero Section ([HeroSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/HeroSection.tsx))
-- **Hidden Button**: Completely hid the **"Learn More"** button from the Hero Section because it pointed to the Company page (`/about`), which is currently disabled on the Home Page.
+- ⏮️ **BEFORE UI STATE**:
+  - Hero Section displayed an active **"Learn More"** outline button linking to `/about` (Company).
+- ⏭️ **AFTER UI STATE**:
+  - **"Learn More"** button is hidden from the UI on the Home Page.
+  - *Previous button code preserved as comment block in `HeroSection.tsx`.*
 
 #### 📍 Section 3: Missions Section ([Missions.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Missions.tsx))
-- **Status**: No changes requested (Operating normally).
+- ⏮️ **BEFORE UI STATE**: Full-screen image section "On a mission to protect our protectors."
+- ⏭️ **AFTER UI STATE**: Unchanged (Operating normally).
 
 #### 📍 Section 4: Product Section ([ProductSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/ProductSection.tsx))
-- **Prevent Navigation on Click**: Updated all product card buttons (**Learn More** and **Explore** buttons for FENIX, T-BAT, TEAMING / DEXTER, STORM, and MAVERICK) to trigger `e.preventDefault()` on click, ensuring users remain on the Home Page when pressing any product button.
+- ⏮️ **BEFORE UI STATE**:
+  - Product cards (**FENIX**, **T-BAT**, **TEAMING/DEXTER**, **STORM**) and Bento grid cards had **"Learn More"** and **"Explore"** buttons that navigated directly to individual product detail pages (`/uncrewedsystems/fenix`, etc.).
+- ⏭️ **AFTER UI STATE**:
+  - All **"Learn More"** and **"Explore"** buttons are visible on product cards, but clicking any button triggers `e.preventDefault()`, keeping the user on the Home Page without navigating away.
+  - *Previous navigation code preserved as comment block in `ProductSection.tsx`.*
 
 #### 📍 Section 5: Velocity Complex Section ([VelocityComplex.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/VelocityComplex.tsx))
-- **Status**: No changes requested (Operating normally).
+- ⏮️ **BEFORE UI STATE**: Section displaying defense manufacturing facility details.
+- ⏭️ **AFTER UI STATE**: Unchanged (Operating normally).
 
 #### 📍 Section 6: Testimonials / News & Media Section ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
-- **Status**: No changes requested (Operating normally).
+- ⏮️ **BEFORE UI STATE**: News cards carousel.
+- ⏭️ **AFTER UI STATE**: Unchanged (Operating normally).
 
 #### 📍 Section 7: Footer Section ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx))
-- **Correct Product Data**: Replaced placeholder products (`Roadrunner`, `Hardware`, `Mission Systems`) with the exact real Tsalla Aerospace product suite: **FENIX**, **T-BAT**, **STORM**, **DEXTER**, and **MAVERICK**.
-- **Company Section Restored**: Rendered complete company links under `COMPANY` (`About Us`, `Mission Autonomy`, `Our Team`, `Our Culture`, `Careers`).
-- **Prevent Navigation on Click**: Updated all Footer links and the **"VIEW CAREERS"** button so that when pressed on the Home Page, `e.preventDefault()` is triggered and the user is prevented from navigating away from the Home Page.
+- ⏮️ **BEFORE UI STATE**:
+  - `PRODUCTS` column displayed placeholder product names (`Roadrunner`, `Hardware`, `Mission Systems`).
+  - `COMPANY` column was empty due to hidden routes.
+  - Footer links navigated to subpages when clicked.
+- ⏭️ **AFTER UI STATE**:
+  - `PRODUCTS` column displays the exact real Tsalla Aerospace products: **FENIX**, **T-BAT**, **STORM**, **DEXTER**, **MAVERICK**.
+  - `COMPANY` column displays full links: **About Us**, **Mission Autonomy**, **Our Team**, **Our Culture**, **Careers**.
+  - Clicking any link under `COMPANY`, `PRODUCTS`, `MEDIA`, `LEGAL` or pressing **"VIEW CAREERS"** triggers `e.preventDefault()`, preventing page navigation away from the Home Page.
+  - *Previous footer configuration preserved as comment block in `Footer.tsx`.*
 
 ---
 
-### ⚙️ System & Memory Setup
+### ⚙️ System, Memory & Git Setup
 
 #### 1. Change Log Creation ([PROJECT_CHANGELOG.md](file:///c:/Users/tsall/Desktop/1st_version/PROJECT_CHANGELOG.md))
-- Created this central document to store full history, memory, and section-by-section breakdown of all modifications.
+- Created this central document to maintain complete Before/After UI state records and section-by-section history.
 
 #### 2. AI Agent Guidelines ([AGENTS.md](file:///c:/Users/tsall/Desktop/1st_version/.agents/AGENTS.md))
-- Created workspace rules forcing all future AI assistants to update this changelog file for every single prompt.
+- Established mandatory workspace rules:
+  1. Always document Before UI vs After UI in `PROJECT_CHANGELOG.md`.
+  2. NEVER delete code; always comment out previous UI code blocks in source files.
 
-#### 4. GitHub Repository Setup & Code Push
-- Initialized local Git repository in workspace (`git init`), created root `.gitignore` to exclude dependencies/cache, created `README.md`, committed all source files, set primary branch to `main`, connected to remote `https://github.com/tsallaaerospace/temp_web.git`, and successfully pushed codebase (`git push -u origin main`).
+#### 3. GitHub Repository Setup & Push
+- Initialized local Git repository (`git init`), added `.gitignore` & `README.md`, committed all source files, set remote `https://github.com/tsallaaerospace/temp_web.git`, and pushed branch `main`.
 
 ---
 
-## 📊 Summary Table: Home Page UI & Navigation Status
+## 📊 Before UI vs After UI Comparison Summary Table
 
-| Navigation / Action Item | Page / Section | Status | Visual UI State |
-| :--- | :--- | :--- | :--- |
-| **MAVERICK** | Home Page -> Top Navigation Bar | ✅ **Active** | Visible & Centered in Header |
-| **UNCREWED SYSTEMS** | Home Page -> Top Navigation Bar | ✅ **Active** | Visible & Centered in Header |
-| **COUNTER SYSTEMS** | Home Page -> Top Navigation Bar | ❌ **Disabled** | 🙈 **Hidden from UI** |
-| **SPACE SYSTEMS** | Home Page -> Top Navigation Bar | ❌ **Disabled** | 🙈 **Hidden from UI** |
-| **COMPANY** | Home Page -> Top Navigation Bar | ❌ **Disabled** | 🙈 **Hidden from UI** |
-| **JOIN THE MISSION** | Home Page -> Top Navigation Bar | ❌ **Disabled** | 🙈 **Hidden from UI** |
-| **Learn More Button** | Home Page -> Hero Section | ❌ **Disabled** | 🙈 **Hidden from UI** |
-| **View Careers Button** | Home Page -> Footer Section | ❌ **Disabled** | 🙈 **Hidden from UI** |
+| Page / Section | Element | Before UI State | After UI State | Reversion Code Location |
+| :--- | :--- | :--- | :--- | :--- |
+| **Navbar** | Navbar Links | 6 items right-aligned | 2 items (**MAVERICK**, **UNCREWED SYSTEMS**) centered in header | Commented in `Navbar.tsx` |
+| **Navbar** | Disabled Items | `COUNTER SYSTEMS`, `SPACE SYSTEMS`, `COMPANY`, `JOIN THE MISSION` visible | Hidden from UI on Home Page | Commented in `Navbar.tsx` |
+| **Hero Section** | Action Button | **"Learn More"** button visible & linking to `/about` | Hidden from UI on Home Page | Commented in `HeroSection.tsx` |
+| **Product Section** | Card Buttons | **"Learn More"** / **"Explore"** buttons navigated to subpages | Buttons visible; click triggers `e.preventDefault()` | Commented in `ProductSection.tsx` |
+| **Footer Section** | Products List | Placeholder: `Roadrunner`, `Hardware`, `Mission Systems` | Real: `FENIX`, `T-BAT`, `STORM`, `DEXTER`, `MAVERICK` | Commented in `Footer.tsx` |
+| **Footer Section** | Company List | Empty column | Full links: `About Us`, `Mission Autonomy`, `Our Team`, `Our Culture`, `Careers` | Commented in `Footer.tsx` |
+| **Footer Section** | Click Behavior | Navigated away to subpages | Click triggers `e.preventDefault()`, stays on Home Page | Commented in `Footer.tsx` |
 
 ---
 

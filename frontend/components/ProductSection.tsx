@@ -271,6 +271,11 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                         <h3 className="text-2xl lg:text-base xl:text-lg 2xl:text-2xl uw:text-3xl font-black text-white uppercase tracking-tighter truncate" style={{ fontFamily: PONTANO_SANS }}>
                             {product.title}
                         </h3>
+                        {/* PREVIOUS UI (Original Direct Navigation):
+                        <Link href={product.href} className="shrink-0">
+                            <motion.button ...> Learn More </motion.button>
+                        </Link>
+                        */}
                         <Link href="#" onClick={(e) => e.preventDefault()} className="shrink-0">
                             <motion.button
                                 whileHover={{ scale: 1.05 }}

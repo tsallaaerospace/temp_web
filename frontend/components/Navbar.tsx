@@ -334,6 +334,17 @@ export default function Navbar() {
               />
             </Link>
 
+            {/* PREVIOUS UI (Original Right-Aligned Layout):
+            <div className="hidden lg:flex items-center h-full pr-14">
+              {navigationItems.map((item, index) => (
+                <div key={item.name} className="relative h-full" ...>
+                  <Link href={item.href} className="..."> ... </Link>
+                </div>
+              ))}
+            </div>
+            */}
+
+            {/* CURRENT UI (Centered active items & hidden disabled items on Home Page) */}
             <div className="hidden lg:flex items-center h-full absolute left-1/2 -translate-x-1/2">
               {navigationItems.map((item, index) => {
                 const isDisabled = isHomePage && ["COUNTER SYSTEMS", "SPACE SYSTEMS", "COMPANY", "JOIN THE MISSION"].includes(item.name);

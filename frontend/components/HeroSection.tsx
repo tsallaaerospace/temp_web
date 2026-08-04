@@ -113,7 +113,21 @@ export default function HeroSection(rogg: any) {
             stagger={0.04}
           />
 
-          {/* THIRD LINE / BUTTON - Hidden while Company is disabled */}
+          {/* PREVIOUS UI (Original Hero Learn More Button):
+          <div ref={buttonRef}>
+            <Link
+              href="/about"
+              className="
+                inline-block bg-transparent border border-white text-white
+                hover:bg-white hover:text-black
+                px-8 py-3 mt-3 transition-colors duration-200
+                font-orbit text-sm md:text-base tracking-widest uppercase
+              "
+            >
+              Learn More
+            </Link>
+          </div>
+          */}
         </div>
       </div>
     </section>
