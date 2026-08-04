@@ -1,11 +1,7 @@
 "use client"
 
-import React, { useRef } from "react"
+import React, { useRef, useEffect } from "react"
 import gsap from "gsap"
-import { useGSAP } from "@gsap/react"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 interface CharacterRevealProps {
   text: string
@@ -25,18 +21,25 @@ export default function CharacterReveal({
   targetColor,
 }: CharacterRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const played = useRef(false)
 
-  useGSAP(() => {
+  useEffect(() => {
     if (!containerRef.current) return
 
     const chars = containerRef.current.querySelectorAll(".char")
     if (chars.length === 0) return
 
-    gsap.set(chars, { opacity: 0 })
+    // Characters start invisible
+    chars.forEach((c) => {
+      ;(c as HTMLElement).style.opacity = "0"
+    })
 
     const finalColor = targetColor || "inherit"
 
     const animateChars = () => {
+      if (played.current) return
+      played.current = true
+
       gsap.to(chars, {
         keyframes: [
           { opacity: 1, color: "#5ce1e6", textShadow: "0 0 15px #5ce1e6", duration: 0.12, ease: "none" },
@@ -57,16 +60,24 @@ export default function CharacterReveal({
     }
 
     if (triggerOnScroll) {
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top 85%",
-        once: true,
-        onEnter: animateChars
-      })
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              animateChars()
+              observer.disconnect()
+            }
+          })
+        },
+        { threshold: 0.1 }
+      )
+
+      observer.observe(containerRef.current)
+      return () => observer.disconnect()
     } else {
       animateChars()
     }
-  }, { scope: containerRef })
+  }, [stagger, delay, triggerOnScroll, targetColor])
 
   return (
     <div ref={containerRef} className={`inline-block ${className}`}>

@@ -67,18 +67,18 @@
   - *Previous button & text truncation code blocks preserved as comments in `ProductSection.tsx`.*
 
 #### 📍 Section 5: Velocity Complex Section ([VelocityComplex.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/VelocityComplex.tsx))
-- ⏮️ **BEFORE UI STATE**: Standard static `h2` section title.
+- ⏮️ **BEFORE UI STATE**: Standard static `h2` title (*"Velocity Complex"*).
 - ⏭️ **AFTER UI STATE**:
-  - Added **CharacterReveal** digital signal lock animation on scroll to the main title (*"Velocity Complex"*).
-  - *Previous title code preserved as comment block in `VelocityComplex.tsx`.*
+  - Added **CharacterReveal** digital signal lock animation powered by `IntersectionObserver` so the title (*"Velocity Complex"*) reveals with neon cyan flickers as soon as it scrolls into view.
+  - *Previous static title preserved as comment block in `VelocityComplex.tsx`.*
 
 #### 📍 Section 6: Testimonials / News & Media Section ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
 - ⏮️ **BEFORE UI STATE**:
   - Clicking cards in the News and Media carousel navigated to `/newsroom` or external links. Standard static `h2` title.
 - ⏭️ **AFTER UI STATE**:
   - Disabled navigation on click for all News and Media cards (`e.preventDefault()`), preventing users from leaving the page when clicking any card.
-  - Added **CharacterReveal** digital signal lock animation on scroll to the main title (*"News and media"*).
-  - *Previous title & link navigation code preserved as comment blocks in `Testimonials.tsx`.*
+  - Added **CharacterReveal** digital signal lock animation powered by `IntersectionObserver` so the section title (*"News and media"*) reveals with neon cyan flickers as soon as it scrolls into view.
+  - *Previous static title & link navigation code preserved as comment blocks in `Testimonials.tsx`.*
 
 #### 📍 Section 7: Footer Section ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx))
 - ⏮️ **BEFORE UI STATE**:
