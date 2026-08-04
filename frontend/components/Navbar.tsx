@@ -344,10 +344,13 @@ export default function Navbar() {
             </div>
             */}
 
-            {/* CURRENT UI (Centered active items & hidden disabled items on Home Page) */}
+            {/* CURRENT UI (Centered active items & hidden disabled items across all pages) */}
             <div className="hidden lg:flex items-center h-full absolute left-1/2 -translate-x-1/2">
               {navigationItems.map((item, index) => {
+                {/* PREVIOUS CONDITION (Only hidden on Home Page):
                 const isDisabled = isHomePage && ["COUNTER SYSTEMS", "SPACE SYSTEMS", "COMPANY", "JOIN THE MISSION"].includes(item.name);
+                */}
+                const isDisabled = ["COUNTER SYSTEMS", "SPACE SYSTEMS", "COMPANY", "JOIN THE MISSION"].includes(item.name);
                 if (isDisabled) return null;
 
                 return (
@@ -601,7 +604,10 @@ export default function Navbar() {
             ) : (
               <div className="flex flex-col h-full overflow-y-auto">
                 {navigationItems.map((item) => {
+                  {/* PREVIOUS CONDITION (Only hidden on Home Page):
                   const isDisabled = isHomePage && ["COUNTER SYSTEMS", "SPACE SYSTEMS", "COMPANY", "JOIN THE MISSION"].includes(item.name);
+                  */}
+                  const isDisabled = ["COUNTER SYSTEMS", "SPACE SYSTEMS", "COMPANY", "JOIN THE MISSION"].includes(item.name);
                   if (isDisabled) return null;
 
                   return (

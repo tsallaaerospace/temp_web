@@ -77,6 +77,24 @@
 
 ---
 
+### 🌐 PAGE: Contact Page (`/contact`)
+
+#### 📍 Section 1: Top Navigation Bar ([Navbar.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Navbar.tsx))
+- ⏮️ **BEFORE UI STATE**:
+  - Contact page header displayed disabled items: `COUNTER SYSTEMS`, `SPACE SYSTEMS`, `COMPANY`, `JOIN THE MISSION`.
+- ⏭️ **AFTER UI STATE**:
+  - Hidden disabled items (`COUNTER SYSTEMS`, `SPACE SYSTEMS`, `COMPANY`, `JOIN THE MISSION`) on the Contact Page as well as across the site. Only **MAVERICK** and **UNCREWED SYSTEMS** are visible, centered in the header.
+  - *Previous conditional logic preserved as comment block in `Navbar.tsx`.*
+
+#### 📍 Section 2: Contact Form vs Email Section ([ContactSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/ContactSection.tsx))
+- ⏮️ **BEFORE UI STATE**:
+  - Left side of the Contact Page displayed an interactive 5-field contact form (Full Name, Email Address, Phone Number, Enquiry Type, Message, Send Message button).
+- ⏭️ **AFTER UI STATE**:
+  - Left side form UI disabled & replaced with an elegant Direct Contact Information card displaying primary email `info@tsallaaerospace.com`, phone support, location, and a "Compose Email" button.
+  - *Previous form code block preserved as comment in `ContactSection.tsx`.*
+
+---
+
 ### ⚙️ System, Memory & Git Setup
 
 #### 1. Change Log Creation ([PROJECT_CHANGELOG.md](file:///c:/Users/tsall/Desktop/1st_version/PROJECT_CHANGELOG.md))
@@ -97,12 +115,13 @@
 | Page / Section | Element | Before UI State | After UI State | Reversion Code Location |
 | :--- | :--- | :--- | :--- | :--- |
 | **Navbar** | Navbar Links | 6 items right-aligned | 2 items (**MAVERICK**, **UNCREWED SYSTEMS**) centered in header | Commented in `Navbar.tsx` |
-| **Navbar** | Disabled Items | `COUNTER SYSTEMS`, `SPACE SYSTEMS`, `COMPANY`, `JOIN THE MISSION` visible | Hidden from UI on Home Page | Commented in `Navbar.tsx` |
+| **Navbar** | Disabled Items | `COUNTER SYSTEMS`, `SPACE SYSTEMS`, `COMPANY`, `JOIN THE MISSION` visible | Hidden from UI on all pages (Home & Contact) | Commented in `Navbar.tsx` |
 | **Hero Section** | Action Button | **"Learn More"** button visible & linking to `/about` | Hidden from UI on Home Page | Commented in `HeroSection.tsx` |
 | **Product Section** | Card Buttons | **"Learn More"** / **"Explore"** buttons navigated to subpages | Buttons visible; click triggers `e.preventDefault()` | Commented in `ProductSection.tsx` |
 | **Footer Section** | Products List | Placeholder: `Roadrunner`, `Hardware`, `Mission Systems` | Real: `FENIX`, `T-BAT`, `STORM`, `DEXTER`, `MAVERICK` | Commented in `Footer.tsx` |
 | **Footer Section** | Company List | Empty column | Full links: `About Us`, `Mission Autonomy`, `Our Team`, `Our Culture`, `Careers` | Commented in `Footer.tsx` |
 | **Footer Section** | Click Behavior | Navigated away to subpages | Click triggers `e.preventDefault()`, stays on Home Page | Commented in `Footer.tsx` |
+| **Contact Page** | Form UI | 5-field interactive contact form on left side | Disabled form UI; displays Direct Email Info (`info@tsallaaerospace.com`) | Commented in `ContactSection.tsx` |
 
 ---
 

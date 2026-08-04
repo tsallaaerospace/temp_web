@@ -87,13 +87,13 @@ export default function ContactSection() {
                     className="text-center mb-16"
                 >
                     <h1 className="uppercase text-4xl md:text-6xl font-bold text-white mb-3 tracking-tight">Reach Out to Us</h1>
-                    <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-600 max-w-2xl mx-auto">
-                        Got a question, idea, or collaboration in mind? Reach out using the form below — our team will be in touch
-                        soon.
+                    <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-400 max-w-2xl mx-auto">
+                        Got a question, idea, or collaboration in mind? Connect with our team directly via email — our team will be in touch soon.
                     </p>
                 </motion.div>
 
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+                    {/* PREVIOUS UI (Original 5-Field Contact Form - Commented out for future reuse):
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -103,107 +103,77 @@ export default function ContactSection() {
                     >
                         <form onSubmit={handleSubmit} className="space-y-8">
                             <div className="group">
-                                <label htmlFor="fullName" className="block text-xs mb-2 uppercase tracking-widest font-bold font-orbit text-white transition-colors">
-                                    Full Name
-                                </label>
-                                <Input
-                                    id="fullName"
-                                    value={formData.fullName}
-                                    onChange={handleChange}
-                                    className="bg-transparent border-0 border-b border-white/40 rounded-none px-0 py-3 text-white placeholder:text-zinc-600 focus-visible:ring-0 focus-visible:border-white focus-visible:ring-offset-0 transition-all duration-300 font-medium"
-                                    placeholder="ENTER YOUR NAME"
-                                />
+                                <label htmlFor="fullName" className="...">Full Name</label>
+                                <Input id="fullName" placeholder="ENTER YOUR NAME" ... />
                             </div>
-
                             <div className="grid grid-cols-2 gap-8">
-                                <div className="group">
-                                    <label htmlFor="email" className="block text-xs mb-2 uppercase tracking-widest font-bold font-orbit text-white transition-colors">
-                                        Email Address
-                                    </label>
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        className="bg-transparent border-0 border-b border-white/40 rounded-none px-0 py-3 text-white placeholder:text-zinc-600 focus-visible:ring-0 focus-visible:border-white focus-visible:ring-offset-0 transition-all duration-300 font-medium"
-                                        placeholder="EMAIL@EXAMPLE.COM"
-                                    />
-                                </div>
-                                <div className="group">
-                                    <label htmlFor="phone" className="block text-xs mb-2 uppercase tracking-widest font-bold font-orbit text-white transition-colors">
-                                        Phone Number
-                                    </label>
-                                    <Input
-                                        id="phone"
-                                        type="tel"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                        className="bg-transparent border-0 border-b border-white/40 rounded-none px-0 py-3 text-white placeholder:text-zinc-600 focus-visible:ring-0 focus-visible:border-white focus-visible:ring-offset-0 transition-all duration-300 font-medium"
-                                        placeholder="+91 00000 00000"
-                                    />
-                                </div>
+                                <div><Input id="email" placeholder="EMAIL@EXAMPLE.COM" ... /></div>
+                                <div><Input id="phone" placeholder="+91 00000 00000" ... /></div>
                             </div>
-
-                            <div className="group">
-                                <label htmlFor="enquiryType" className="block text-xs mb-2 uppercase tracking-widest font-bold font-orbit text-white transition-colors">
-                                    Enquiry Type
-                                </label>
-                                <Input
-                                    id="enquiryType"
-                                    value={formData.enquiryType}
-                                    onChange={handleChange}
-                                    className="bg-transparent border-0 border-b border-white/40 rounded-none px-0 py-3 text-white placeholder:text-zinc-600 focus-visible:ring-0 focus-visible:border-white focus-visible:ring-offset-0 transition-all duration-300 font-medium"
-                                    placeholder="PARTNERSHIP / GENERAL / CAREERS"
-                                />
-                            </div>
-
-                            <div className="group">
-                                <label htmlFor="message" className="block text-xs mb-2 uppercase tracking-widest font-bold font-orbit text-white transition-colors">
-                                    Message
-                                </label>
-                                <Textarea
-                                    id="message"
-                                    rows={6}
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    className="bg-transparent border-0 border-b border-white/40 rounded-none px-0 py-3 text-white placeholder:text-zinc-600 focus-visible:ring-0 focus-visible:border-white focus-visible:ring-offset-0 transition-all duration-300 resize-none font-medium"
-                                    placeholder="TELL US ABOUT YOUR PROJECT..."
-                                />
-                            </div>
-
-                            <div className="pt-6">
-                                {errorFields.length > 0 && (
-                                    <motion.div
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: "auto" }}
-                                        className="text-red-500 text-xs mb-4"
-                                    >
-                                        Please fill out: <span className="font-semibold">{errorFields.join(", ")}</span>
-                                    </motion.div>
-                                )}
-                                {errorMessage && <div className="text-red-500 text-xs mb-4">❌ {errorMessage}</div>}
-                                {submitted && (
-                                    <motion.p
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        className="text-green-400 text-xs mb-4"
-                                    >
-                                        ✅ Message sent successfully!
-                                    </motion.p>
-                                )}
-
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    type="submit"
-                                    onClick={handleSubmit}
-                                    disabled={isLoading}
-                                    className="w-full h-14 bg-white text-black font-medium text-sm tracking-widest uppercase rounded-sm hover:bg-zinc-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    {isLoading ? "Sending..." : "Send Message"}
-                                </motion.button>
-                            </div>
+                            <div><Input id="enquiryType" placeholder="PARTNERSHIP / GENERAL / CAREERS" ... /></div>
+                            <div><Textarea id="message" placeholder="TELL US ABOUT YOUR PROJECT..." ... /></div>
+                            <button type="submit">Send Message</button>
                         </form>
+                    </motion.div>
+                    */}
+
+                    {/* CURRENT UI (Direct Email Contact Card) */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="w-full space-y-6"
+                    >
+                        <div className="bg-zinc-900/60 border border-zinc-800 p-8 rounded-sm space-y-6">
+                            <h2 className="text-xl font-bold uppercase tracking-wider text-[#5ce1e6] font-orbit">
+                                Direct Contact Information
+                            </h2>
+                            <p className="text-zinc-400 text-sm leading-relaxed">
+                                Our form is currently offline for scheduled maintenance. Please send your inquiries directly to our team using the email address below.
+                            </p>
+
+                            <div className="pt-4 border-t border-zinc-800 space-y-4">
+                                <div>
+                                    <span className="block text-xs uppercase tracking-widest text-zinc-500 font-bold mb-1">
+                                        Primary Email Address
+                                    </span>
+                                    <a
+                                        href="mailto:info@tsallaaerospace.com"
+                                        className="text-xl md:text-2xl font-bold text-white hover:text-[#5ce1e6] transition-colors tracking-tight font-orbit inline-block"
+                                    >
+                                        info@tsallaaerospace.com
+                                    </a>
+                                </div>
+
+                                <div>
+                                    <span className="block text-xs uppercase tracking-widest text-zinc-500 font-bold mb-1">
+                                        Phone Support
+                                    </span>
+                                    <span className="text-base text-zinc-300 font-orbit">
+                                        +91 95357 20540
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <span className="block text-xs uppercase tracking-widest text-zinc-500 font-bold mb-1">
+                                        Headquarters Location
+                                    </span>
+                                    <span className="text-base text-zinc-300 font-orbit">
+                                        Bengaluru, Karnataka 560012, India
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="pt-4">
+                                <a
+                                    href="mailto:info@tsallaaerospace.com"
+                                    className="inline-flex items-center justify-center w-full h-12 bg-[#5ce1e6] text-black font-bold text-xs tracking-widest uppercase rounded-sm hover:bg-white transition-colors"
+                                >
+                                    Compose Email
+                                </a>
+                            </div>
+                        </div>
                     </motion.div>
 
                     <motion.div
