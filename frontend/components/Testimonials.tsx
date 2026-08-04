@@ -213,7 +213,7 @@ const Testimonials: React.FC = () => {
             text="Our integrated suite of software, hardware, and services empowers businesses to operate smarter and grow faster."
             className="text-black leading-tight text-sm md:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl"
             stagger={0.03}
-            delay={1.5}
+            delay={1.2}
             triggerOnScroll={true}
           />
         </div>
