@@ -313,8 +313,16 @@ export default function ProductSection() {
 
                 {/* Header Section */}
                 <div className="text-left mb-16 lg:-ml-2 3xl:ml-14">
+                    {/* PREVIOUS UI (Standard h1 static title):
                     <h1 className="text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit">
                         Powered by <span style={{ color: '#5ce1e6' }}>MAVERICK</span>
+                    </h1>
+                    */}
+                    <h1 className="text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit text-white flex items-center gap-3">
+                        <span>Powered by</span>
+                        <span style={{ color: '#5ce1e6' }}>
+                            <MaverickBlink />
+                        </span>
                     </h1>
                 </div>
 
