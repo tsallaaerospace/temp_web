@@ -1,0 +1,14 @@
+"use client"
+
+import React from "react"
+import { ArrowRight } from "lucide-react"
+
+export default function AIOperations() {
+    return (
+        <section className="min-h-screen flex flex-col items-center justify-center text-center bg-white px-6 uw:px-16 font-orbit">
+            <h2 className="text-5xl lg:text-9xl uw:text-[12rem] font-bold tracking-tighter text-black uppercase leading-[0.9]">
+                THE FUTURE OF FLIGHT HAS <br /> <span className="text-[#5ce1e6]">NO COCKPIT.</span>
+            </h2>
+        </section>
+    )
+}
