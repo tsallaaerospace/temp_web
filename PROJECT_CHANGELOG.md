@@ -63,7 +63,7 @@
   - Clicking the **FENIX** card directly navigates to the FENIX detail page (`/fenix`).
   - Clicking on other product cards (**T-BAT**, **TEAMING**, **STORM**) does not trigger navigation (`cursor-default`).
   - Removed text truncation (`line-clamp-1`) so the full name/description for **STORM** ("Smart Transport Operations for Rugged Missions") and all cards display completely.
-  - Added **CharacterReveal** digital signal lock animation on scroll to the main title (*"Powered by MAVERICK"*).
+  - Applied **CharacterReveal** digital signal lock animation **exclusively to the word "MAVERICK"** with cyan blue target color (`#5ce1e6`), while keeping "Powered by" as static white text.
   - *Previous button & text truncation code blocks preserved as comments in `ProductSection.tsx`.*
 
 #### 📍 Section 5: Velocity Complex Section ([VelocityComplex.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/VelocityComplex.tsx))

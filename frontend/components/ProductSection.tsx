@@ -338,11 +338,7 @@ export default function ProductSection() {
                 {/* Bento Grid Section */}
                 <div className="w-full mt-32">
                     <div className="text-left mb-16 lg:-ml-2 3xl:ml-14">
-                        {/* PREVIOUS UI (Standard h1 title):
-                        <h1 className="text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit">
-                            Powered by <span style={{ color: '#5ce1e6' }}>MAVERICK</span>
-                        </h1>
-                        */}
+                        {/* PREVIOUS UI (Whole title character reveal):
                         <CharacterReveal
                             text="Powered by MAVERICK"
                             cyanHighlight="MAVERICK"
@@ -350,6 +346,17 @@ export default function ProductSection() {
                             stagger={0.04}
                             triggerOnScroll={true}
                         />
+                        */}
+                        <h1 className="text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit text-white flex items-center gap-3">
+                            <span>Powered by</span>
+                            <CharacterReveal
+                                text="MAVERICK"
+                                className="text-[#5ce1e6]"
+                                targetColor="#5ce1e6"
+                                stagger={0.06}
+                                triggerOnScroll={true}
+                            />
+                        </h1>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">

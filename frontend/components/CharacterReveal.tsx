@@ -13,7 +13,7 @@ interface CharacterRevealProps {
   stagger?: number
   delay?: number
   triggerOnScroll?: boolean
-  cyanHighlight?: string
+  targetColor?: string
 }
 
 export default function CharacterReveal({
@@ -22,7 +22,7 @@ export default function CharacterReveal({
   stagger = 0.04,
   delay = 0,
   triggerOnScroll = true,
-  cyanHighlight,
+  targetColor,
 }: CharacterRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -34,16 +34,18 @@ export default function CharacterReveal({
 
     gsap.set(chars, { opacity: 0 })
 
+    const finalColor = targetColor || "inherit"
+
     const animateChars = () => {
       gsap.to(chars, {
         keyframes: [
           { opacity: 1, color: "#5ce1e6", textShadow: "0 0 15px #5ce1e6", duration: 0.12, ease: "none" },
-          { opacity: 1, color: "inherit", textShadow: "none", duration: 0.1, ease: "none" },
+          { opacity: 1, color: finalColor, textShadow: "none", duration: 0.1, ease: "none" },
           { opacity: 1, color: "#5ce1e6", textShadow: "0 0 25px #5ce1e6", duration: 0.18, ease: "none" },
-          { opacity: 1, color: "inherit", textShadow: "none", duration: 0.08, ease: "none" },
+          { opacity: 1, color: finalColor, textShadow: "none", duration: 0.08, ease: "none" },
           { opacity: 1, color: "#5ce1e6", textShadow: "0 0 10px #5ce1e6", duration: 0.12, ease: "none" },
-          { opacity: 1, color: "inherit", textShadow: "none", duration: 0.1, ease: "none" },
-          { opacity: 1, color: "inherit", textShadow: "none", duration: 0.3, ease: "power2.out" }
+          { opacity: 1, color: finalColor, textShadow: "none", duration: 0.1, ease: "none" },
+          { opacity: 1, color: finalColor, textShadow: "none", duration: 0.3, ease: "power2.out" }
         ],
         stagger: {
           each: stagger,
@@ -67,21 +69,17 @@ export default function CharacterReveal({
   }, { scope: containerRef })
 
   return (
-    <div ref={containerRef} className={className}>
+    <div ref={containerRef} className={`inline-block ${className}`}>
       {text.split("\n").map((line, lineIdx) => (
         <div key={lineIdx} className="flex whitespace-pre-wrap flex-wrap">
-          {line.split("").map((char, i) => {
-            const isHighlighted = cyanHighlight && line.includes(cyanHighlight) && line.indexOf(cyanHighlight) <= i && i < line.indexOf(cyanHighlight) + cyanHighlight.length;
-            return (
-              <span
-                key={i}
-                className="char inline-block will-change-[opacity,color,filter]"
-                style={isHighlighted ? { color: "#5ce1e6" } : undefined}
-              >
-                {char === " " ? "\u00A0" : char}
-              </span>
-            );
-          })}
+          {line.split("").map((char, i) => (
+            <span
+              key={i}
+              className="char inline-block will-change-[opacity,color,filter]"
+            >
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
         </div>
       ))}
     </div>

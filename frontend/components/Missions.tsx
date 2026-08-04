@@ -52,17 +52,12 @@ export default function Missions() {
         {/* whjhsw */}
         {/* Content */}
         <div className="relative z-10 px-6 sm:px-10 md:px-16 lg:px-24 uw:px-24 text-left max-w-5xl uw:max-w-7xl">
-          {/* PREVIOUS UI (Standard h2 title):
+          {/* PREVIOUS UI (CharacterReveal title):
+          <CharacterReveal text={"On a mission to protect our\nprotectors."} ... />
+          */}
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl 3xl:text-5xl uw:text-5xl font-bold text-black mb-6 font-orbit">
             On a mission to protect our<br />protectors.
           </h2>
-          */}
-          <CharacterReveal
-            text={"On a mission to protect our\nprotectors."}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl 3xl:text-5xl uw:text-5xl font-bold text-black mb-6 font-orbit"
-            stagger={0.04}
-            triggerOnScroll={true}
-          />
           <div className="w-full">
             <p
               className={`text-lg md:text-2xl 3xl:text-lg uw:text-4xl font-light leading-relaxed text-neutral-600 tracking-wide font-orbit transition-all duration-700 ease-out transform ${isVisible ? "opacity-90 translate-y-0" : "opacity-0 translate-y-12"

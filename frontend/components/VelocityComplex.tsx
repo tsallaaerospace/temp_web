@@ -12,15 +12,10 @@ export default function VelocityComplex() {
             <div className="w-full max-w-[2000px] mx-auto">
                 {/* Top Header Row */}
                 <div className="flex justify-between items-end mb-4 lg:mb-10 3xl:mb-12 uw:mb-14 px-2 md:px-4">
-                    {/* PREVIOUS UI (Standard h2 title):
-                    <h2 className="text-3xl md:text-4xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tight pl-4 md:pl-5 lg:pl-8 uw:pl-0 uw:-ml-20">Velocity Complex</h2>
+                    {/* PREVIOUS UI (CharacterReveal title):
+                    <CharacterReveal text="Velocity Complex" ... />
                     */}
-                    <CharacterReveal
-                        text="Velocity Complex"
-                        className="text-3xl md:text-4xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tight pl-4 md:pl-5 lg:pl-8 uw:pl-0 uw:-ml-20 font-orbit text-white"
-                        stagger={0.04}
-                        triggerOnScroll={true}
-                    />
+                    <h2 className="text-3xl md:text-4xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tight pl-4 md:pl-5 lg:pl-8 uw:pl-0 uw:-ml-20">Velocity Complex</h2>
                     <motion.button
                         whileHover={{ x: 3 }}
                         className="flex items-center gap-2 text-xs md:text-sm font-normal opacity-50 hover:opacity-100 transition-opacity uppercase tracking-widest mr-8 lg:mr-12 3xl:mr-14 uw:mr-16"
