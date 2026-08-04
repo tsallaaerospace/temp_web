@@ -144,8 +144,8 @@ const TestimonialSlider = () => {
                     className="w-full h-full object-cover rounded-full shadow-lg"
                     loading="lazy"
                     onError={(e) => {
-                      e.target.src =
-                        "https://image s.unsplash.com/photo-1534528741775-53994a69daeb";
+                      (e.target as HTMLImageElement).src =
+                        "https://images.unsplash.com/photo-1534528741775-53994a69daeb";
                     }}
                   />
                   {/* <div> <nav><data value="dd"><datalist><ddd/datalist></data></nav></div> */}

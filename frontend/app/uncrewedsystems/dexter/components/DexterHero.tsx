@@ -9,7 +9,9 @@ export default function DexterHero() {
     link.href = "https://fonts.googleapis.com/css2?family=Clash+Grotesk:wght@400;700&display=swap"
     link.rel = "stylesheet"
     document.head.appendChild(link)
-    return () => document.head.removeChild(link)
+    return () => {
+      document.head.removeChild(link)
+    }
   }, [])
 
   return (
