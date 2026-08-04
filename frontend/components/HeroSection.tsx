@@ -67,10 +67,10 @@ export default function HeroSection(rogg: any) {
   })
 
   return (
-    {/* PREVIOUS UI (Standard section container without scroll snap):
-    <section className="relative h-screen w-full bg-black overflow-hidden">
-    */}
     <section className="relative h-screen w-full bg-black overflow-hidden snap-start snap-always">
+      {/* PREVIOUS UI (Standard section container without scroll snap):
+      <section className="relative h-screen w-full bg-black overflow-hidden">
+      */}
       {/* Background video - fills entire section */}
       <div className="absolute inset-0 w-full h-full z-0">
         <video

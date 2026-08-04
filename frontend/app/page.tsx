@@ -7,10 +7,10 @@ import ProductSection from "@/components/ProductSection"
 
 export default function HomePage() {
   return (
-    {/* PREVIOUS UI (Standard PageWrapper without scroll snap):
-    <PageWrapper hasHero={true} className="font-orbit">
-    */}
     <PageWrapper hasHero={true} className="font-orbit snap-y snap-proximity scroll-smooth">
+      {/* PREVIOUS UI (Standard PageWrapper without scroll snap):
+      <PageWrapper hasHero={true} className="font-orbit">
+      */}
       <HeroSection />
       <Missions />
       <ProductSection />
