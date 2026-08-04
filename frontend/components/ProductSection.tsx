@@ -10,6 +10,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+import CharacterReveal from "./CharacterReveal";
+
 const PONTANO_SANS = "'Orbit', sans-serif";
 const cn = (...classes: (string | boolean | undefined | null)[]) => classes.filter(Boolean).join(' ');
 
@@ -336,9 +338,18 @@ export default function ProductSection() {
                 {/* Bento Grid Section */}
                 <div className="w-full mt-32">
                     <div className="text-left mb-16 lg:-ml-2 3xl:ml-14">
+                        {/* PREVIOUS UI (Standard h1 title):
                         <h1 className="text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit">
                             Powered by <span style={{ color: '#5ce1e6' }}>MAVERICK</span>
                         </h1>
+                        */}
+                        <CharacterReveal
+                            text="Powered by MAVERICK"
+                            cyanHighlight="MAVERICK"
+                            className="text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit text-white"
+                            stagger={0.04}
+                            triggerOnScroll={true}
+                        />
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">

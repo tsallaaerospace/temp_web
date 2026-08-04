@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import CharacterReveal from "./CharacterReveal"
 
 interface TestimonialBlockProps {
   backgroundImage: string
@@ -192,9 +193,17 @@ const Testimonials: React.FC = () => {
     <section className="bg-[#eaeaea] text-black py-12 lg:py-16 3xl:py-20 uw:py-8 overflow-hidden">
       <div className="w-full px-4 md:px-24 uw:px-24 mb-12 uw:mt-8">
         <div className="max-w-4xl uw:max-w-7xl">
+          {/* PREVIOUS UI (Standard h2 title):
           <h2 className="text-black mb-8 lg:mb-10 font-orbit text-xl md:text-2xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] tracking-[0.2em] font-bold uppercase">
             News and media
           </h2>
+          */}
+          <CharacterReveal
+            text="News and media"
+            className="text-black mb-8 lg:mb-10 font-orbit text-xl md:text-2xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] tracking-[0.2em] font-bold uppercase"
+            stagger={0.04}
+            triggerOnScroll={true}
+          />
           <p className="text-black leading-tight text-sm md:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl">
             Our integrated suite of software, hardware, and services empowers businesses to operate smarter and grow faster.
           </p>

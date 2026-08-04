@@ -48,10 +48,11 @@
 
 #### 📍 Section 3: Missions Section ([Missions.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Missions.tsx))
 - ⏮️ **BEFORE UI STATE**:
-  - Used `lg:h-[75vh]` height class which caused the section to appear squished/shortened on standard desktop viewports in production builds.
+  - Used `lg:h-[75vh]` height class which caused the section to appear squished/shortened on standard desktop viewports in production builds. Standard static `h2` title.
 - ⏭️ **AFTER UI STATE**:
-  - Updated section container to `h-screen min-h-screen snap-start snap-always flex items-center`, ensuring Section 2 fits the screen 100% perfectly across all monitor sizes (laptops, 1080p, 1440p, 4K, ultrawides) with smooth scroll snapping.
-  - *Previous height classes preserved as comment block in `Missions.tsx`.*
+  - Updated section container to `h-screen min-h-screen snap-start snap-always flex items-center`, ensuring Section 2 fits the screen 100% perfectly across all monitor sizes.
+  - Added **CharacterReveal** digital signal lock animation on scroll to the main title (*"On a mission to protect our protectors."*).
+  - *Previous height classes & h2 title preserved as comment blocks in `Missions.tsx`.*
 
 #### 📍 Section 4: Product Section ([ProductSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/ProductSection.tsx))
 - ⏮️ **BEFORE UI STATE**:
@@ -59,21 +60,25 @@
   - Subtitle descriptions were truncated with `line-clamp-1` (e.g. STORM displayed as "Smart Transport Operations for...").
 - ⏭️ **AFTER UI STATE**:
   - Removed **"Learn More"** and **"Explore"** buttons from all product cards (in both top product grid and Bento grid).
-  - Clicking the **FENIX** card directly navigates to the FENIX detail page (`/uncrewedsystems/fenix`).
+  - Clicking the **FENIX** card directly navigates to the FENIX detail page (`/fenix`).
   - Clicking on other product cards (**T-BAT**, **TEAMING**, **STORM**) does not trigger navigation (`cursor-default`).
   - Removed text truncation (`line-clamp-1`) so the full name/description for **STORM** ("Smart Transport Operations for Rugged Missions") and all cards display completely.
+  - Added **CharacterReveal** digital signal lock animation on scroll to the main title (*"Powered by MAVERICK"*).
   - *Previous button & text truncation code blocks preserved as comments in `ProductSection.tsx`.*
 
 #### 📍 Section 5: Velocity Complex Section ([VelocityComplex.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/VelocityComplex.tsx))
-- ⏮️ **BEFORE UI STATE**: Section displaying defense manufacturing facility details.
-- ⏭️ **AFTER UI STATE**: Unchanged (Operating normally).
+- ⏮️ **BEFORE UI STATE**: Standard static `h2` section title.
+- ⏭️ **AFTER UI STATE**:
+  - Added **CharacterReveal** digital signal lock animation on scroll to the main title (*"Velocity Complex"*).
+  - *Previous title code preserved as comment block in `VelocityComplex.tsx`.*
 
 #### 📍 Section 6: Testimonials / News & Media Section ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
 - ⏮️ **BEFORE UI STATE**:
-  - Clicking cards in the News and Media carousel navigated to `/newsroom` or external links.
+  - Clicking cards in the News and Media carousel navigated to `/newsroom` or external links. Standard static `h2` title.
 - ⏭️ **AFTER UI STATE**:
   - Disabled navigation on click for all News and Media cards (`e.preventDefault()`), preventing users from leaving the page when clicking any card.
-  - *Previous link navigation code preserved as comment block in `Testimonials.tsx`.*
+  - Added **CharacterReveal** digital signal lock animation on scroll to the main title (*"News and media"*).
+  - *Previous title & link navigation code preserved as comment blocks in `Testimonials.tsx`.*
 
 #### 📍 Section 7: Footer Section ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx))
 - ⏮️ **BEFORE UI STATE**:
