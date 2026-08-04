@@ -48,8 +48,9 @@
 - **Status**: No changes requested (Operating normally).
 
 #### 📍 Section 7: Footer Section ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx))
-- **Hidden Footer Links**: Hid links to Company (`About Us`, `Mission Autonomy`, `Our Team`, `Our Culture`), Careers, and Hardware from the footer column list on the Home Page.
-- **Hidden Button**: Hid the **"VIEW CAREERS"** button from the footer on the Home Page.
+- **Correct Product Data**: Replaced placeholder products (`Roadrunner`, `Hardware`, `Mission Systems`) with the exact real Tsalla Aerospace product suite: **FENIX**, **T-BAT**, **STORM**, **DEXTER**, and **MAVERICK**.
+- **Company Section Restored**: Rendered complete company links under `COMPANY` (`About Us`, `Mission Autonomy`, `Our Team`, `Our Culture`, `Careers`).
+- **Prevent Navigation on Click**: Updated all Footer links and the **"VIEW CAREERS"** button so that when pressed on the Home Page, `e.preventDefault()` is triggered and the user is prevented from navigating away from the Home Page.
 
 ---
 
@@ -61,8 +62,8 @@
 #### 2. AI Agent Guidelines ([AGENTS.md](file:///c:/Users/tsall/Desktop/1st_version/.agents/AGENTS.md))
 - Created workspace rules forcing all future AI assistants to update this changelog file for every single prompt.
 
-#### 3. Development Server Cache Purge
-- Cleared corrupted `.next` build cache (`Remove-Item -Recurse -Force .next`) to resolve runtime cache errors after building while dev server was running.
+#### 4. GitHub Repository Setup & Code Push
+- Initialized local Git repository in workspace (`git init`), created root `.gitignore` to exclude dependencies/cache, created `README.md`, committed all source files, set primary branch to `main`, connected to remote `https://github.com/tsallaaerospace/temp_web.git`, and successfully pushed codebase (`git push -u origin main`).
 
 ---
 

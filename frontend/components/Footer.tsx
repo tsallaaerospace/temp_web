@@ -17,15 +17,17 @@ export default function Footer() {
   const footerLinks = {
     company: [
       { name: "About Us", href: "/about" },
-      { name: "Mission Autonomy", href: "/mission-autonomy" },
-      { name: "Our Team", href: "/our-team" },
+      { name: "Mission Autonomy", href: "/about#mission" },
+      { name: "Our Team", href: "/leadership" },
       { name: "Our Culture", href: "/careers/culture" },
       { name: "Careers", href: "/careers" },
     ],
     products: [
-      { name: "Roadrunner", href: "/products/roadrunner" },
-      { name: "Hardware", href: "/products/hardware" },
-      { name: "Mission Systems", href: "/products/mission-systems" },
+      { name: "FENIX", href: "/uncrewedsystems/fenix" },
+      { name: "T-BAT", href: "/uncrewedsystems/bat" },
+      { name: "STORM", href: "/uncrewedsystems/storm" },
+      { name: "DEXTER", href: "/uncrewedsystems/dexter" },
+      { name: "MAVERICK", href: "/maverick" },
     ],
     media: [
       { name: "Media Coverage", href: "/newsroom" },
@@ -75,17 +77,20 @@ export default function Footer() {
                   CONNECT WITH US
                 </span>
               </Link>
-              {pathname !== "/" && (
-                <Link
-                  href="/careers"
-                  className="group relative px-6 py-3 bg-transparent border border-white/20 overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                  <span className="relative z-10 font-orbit text-xs tracking-widest group-hover:text-black transition-colors duration-300">
-                    VIEW CAREERS
-                  </span>
-                </Link>
-              )}
+              <Link
+                href="#"
+                onClick={(e) => {
+                  if (pathname === "/") {
+                    e.preventDefault();
+                  }
+                }}
+                className="group relative px-6 py-3 bg-transparent border border-white/20 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                <span className="relative z-10 font-orbit text-xs tracking-widest group-hover:text-black transition-colors duration-300">
+                  VIEW CAREERS
+                </span>
+              </Link>
             </div>
           </div>
 
@@ -97,30 +102,22 @@ export default function Footer() {
                   {title}
                 </h4>
                 <ul className="flex flex-col space-y-3">
-                  {links.map((link) => {
-                    const isDisabledRoute = pathname === "/" && [
-                      "/about",
-                      "/mission-autonomy",
-                      "/our-team",
-                      "/careers/culture",
-                      "/careers",
-                      "/products/hardware"
-                    ].includes(link.href);
-
-                    if (isDisabledRoute) return null;
-
-                    return (
-                      <li key={link.name}>
-                        <Link
-                          href={link.href}
-                          className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-nowrap block relative group w-fit"
-                        >
-                          {link.name}
-                          <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-[#5ce1e6] transition-all duration-300 group-hover:w-full" />
-                        </Link>
-                      </li>
-                    );
-                  })}
+                  {links.map((link) => (
+                    <li key={link.name}>
+                      <Link
+                        href="#"
+                        onClick={(e) => {
+                          if (pathname === "/") {
+                            e.preventDefault();
+                          }
+                        }}
+                        className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-nowrap block relative group w-fit"
+                      >
+                        {link.name}
+                        <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-[#5ce1e6] transition-all duration-300 group-hover:w-full" />
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             ))}
