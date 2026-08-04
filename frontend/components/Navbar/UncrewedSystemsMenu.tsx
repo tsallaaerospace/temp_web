@@ -111,7 +111,18 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                             <Link
                                 key={link.name}
                                 href={isLocked ? "#" : link.href}
-                                onMouseEnter={() => !window.matchMedia('(max-width: 1024px)').matches && setHoveredUncrewedSystemDetails({ ...link.details, href: isLocked ? "#" : link.href, isLocked })}
+                                onMouseEnter={() => {
+                                    if (!window.matchMedia('(max-width: 1024px)').matches) {
+                                        {/* PREVIOUS HOVER HANDLER (Showed details even for locked systems):
+                                        setHoveredUncrewedSystemDetails({ ...link.details, href: isLocked ? "#" : link.href, isLocked });
+                                        */}
+                                        if (isLocked) {
+                                            setHoveredUncrewedSystemDetails(null);
+                                        } else {
+                                            setHoveredUncrewedSystemDetails({ ...link.details, href: link.href });
+                                        }
+                                    }
+                                }}
                                 onClick={(e) => {
                                     if (isLocked) {
                                         e.preventDefault();

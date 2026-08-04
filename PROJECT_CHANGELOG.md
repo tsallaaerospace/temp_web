@@ -99,12 +99,12 @@
 
 #### 📍 Section 1: Hangar System Registry Menu
 - ⏮️ **BEFORE UI STATE**:
-  - All uncrewed system buttons (**FENIX**, **BAT**, **STORM**, **VULCAN**, **Sky-CAT**, **DEXTER**) were active with standard hover states and initiated mission navigation.
+  - All uncrewed system buttons (**FENIX**, **BAT**, **STORM**, **VULCAN**, **Sky-CAT**, **DEXTER**) were active. Hovering over any system (including locked ones) displayed its details and image in the right side panel.
 - ⏭️ **AFTER UI STATE**:
-  - **FENIX** remains unlocked, active, and fully interactive (`[ONLINE]`).
-  - All other uncrewed system buttons (**BAT**, **STORM**, **VULCAN**, **Sky-CAT**, **DEXTER**) display a Lock icon (`<Lock />`), a **`LOCKED`** badge UI, and trigger `e.preventDefault()` on click to prevent navigation.
-  - When a locked system is inspected in the detail view, the mission button displays **`SYSTEM RESTRICTED`** with a lock icon instead of `Initiate Mission`.
-  - *Previous list mapping code preserved as comment block in `UncrewedSystemsMenu.tsx`.*
+  - **FENIX** remains unlocked, active, and fully interactive (`[ONLINE]`), displaying its details on the right side panel on hover.
+  - All other uncrewed system buttons (**BAT**, **STORM**, **VULCAN**, **Sky-CAT**, **DEXTER**) display a Lock icon (`<Lock />`), a **`LOCKED`** badge UI, and trigger `e.preventDefault()` on click.
+  - **Hover Behavior Fix**: Hovering over any locked/disabled system button clears the right side panel (`setHoveredUncrewedSystemDetails(null)`) so **nothing is shown in the right side panel for disabled buttons**.
+  - *Previous hover handler code preserved as comment block in `UncrewedSystemsMenu.tsx`.*
 
 ---
 
@@ -135,7 +135,8 @@
 | **Footer Section** | Company List | Empty column | Full links: `About Us`, `Mission Autonomy`, `Our Team`, `Our Culture`, `Careers` | Commented in `Footer.tsx` |
 | **Footer Section** | Click Behavior | Navigated away to subpages | Click triggers `e.preventDefault()`, stays on Home Page | Commented in `Footer.tsx` |
 | **Contact Page** | Form UI | 5-field interactive contact form on left side | Disabled form UI; displays Direct Email Info (`info@tsallaaerospace.com`) | Commented in `ContactSection.tsx` |
-| **Hangar Menu** | System Links | All 6 systems unlocked and navigable | **FENIX** active; all other 5 systems show **Lock Icon** & **`LOCKED`** status | Commented in `UncrewedSystemsMenu.tsx` |
+| **Hangar Menu** | System Links | All 6 systems unlocked and navigable | **FENIX** active; locked systems show **Lock Icon** & **`LOCKED`** badge | Commented in `UncrewedSystemsMenu.tsx` |
+| **Hangar Menu** | Hover Behavior | Hovering locked systems showed details on right | Hovering locked systems **shows nothing on right side panel** | Commented in `UncrewedSystemsMenu.tsx` |
 
 ---
 
