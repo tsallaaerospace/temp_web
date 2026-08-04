@@ -35,9 +35,15 @@ export default function Missions() {
         @import url('https://fonts.googleapis.com/css2?family=Pontano+Sans&display=swap');
       `}</style>
 
+      {/* PREVIOUS UI (Restricted height classes causing short height on lg viewports):
       <section
         ref={sectionRef}
         className="relative w-full h-[85vh] lg:h-[75vh] 2xl:h-[105vh] 3xl:h-[100vh] uw:h-screen flex items-center justify-start bg-black text-white overflow-hidden"
+      >
+      */}
+      <section
+        ref={sectionRef}
+        className="relative w-full min-h-[90vh] lg:min-h-screen lg:h-screen flex items-center justify-start bg-black text-white overflow-hidden"
       >
         {/* Background Image Container */}
         <div className="absolute inset-0 z-0">

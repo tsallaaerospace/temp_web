@@ -46,8 +46,11 @@
   - *Previous button code preserved as comment block in `HeroSection.tsx`.*
 
 #### 📍 Section 3: Missions Section ([Missions.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Missions.tsx))
-- ⏮️ **BEFORE UI STATE**: Full-screen image section "On a mission to protect our protectors."
-- ⏭️ **AFTER UI STATE**: Unchanged (Operating normally).
+- ⏮️ **BEFORE UI STATE**:
+  - Used `lg:h-[75vh]` height class which caused the section to appear squished/shortened on standard desktop viewports (1024px - 1400px) in production builds.
+- ⏭️ **AFTER UI STATE**:
+  - Replaced height constraint with `min-h-[90vh] lg:min-h-screen lg:h-screen`, ensuring the section always renders full viewport height across all devices and production host deployments.
+  - *Previous height classes preserved as comment block in `Missions.tsx`.*
 
 #### 📍 Section 4: Product Section ([ProductSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/ProductSection.tsx))
 - ⏮️ **BEFORE UI STATE**:
