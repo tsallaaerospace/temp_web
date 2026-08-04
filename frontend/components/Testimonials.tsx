@@ -204,9 +204,18 @@ const Testimonials: React.FC = () => {
             stagger={0.04}
             triggerOnScroll={true}
           />
+          {/* PREVIOUS UI (Standard static paragraph):
           <p className="text-black leading-tight text-sm md:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl">
             Our integrated suite of software, hardware, and services empowers businesses to operate smarter and grow faster.
           </p>
+          */}
+          <CharacterReveal
+            text="Our integrated suite of software, hardware, and services empowers businesses to operate smarter and grow faster."
+            className="text-black leading-tight text-sm md:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl"
+            stagger={0.03}
+            delay={1.5}
+            triggerOnScroll={true}
+          />
         </div>
       </div>
 

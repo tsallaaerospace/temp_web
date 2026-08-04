@@ -74,11 +74,12 @@
 
 #### 📍 Section 6: Testimonials / News & Media Section ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
 - ⏮️ **BEFORE UI STATE**:
-  - Clicking cards in the News and Media carousel navigated to `/newsroom` or external links. Standard static `h2` title.
+  - Clicking cards in the News and Media carousel navigated to `/newsroom` or external links. Standard static `h2` title and static subtitle paragraph.
 - ⏭️ **AFTER UI STATE**:
   - Disabled navigation on click for all News and Media cards (`e.preventDefault()`), preventing users from leaving the page when clicking any card.
-  - Added **CharacterReveal** digital signal lock animation powered by `IntersectionObserver` so the section title (*"News and media"*) reveals with neon cyan flickers as soon as it scrolls into view.
-  - *Previous static title & link navigation code preserved as comment blocks in `Testimonials.tsx`.*
+  - Added **CharacterReveal** digital signal lock animation powered by `IntersectionObserver` to section title (*"News and media"*).
+  - Added **CharacterReveal** digital signal lock animation with **1.5s delay** (`delay={1.5}`) to the subtitle paragraph (*"Our integrated suite of software, hardware, and services empowers businesses to operate smarter and grow faster."*).
+  - *Previous static title, paragraph & link navigation code preserved as comment blocks in `Testimonials.tsx`.*
 
 #### 📍 Section 7: Footer Section ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx))
 - ⏮️ **BEFORE UI STATE**:
