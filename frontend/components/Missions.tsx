@@ -43,7 +43,7 @@ export default function Missions() {
       */}
       <section
         ref={sectionRef}
-        className="relative w-full min-h-[90vh] lg:min-h-screen lg:h-screen flex items-center justify-start bg-black text-white overflow-hidden"
+        className="relative w-full h-screen min-h-screen flex items-center justify-start bg-black text-white overflow-hidden snap-start snap-always"
       >
         {/* Background Image Container */}
         <div className="absolute inset-0 z-0">

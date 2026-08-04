@@ -40,16 +40,17 @@
 
 #### 📍 Section 2: Hero Section ([HeroSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/HeroSection.tsx))
 - ⏮️ **BEFORE UI STATE**:
-  - Hero Section displayed an active **"Learn More"** outline button linking to `/about` (Company).
+  - Hero Section displayed an active **"Learn More"** outline button linking to `/about` (Company). Standard scrolling behavior.
 - ⏭️ **AFTER UI STATE**:
   - **"Learn More"** button is hidden from the UI on the Home Page.
-  - *Previous button code preserved as comment block in `HeroSection.tsx`.*
+  - Added `snap-start snap-always` scroll snapping so a small scroll movement from Section 1 smoothly transitions directly into Section 2.
+  - *Previous code preserved as comment block in `HeroSection.tsx`.*
 
 #### 📍 Section 3: Missions Section ([Missions.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Missions.tsx))
 - ⏮️ **BEFORE UI STATE**:
-  - Used `lg:h-[75vh]` height class which caused the section to appear squished/shortened on standard desktop viewports (1024px - 1400px) in production builds.
+  - Used `lg:h-[75vh]` height class which caused the section to appear squished/shortened on standard desktop viewports in production builds.
 - ⏭️ **AFTER UI STATE**:
-  - Replaced height constraint with `min-h-[90vh] lg:min-h-screen lg:h-screen`, ensuring the section always renders full viewport height across all devices and production host deployments.
+  - Updated section container to `h-screen min-h-screen snap-start snap-always flex items-center`, ensuring Section 2 fits the screen 100% perfectly across all monitor sizes (laptops, 1080p, 1440p, 4K, ultrawides) with smooth scroll snapping.
   - *Previous height classes preserved as comment block in `Missions.tsx`.*
 
 #### 📍 Section 4: Product Section ([ProductSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/ProductSection.tsx))
