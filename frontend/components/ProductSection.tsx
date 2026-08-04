@@ -102,29 +102,23 @@ function MaverickBlink() {
                     played.current = true;
                     observer.disconnect();
 
-                    // Run blink sequence with plain GSAP (no ScrollTrigger)
+                    // Run digital signal lock blink sequence with GSAP
                     gsap.to(chars, {
                         keyframes: [
-                            { opacity: 1, color: "#5ce1e6", duration: 0.10, ease: "none" },
-                            { opacity: 0, color: "#ffffff", duration: 0.08, ease: "none" },
-                            { opacity: 1, color: "#5ce1e6", duration: 0.14, ease: "none" },
-                            { opacity: 0, color: "#ffffff", duration: 0.07, ease: "none" },
-                            { opacity: 1, color: "#5ce1e6", duration: 0.10, ease: "none" },
-                            { opacity: 0, color: "#ffffff", duration: 0.10, ease: "none" },
-                            { opacity: 1, color: "#5ce1e6", duration: 0.12, ease: "none" },
-                            { opacity: 0, color: "#ffffff", duration: 0.06, ease: "none" },
-                            { opacity: 1, color: "#5ce1e6", duration: 0.18, ease: "none" },
-                            { opacity: 0, color: "#ffffff", duration: 0.08, ease: "none" },
-                            { opacity: 1, color: "#5ce1e6", duration: 0.12, ease: "none" },
-                            { opacity: 1, color: "#5ce1e6", duration: 0.40, ease: "power2.out" },
+                            { opacity: 1, color: "#5ce1e6", textShadow: "0 0 15px #5ce1e6", duration: 0.12, ease: "none" },
+                            { opacity: 0, color: "#ffffff", textShadow: "none", duration: 0.08, ease: "none" },
+                            { opacity: 1, color: "#5ce1e6", textShadow: "0 0 25px #5ce1e6", duration: 0.14, ease: "none" },
+                            { opacity: 0, color: "#ffffff", textShadow: "none", duration: 0.07, ease: "none" },
+                            { opacity: 1, color: "#5ce1e6", textShadow: "0 0 10px #5ce1e6", duration: 0.10, ease: "none" },
+                            { opacity: 1, color: "#5ce1e6", textShadow: "none", duration: 0.30, ease: "power2.out" },
                         ],
-                        stagger: { each: 0.10, from: "random" },
-                        delay: 0.2,
+                        stagger: { each: 0.06, from: "random" },
+                        delay: 0.1,
                         overwrite: true,
                     });
                 }
             },
-            { threshold: 0.3 }
+            { threshold: 0.1 }
         );
 
         observer.observe(el);
@@ -134,7 +128,7 @@ function MaverickBlink() {
     return (
         <span ref={ref} className="inline-flex whitespace-pre">
             {"MAVERICK".split("").map((char, i) => (
-                <span key={i} className="char inline-block will-change-[opacity,color]">
+                <span key={i} className="char inline-block will-change-[opacity,color,filter]">
                     {char}
                 </span>
             ))}
@@ -347,15 +341,20 @@ export default function ProductSection() {
                             triggerOnScroll={true}
                         />
                         */}
+                        {/* PREVIOUS UI (CharacterReveal wrapper):
+                        <CharacterReveal
+                            text="MAVERICK"
+                            className="text-[#5ce1e6]"
+                            targetColor="#5ce1e6"
+                            stagger={0.06}
+                            triggerOnScroll={true}
+                        />
+                        */}
                         <h1 className="text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit text-white flex items-center gap-3">
                             <span>Powered by</span>
-                            <CharacterReveal
-                                text="MAVERICK"
-                                className="text-[#5ce1e6]"
-                                targetColor="#5ce1e6"
-                                stagger={0.06}
-                                triggerOnScroll={true}
-                            />
+                            <span style={{ color: '#5ce1e6' }}>
+                                <MaverickBlink />
+                            </span>
                         </h1>
                     </div>
 
