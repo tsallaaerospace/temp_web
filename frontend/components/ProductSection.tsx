@@ -312,8 +312,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 export default function ProductSection() {
     return (
         <section className="bg-black text-white relative overflow-hidden">
-            <div className="max-w-7xl 2xl:max-w-[90rem] 3xl:max-w-[125rem] uw:max-w-[160rem] mx-auto px-6 3xl:px-2 uw:px-2 pt-12 pb-24">
-            {/* PREVIOUS UI: max-w-[110rem] at 3xl, max-w-[150rem] at uw, px-4 at 3xl/uw */}
+            <div className="max-w-7xl 2xl:max-w-[90rem] 3xl:max-w-[110rem] uw:max-w-[150rem] mx-auto px-6 pt-12 pb-24">
 
                 {/* Header Section */}
                 <div className="text-left mb-16 lg:-ml-2 3xl:ml-14">
@@ -331,8 +330,7 @@ export default function ProductSection() {
                 </div>
 
                 {/* Grid Layout - 4 columns in a row */}
-                {/* PREVIOUS UI: gap-3 at 3xl/uw */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 3xl:gap-1 uw:gap-1 mb-32">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
                     {STATIC_PRODUCTS.map((product, index) => (
                         <ProductCard
                             key={product.id}
