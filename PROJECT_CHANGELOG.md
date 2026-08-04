@@ -51,10 +51,14 @@
 
 #### 📍 Section 4: Product Section ([ProductSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/ProductSection.tsx))
 - ⏮️ **BEFORE UI STATE**:
-  - Product cards (**FENIX**, **T-BAT**, **TEAMING/DEXTER**, **STORM**) and Bento grid cards had **"Learn More"** and **"Explore"** buttons that navigated directly to individual product detail pages (`/uncrewedsystems/fenix`, etc.).
+  - Product cards (**FENIX**, **T-BAT**, **TEAMING/DEXTER**, **STORM**) displayed **"Learn More"** and **"Explore"** buttons in the bottom right corner of each card.
+  - Subtitle descriptions were truncated with `line-clamp-1` (e.g. STORM displayed as "Smart Transport Operations for...").
 - ⏭️ **AFTER UI STATE**:
-  - All **"Learn More"** and **"Explore"** buttons are visible on product cards, but clicking any button triggers `e.preventDefault()`, keeping the user on the Home Page without navigating away.
-  - *Previous navigation code preserved as comment block in `ProductSection.tsx`.*
+  - Removed **"Learn More"** and **"Explore"** buttons from all product cards (in both top product grid and Bento grid).
+  - Clicking the **FENIX** card directly navigates to the FENIX detail page (`/uncrewedsystems/fenix`).
+  - Clicking on other product cards (**T-BAT**, **TEAMING**, **STORM**) does not trigger navigation (`cursor-default`).
+  - Removed text truncation (`line-clamp-1`) so the full name/description for **STORM** ("Smart Transport Operations for Rugged Missions") and all cards display completely.
+  - *Previous button & text truncation code blocks preserved as comments in `ProductSection.tsx`.*
 
 #### 📍 Section 5: Velocity Complex Section ([VelocityComplex.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/VelocityComplex.tsx))
 - ⏮️ **BEFORE UI STATE**: Section displaying defense manufacturing facility details.

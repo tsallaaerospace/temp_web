@@ -11,6 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const PONTANO_SANS = "'Orbit', sans-serif";
+const cn = (...classes: (string | boolean | undefined | null)[]) => classes.filter(Boolean).join(' ');
 
 // --- Types ---
 interface Product {
@@ -248,14 +249,22 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         );
     }
 
+    const isFenix = product.title === "FENIX";
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-            className="group relative aspect-[2/3] lg:aspect-auto lg:h-[62vh] 3xl:h-[68vh] uw:h-[72vh] overflow-hidden rounded-none bg-black border border-white/20 hover:border-white/40 transition-all duration-500 shadow-[inset_0_0_30px_rgba(255,255,255,0.05)]"
+            className={cn(
+                "group relative aspect-[2/3] lg:aspect-auto lg:h-[62vh] 3xl:h-[68vh] uw:h-[72vh] overflow-hidden rounded-none bg-black border border-white/20 hover:border-white/40 transition-all duration-500 shadow-[inset_0_0_30px_rgba(255,255,255,0.05)]",
+                isFenix && "cursor-pointer hover:border-[#5ce1e6]/60"
+            )}
         >
+            {isFenix && (
+                <Link href="/uncrewedsystems/fenix" className="absolute inset-0 z-30" />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
             <motion.img
                 src={product.imageUrl}
@@ -271,11 +280,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                         <h3 className="text-2xl lg:text-base xl:text-lg 2xl:text-2xl uw:text-3xl font-black text-white uppercase tracking-tighter truncate" style={{ fontFamily: PONTANO_SANS }}>
                             {product.title}
                         </h3>
-                        {/* PREVIOUS UI (Original Direct Navigation):
-                        <Link href={product.href} className="shrink-0">
-                            <motion.button ...> Learn More </motion.button>
-                        </Link>
-                        */}
+                        {/* PREVIOUS UI (Learn More Button inside Product Card - Commented out):
                         <Link href="#" onClick={(e) => e.preventDefault()} className="shrink-0">
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
@@ -287,8 +292,14 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                                 <ChevronRight className="w-3.5 h-3.5" />
                             </motion.button>
                         </Link>
+                        */}
                     </div>
+                    {/* PREVIOUS UI (Truncated description with line-clamp-1):
                     <p className="text-xs text-gray-500 font-medium line-clamp-1 h-4" style={{ fontFamily: PONTANO_SANS }}>
+                        {product.description}
+                    </p>
+                    */}
+                    <p className="text-xs text-gray-400 font-medium leading-relaxed" style={{ fontFamily: PONTANO_SANS }}>
                         {product.description}
                     </p>
                 </div>
@@ -333,18 +344,21 @@ export default function ProductSection() {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
 
                         {/* ── FENIx — large left card ── */}
-                        <div className="lg:col-span-7 bg-[#0d0d0d] border border-white/5 p-6 lg:p-8 uw:p-5 flex flex-col justify-between min-h-[420px] uw:min-h-[300px]">
+                        <div className="lg:col-span-7 bg-[#0d0d0d] border border-white/5 p-6 lg:p-8 uw:p-5 flex flex-col justify-between min-h-[420px] uw:min-h-[300px] relative group hover:border-[#5ce1e6]/40 transition-colors cursor-pointer">
+                            <Link href="/uncrewedsystems/fenix" className="absolute inset-0 z-30" />
                             {/* Card header */}
-                            <div className="flex items-center justify-between mb-6">
+                            <div className="flex items-center justify-between mb-6 relative z-10">
                                 <span className="inline-flex items-center gap-2 px-3 py-1 text-[10px] uppercase tracking-widest font-bold bg-white/5 border border-white/10 text-white/70">
                                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                                     Drone As First Responder
                                 </span>
+                                {/* PREVIOUS UI (Explore Button - Commented out):
                                 <Link href="#" onClick={(e) => e.preventDefault()}>
                                     <button className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-bold text-white/50 hover:text-white transition-colors">
                                         Explore <ChevronRight className="w-3.5 h-3.5" />
                                     </button>
                                 </Link>
+                                */}
                             </div>
 
                             {/* Main content */}
@@ -397,11 +411,13 @@ export default function ProductSection() {
                                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                                     Outdoor Tactical
                                 </span>
+                                {/* PREVIOUS UI (Explore Button - Commented out):
                                 <Link href="#" onClick={(e) => e.preventDefault()}>
                                     <button className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-bold text-white/50 hover:text-white transition-colors">
                                         Explore <ChevronRight className="w-3.5 h-3.5" />
                                     </button>
                                 </Link>
+                                */}
                             </div>
                             <p className="text-2xl uw:text-2xl font-black tracking-tighter text-white font-orbit mb-1">T-BAT</p>
                             <p className="text-gray-500 text-xs mb-4">Battlefield Aerial Tactical UAS</p>
@@ -436,11 +452,13 @@ export default function ProductSection() {
                                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                                     Outdoor Overwatch
                                 </span>
+                                {/* PREVIOUS UI (Explore Button - Commented out):
                                 <Link href="#" onClick={(e) => e.preventDefault()}>
                                     <button className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-bold text-white/50 hover:text-white transition-colors">
                                         Explore <ChevronRight className="w-3.5 h-3.5" />
                                     </button>
                                 </Link>
+                                */}
                             </div>
                             <p className="text-2xl uw:text-2xl font-black tracking-tighter text-white font-orbit mb-1">TEAMING</p>
                             <p className="text-gray-500 text-xs mb-4">Multi-Role Single Solution</p>
@@ -474,11 +492,13 @@ export default function ProductSection() {
                                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                                     Crisis Communications
                                 </span>
+                                {/* PREVIOUS UI (Explore Button - Commented out):
                                 <Link href="#" onClick={(e) => e.preventDefault()}>
                                     <button className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-bold text-white/50 hover:text-white transition-colors">
                                         Explore <ChevronRight className="w-3.5 h-3.5" />
                                     </button>
                                 </Link>
+                                */}
                             </div>
 
                             <div className="flex flex-col md:flex-row items-center gap-6 flex-1">
