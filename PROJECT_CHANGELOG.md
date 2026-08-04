@@ -95,6 +95,19 @@
 
 ---
 
+### 🌐 PAGE: Uncrewed Systems / Hangar Menu ([UncrewedSystemsMenu.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Navbar/UncrewedSystemsMenu.tsx))
+
+#### 📍 Section 1: Hangar System Registry Menu
+- ⏮️ **BEFORE UI STATE**:
+  - All uncrewed system buttons (**FENIX**, **BAT**, **STORM**, **VULCAN**, **Sky-CAT**, **DEXTER**) were active with standard hover states and initiated mission navigation.
+- ⏭️ **AFTER UI STATE**:
+  - **FENIX** remains unlocked, active, and fully interactive (`[ONLINE]`).
+  - All other uncrewed system buttons (**BAT**, **STORM**, **VULCAN**, **Sky-CAT**, **DEXTER**) display a Lock icon (`<Lock />`), a **`LOCKED`** badge UI, and trigger `e.preventDefault()` on click to prevent navigation.
+  - When a locked system is inspected in the detail view, the mission button displays **`SYSTEM RESTRICTED`** with a lock icon instead of `Initiate Mission`.
+  - *Previous list mapping code preserved as comment block in `UncrewedSystemsMenu.tsx`.*
+
+---
+
 ### ⚙️ System, Memory & Git Setup
 
 #### 1. Change Log Creation ([PROJECT_CHANGELOG.md](file:///c:/Users/tsall/Desktop/1st_version/PROJECT_CHANGELOG.md))
@@ -122,6 +135,7 @@
 | **Footer Section** | Company List | Empty column | Full links: `About Us`, `Mission Autonomy`, `Our Team`, `Our Culture`, `Careers` | Commented in `Footer.tsx` |
 | **Footer Section** | Click Behavior | Navigated away to subpages | Click triggers `e.preventDefault()`, stays on Home Page | Commented in `Footer.tsx` |
 | **Contact Page** | Form UI | 5-field interactive contact form on left side | Disabled form UI; displays Direct Email Info (`info@tsallaaerospace.com`) | Commented in `ContactSection.tsx` |
+| **Hangar Menu** | System Links | All 6 systems unlocked and navigable | **FENIX** active; all other 5 systems show **Lock Icon** & **`LOCKED`** status | Commented in `UncrewedSystemsMenu.tsx` |
 
 ---
 

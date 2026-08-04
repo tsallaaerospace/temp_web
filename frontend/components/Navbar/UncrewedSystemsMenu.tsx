@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Lock } from "lucide-react"
 
 const cn = (...classes: (string | boolean | undefined | null)[]) => classes.filter(Boolean).join(' ');
 
@@ -91,23 +91,42 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                     </div>
                 </div>
 
+                {/* PREVIOUS UI (All Uncrewed Systems Unlocked):
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
+                    {data.links.map((link: any) => (
+                        <Link key={link.name} href={link.href} ...>
+                            <div>{link.name}</div>
+                        </Link>
+                    ))}
+                </div>
+                */}
+
+                {/* CURRENT UI (Lock UI for all buttons except FENIX) */}
                 <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
                     {data.links.map((link: any, index: number) => {
+                        const isFenix = link.name === "FENIX";
+                        const isLocked = !isFenix;
                         const isActive = hoveredUncrewedSystemDetails?.headline === link.details.headline;
                         return (
                             <Link
                                 key={link.name}
-                                href={link.href}
-                                onMouseEnter={() => !window.matchMedia('(max-width: 1024px)').matches && setHoveredUncrewedSystemDetails({ ...link.details, href: link.href })}
-                                onClick={onClose}
+                                href={isLocked ? "#" : link.href}
+                                onMouseEnter={() => !window.matchMedia('(max-width: 1024px)').matches && setHoveredUncrewedSystemDetails({ ...link.details, href: isLocked ? "#" : link.href, isLocked })}
+                                onClick={(e) => {
+                                    if (isLocked) {
+                                        e.preventDefault();
+                                    } else {
+                                        onClose();
+                                    }
+                                }}
                                 className={cn(
-                                    "group relative flex items-center justify-between p-4 rounded-sm transition-all duration-300 border border-transparent cursor-pointer",
-                                    isActive
-                                        ? "bg-[#5ce1e6]/10 border-[#5ce1e6]/20"
-                                        : "hover:bg-white/5"
+                                    "group relative flex items-center justify-between p-4 rounded-sm transition-all duration-300 border border-transparent",
+                                    isLocked
+                                        ? "opacity-60 cursor-not-allowed hover:bg-white/[0.02]"
+                                        : (isActive ? "bg-[#5ce1e6]/10 border-[#5ce1e6]/20 cursor-pointer" : "hover:bg-white/5 cursor-pointer")
                                 )}
                             >
-                                {isActive && (
+                                {isActive && !isLocked && (
                                     <motion.div
                                         layoutId="hangar-scanline"
                                         className={cn(
@@ -122,12 +141,13 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
 
                                 <div className="relative z-10">
                                     <div className={cn(
-                                        "text-sm font-semibold tracking-widest transition-all duration-300 font-orbit uppercase",
-                                        isActive
-                                            ? "text-[#5ce1e6] translate-x-1"
-                                            : "text-white/60 group-hover:text-[#5ce1e6]"
+                                        "text-sm font-semibold tracking-widest transition-all duration-300 font-orbit uppercase flex items-center gap-2",
+                                        isLocked
+                                            ? "text-white/40"
+                                            : (isActive ? "text-[#5ce1e6] translate-x-1" : "text-white/60 group-hover:text-[#5ce1e6]")
                                     )}>
                                         {link.name}
+                                        {isLocked && <Lock className="w-3.5 h-3.5 text-white/40 group-hover:text-amber-400/80 transition-colors" />}
                                     </div>
                                     <div className="text-[9px] text-white/30 tracking-widest mt-0.5 uppercase font-orbit leading-relaxed">
                                         {link.description}
@@ -135,17 +155,25 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                 </div>
 
                                 <div className="flex items-center gap-3">
-                                    {isActive && (
-                                        <motion.div initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-[8px] font-mono text-[#5ce1e6]/60">
-                                            [ONLINE]
-                                        </motion.div>
+                                    {isLocked ? (
+                                        <span className="text-[8px] font-mono text-amber-400/80 tracking-widest uppercase border border-amber-500/30 px-1.5 py-0.5 rounded-xs bg-amber-500/10 flex items-center gap-1">
+                                            LOCKED
+                                        </span>
+                                    ) : (
+                                        <>
+                                            {isActive && (
+                                                <motion.div initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-[8px] font-mono text-[#5ce1e6]/60">
+                                                    [ONLINE]
+                                                </motion.div>
+                                            )}
+                                            <ArrowRight className={cn(
+                                                "w-3 h-3 transition-all duration-300",
+                                                isActive
+                                                    ? "text-[#5ce1e6]"
+                                                    : "text-white/20 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
+                                            )} />
+                                        </>
                                     )}
-                                    <ArrowRight className={cn(
-                                        "w-3 h-3 transition-all duration-300",
-                                        isActive
-                                            ? "text-[#5ce1e6]"
-                                            : "text-white/20 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
-                                    )} />
                                 </div>
                             </Link>
                         );
@@ -214,14 +242,20 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                     </div>
 
                                     <div className="my-4 lg:my-12">
-                                        <Link href={hoveredUncrewedSystemDetails.href || "#"}
-                                            onClick={onClose}
-                                            className="relative group inline-flex items-center px-6 lg:px-10 py-2.5 lg:py-4 bg-[#5ce1e6]/5 border border-[#5ce1e6]/20 text-[#5ce1e6] overflow-hidden transition-all duration-500 hover:bg-[#5ce1e6]/20 hover:border-[#5ce1e6] hover:shadow-[0_0_30px_rgba(92,225,230,0.3)]"
-                                        >
-
-                                            <span className="relative z-10 text-[9px] lg:text-xs font-bold uppercase tracking-[0.3em] font-orbit">Initiate Mission</span>
-                                            <ArrowRight className="relative z-10 ml-3 lg:ml-4 w-3 lg:w-4 h-3 lg:h-4 group-hover:translate-x-1 transition-transform" />
-                                        </Link>
+                                        {hoveredUncrewedSystemDetails.isLocked ? (
+                                            <div className="relative inline-flex items-center px-6 lg:px-10 py-2.5 lg:py-4 bg-amber-500/10 border border-amber-500/30 text-amber-400 opacity-80 cursor-not-allowed">
+                                                <Lock className="w-4 h-4 mr-2" />
+                                                <span className="text-[9px] lg:text-xs font-bold uppercase tracking-[0.3em] font-orbit">SYSTEM RESTRICTED</span>
+                                            </div>
+                                        ) : (
+                                            <Link href={hoveredUncrewedSystemDetails.href || "#"}
+                                                onClick={onClose}
+                                                className="relative group inline-flex items-center px-6 lg:px-10 py-2.5 lg:py-4 bg-[#5ce1e6]/5 border border-[#5ce1e6]/20 text-[#5ce1e6] overflow-hidden transition-all duration-500 hover:bg-[#5ce1e6]/20 hover:border-[#5ce1e6] hover:shadow-[0_0_30px_rgba(92,225,230,0.3)]"
+                                            >
+                                                <span className="relative z-10 text-[9px] lg:text-xs font-bold uppercase tracking-[0.3em] font-orbit">Initiate Mission</span>
+                                                <ArrowRight className="relative z-10 ml-3 lg:ml-4 w-3 lg:w-4 h-3 lg:h-4 group-hover:translate-x-1 transition-transform" />
+                                            </Link>
+                                        )}
                                     </div>
                                 </div>
 
