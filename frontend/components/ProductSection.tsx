@@ -39,7 +39,7 @@ const STATIC_PRODUCTS: Product[] = [
         animationType: "scan",
         glitchEffect: true,
         features: [],
-        href: "/uncrewedsystems/fenix"
+        href: "/fenix"
     },
     {
         id: 2,
@@ -51,7 +51,7 @@ const STATIC_PRODUCTS: Product[] = [
         // animationType: "float",
         glitchEffect: true,
         features: [],
-        href: "/uncrewedsystems/bat"
+        href: "/bat"
     },
     {
         id: 3,
@@ -63,7 +63,7 @@ const STATIC_PRODUCTS: Product[] = [
         // animationType: "float",
         glitchEffect: false,
         features: [],
-        href: "/uncrewedsystems/dexter"
+        href: "/dexter"
     },
     {
         id: 4,
@@ -75,7 +75,7 @@ const STATIC_PRODUCTS: Product[] = [
         animationType: "pulse",
         glitchEffect: false,
         features: [],
-        href: "/uncrewedsystems/storm"
+        href: "/storm"
     }
 ];
 
@@ -263,7 +263,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             )}
         >
             {isFenix && (
-                <Link href="/uncrewedsystems/fenix" className="absolute inset-0 z-30" />
+                <Link href="/fenix" className="absolute inset-0 z-30" />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
             <motion.img
@@ -345,7 +345,7 @@ export default function ProductSection() {
 
                         {/* ── FENIx — large left card ── */}
                         <div className="lg:col-span-7 bg-[#0d0d0d] border border-white/5 p-6 lg:p-8 uw:p-5 flex flex-col justify-between min-h-[420px] uw:min-h-[300px] relative group hover:border-[#5ce1e6]/40 transition-colors cursor-pointer">
-                            <Link href="/uncrewedsystems/fenix" className="absolute inset-0 z-30" />
+                            <Link href="/fenix" className="absolute inset-0 z-30" />
                             {/* Card header */}
                             <div className="flex items-center justify-between mb-6 relative z-10">
                                 <span className="inline-flex items-center gap-2 px-3 py-1 text-[10px] uppercase tracking-widest font-bold bg-white/5 border border-white/10 text-white/70">

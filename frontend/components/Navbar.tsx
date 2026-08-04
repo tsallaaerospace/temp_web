@@ -23,10 +23,20 @@ const megaMenuData = {
     title: "HANGAR",
     description:
       "Revolutionary uncrewed systems that think, adapt, and execute missions with unprecedented autonomy. Real-time decision making where delay means defeat.",
+    /* PREVIOUS HANGAR LINKS (Nested under /uncrewedsystems):
+    links: [
+      { name: "FENIX", href: "/uncrewedsystems/fenix", ... },
+      { name: "BAT", href: "/uncrewedsystems/bat", ... },
+      { name: "STORM", href: "/uncrewedsystems/storm", ... },
+      { name: "VULCAN", href: "/uncrewedsystems/vulcan", ... },
+      { name: "Sky-CAT", href: "/uncrewedsystems/sky-cat", ... },
+      { name: "DEXTER", href: "/uncrewedsystems/dexter", ... }
+    ]
+    */
     links: [
       {
         name: "FENIX",
-        href: "/uncrewedsystems/fenix",
+        href: "/fenix",
         description: "Fast Entry Navigational Intrusion eXplorer",
         details: {
           headline: "FENIX",
@@ -38,7 +48,7 @@ const megaMenuData = {
       },
       {
         name: "BAT",
-        href: "/uncrewedsystems/bat",
+        href: "/bat",
         description: "Battlefield Aerial Tactical UAS",
         details: {
           headline: "BAT",
@@ -50,7 +60,7 @@ const megaMenuData = {
       },
       {
         name: "STORM",
-        href: "/uncrewedsystems/storm",
+        href: "/storm",
         description: "Smart Transport Operations for Rugged Missions",
         details: {
           headline: "STORM",
@@ -62,7 +72,7 @@ const megaMenuData = {
       },
       {
         name: "VULCAN",
-        href: "/uncrewedsystems/vulcan",
+        href: "/vulcan",
         description: "Versatile Unmanned Logistics and Combat Aircraft",
         details: {
           headline: "VULCAN",
@@ -74,7 +84,7 @@ const megaMenuData = {
       },
       {
         name: "Sky-CAT",
-        href: "/uncrewedsystems/sky-cat",
+        href: "/sky-cat",
         description: "High Altitude Long Endurance Surveillance",
         details: {
           headline: "Sky-CAT",
@@ -86,7 +96,7 @@ const megaMenuData = {
       },
       {
         name: "DEXTER",
-        href: "/uncrewedsystems/dexter",
+        href: "/dexter",
         description: "Multi-Role Single Solution",
         details: {
           headline: "DEXTER",

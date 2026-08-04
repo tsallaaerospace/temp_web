@@ -122,8 +122,16 @@
   1. Always document Before UI vs After UI in `PROJECT_CHANGELOG.md`.
   2. NEVER delete code; always comment out previous UI code blocks in source files.
 
-#### 3. GitHub Repository Setup & Push
-- Initialized local Git repository (`git init`), added `.gitignore` & `README.md`, committed all source files, set remote `https://github.com/tsallaaerospace/temp_web.git`, and pushed branch `main`.
+#### 4. Top-Level Product Route Paths
+- ⏮️ **BEFORE UI STATE**: Product URLs were nested under `/uncrewedsystems/` (e.g. `/uncrewedsystems/fenix`, `/uncrewedsystems/bat`, `/uncrewedsystems/storm`, `/uncrewedsystems/dexter`).
+- ⏭️ **AFTER UI STATE**: Updated all product paths to clean top-level routes:
+  - **FENIX**: `/fenix`
+  - **BAT**: `/bat`
+  - **STORM**: `/storm`
+  - **DEXTER**: `/dexter`
+  - **VULCAN**: `/vulcan`
+  - **Sky-CAT**: `/sky-cat`
+- Created top-level Next.js route pages in `app/fenix/page.tsx`, `app/bat/page.tsx`, `app/storm/page.tsx`, `app/dexter/page.tsx`.
 
 ---
 
@@ -141,6 +149,7 @@
 | **Contact Page** | Form UI | 5-field interactive contact form on left side | Disabled form UI; displays Direct Email Info (`info@tsallaaerospace.com`) | Commented in `ContactSection.tsx` |
 | **Hangar Menu** | System Links | All 6 systems unlocked and navigable | **FENIX** active; locked systems show **Lock Icon** & **`LOCKED`** badge | Commented in `UncrewedSystemsMenu.tsx` |
 | **Hangar Menu** | Hover Behavior | Hovering locked systems showed details on right | Hovering locked systems **shows nothing on right side panel** | Commented in `UncrewedSystemsMenu.tsx` |
+| **Routes** | Product Paths | Nested URLs (e.g. `/uncrewedsystems/fenix`) | Clean top-level URLs (`/fenix`, `/bat`, `/storm`, `/dexter`) | Created in `app/fenix/`, `app/bat/`, etc. |
 
 ---
 

@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const pathname = usePathname();
-  const isFenixPage = pathname === "/uncrewedsystems/fenix";
+  const isFenixPage = pathname === "/fenix" || pathname === "/uncrewedsystems/fenix";
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -50,10 +50,10 @@ export default function Footer() {
       { name: "Careers", href: "/careers" },
     ],
     products: [
-      { name: "FENIX", href: "/uncrewedsystems/fenix" },
-      { name: "T-BAT", href: "/uncrewedsystems/bat" },
-      { name: "STORM", href: "/uncrewedsystems/storm" },
-      { name: "DEXTER", href: "/uncrewedsystems/dexter" },
+      { name: "FENIX", href: "/fenix" },
+      { name: "T-BAT", href: "/bat" },
+      { name: "STORM", href: "/storm" },
+      { name: "DEXTER", href: "/dexter" },
       { name: "MAVERICK", href: "/maverick" },
     ],
     media: [
