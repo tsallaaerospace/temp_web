@@ -292,6 +292,33 @@
 | **Hangar Menu** | Hover Behavior | Hovering locked systems showed details on right | Hovering locked systems **shows nothing on right side panel** | Commented in `UncrewedSystemsMenu.tsx` |
 | **Routes** | Product Paths | Nested URLs (e.g. `/uncrewedsystems/fenix`) | Clean top-level URLs (`/fenix`, `/bat`, `/storm`, `/dexter`) | Created in `app/fenix/`, `app/bat/`, etc. |
 
+| **AI-Pilot Page** | Capabilities Title Height | `min-h-[35vh]` mobile height for "Tactical Autonomy At The Edge" | `min-h-[100dvh]` mobile viewport height (full screen) | Commented in `AICapabilities.tsx` |
+| **AI-Pilot Page** | Capabilities Title Layout | 2 lines (`text-2xl`) on mobile view | 3 lines (`text-6xl xs:text-7xl font-black`), shifted further upward (`-translate-y-20`) | Commented in `AICapabilities.tsx` |
+| **AI-Pilot Page** | How It Works Cards | `gap-4`, `h-[25vh]` image on mobile view | `gap-6`, taller `h-[32vh]` image, `p-5` text padding & light border (`border-white/30`) on mobile view | Commented in `AIHowItWorks.tsx` |
+| **AI-Pilot Page** | Operations Heading | 2 lines (`text-2xl`) on mobile view | 3 lines (`text-6xl xs:text-7xl font-black`), matching `AICapabilities` typography | Commented in `AIOperations.tsx` |
+| **Cortex Page** | Hero Section | Bottom-anchored text on mobile | `top-40` shifted down, `h-[100dvh]` on mobile view | Commented in `CortexHero.tsx` |
+| **Cortex Page** | Capabilities Section | 2 lines on mobile view | 3 lines (`text-6xl xs:text-7xl font-black`), `min-h-[100dvh]`, visually centered (`-mt-12`) | Commented in `CortexCapabilities.tsx` |
+| **Cortex Page** | Features Cards | `gap-3`, `h-[30vh]` image on mobile | `gap-6`, taller `h-[32vh]` image, `p-5` padding & `border-white/30` on mobile view | Commented in `CortexHowItWorks.tsx` |
+| **Cortex Page** | Operations Heading | 2 lines (`text-5xl`) on mobile | 3 lines (`text-6xl xs:text-7xl font-black`), `min-h-[100dvh]` on mobile view | Commented in `CortexOperations.tsx` |
+| **Mesh Page** | Hero Section | Bottom-anchored text on mobile | `top-40` shifted down, `h-[100dvh]` on mobile view | Commented in `MeshHero.tsx` |
+| **Mesh Page** | Capabilities Section | 2 lines on mobile view | 3 lines (`text-6xl xs:text-7xl font-black`), `min-h-[100dvh]`, visually centered (`-mt-12`) | Commented in `MeshCapabilities.tsx` |
+| **Mesh Page** | How It Works Cards | `gap-3`, `h-[30vh]` image on mobile | `gap-6`, taller `h-[32vh]` image, `p-5` padding & `border-white/30` on mobile view | Commented in `MeshHowItWorks.tsx` |
+| **Cortex Page** | Characteristics Section Height | Compact `py-6` card padding on mobile | Expanded `py-14` card padding & `gap-y-8` for proportional section height | Commented in `CortexCapabilities.tsx` |
+| **Cortex & Mesh Pages** | Characteristics Title Label | `Characteristics` heading label displayed | Title label removed (commented out) | Commented in `CortexCapabilities.tsx`, `MeshCapabilities.tsx` |
+| **New Component** | TextReveal.tsx | N/A | New reusable GSAP character-reveal animation component (`lines[]`, `className`, `lineClassName`, `stagger`, `delay`, `glowColor`) | Created `components/TextReveal.tsx` |
+| **AI-Pilot Page** | Operations Section Heading | Static `<h2>` text | Character-reveal animation via `TextReveal` component | Previous UI commented in `AIOperations.tsx` |
+| **Cortex Page** | Operations Section Heading | Static `<h2>` text | Character-reveal animation via `TextReveal` component | Previous UI commented in `CortexOperations.tsx` |
+| **Component Fix** | TextReveal.tsx Persistence | Disappeared on re-renders | GSAP timeline with `played.current` guard and `onComplete` permanent inline style application | Updated `components/TextReveal.tsx` |
+| **Operations Sections** | Line Break Structure | `block sm:inline` merging words | `lineClassName="block"` ensuring clean line breaks across all viewports | Updated `CortexOperations.tsx`, `AIOperations.tsx`, `MeshOperations.tsx` |
+| **AI-Pilot Page** | Hero Main Title | Static `<h1>` text | Character-reveal animation via `TextReveal` component | Previous UI commented in `AIHero.tsx` |
+| **Cortex Page** | Hero Main Title | Static `<h1>` text | Character-reveal animation via `TextReveal` component | Previous UI commented in `CortexHero.tsx` |
+| **Mesh Page** | Hero Main Title | Static `<h1>` text | Character-reveal animation via `TextReveal` component | Previous UI commented in `MeshHero.tsx` |
+| **Animation Update** | TextReveal.tsx Keyframes | 2-stage fade animation | Updated keyframes to match `CharacterReveal.tsx` exact multi-stage cyan flicker (`#5ce1e6` glows at 15px, 25px, 10px textShadow) | Updated `components/TextReveal.tsx` |
+| **Mesh Page** | How It Works Title | Static `<h2>HOW IT WORKS</h2>` | Character-reveal animation via `TextReveal` component | Previous UI commented in `MeshHowItWorks.tsx` |
+| **AI-Pilot Page** | How It Works Title | Static `<h2>HOW IT WORKS</h2>` | Character-reveal animation via `TextReveal` component | Previous UI commented in `AIHowItWorks.tsx` |
+| **Cortex Page** | Features Title | Static `<h2>FEATURES</h2>` | Character-reveal animation via `TextReveal` component | Previous UI commented in `CortexHowItWorks.tsx` |
+| **Operations Sections** | Blue Text Reveal Only | `TextReveal` on all lines | `TextReveal` scoped ONLY to cyan/blue text (`NEVER GOES DARK.`, `NO COCKPIT.`, `Actionable`); other lines remain static black text | Updated `MeshOperations.tsx`, `AIOperations.tsx`, `CortexOperations.tsx` |
+
 ---
 
 *Log last updated: August 05, 2026*
