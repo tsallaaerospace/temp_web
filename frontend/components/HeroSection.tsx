@@ -58,8 +58,8 @@ export default function HeroSection(rogg: any) {
             pt-20 pb-20 sm:pb-32 md:pb-48
           "
         >
-          {/* PREVIOUS UI: div className="w-full max-w-4xl" */}
-          <div className="w-full max-w-4xl -mt-12 sm:mt-0">
+          {/* PREVIOUS UI: div className="w-full max-w-4xl -mt-12 sm:mt-0" */}
+          <div className="w-full max-w-4xl -mt-28 sm:mt-0">
             {/* MAIN LINE - Digital Blink Animation */}
             {/* PREVIOUS UI: CharacterReveal text="UNMANNED..." className="font-bold text-4xl sm:text-5xl lg:text-[4.375rem]..." */}
             <CharacterReveal
