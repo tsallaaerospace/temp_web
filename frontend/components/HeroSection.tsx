@@ -26,9 +26,7 @@ export default function HeroSection(rogg: any) {
 
   return (
     <>
-      {/* PREVIOUS UI (Standard section container without dynamic 100dvh for mobile):
-      <section className="relative h-screen w-full bg-black overflow-hidden snap-start snap-always">
-      */}
+      {/* PREVIOUS UI: section className="relative h-screen w-full bg-black overflow-hidden snap-start snap-always" */}
       <section className="relative h-[100dvh] sm:h-screen w-full bg-black overflow-hidden snap-start snap-always">
         {/* Background video - fills entire section */}
         <div className="absolute inset-0 w-full h-full z-0">
@@ -50,9 +48,7 @@ export default function HeroSection(rogg: any) {
         </div>
 
         {/* Content block - centered vertically, accounting for navbar height */}
-        {/* PREVIOUS UI (Standard padding):
-        <div className="relative z-20 w-full h-full flex flex-col justify-center items-start text-left px-8 sm:px-12 md:px-16 lg:px-24 pt-20 pb-32 md:pb-48">
-        */}
+        {/* PREVIOUS UI: div className="relative z-20 w-full h-full flex flex-col justify-center items-start text-left px-8 sm:px-12 md:px-16 lg:px-24 pt-20 pb-32 md:pb-48" */}
         <div
           className="
             relative z-20 w-full h-full
@@ -61,18 +57,11 @@ export default function HeroSection(rogg: any) {
             px-5 sm:px-12 md:px-16 lg:px-24
             pt-20 pb-20 sm:pb-32 md:pb-48
           "
-          {/* PREVIOUS UI (Standard container without mobile vertical shift):
-          <div className="w-full max-w-4xl">
-          */}
+        >
+          {/* PREVIOUS UI: div className="w-full max-w-4xl" */}
           <div className="w-full max-w-4xl -mt-12 sm:mt-0">
             {/* MAIN LINE - Digital Blink Animation */}
-            {/* PREVIOUS UI (Main line font size):
-            <CharacterReveal
-              text={"UNMANNED.\nUNMATCHED.\nUNCOMPROMISED."}
-              className="font-bold text-4xl sm:text-5xl lg:text-[4.375rem] leading-[1.1] mb-5 font-orbit tracking-normal text-white"
-              stagger={0.06}
-            />
-            */}
+            {/* PREVIOUS UI: CharacterReveal text="UNMANNED..." className="font-bold text-4xl sm:text-5xl lg:text-[4.375rem]..." */}
             <CharacterReveal
               text={"UNMANNED.\nUNMATCHED.\nUNCOMPROMISED."}
               className="font-bold text-3xl sm:text-5xl lg:text-[4.375rem] leading-[1.1] mb-4 sm:mb-5 font-orbit tracking-normal text-white"
@@ -80,14 +69,7 @@ export default function HeroSection(rogg: any) {
             />
 
             {/* SECOND LINE - Delayed Blink */}
-            {/* PREVIOUS UI (Second line font size):
-            <CharacterReveal
-              text="We Don’t Build Systems. We Build Unfair Advantages."
-              className="text-base md:text-lg lg:text-xl mb-6 font-orbit text-white/90 max-w-full sm:max-w-[90%] md:max-w-[80%]"
-              delay={1.5}
-              stagger={0.04}
-            />
-            */}
+            {/* PREVIOUS UI: CharacterReveal text="We Don’t Build..." className="text-base md:text-lg lg:text-xl..." */}
             <CharacterReveal
               text="We Don’t Build Systems. We Build Unfair Advantages."
               className="text-sm sm:text-lg lg:text-xl mb-6 font-orbit text-white/90 max-w-full sm:max-w-[90%] md:max-w-[80%]"
