@@ -331,7 +331,8 @@ export default function Navbar() {
       >
         <div className="w-full">
           <div className="relative flex items-center justify-between h-20 px-4">
-            <Link href="/" className="flex items-center z-50 pl-4 lg:ml-12">
+            {/* PREVIOUS UI: Link href="/" className="flex items-center z-50 pl-4 lg:ml-12" */}
+            <Link href="/" className="flex items-center z-50 pl-1 sm:pl-4 lg:ml-12">
               <img
                 src={(isMerchPage || (isHomePage && isScrolled)) ? "/merch/TsallaAerospace_black.png" : "/tsalla_main.svg"}
                 alt="Tsalla Aerospace"

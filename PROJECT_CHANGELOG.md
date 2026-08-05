@@ -185,7 +185,12 @@
 
 ### 🌐 PAGE: Home Page (`/`)
 
-#### 📍 Section 1: Hero Section ([HeroSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/HeroSection.tsx))
+#### 📍 Section 1: Top Navigation Bar ([Navbar.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Navbar.tsx))
+- ⏮️ **BEFORE UI STATE**: Logo padding on mobile was `pl-4` (same as desktop default).
+- ⏭️ **AFTER UI STATE**: Updated logo link padding on mobile to `pl-1 sm:pl-4 lg:ml-12`, shifting the logo closer to the left edge on mobile screens while leaving desktop alignment 100% untouched.
+- *Previous code preserved as comment blocks in `Navbar.tsx`.*
+
+#### 📍 Section 2: Hero Section ([HeroSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/HeroSection.tsx))
 - ⏮️ **BEFORE UI STATE**:
   - Container used `h-screen`, heading used `text-4xl sm:text-5xl lg:text-[4.375rem]`, padding was `px-8 sm:px-12`.
   - On mobile browsers with dynamic URL bars, content could be slightly misaligned vertically or heading could wrap awkwardly.
