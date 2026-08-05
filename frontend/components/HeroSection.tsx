@@ -70,9 +70,9 @@ export default function HeroSection(rogg: any) {
             />
 
             {/* SECOND LINE - Delayed Blink */}
-            {/* PREVIOUS UI: CharacterReveal text="We Don’t Build..." className="text-base md:text-lg lg:text-xl..." */}
+            {/* PREVIOUS UI: CharacterReveal text="We Don’t Build Systems. We Build Unfair Advantages." className="text-sm sm:text-lg lg:text-xl..." */}
             <CharacterReveal
-              text="We Don’t Build Systems. We Build Unfair Advantages."
+              text={"We Don’t Build Systems.\nWe Build Unfair Advantages."}
               className="text-sm sm:text-lg lg:text-xl mb-6 font-orbit text-white/90 max-w-full sm:max-w-[90%] md:max-w-[80%]"
               delay={1.5}
               stagger={0.04}
