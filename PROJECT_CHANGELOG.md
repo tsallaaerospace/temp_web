@@ -250,7 +250,7 @@
 
 #### 📍 Section 1: AI Hero ([AIHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/maverick/ai-pilot/components/AIHero.tsx))
 - ⏮️ **BEFORE UI STATE**: Container used fixed `h-screen`, heading font size was `text-6xl`, text block left offset was fixed `left-10`.
-- ⏭️ **AFTER UI STATE**: Container updated to `h-[100dvh] sm:h-screen`, heading font size to `text-xl sm:text-3xl md:text-[2.25rem] lg:text-[2.65rem] xl:text-[3.25rem]`, padding to `px-5 sm:px-6`, positioning to `left-5 sm:left-10 right-5 sm:right-auto max-w-full sm:max-w-3xl lg:max-w-[1180px]`, spreading desktop title wide across 2 lines (`Imagine a future where the most complex landing in aviation happens\nwithout a pilot.`) while keeping mobile perfectly responsive.
+- ⏭️ **AFTER UI STATE**: Container updated to `h-[100dvh] sm:h-screen`, heading font size to `text-base sm:text-xl lg:text-[1.85rem] xl:text-[2.15rem]`, max-width to `lg:max-w-[1380px]`, ensuring `happens` stays on Line 1 (`Imagine a future where the most complex landing in aviation happens\nwithout a pilot.`) while keeping mobile viewports perfectly responsive.
 
 #### 📍 Section 2: AI Domains ([AIDomains.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/maverick/ai-pilot/components/AIDomains.tsx))
 - ⏮️ **BEFORE UI STATE**: Container height was `min-h-screen`, grid padding was `py-24`, heading font size was `text-3xl`.
