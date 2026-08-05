@@ -192,7 +192,7 @@
 - ⏭️ **AFTER UI STATE**:
   - Container updated to dynamic mobile height `h-[100dvh] sm:h-screen`.
   - Heading font size updated to `text-3xl sm:text-5xl lg:text-[4.375rem]`.
-  - Shifted text content significantly higher up on mobile screens (`-mt-28 sm:mt-0`) for optimal vertical balance on phone screens.
+  - Shifted text content 2x higher up on mobile screens (`justify-start pt-28` on mobile) for optimal high-positioning right below the mobile top bar.
   - Container padding updated to `px-5 sm:px-12` and `pb-20 sm:pb-32`, ensuring `"UNMANNED. UNMATCHED. UNCOMPROMISED."` fits mobile screens cleanly.
   - *Previous code preserved as comment blocks in `HeroSection.tsx`.*
 
