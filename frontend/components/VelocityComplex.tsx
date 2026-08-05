@@ -8,13 +8,16 @@ import CharacterReveal from "./CharacterReveal"
 
 export default function VelocityComplex() {
     return (
+        /* PREVIOUS UI (Standard section container without mobile 100dvh height):
         <section className="bg-[#3d3d3d] text-white pt-12 lg:pt-16 uw:pt-16 pb-8 uw:pb-12 px-4 md:px-8 lg:px-12 font-orbit overflow-hidden">
-            <div className="w-full max-w-[2000px] mx-auto">
+        */
+        <section className="bg-[#3d3d3d] text-white min-h-[100dvh] sm:min-h-0 flex flex-col justify-between pt-16 sm:pt-12 lg:pt-16 uw:pt-16 pb-10 sm:pb-8 uw:pb-12 px-4 md:px-8 lg:px-12 font-orbit overflow-hidden snap-start snap-always">
+            <div className="w-full max-w-[2000px] mx-auto flex-1 flex flex-col justify-between">
                 {/* Top Header Row */}
                 {/* PREVIOUS UI (Standard flex row without mobile flex-col):
                 <div className="flex justify-between items-end mb-4 lg:mb-10 3xl:mb-12 uw:mb-14 px-2 md:px-4">
                 */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-0 mb-6 sm:mb-8 lg:mb-10 3xl:mb-12 uw:mb-14 px-2 md:px-4">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-0 mb-4 sm:mb-8 lg:mb-10 3xl:mb-12 uw:mb-14 px-2 md:px-4">
                     {/* PREVIOUS UI (Standard title font size & padding):
                     <CharacterReveal text="Velocity Complex" className="text-3xl md:text-4xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tight pl-4 md:pl-5 lg:pl-8 uw:pl-0 uw:-ml-20 font-orbit text-white" stagger={0.04} triggerOnScroll={true} />
                     */}
@@ -33,10 +36,10 @@ export default function VelocityComplex() {
                 </div>
 
                 {/* Main Hero Image */}
-                {/* PREVIOUS UI (Standard aspect ratio without mobile aspect-16/9):
-                <div className="relative w-full aspect-[21/9] lg:aspect-[3.2/1] uw:aspect-[3.6/1] overflow-hidden grayscale-[20%] hover:grayscale-0 transition-all duration-700">
-                */}
+                {/* PREVIOUS UI (Standard aspect ratio without mobile full screen fitting):
                 <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[3.2/1] uw:aspect-[3.6/1] overflow-hidden grayscale-[20%] hover:grayscale-0 transition-all duration-700">
+                */}
+                <div className="relative w-full flex-1 min-h-[35vh] sm:min-h-0 aspect-[4/3] sm:aspect-[21/9] lg:aspect-[3.2/1] uw:aspect-[3.6/1] overflow-hidden grayscale-[20%] hover:grayscale-0 transition-all duration-700 my-4 sm:my-0">
                     <img
                         src="/building.avif"
                         alt="Velocity Complex"

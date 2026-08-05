@@ -230,7 +230,7 @@
 - ⏭️ **AFTER UI STATE**:
   - Header row updated to `flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-0`.
   - Title font size updated to `text-2xl sm:text-3xl md:text-4xl lg:text-[4.375rem] pl-0 sm:pl-4`.
-  - Banner image updated to `aspect-[16/9] sm:aspect-[21/9] lg:aspect-[3.2/1]`, giving the building image great depth on mobile screens.
+  - Section container updated to `min-h-[100dvh] sm:min-h-0 flex flex-col justify-between snap-start snap-always` and hero image to `aspect-[4/3] sm:aspect-[21/9]`, ensuring the Velocity Complex section fills 100% of the mobile screen height smoothly.
   - *Previous code preserved as comment blocks in `VelocityComplex.tsx`.*
 
 #### 📍 Section 5: News and Media ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
