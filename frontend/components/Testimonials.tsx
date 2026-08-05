@@ -193,10 +193,11 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    /* PREVIOUS UI: section className="bg-[#eaeaea] text-black py-12 lg:py-16 3xl:py-20 uw:py-8 overflow-hidden" */
-    <section className="bg-[#eaeaea] text-black min-h-[100dvh] sm:min-h-0 flex flex-col justify-between pt-16 pb-8 sm:py-12 lg:py-16 3xl:py-20 uw:py-8 overflow-hidden snap-start snap-always">
-      {/* PREVIOUS UI: div className="w-full px-4 md:px-24 uw:px-24 mb-12 uw:mt-8" */}
-      <div className="w-full px-5 sm:px-12 md:px-24 uw:px-24 mb-6 sm:mb-12 uw:mt-8">
+    <section className="bg-[#eaeaea] text-black py-12 lg:py-16 3xl:py-20 uw:py-8 overflow-hidden">
+      {/* PREVIOUS UI (Standard container padding):
+      <div className="w-full px-4 md:px-24 uw:px-24 mb-12 uw:mt-8">
+      */}
+      <div className="w-full px-5 sm:px-12 md:px-24 uw:px-24 mb-8 sm:mb-12 uw:mt-8">
         <div className="max-w-4xl uw:max-w-7xl">
           {/* PREVIOUS UI (Standard title font size):
           <CharacterReveal text="News and media" className="text-black mb-8 lg:mb-10 font-orbit text-xl md:text-2xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] tracking-[0.2em] font-bold uppercase" stagger={0.04} triggerOnScroll={true} />
