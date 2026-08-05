@@ -1,7 +1,6 @@
 "use client"
 
-import type React from "react"
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
@@ -165,15 +164,28 @@ const TESTIMONIALS_DATA = [
 const Testimonials: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  /* PREVIOUS UI (Fixed 3 items per page without mobile check):
   const totalPages = Math.ceil(TESTIMONIALS_DATA.length / 3);
+  const currentItems = TESTIMONIALS_DATA.slice(currentPage * 3, (currentPage + 1) * 3);
+  */
+  const itemsPerPage = isMobile ? 1 : 3;
+  const totalPages = Math.ceil(TESTIMONIALS_DATA.length / itemsPerPage);
 
   const paginate = (newDirection: number) => {
     setDirection(newDirection);
     setCurrentPage((prev) => (prev + newDirection + totalPages) % totalPages);
   };
 
-  const currentItems = TESTIMONIALS_DATA.slice(currentPage * 3, (currentPage + 1) * 3);
+  const currentItems = TESTIMONIALS_DATA.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
   const variants = {
     enter: (direction: number) => ({
@@ -193,11 +205,14 @@ const Testimonials: React.FC = () => {
   };
 
   return (
+    /* PREVIOUS UI (Standard section container without mobile 100dvh height):
     <section className="bg-[#eaeaea] text-black py-12 lg:py-16 3xl:py-20 uw:py-8 overflow-hidden">
+    */
+    <section className="bg-[#eaeaea] text-black min-h-[100dvh] sm:min-h-0 flex flex-col justify-between py-12 lg:py-16 3xl:py-20 uw:py-8 overflow-hidden snap-start snap-always">
       {/* PREVIOUS UI (Standard container padding):
       <div className="w-full px-4 md:px-24 uw:px-24 mb-12 uw:mt-8">
       */}
-      <div className="w-full px-5 sm:px-12 md:px-24 uw:px-24 mb-8 sm:mb-12 uw:mt-8">
+      <div className="w-full px-5 sm:px-12 md:px-24 uw:px-24 mb-6 sm:mb-12 uw:mt-8">
         <div className="max-w-4xl uw:max-w-7xl">
           {/* PREVIOUS UI (Standard title font size):
           <CharacterReveal text="News and media" className="text-black mb-8 lg:mb-10 font-orbit text-xl md:text-2xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] tracking-[0.2em] font-bold uppercase" stagger={0.04} triggerOnScroll={true} />
@@ -286,9 +301,27 @@ const Testimonials: React.FC = () => {
           ))}
         </div>
 
+        {/* PREVIOUS UI (Large mobile buttons):
         <div className="flex md:hidden gap-6">
           <button onClick={() => paginate(-1)} className="p-4 border border-black/10"><ChevronLeft size={24} /></button>
           <button onClick={() => paginate(1)} className="p-4 bg-black text-white"><ChevronRight size={24} /></button>
+        </div>
+        */}
+        <div className="flex md:hidden gap-4">
+          <button
+            onClick={() => paginate(-1)}
+            className="p-2.5 border border-black/20 text-black hover:bg-black/5 active:scale-95 transition-all flex items-center justify-center"
+            aria-label="Previous story"
+          >
+            <ChevronLeft size={18} />
+          </button>
+          <button
+            onClick={() => paginate(1)}
+            className="p-2.5 bg-black text-white hover:bg-neutral-800 active:scale-95 transition-all flex items-center justify-center"
+            aria-label="Next story"
+          >
+            <ChevronRight size={18} />
+          </button>
         </div>
       </div>
     </section>

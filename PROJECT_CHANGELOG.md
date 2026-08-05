@@ -241,6 +241,7 @@
   - Header padding updated to `px-5 sm:px-12 md:px-24`, title font size updated to `text-2xl sm:text-3xl md:text-4xl lg:text-[4.375rem]`.
   - Subtitle paragraph font size updated to `text-xs sm:text-base`.
   - Testimonial card height updated to `h-[360px] sm:h-[400px] lg:h-[450px]`, container height to `h-[380px] sm:h-[420px] lg:h-[450px]`.
+  - Section container updated to `min-h-[100dvh] sm:min-h-0 flex flex-col justify-between snap-start snap-always`, ensuring the News and Media section covers 100% of the mobile screen height smoothly.
   - *Previous code preserved as comment blocks in `Testimonials.tsx`.*
 
 ---
