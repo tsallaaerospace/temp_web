@@ -32,7 +32,8 @@ const features = [
 
 export default function AIHowItWorks() {
     return (
-        <section className="bg-black min-h-screen flex flex-col justify-center py-10 lg:py-12 px-6 lg:px-20 uw:px-24 font-orbit overflow-hidden">
+        /* PREVIOUS UI: section className="bg-black min-h-screen flex flex-col justify-center py-10 lg:py-12 px-6 lg:px-20 uw:px-24 font-orbit overflow-hidden" */
+        <section className="bg-black min-h-[100dvh] sm:min-h-screen flex flex-col justify-center py-12 sm:py-10 lg:py-12 px-5 sm:px-6 lg:px-20 uw:px-24 font-orbit overflow-hidden">
             <div className="w-full">
                 {/* Section Label */}
                 <motion.div
@@ -42,11 +43,12 @@ export default function AIHowItWorks() {
                     transition={{ duration: 0.6 }}
                     className="mb-6 lg:mb-8"
                 >
-                    <h2 className="text-[120px] lg:text-[72px] uw:text-[96px] font-bold text-white tracking-tight uppercase font-orbit">HOW IT WORKS</h2>
+                    {/* PREVIOUS UI: h2 className="text-[120px] lg:text-[72px] uw:text-[96px]..." */}
+                    <h2 className="text-3xl sm:text-5xl md:text-[72px] lg:text-[72px] uw:text-[96px] font-bold text-white tracking-tight uppercase font-orbit">HOW IT WORKS</h2>
                 </motion.div>
 
                 {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-3">
                     {features.map((item, i) => (
                         <motion.div
                             key={i}
@@ -57,7 +59,8 @@ export default function AIHowItWorks() {
                             className="group bg-white flex flex-col overflow-hidden"
                         >
                             {/* Blender Render Image */}
-                            <div className="relative overflow-hidden h-[30vh] lg:h-[45vh] 3xl:h-[48vh] uw:h-[35vh]">
+                            {/* PREVIOUS UI: div className="relative overflow-hidden h-[30vh] lg:h-[45vh]..." */}
+                            <div className="relative overflow-hidden h-[25vh] sm:h-[30vh] lg:h-[45vh] 3xl:h-[48vh] uw:h-[35vh]">
                                 <img
                                     src={item.img}
                                     alt={item.title}

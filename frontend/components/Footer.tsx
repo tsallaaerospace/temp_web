@@ -69,7 +69,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative w-full bg-[#050505] text-white flex flex-col items-center pt-8 sm:pt-20 lg:pt-32 uw:pt-8 overflow-hidden z-[10]">
+    <footer className="relative w-full bg-[#050505] text-white flex flex-col items-center pt-16 sm:pt-20 lg:pt-32 uw:pt-8 overflow-hidden z-[10]">
       {/* PREVIOUS UI: footer pt-20 lg:pt-32 (no mobile-specific padding) */}
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-[#5ce1e6]/20" />
@@ -82,14 +82,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-16 lg:gap-8 items-start">
           {/* ========== Left Column (Brand) ========== */}
           {/* PREVIOUS UI: div space-y-8, Image h-16 lg:h-20 */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-start space-y-4 sm:space-y-8">
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-start space-y-6 sm:space-y-8">
             <Link href="/" className="group transition-transform duration-500 hover:scale-105">
               <Image
                 src="/tsalla_main.svg"
                 alt="Tsalla Aerospace"
                 width={300}
                 height={80}
-                className="h-10 sm:h-16 lg:h-20 w-auto brightness-125"
+                className="h-14 sm:h-16 lg:h-20 w-auto brightness-125"
                 priority
               />
             </Link>
@@ -128,9 +128,9 @@ export default function Footer() {
 
           {/* ========== Right Column (Navigation) ========== */}
           {/* PREVIOUS UI: div gap-x-8 gap-y-12 pl-8 */}
-          <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-6 sm:gap-y-12 pl-6 sm:pl-8 md:pl-0">
+          <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-10 sm:gap-y-12 pl-6 sm:pl-8 md:pl-0">
             {Object.entries(footerLinks).map(([title, links]) => (
-              <div key={title} className="flex flex-col space-y-3 sm:space-y-6">
+              <div key={title} className="flex flex-col space-y-4 sm:space-y-6">
                 {/* PREVIOUS UI: div space-y-6 */}
                 <h4 className="font-orbit text-[#5ce1e6] text-xs font-bold uppercase tracking-[0.2em]">
                   {title}
@@ -162,7 +162,7 @@ export default function Footer() {
 
       {/* Massive Brand Watermark */}
       {/* PREVIOUS UI: watermark div mt-8 mb-8 md:mt-[-5vw] md:mb-[-5vw] */}
-      <div className={`relative w-full overflow-hidden flex justify-center pointer-events-none select-none z-0 ${isFenixPage ? "mt-[-65vw] mb-[-45vw]" : "mt-2 sm:mt-8 mb-2 sm:mb-8 md:mt-[-5vw] md:mb-[-5vw]"}`}>
+      <div className={`relative w-full overflow-hidden flex justify-center pointer-events-none select-none z-0 ${isFenixPage ? "mt-[-65vw] mb-[-45vw]" : "mt-4 sm:mt-8 mb-4 sm:mb-8 md:mt-[-5vw] md:mb-[-5vw]"}`}>
         {isFenixPage ? (
           <div
             className="relative w-[120vw] h-[120vw] flex items-center justify-center opacity-[0.03]"
@@ -176,7 +176,7 @@ export default function Footer() {
             />
           </div>
         ) : (
-          <div className="relative w-[140vw] h-[15vw] sm:h-[25vw] opacity-[0.03]">
+          <div className="relative w-[140vw] h-[22vw] sm:h-[25vw] opacity-[0.03]">
             {/* PREVIOUS UI: div h-[25vw] - watermark height reduced on mobile */}
             <Image
               src="/Tsalla.svg"
@@ -191,7 +191,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       {/* PREVIOUS UI: div py-8 */}
-      <div className="w-full border-t border-white/10 relative bg-black/40 backdrop-blur-md py-4 sm:py-8">
+      <div className="w-full border-t border-white/10 relative bg-black/40 backdrop-blur-md py-6 sm:py-8">
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#5ce1e6]/30 to-transparent" />
         <div className="max-w-[90rem] mx-auto px-6 lg:px-24 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center space-x-8 order-2 md:order-1">
