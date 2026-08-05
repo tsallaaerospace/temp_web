@@ -193,7 +193,7 @@
   - Container updated to dynamic mobile height `h-[100dvh] sm:h-screen`.
   - Heading font size updated to `text-3xl sm:text-5xl lg:text-[4.375rem]`.
   - Shifted text content slightly down (`justify-start pt-44 sm:pt-20` on mobile) for perfect visual balance on phone screens.
-  - Formatted Hero subtitle to break onto next line (`"We Don’t Build Systems.\nWe Build Unfair Advantages."`) for clean mobile reading.
+  - Implemented responsive subtitle split: mobile viewports (`block sm:hidden`) break subtitle after `"Systems."` into 2 clean lines (`"We Don’t Build Systems.\nWe Build Unfair Advantages."`), while desktop viewports (`hidden sm:block`) render on 1 single continuous line.
   - Container padding updated to `px-5 sm:px-12` and `pb-20 sm:pb-32`, ensuring `"UNMANNED. UNMATCHED. UNCOMPROMISED."` fits mobile screens cleanly.
   - *Previous code preserved as comment blocks in `HeroSection.tsx`.*
 
