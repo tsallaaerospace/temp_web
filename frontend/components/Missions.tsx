@@ -68,6 +68,7 @@ export default function Missions() {
             On a mission to protect our<br />protectors.
           </h2>
           <div className="w-full">
+            {/* PREVIOUS UI: <p className={`text-base sm:text-xl ...`}>Our adversaries are evolving, so must we!</p> */}
             <p
               className={`text-base sm:text-xl md:text-2xl 3xl:text-lg uw:text-4xl font-light leading-relaxed text-neutral-600 tracking-wide font-orbit transition-all duration-700 ease-out transform ${isVisible ? "opacity-90 translate-y-0" : "opacity-0 translate-y-12"
                 }`}
@@ -75,7 +76,8 @@ export default function Missions() {
                 transitionDelay: "150ms",
               }}
             >
-              Our adversaries are evolving, so must we!
+              <span className="block sm:inline">Our adversaries are evolving,</span>{" "}
+              <span className="block sm:inline">so must we!</span>
             </p>
           </div>
         </div>

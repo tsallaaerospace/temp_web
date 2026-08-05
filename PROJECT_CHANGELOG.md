@@ -318,6 +318,8 @@
 | **AI-Pilot Page** | How It Works Title | Static `<h2>HOW IT WORKS</h2>` | Character-reveal animation via `TextReveal` component | Previous UI commented in `AIHowItWorks.tsx` |
 | **Cortex Page** | Features Title | Static `<h2>FEATURES</h2>` | Character-reveal animation via `TextReveal` component | Previous UI commented in `CortexHowItWorks.tsx` |
 | **Operations Sections** | Blue Text Reveal Only | `TextReveal` on all lines | `TextReveal` scoped ONLY to cyan/blue text (`NEVER GOES DARK.`, `NO COCKPIT.`, `Actionable`); other lines remain static black text | Updated `MeshOperations.tsx`, `AIOperations.tsx`, `CortexOperations.tsx` |
+| **Home Page (/)** | Missions Section Subtitle | `so must` on line 1, `we!` on line 2 on mobile | `Our adversaries are evolving,` on line 1, `so must we!` on 2nd line on mobile view via `span className="block sm:inline"` | Commented in `components/Missions.tsx` |
+| **FENIX & Hangar Pages** | Navbar Background | Solid `bg-black` bar over hero video | `bg-transparent` navbar when un-scrolled so hero video extends under navbar | Commented in `components/Navbar.tsx` |
 
 ---
 

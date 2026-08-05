@@ -311,8 +311,28 @@ export default function Navbar() {
 
   const isMerchPage = pathname?.startsWith("/merchandise")
   const isHomePage = pathname === "/"
-  const transparentPaths = ["/countersystems/detection", "/careers", "/maverick/ai-pilot", "/maverick/cortex", "/maverick/mesh"]
-  const isTransparentPage = transparentPaths.includes(pathname || "")
+  {/* PREVIOUS UI: const transparentPaths = ["/countersystems/detection", "/careers", "/maverick/ai-pilot", "/maverick/cortex", "/maverick/mesh"] */}
+  const transparentPaths = [
+    "/countersystems/detection",
+    "/careers",
+    "/maverick/ai-pilot",
+    "/maverick/cortex",
+    "/maverick/mesh",
+    "/fenix",
+    "/uncrewedsystems/fenix",
+    "/bat",
+    "/uncrewedsystems/bat",
+    "/storm",
+    "/uncrewedsystems/storm",
+    "/vulcan",
+    "/uncrewedsystems/vulcan",
+    "/sky-cat",
+    "/uncrewedsystems/sky-cat",
+    "/dexter",
+    "/uncrewedsystems/dexter",
+    "/uncrewedsystems"
+  ]
+  const isTransparentPage = transparentPaths.includes(pathname || "") || pathname?.startsWith("/uncrewedsystems")
   
   let navBackground = isScrolled || !isTransparentPage ? "bg-black" : "bg-transparent"
   if (isHomePage) {

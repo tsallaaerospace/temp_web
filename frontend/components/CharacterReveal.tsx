@@ -31,7 +31,7 @@ export default function CharacterReveal({
 
     // Characters start invisible
     chars.forEach((c) => {
-      ;(c as HTMLElement).style.opacity = "0"
+      ; (c as HTMLElement).style.opacity = "0"
     })
 
     const finalColor = targetColor || "inherit"
