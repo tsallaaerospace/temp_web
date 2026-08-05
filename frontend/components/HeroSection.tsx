@@ -49,18 +49,18 @@ export default function HeroSection(rogg: any) {
 
         {/* Content block - centered vertically, accounting for navbar height */}
         {/* PREVIOUS UI: div className="relative z-20 w-full h-full flex flex-col justify-center items-start text-left px-8 sm:px-12 md:px-16 lg:px-24 pt-20 pb-32 md:pb-48" */}
-        {/* PREVIOUS UI: div className="relative z-20 w-full h-full flex flex-col justify-center items-start text-left px-5 sm:px-12 md:px-16 lg:px-24 pt-20 pb-20 sm:pb-32 md:pb-48" */}
+        {/* PREVIOUS UI: div className="relative z-20 w-full h-full flex flex-col justify-start sm:justify-center items-start text-left px-5 sm:px-12 md:px-16 lg:px-24 pt-36 sm:pt-20 pb-10 sm:pb-32 md:pb-48" */}
         <div
           className="
             relative z-20 w-full h-full
             flex flex-col
             justify-start sm:justify-center items-start text-left
             px-5 sm:px-12 md:px-16 lg:px-24
-            pt-28 sm:pt-20 pb-10 sm:pb-32 md:pb-48
+            pt-44 sm:pt-20 pb-10 sm:pb-32 md:pb-48
           "
         >
-          {/* PREVIOUS UI: div className="w-full max-w-4xl -mt-28 sm:mt-0" */}
-          <div className="w-full max-w-4xl -mt-6 sm:mt-0">
+          {/* PREVIOUS UI: div className="w-full max-w-4xl -mt-6 sm:mt-0" */}
+          <div className="w-full max-w-4xl mt-0">
             {/* MAIN LINE - Digital Blink Animation */}
             {/* PREVIOUS UI: CharacterReveal text="UNMANNED..." className="font-bold text-4xl sm:text-5xl lg:text-[4.375rem]..." */}
             <CharacterReveal
