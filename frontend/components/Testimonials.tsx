@@ -32,9 +32,12 @@ const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
   const [isHovered, setIsHovered] = useState(false)
 
   return (
+    /* PREVIOUS UI (Standard card height without mobile adjustment):
+    <motion.li className={`relative w-full overflow-hidden border border-[#505051]/10 md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] h-[400px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] mb-8 lg:mb-0 group cursor-pointer`} ... >
+    */
     <motion.li
       className={`relative w-full overflow-hidden border border-[#505051]/10
-        md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] h-[400px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] mb-8 lg:mb-0 group cursor-pointer`}
+        md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] h-[360px] sm:h-[400px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] mb-8 lg:mb-0 group cursor-pointer`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -191,27 +194,26 @@ const Testimonials: React.FC = () => {
 
   return (
     <section className="bg-[#eaeaea] text-black py-12 lg:py-16 3xl:py-20 uw:py-8 overflow-hidden">
+      {/* PREVIOUS UI (Standard container padding):
       <div className="w-full px-4 md:px-24 uw:px-24 mb-12 uw:mt-8">
+      */}
+      <div className="w-full px-5 sm:px-12 md:px-24 uw:px-24 mb-8 sm:mb-12 uw:mt-8">
         <div className="max-w-4xl uw:max-w-7xl">
-          {/* PREVIOUS UI (Standard h2 title):
-          <h2 className="text-black mb-8 lg:mb-10 font-orbit text-xl md:text-2xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] tracking-[0.2em] font-bold uppercase">
-            News and media
-          </h2>
+          {/* PREVIOUS UI (Standard title font size):
+          <CharacterReveal text="News and media" className="text-black mb-8 lg:mb-10 font-orbit text-xl md:text-2xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] tracking-[0.2em] font-bold uppercase" stagger={0.04} triggerOnScroll={true} />
           */}
           <CharacterReveal
             text="News and media"
-            className="text-black mb-8 lg:mb-10 font-orbit text-xl md:text-2xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] tracking-[0.2em] font-bold uppercase"
+            className="text-black mb-4 sm:mb-8 lg:mb-10 font-orbit text-2xl sm:text-3xl md:text-4xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] tracking-[0.15em] sm:tracking-[0.2em] font-bold uppercase"
             stagger={0.04}
             triggerOnScroll={true}
           />
-          {/* PREVIOUS UI (Standard static paragraph):
-          <p className="text-black leading-tight text-sm md:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl">
-            Our integrated suite of software, hardware, and services empowers businesses to operate smarter and grow faster.
-          </p>
+          {/* PREVIOUS UI (Standard paragraph font size):
+          <CharacterReveal text="..." className="text-black leading-tight text-sm md:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl" ... />
           */}
           <CharacterReveal
             text="Our integrated suite of software, hardware, and services empowers businesses to operate smarter and grow faster."
-            className="text-black leading-tight text-sm md:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl"
+            className="text-black leading-tight text-xs sm:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl"
             stagger={0.015}
             delay={1.2}
             triggerOnScroll={true}
@@ -229,7 +231,10 @@ const Testimonials: React.FC = () => {
           <ChevronLeft size={24} />
         </motion.button>
 
+        {/* PREVIOUS UI (Standard container height):
         <div className="flex-1 relative h-[420px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] overflow-hidden px-2 md:px-4">
+        */}
+        <div className="flex-1 relative h-[380px] sm:h-[420px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] overflow-hidden px-2 md:px-4">
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.ul
               key={currentPage}

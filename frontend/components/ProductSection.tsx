@@ -254,10 +254,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
             className={cn(
-                /* PREVIOUS UI (vh-based card height - causes size difference between localhost and production):
-                "group relative aspect-[2/3] lg:aspect-auto lg:h-[62vh] 3xl:h-[68vh] uw:h-[72vh] overflow-hidden rounded-none bg-black border border-white/20 hover:border-white/40 transition-all duration-500 shadow-[inset_0_0_30px_rgba(255,255,255,0.05)]",
-                */
+                /* PREVIOUS UI (Fixed pixel height without mobile adjustment):
                 "group relative aspect-[2/3] lg:aspect-auto lg:h-[480px] 3xl:h-[520px] uw:h-[560px] overflow-hidden rounded-none bg-black border border-white/20 hover:border-white/40 transition-all duration-500 shadow-[inset_0_0_30px_rgba(255,255,255,0.05)]",
+                */
+                "group relative h-[420px] sm:h-[460px] lg:h-[480px] 3xl:h-[520px] uw:h-[560px] overflow-hidden rounded-none bg-black border border-white/20 hover:border-white/40 transition-all duration-500 shadow-[inset_0_0_30px_rgba(255,255,255,0.05)]",
                 isFenix && "cursor-pointer hover:border-[#5ce1e6]/60"
             )}
         >
@@ -312,16 +312,18 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 export default function ProductSection() {
     return (
         <section className="bg-black text-white relative overflow-hidden">
+            {/* PREVIOUS UI (Standard container padding):
             <div className="max-w-7xl 2xl:max-w-[90rem] 3xl:max-w-[110rem] uw:max-w-[150rem] mx-auto px-6 pt-12 pb-24">
+            */}
+            <div className="max-w-7xl 2xl:max-w-[90rem] 3xl:max-w-[110rem] uw:max-w-[150rem] mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-16 sm:pb-24">
 
                 {/* Header Section */}
+                {/* PREVIOUS UI (Standard header margin & font size):
                 <div className="text-left mb-16 lg:-ml-2 3xl:ml-14">
-                    {/* PREVIOUS UI (Standard h1 static title):
-                    <h1 className="text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit">
-                        Powered by <span style={{ color: '#5ce1e6' }}>MAVERICK</span>
-                    </h1>
-                    */}
                     <h1 className="text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit text-white flex items-center gap-3">
+                */}
+                <div className="text-left mb-8 sm:mb-16 lg:-ml-2 3xl:ml-14">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit text-white flex flex-wrap items-center gap-2 sm:gap-3">
                         <span>Powered by</span>
                         <span style={{ color: '#5ce1e6' }}>
                             <MaverickBlink />
@@ -330,7 +332,10 @@ export default function ProductSection() {
                 </div>
 
                 {/* Grid Layout - 4 columns in a row */}
+                {/* PREVIOUS UI (Standard grid bottom margin):
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
+                */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 sm:mb-32">
                     {STATIC_PRODUCTS.map((product, index) => (
                         <ProductCard
                             key={product.id}
@@ -341,27 +346,12 @@ export default function ProductSection() {
                 </div>
 
                 {/* Bento Grid Section */}
+                {/* PREVIOUS UI (Standard top margin):
                 <div className="w-full mt-32">
-                    <div className="text-left mb-16 lg:-ml-2 3xl:ml-14">
-                        {/* PREVIOUS UI (Whole title character reveal):
-                        <CharacterReveal
-                            text="Powered by MAVERICK"
-                            cyanHighlight="MAVERICK"
-                            className="text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit text-white"
-                            stagger={0.04}
-                            triggerOnScroll={true}
-                        />
-                        */}
-                        {/* PREVIOUS UI (CharacterReveal wrapper):
-                        <CharacterReveal
-                            text="MAVERICK"
-                            className="text-[#5ce1e6]"
-                            targetColor="#5ce1e6"
-                            stagger={0.06}
-                            triggerOnScroll={true}
-                        />
-                        */}
-                        <h1 className="text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit text-white flex items-center gap-3">
+                */}
+                <div className="w-full mt-16 sm:mt-32">
+                    <div className="text-left mb-8 sm:mb-16 lg:-ml-2 3xl:ml-14">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] font-bold tracking-tighter leading-[0.9] font-orbit text-white flex flex-wrap items-center gap-2 sm:gap-3">
                             <span>Powered by</span>
                             <span style={{ color: '#5ce1e6' }}>
                                 <MaverickBlink />

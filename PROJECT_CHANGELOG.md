@@ -173,4 +173,93 @@
 
 ---
 
-*Log last updated: August 04, 2026*
+## 📅 Session Log: August 05, 2026
+
+### 🎯 Overview of User Request
+- Perform full mobile and tablet responsiveness optimization for every section on the Home Page (`/`).
+- Ensure every section fits mobile and tablet screens perfectly without any text overflow, cut-offs, or awkward horizontal scrolling.
+- Strictly maintain all existing desktop, 1440p, 3xl, and ultrawide (`uw`) monitor layouts.
+- Preserve all previous code in source files via comment blocks (`{/* PREVIOUS UI: ... */}`).
+
+---
+
+### 🌐 PAGE: Home Page (`/`)
+
+#### 📍 Section 1: Hero Section ([HeroSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/HeroSection.tsx))
+- ⏮️ **BEFORE UI STATE**:
+  - Container used `h-screen`, heading used `text-4xl sm:text-5xl lg:text-[4.375rem]`, padding was `px-8 sm:px-12`.
+  - On mobile browsers with dynamic URL bars, content could be slightly misaligned vertically or heading could wrap awkwardly.
+- ⏭️ **AFTER UI STATE**:
+  - Container updated to dynamic mobile height `h-[100dvh] sm:h-screen`.
+  - Heading font size updated to `text-3xl sm:text-5xl lg:text-[4.375rem]`.
+  - Container padding updated to `px-5 sm:px-12` and `pb-20 sm:pb-32`, ensuring `"UNMANNED. UNMATCHED. UNCOMPROMISED."` fits mobile screens cleanly.
+  - *Previous code preserved as comment blocks in `HeroSection.tsx`.*
+
+#### 📍 Section 2: Missions Section ([Missions.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Missions.tsx))
+- ⏮️ **BEFORE UI STATE**:
+  - Background image used `object-right transform scale-110`.
+  - Title font size was `text-4xl sm:text-5xl md:text-6xl`. Container used `h-screen min-h-screen`.
+- ⏭️ **AFTER UI STATE**:
+  - Container updated to dynamic height `h-[100dvh] sm:h-screen min-h-[100dvh] sm:min-h-screen`.
+  - Background image updated to `object-[85%_center] sm:object-right`, ensuring the background drone artwork remains crisp behind text on mobile viewports.
+  - Title font size scaled to `text-3xl sm:text-5xl md:text-6xl` with `leading-tight` and padding `px-5 sm:px-10`.
+  - *Previous code preserved as comment blocks in `Missions.tsx`.*
+
+#### 📍 Section 3: Product Section ([ProductSection.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/ProductSection.tsx))
+- ⏮️ **BEFORE UI STATE**:
+  - Top 4 product cards used `h-[480px]` without mobile scale adjustments.
+  - Section titles `"Powered by MAVERICK"` used `text-4xl md:text-5xl` without `flex-wrap`, which could cause overflow on 320px mobile screens.
+  - Container padding was `px-6 pt-12 pb-24`, margin bottom was `mb-32`.
+- ⏭️ **AFTER UI STATE**:
+  - Top product cards height set to `h-[420px] sm:h-[460px] lg:h-[480px]`.
+  - Section titles updated to `text-3xl sm:text-4xl md:text-5xl lg:text-[4.375rem]` with `flex-wrap items-center gap-2 sm:gap-3` for clean wrapping on narrow mobile screens.
+  - Container padding and margins optimized for mobile (`px-4 sm:px-6`, `mb-8 sm:mb-16`, `mt-16 sm:mt-32`).
+  - *Previous code preserved as comment blocks in `ProductSection.tsx`.*
+
+#### 📍 Section 4: Velocity Complex ([VelocityComplex.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/VelocityComplex.tsx))
+- ⏮️ **BEFORE UI STATE**:
+  - Header row used `flex justify-between items-end`. Title used `text-3xl md:text-4xl`.
+  - Banner image used `aspect-[21/9]`, which became thin on 375px mobile screens.
+- ⏭️ **AFTER UI STATE**:
+  - Header row updated to `flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-0`.
+  - Title font size updated to `text-2xl sm:text-3xl md:text-4xl lg:text-[4.375rem] pl-0 sm:pl-4`.
+  - Banner image updated to `aspect-[16/9] sm:aspect-[21/9] lg:aspect-[3.2/1]`, giving the building image great depth on mobile screens.
+  - *Previous code preserved as comment blocks in `VelocityComplex.tsx`.*
+
+#### 📍 Section 5: News and Media ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
+- ⏮️ **BEFORE UI STATE**:
+  - Header padding was `px-4 md:px-24`, title font size was `text-xl md:text-2xl lg:text-[4.375rem]`.
+  - Testimonial card height was `h-[400px] lg:h-[450px]`, container height was `h-[420px] lg:h-[450px]`.
+- ⏭️ **AFTER UI STATE**:
+  - Header padding updated to `px-5 sm:px-12 md:px-24`, title font size updated to `text-2xl sm:text-3xl md:text-4xl lg:text-[4.375rem]`.
+  - Subtitle paragraph font size updated to `text-xs sm:text-base`.
+  - Testimonial card height updated to `h-[360px] sm:h-[400px] lg:h-[450px]`, container height to `h-[380px] sm:h-[420px] lg:h-[450px]`.
+  - *Previous code preserved as comment blocks in `Testimonials.tsx`.*
+
+---
+
+## 📊 Before UI vs After UI Comparison Summary Table
+
+| Page / Section | Element | Before UI State | After UI State | Reversion Code Location |
+| :--- | :--- | :--- | :--- | :--- |
+| **Navbar** | Navbar Links | 6 items right-aligned | 2 items (**MAVERICK**, **UNCREWED SYSTEMS**) centered in header | Commented in `Navbar.tsx` |
+| **Navbar** | Disabled Items | `COUNTER SYSTEMS`, `SPACE SYSTEMS`, `COMPANY`, `JOIN THE MISSION` visible | Hidden from UI on all pages (Home & Contact) | Commented in `Navbar.tsx` |
+| **Hero Section** | Action Button | **"Learn More"** button visible & linking to `/about` | Hidden from UI on Home Page | Commented in `HeroSection.tsx` |
+| **Hero Section** | Mobile Viewport | Static `h-screen`, `text-4xl` heading | Dynamic `h-[100dvh]`, `text-3xl sm:text-5xl` mobile fitting | Commented in `HeroSection.tsx` |
+| **Missions** | Mobile Viewport | Static `h-screen`, `object-right` image | Dynamic `h-[100dvh]`, `object-[85%_center]` mobile artwork fitting | Commented in `Missions.tsx` |
+| **Product Section** | Top Cards Height | Fixed `h-[480px]` | Responsive `h-[420px] sm:h-[460px] lg:h-[480px]` | Commented in `ProductSection.tsx` |
+| **Product Section** | Title Fitting | Single line flex row `text-4xl` | Scaled `text-3xl sm:text-4xl` flex-wrap | Commented in `ProductSection.tsx` |
+| **Velocity Complex**| Mobile Header | Horizontal flex row squeezing elements | Vertical flex stack (`flex-col sm:flex-row`) on mobile | Commented in `VelocityComplex.tsx` |
+| **Velocity Complex**| Banner Image | Thin `aspect-[21/9]` on phone | Deep `aspect-[16/9]` on mobile, `aspect-[21/9]` desktop | Commented in `VelocityComplex.tsx` |
+| **News & Media** | Card Height | Fixed `h-[400px]` card, `h-[420px]` container | Mobile `h-[360px]` card, `h-[380px]` container | Commented in `Testimonials.tsx` |
+| **Footer Section** | Products List | Placeholder: `Roadrunner`, `Hardware`, `Mission Systems` | Real: `FENIX`, `T-BAT`, `STORM`, `DEXTER`, `MAVERICK` | Commented in `Footer.tsx` |
+| **Footer Section** | Company List | Empty column | Full links: `About Us`, `Mission Autonomy`, `Our Team`, `Our Culture`, `Careers` | Commented in `Footer.tsx` |
+| **Footer Section** | Click Behavior | Navigated away to subpages | Click triggers `e.preventDefault()`, stays on Home Page | Commented in `Footer.tsx` |
+| **Contact Page** | Form UI | 5-field interactive contact form on left side | Disabled form UI; displays Direct Email Info (`info@tsallaaerospace.com`) | Commented in `ContactSection.tsx` |
+| **Hangar Menu** | System Links | All 6 systems unlocked and navigable | **FENIX** active; locked systems show **Lock Icon** & **`LOCKED`** badge | Commented in `UncrewedSystemsMenu.tsx` |
+| **Hangar Menu** | Hover Behavior | Hovering locked systems showed details on right | Hovering locked systems **shows nothing on right side panel** | Commented in `UncrewedSystemsMenu.tsx` |
+| **Routes** | Product Paths | Nested URLs (e.g. `/uncrewedsystems/fenix`) | Clean top-level URLs (`/fenix`, `/bat`, `/storm`, `/dexter`) | Created in `app/fenix/`, `app/bat/`, etc. |
+
+---
+
+*Log last updated: August 05, 2026*
