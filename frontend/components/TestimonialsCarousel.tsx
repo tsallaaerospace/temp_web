@@ -12,7 +12,7 @@ interface Testimonial {
   logo: string
   image: string
 }
-
+// sdsl
 interface TestimonialsCarouselProps {
   testimonials: Testimonial[]
 }
