@@ -23,7 +23,8 @@ export default function FenixCapabilities(): React.JSX.Element {
       */}
 
       {/* PREVIOUS UI: <section className="font-clash-grotesk ..."> */}
-      <section className="font-orbit flex flex-col md:flex-row items-center justify-center bg-white text-black w-full min-h-screen py-12 md:py-20">
+      {/* PREVIOUS MOBILE HEIGHT: <section className="font-orbit flex flex-col md:flex-row items-center justify-center bg-white text-black w-full min-h-screen py-12 md:py-20"> */}
+      <section className="font-orbit flex min-h-[100svh] w-full flex-col items-center justify-center bg-white py-12 text-black md:min-h-screen md:flex-row md:py-20">
         <ContentWrapper>
           <div className="flex flex-col md:flex-row items-center justify-center gap-16 lg:gap-24">
             {/* Left Column: Image */}

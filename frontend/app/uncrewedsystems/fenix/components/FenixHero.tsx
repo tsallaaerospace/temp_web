@@ -4,9 +4,10 @@ import type { JSX } from "react"
 import CharacterReveal from "@/components/CharacterReveal"
 
 export default function FenixHero(): React.JSX.Element {
+  // PREVIOUS MOBILE HEIGHT: the hero used `h-screen` (`100vh`), which includes mobile browser chrome on physical phones.
   return (
     <section
-      className="relative h-screen w-full text-white overflow-hidden font-orbit"
+      className="relative h-[100svh] w-full text-white overflow-hidden font-orbit md:h-screen"
     >
       {/* Background Video */}
       <video

@@ -796,10 +796,14 @@
 - ⏭️ **AFTER UI STATE**: Added `min-height: 100svh` to the short-phone footer rule and anchored the bottom bar with `margin-top: auto`, making the footer fill the complete iPhone 14 viewport while retaining the existing content sizes. Taller iPhone 14 Pro Max screens remain unaffected.
 - *The previous content-driven height behavior is preserved in a source comment in `globals.css`.*
 
+#### 📍 Section 61: FENIX Hero & Capabilities Real-Mobile Viewport Height Fix ([FenixHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixHero.tsx), [FenixCapabilities.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixCapabilities.tsx))
+- ⏮️ **BEFORE UI STATE**: The Hero used `h-screen` and the second Capabilities section used `min-h-screen`. Their legacy `100vh` sizing could include the physical phone browser's address and toolbar area, making both sections taller on real iPhones than in desktop device inspection.
+- ⏭️ **AFTER UI STATE**: Both mobile sections now use the small viewport unit (`100svh`), matching the reliably visible phone screen height on iPhone 14 and iPhone 14 Pro Max. Desktop viewports retain the original `h-screen`/`min-h-screen` behavior from the `md` breakpoint onward.
+- *The previous legacy viewport-height classes are preserved as source comments in both component files.*
+
 ---
 
 *Log last updated: August 06, 2026*
-
 
 
 
