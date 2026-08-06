@@ -466,6 +466,78 @@
 - **AFTER UI STATE**: The description now has an additional `0.5rem` (8px) left inset below the `lg` breakpoint, moving it slightly right as requested. The desktop right-column position is unchanged.
 - *The previous mobile paragraph position is preserved as a source comment in `FenixHero.tsx`.*
 
+#### Section: Turtle Mode Premium White Recovery Interface ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- **BEFORE UI STATE**: Turtle Mode used a large, minimally framed video over a faint grid, a low-opacity centered title watermark, and a single low-contrast sentence. The white background transitioned to dark at the end of the scroll and did not communicate the recovery process.
+- **AFTER UI STATE**:
+  - The background remains white throughout, with a restrained technical grid and cyan radial glow.
+  - The video is now a premium framed live-feed panel with camera label, live status, corner guides, and elevated shadow treatment.
+  - Added a clear Turtle Mode identity, recovery-protocol narrative, desktop system-status panel, three-stage autonomous recovery sequence, and fail-safe intelligence label. The compact mobile view retains the identity, video, and protocol panel without crowding the footage.
+  - Scroll motion now introduces and exits the interface elements subtly while the video stays central to the experience.
+- *The previous background transition, video frame, title treatment, and narrative positioning are preserved as source comments in `FenixTurtleMode.tsx`.*
+
+#### Section: Turtle Mode Fail-Safe Label Removal ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- **BEFORE UI STATE**: A lower-left `FAIL-SAFE INTELLIGENCE` label with a cyan lightning icon was visible from the `sm` breakpoint upward.
+- **AFTER UI STATE**: Removed the lower-left fail-safe label, leaving the framed video, recovery protocol, and system information panels unchanged.
+- *The prior label markup and icon import are preserved as source comments in `FenixTurtleMode.tsx`.*
+
+#### Section: Turtle Mode Title Video-Edge Clearance ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- **BEFORE UI STATE**: The desktop video used 70% viewport width, and the large Turtle Mode title extended into its dark left edge. This made the final title letters and supporting text visually disappear.
+- **AFTER UI STATE**: The desktop video now leaves a wider white left gutter (`64vw` at `lg`, `66vw` at `xl`), while the title uses a compact breakpoint-aware width and size. The complete title and its supporting copy remain visible on the white background beside the video.
+- *The previous desktop video width, title position, and title size are preserved as source comments in `FenixTurtleMode.tsx`.*
+
+#### Section: Turtle Mode Recovery Eyebrow Removal ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- **BEFORE UI STATE**: A cyan `04 / RECOVERY` eyebrow with a horizontal line appeared directly above the Turtle Mode title.
+- **AFTER UI STATE**: Removed the recovery eyebrow, leaving the title and supporting description as the section identity.
+- *The previous eyebrow markup is preserved as a source comment in `FenixTurtleMode.tsx`.*
+
+#### Section: Turtle Mode Title Emphasis ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- **BEFORE UI STATE**: The Turtle Mode title used `font-medium` with a 2rem mobile base size and 2.25rem / 3rem desktop scale.
+- **AFTER UI STATE**: Increased the title to `font-semibold` and raised each breakpoint size by 0.25rem, adding a modest amount of visual weight without encroaching on the video.
+- *The previous title weight and responsive sizes are preserved as a source comment in `FenixTurtleMode.tsx`.*
+
+#### Section: Turtle Mode Mobile Responsive Layout ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- **BEFORE UI STATE**: The sticky stage used static `vh` units, a near-full-width phone video, and a desktop-oriented protocol-card offset. On shorter phones, the title, video, and lower panel could visually compete for the same space.
+- **AFTER UI STATE**:
+  - Uses `dvh` for the scroll stage and sticky viewport, so mobile browser chrome changes do not leave clipped or excess space.
+  - The phone video is capped at 78% viewport width with a smaller shadow, preserving clear space above for the title and below for the protocol panel. Tablet and desktop widths retain their existing sizing.
+  - The protocol card now uses stable left/right phone gutters, compact metadata spacing, and a four-line description cap; its original wider presentation returns at `sm` and larger.
+- *The previous stage height, mobile video width, header sizing, and protocol-card classes are preserved as source comments in `FenixTurtleMode.tsx`.*
+
+#### Section: Turtle Mode Immediate Interface Visibility ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- **BEFORE UI STATE**: The video, Turtle Mode title, recovery protocol card, recovery sequence, and system-status card all animated from zero opacity during the beginning of the section scroll. This left the interface faint or absent for roughly the first second after arriving at the section.
+- **AFTER UI STATE**: Removed the scroll-driven opacity and entry-position transforms from every active interface element. The complete interface is now fully visible immediately on entry; only the restrained video scale remains.
+- *The previous entrance motion values are preserved as source comments in `FenixTurtleMode.tsx`.*
+
+#### Section: Development Source-Map 404 Suppression ([next.config.mjs](file:///c:/Users/tsall/Desktop/1st_version/frontend/next.config.mjs), [strip-source-map-url.cjs](file:///c:/Users/tsall/Desktop/1st_version/frontend/loaders/strip-source-map-url.cjs), [com.chrome.devtools.json](file:///c:/Users/tsall/Desktop/1st_version/frontend/public/.well-known/appspecific/com.chrome.devtools.json))
+- **BEFORE UI STATE**: The Framer Motion ESM dependency emitted dangling `*.mjs.map` source-map URLs into Next development chunks, causing requests such as `LayoutGroupContext.mjs.map` to return 404. Chrome DevTools also automatically requested its optional app-specific well-known file, which returned 404.
+- **AFTER UI STATE**: Added a development-only final-asset Webpack cleanup that removes only dangling dependency `*.mjs.map` references after Next emits its chunks, including the map comments encoded inside Next's development `eval` module strings. Added an empty static response for Chrome's optional DevTools probe, so it returns 200 rather than a route 404. Production source-map behavior and page rendering remain unchanged.
+- *The prior configuration, module-level cleanup attempt, and source-map references are preserved in source comments where applicable.*
+
+#### Section: Turtle Mode Mobile Identity Alignment and Protocol Offset ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- **BEFORE UI STATE**: On phones, the Turtle Mode identity was left-aligned, its explicit line break forced the title into two rows, and the recovery protocol card sat 1rem from the bottom edge.
+- **AFTER UI STATE**: Below `sm`, the title and supporting copy use a centered full-width block, and `Turtle Mode` remains on one line. From `sm` upward, the original left-aligned, two-line desktop label returns. The phone protocol card now sits 2rem from the bottom, moving it up by 16px without changing tablet or desktop placement.
+- *The previous identity layout, forced title break, and card offset are preserved as source comments in `FenixTurtleMode.tsx`.*
+
+#### Section: Ready to Deploy Heading Alignment Restoration ([FenixLast.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixLast.tsx))
+- **BEFORE UI STATE**: Each animated heading word inherited `CharacterReveal`'s full-width wrapper, so the flex layout placed `READY`, `TO`, `DEPLOY`, and `WHERE` on separate rows instead of restoring the original two-line composition.
+- **AFTER UI STATE**: The animated word wrappers now use content width and inline inner lines. The heading returns to the original centered composition: `READY TO DEPLOY WHERE` on the first row and `OTHERS CANNOT.` on the second, while retaining the existing black/cyan character-reveal treatment.
+- *The prior full-width animated word behavior is documented as a source comment in `FenixLast.tsx`.*
+
+#### Section: Ready to Deploy Heading Scale Alignment ([FenixLast.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixLast.tsx))
+- **BEFORE UI STATE**: The FENIX closing heading used `text-5xl` at the base size and `text-7xl` on desktop, making it less prominent than the comparable Mesh and AI Pilot closing sections.
+- **AFTER UI STATE**: Adopted the Mesh/AI Pilot responsive starting scale (`text-6xl` with a 7xl extra-small-phone step), retains the existing 7xl medium-screen scale, and increases the desktop display size modestly to `text-8xl`. The maximum heading width expands at desktop sizes so the restored two-line composition remains intact.
+- *The previous heading scale and width limit are preserved as a source comment in `FenixLast.tsx`.*
+
+#### Section: Turtle Mode Mobile Spacing Refinement ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- **BEFORE UI STATE**: The centered mobile identity began 1rem from the top edge, the video used 78% viewport width, and the recovery protocol card was 2rem from the bottom edge.
+- **AFTER UI STATE**: On phones, the title and supporting copy move down by 8px, the video grows to 82% viewport width, and the protocol card moves up by 16px. At `sm` and larger, the existing title, video, and card positions remain unchanged.
+- *The previous phone offsets and video width are preserved as source comments in `FenixTurtleMode.tsx`.*
+
+#### Section: Turtle Mode Additional Mobile Title Offset ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- **BEFORE UI STATE**: After the first refinement, the phone title block began at `top-6`.
+- **AFTER UI STATE**: Moved the phone title and supporting copy to `top-8`, adding another 8px of top spacing. The `sm` and larger layouts are unchanged.
+- *The prior `top-6` position is preserved as a source comment in `FenixTurtleMode.tsx`.*
+
 ### 🌐 PAGE: Uncrewed Systems Fenix Page (`/fenix`, `/uncrewedsystems/fenix`) & Global Footer
 
 #### 📍 Section: Footer Section ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx))
@@ -516,6 +588,200 @@
 - ⏭️ **AFTER UI STATE**: Updated `<CharacterReveal>` props to pass `glowColor="#5ce1e6"` and `flickerColor="#000000"` (black), producing a high-contrast blue and black digital glitch reveal animation optimized for the light section background.
 - *Previous character reveal props are preserved as source comments in both component files.*
 
+#### 📍 Section 19: Hero Right Paragraph Text Justification ([FenixHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixHero.tsx))
+- ⏮️ **BEFORE UI STATE**: The right description paragraph in `FenixHero.tsx` (*"When intelligence fits in the palm of your hand..."*) used `text-left` alignment, leaving ragged right edges.
+- ⏭️ **AFTER UI STATE**: Updated the container and `<CharacterReveal>` properties to use `text-justify` and `w-full` alignment, cleanly justifying both left and right text edges across all screen sizes.
+- *Previous left-aligned container and CharacterReveal props are preserved as source comments.*
+
+#### 📍 Section 20: Hero Right Paragraph Container Expansion & Word Wrapping Fix ([FenixHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixHero.tsx))
+- ⏮️ **BEFORE UI STATE**: The right paragraph container was restricted to `lg:max-w-md` with `text-justify`, causing flexbox character wrapping to split words like `discreet` into `d` and `iscreet` across line breaks.
+- ⏭️ **AFTER UI STATE**: Expanded the container max-width to `lg:max-w-lg` and restored clean `text-left` alignment with full word boundaries, ensuring words never break awkwardly across lines while providing generous typography spacing.
+- *Previous narrow container classes and text-justify properties are preserved as source comments in `FenixHero.tsx`.*
+
+#### 📍 Section 21: CharacterReveal Whole-Word Wrapping Fix & Font Size Reduction ([CharacterReveal.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/CharacterReveal.tsx), [FenixHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixHero.tsx))
+- ⏮️ **BEFORE UI STATE**: `<CharacterReveal>` mapped characters individually across flex items (`line.split("").map(...)`), causing flexbox wrapping to break single words across line boundaries (e.g., `yo` / `ur` and `thei` / `r`). Additionally, the paragraph font size was `text-lg md:text-xl`.
+- ⏭️ **AFTER UI STATE**: Refactored `CharacterReveal.tsx` to group characters word-by-word into `<span className="inline-block whitespace-nowrap">` containers, guaranteeing that words like `your` and `their` remain 100% intact without splitting across lines. Reduced the paragraph font size in `FenixHero.tsx` to `text-base sm:text-lg md:text-lg`.
+- *Previous character mapping and font size classes are preserved as source comments in both component files.*
+
+#### 📍 Section 22: FENIX Page Sections Full Mobile Text Justification ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx), [FenixPtoP.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixPtoP.tsx), [FenixCapabilities.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixCapabilities.tsx))
+- ⏮️ **BEFORE UI STATE**: Paragraphs across `FenixGPSNavigation`, `FenixPtoP`, and `FenixCapabilities` used center or default left alignment without mobile width expansion or `text-justify` alignment.
+- ⏭️ **AFTER UI STATE**: Applied `text-justify`, `w-full`, and responsive padding `px-4 sm:px-0` across description paragraphs, ensuring clean text justification across both mobile phone screens and desktop monitors.
+- *Previous paragraph alignment classes are preserved as source comments in all modified files.*
+
+#### 📍 Section 23: Fix ReferenceError in CharacterReveal & Native Mobile Text Justification ([CharacterReveal.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/CharacterReveal.tsx), [FenixHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixHero.tsx))
+- ⏮️ **BEFORE UI STATE**: `<CharacterReveal>` encountered a `ReferenceError: word is not defined` due to a missing `.map((word, wordIdx, wordArr) => ...)` loop, and word containers used `inline-block` which mobile WebKit/Blink engines ignored for `text-align: justify`.
+- ⏭️ **AFTER UI STATE**: Restored the word mapping loop in `CharacterReveal.tsx` and changed word containers to `inline whitespace-nowrap` with standard space characters. Mobile browsers now natively justify paragraph text across both left and right margins, while keeping words 100% whole without letter splitting.
+- *Previous word container classes are preserved as source comments.*
+
+#### 📍 Section 24: Floor Map Mobile Layout Realignment (Title Top & Paragraph Bottom) ([FenixFloorMap.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixFloorMap.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile screens, the heading ("Floor Map Generation") and description paragraph were vertically centered together in the middle of the video background, cluttering the central footage.
+- ⏭️ **AFTER UI STATE**: Updated the container layout to `flex flex-col justify-between md:justify-center py-16 md:py-0`, moving the heading to the top frame and pushing the description paragraph to the bottom frame on mobile screens. Desktop layout remains centered.
+- *Previous flexbox container classes and paragraph color are preserved as source comments in `FenixFloorMap.tsx`.*
+
+#### 📍 Section 25: Mission Profiles Section Header Vertical Offset Adjustment ([FenixMission.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixMission.tsx))
+- ⏮️ **BEFORE UI STATE**: The section header (`FENIX / Operational envelope` & `Mission Profiles`) was positioned at `top-6 sm:top-7` (24px from top), placing it directly against the top screen edge on mobile displays.
+- ⏭️ **AFTER UI STATE**: Increased header top positioning to `top-12 sm:top-14 md:top-16`, lowering the title block cleanly away from the top viewport edge while leaving generous space above the mission profile cards.
+#### 📍 Section 26: FENIX FUI Header Title Layout Positioning & Inline Character Reveal Restoration ([FenixFUI2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixFUI2.tsx), [CharacterReveal.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/CharacterReveal.tsx))
+- ⏮️ **BEFORE UI STATE**: Default `<CharacterReveal>` outer spans enforced `inline-block w-full` and `block w-full text-justify`. In `FenixFUI2.tsx`, where `<CharacterReveal>` is used for individual inline acronym characters (`F`, `E`, `N`, `I`, `X`), each letter was forced into a full-width block element aligned to the left margin. This caused `F E N I X` to stack vertically on the left screen edge while the remaining word fragments (`AST ENTRY NAVIGATIONAL INTRUSION EXPLORER`) were pushed down into the center over top of the drone image.
+- ⏭️ **AFTER UI STATE**: Updated default outer spans in `CharacterReveal.tsx` to `inline-block` (without forced `w-full` / `block` / `text-justify`). Inline character reveals like `<CharacterReveal text="F" />` now render compactly inline within heading text. The section header in `FenixFUI2.tsx` (`FAST ENTRY NAVIGATIONAL INTRUSION EXPLORER`) is fully restored to its clean, centered position above the drone image, while paragraph character reveals (such as in `FenixHero.tsx`) continue to receive `w-full text-justify` via explicit props.
+- *Previous forced full-width block class names in `CharacterReveal.tsx` are preserved as source comments.*
+
+#### 📍 Section 27: FENIX FUI Header Mobile 3-Line Title Composition ([FenixFUI2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixFUI2.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the title wrapped without constraints as 3 uneven lines (`FAST ENTRY N` / `AVIGATIONAL I` / `NTRUSION EXPLORER`), splitting acronym letters like `N` and `I` onto different lines from `AVIGATIONAL` and `NTRUSION`.
+- ⏭️ **AFTER UI STATE**: Wrapped each logical phrase (`FAST ENTRY`, `NAVIGATIONAL`, `INTRUSION EXPLORER`) in `whitespace-nowrap` spans with responsive `<br className="block sm:hidden" />` line breaks. On mobile viewports, Line 1 displays `FAST ENTRY`, Line 2 displays `NAVIGATIONAL`, and Line 3 displays `INTRUSION EXPLORER`. Desktop screens maintain single-line composition.
+- *Previous unconstrained header title markup is preserved as a source comment in `FenixFUI2.tsx`.*
+
+#### 📍 Section 28: Floor Map Section Header Mobile Horizontal Centering ([FenixFloorMap.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixFloorMap.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the section heading (`Floor Map Generation`) was left-aligned (`items-start`), placing it in the top left corner of the phone screen.
+- ⏭️ **AFTER UI STATE**: Applied `items-center justify-center text-center` to the mobile title flex container and heading element in `FenixFloorMap.tsx`. On mobile viewports, `Floor Map Generation` is now horizontally centered at the top of the frame. Desktop viewports (`md:` and above) retain left-alignment.
+- *Previous left-aligned flex container and heading class names are preserved as source comments in `FenixFloorMap.tsx`.*
+
+#### 📍 Section 29: FENIX Specifications Header Title Resizing, Offset & Stat Table Spacing ([FenixSpecifications.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixSpecifications.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the section title `FENIx` was rendered in a small font size (`text-2xl`) positioned 4px from the top edge (`pt-1`, `mb-2`), placing it directly against the top screen border. The top telemetry stat table (`500 g Lift Capacity`, `20 mins Endurance`, etc.) sat directly underneath with minimal padding (`py-2`, `px-2.5`).
+- ⏭️ **AFTER UI STATE**: Increased container top padding to `pt-8 sm:pt-12 md:pt-16` and added `mt-2 mb-4 sm:mt-4 sm:mb-8` margin around `motion.h2`, shifting the title down cleanly from the top screen border. Enlarged the `FENIx` title font size on mobile to `text-4xl sm:text-5xl`. Shifted the top telemetry stat table (Image 2) down (`mt-2 mb-6 sm:mt-4 sm:mb-10`), increased box padding to `px-3.5 py-3`, and scaled up stat numbers to `text-3xl sm:text-4xl md:text-5xl` for clear readability.
+- *Previous container padding, title font size, and stat table padding classes are preserved as source comments in `FenixSpecifications.tsx`.*
+
+#### 📍 Section 30: FENIX Specifications Bottom Dimension Cards Container Sizing Match ([FenixSpecifications.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixSpecifications.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the bottom dimension cards (`308 mm Length`, `340 mm Width`, `100 mm Height`) used small height and font classes (`h-10`, `px-2 py-1`, `text-base` for values, `text-[9px]` for units/labels, `h-7 w-7` icons), appearing significantly thinner and smaller than the top telemetry stat cards.
+- ⏭️ **AFTER UI STATE**: Updated the bottom dimension cards in `FenixSpecifications.tsx` to match the exact container scale, padding, contrast, and typography of the top telemetry stat cards (`px-3.5 py-3` box padding, `text-3xl font-medium text-cyan-400` for dimension values, `text-xs` for units and labels, `h-9 w-9` rounded icon boxes, `gap-3` row spacing, and `border-neutral-700 bg-neutral-900/50` styling).
+- *Previous bottom card height, padding, icon, and typography classes are preserved as source comments in `FenixSpecifications.tsx`.*
+
+#### 📍 Section 31: Turtle Mode Mobile Title & Description Vertical Offset Adjustment ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the title (`TURTLE MODE`) and its description (`Recovery intelligence built into every mission.`) sat near the top frame edge at `top-8` (32px from top).
+- ⏭️ **AFTER UI STATE**: Increased top positioning of the section identity block on mobile to `top-14` (56px from top), shifting both `TURTLE MODE` and its description copy down by 24px for generous top breathing room. Desktop viewports (`sm:top-8`, `lg:top-[10vh]`) remain unchanged.
+- *Previous `top-8` positioning class is preserved as a source comment in `FenixTurtleMode.tsx`.*
+
+#### 📍 Section 32: Hero Description Paragraph Mobile Center Alignment ([FenixHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixHero.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the Hero right description paragraph used `text-justify`, causing stretched text margins without clear spacing gaps on narrow phone displays.
+- ⏭️ **AFTER UI STATE**: Updated the container and `<CharacterReveal>` alignment classes to `text-center lg:text-justify` in `FenixHero.tsx`. On mobile viewports, the paragraph (*"When intelligence fits in the palm of your hand..."*) is now cleanly centered horizontally. Desktop viewports (`lg:` and larger) retain justified alignment.
+- *Previous `text-justify` container and CharacterReveal class names are preserved as source comments in `FenixHero.tsx`.*
+
+#### 📍 Section 33: First Responder Mobile Card Frame Compactness ([FenixResponder2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixResponder2.tsx))
+- ⏮️ **BEFORE UI STATE**: The four-card mobile frame used `flex-1` at full width, causing it to occupy nearly all available phone viewport space.
+- ⏭️ **AFTER UI STATE**: Below the `sm` breakpoint, the card grid is centered at 92% width and limited to 76svh, reducing both the frame width and the equal-height card rows. Tablet and desktop layouts keep their existing natural dimensions.
+- *The prior full-width flexible mobile frame is preserved as a source comment in `FenixResponder2.tsx`.*
+
+#### 📍 Section 34: GPS Navigation Section Title Mobile Vertical Offset Adjustment ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the sticky render container used `pt-24` (96px top padding) and text wrapper used `pt-4`, positioning the title block (`No GPS ? No problem!`) lower down in the phone viewport.
+- ⏭️ **AFTER UI STATE**: Reduced top padding on mobile to `pt-12` on the container and `pt-1` on the text wrapper in `FenixGPSNavigation.tsx`, shifting the `No GPS ? No problem!` title and description paragraph up by ~48px. Desktop and tablet viewports (`sm:` and larger) remain unchanged.
+- *Previous `pt-24` container and `pt-4` text wrapper padding classes are preserved as source comments in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 35: First Responder Mobile Card Spacing ([FenixResponder2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixResponder2.tsx))
+- ⏮️ **BEFORE UI STATE**: The mobile title sat 1rem above the card frame (`mb-4`), and the stacked cards used 0.5rem gaps (`gap-2`).
+- ⏭️ **AFTER UI STATE**: The title-to-frame spacing is now 1.5rem (`mb-6`), while the cards use 0.75rem gaps (`gap-3`) for clearer separation within the same compact frame.
+- *Previous mobile spacing classes are preserved as source comments in `FenixResponder2.tsx`.*
+
+#### 📍 Section 36: GPS Navigation Paragraph & Drone Image Mobile Vertical Offset Adjustment ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the description paragraph was positioned closely below the title (`mb-4 sm:mb-6`), and the central drone image container used `mt-12 md:mt-0`, placing the drone asset closer to the text layer.
+- ⏭️ **AFTER UI STATE**: Increased title bottom margin (`mb-6 sm:mb-8`) and added `mt-2` top margin on description paragraphs in `FenixGPSNavigation.tsx`, shifting the paragraph down slightly away from the heading. Increased top margin of the drone image container on mobile to `mt-20 sm:mt-16 md:mt-0`, shifting the drone visual down by ~32px for balanced vertical breathing room.
+- *Previous title margin, paragraph margin, and drone container margin classes are preserved as source comments in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 37: GPS Navigation Phase 2 Title & Paragraph Mobile Downward Offset Adjustment ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the sticky container used `pt-12` (48px top padding) and text wrapper used `pt-1`, positioning the `Navigation Lighting` title and description block high up near the top screen border.
+- ⏭️ **AFTER UI STATE**: Increased mobile top padding on the sticky container to `pt-18` (72px) and text wrapper to `pt-4` in `FenixGPSNavigation.tsx`, shifting both `Navigation Lighting` and its description paragraph down by ~36px for balanced top padding. Desktop viewports (`sm:` and larger) remain unchanged.
+- *Previous container padding and text wrapper padding classes are preserved as source comments in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 38: First Responder Mobile Container Gap Increase ([FenixResponder2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixResponder2.tsx))
+- ⏮️ **BEFORE UI STATE**: The stacked mobile card containers used `gap-3` (0.75rem), leaving a small visual separation between cards.
+- ⏭️ **AFTER UI STATE**: Increased the mobile card grid to `gap-4` (1rem), making each container separation more distinct while preserving the compact frame, width, and larger-screen layout.
+- *The prior `gap-3` mobile spacing is preserved as a source comment in `FenixResponder2.tsx`.*
+
+#### 📍 Section 39: GPS Navigation Phase 2 Specific Mobile Downward Offset ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, Phase 1 (`No GPS ? No problem!`) and Phase 2 (`Navigation Lighting`) shared identical vertical positions inside the text wipe container.
+- ⏭️ **AFTER UI STATE**: Applied `pt-8 sm:pt-0` directly to Phase 2's `<motion.div>` in `FenixGPSNavigation.tsx`. On mobile viewports, Phase 1 (`No GPS ? No problem!`) remains higher up, while Phase 2 (`Navigation Lighting` & its description paragraph) is shifted down by 32px. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous Phase 2 motion.div className is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 40: GPS Navigation Phase 1 Mobile Downward Offset Adjustment ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, Phase 1 (`No GPS ? No problem!`) was positioned higher up without top padding inside its text wipe container.
+- ⏭️ **AFTER UI STATE**: Applied `pt-8 sm:pt-0` directly to Phase 1's `<motion.div>` in `FenixGPSNavigation.tsx`, shifting both `No GPS ? No problem!` and its description paragraph down by 32px on mobile viewports for clean, uniform top spacing matching Phase 2. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous Phase 1 motion.div className is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 41: GPS Navigation Title & Paragraph Mobile Downward Offset Increase ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, Phase 1 (`No GPS ? No problem!`) and Phase 2 (`Navigation Lighting`) used `pt-8 sm:pt-0` (32px top padding).
+- ⏭️ **AFTER UI STATE**: Increased mobile top padding to `pt-16 sm:pt-0` (64px) on both Phase 1 and Phase 2 motion containers in `FenixGPSNavigation.tsx`. On mobile viewports, both headings and description paragraphs are shifted down by an additional 32px for balanced vertical positioning. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous `pt-8` top padding class names are preserved as source comments in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 42: GPS Navigation Phase 2 Paragraph Specific Mobile Downward Offset ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the description paragraph under `Navigation Lighting` used `mt-2` top margin, positioning it close below the heading.
+- ⏭️ **AFTER UI STATE**: Increased top margin on ONLY the Phase 2 `Navigation Lighting` description paragraph to `mt-8 sm:mt-2` in `FenixGPSNavigation.tsx`. On mobile viewports, the paragraph (*"Integrated illumination for dark environments..."*) shifts down by 24px away from the `Navigation Lighting` title. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous Phase 2 paragraph top margin className is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 43: GPS Navigation Phase 2 Paragraph Mobile Downward Offset Increase ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the description paragraph under `Navigation Lighting` used `mt-8 sm:mt-2` top margin.
+- ⏭️ **AFTER UI STATE**: Increased top margin on ONLY the Phase 2 `Navigation Lighting` description paragraph to `mt-14 sm:mt-2` (56px) in `FenixGPSNavigation.tsx`. On mobile viewports, the paragraph (*"Integrated illumination for dark environments..."*) shifts down by an additional 24px away from the `Navigation Lighting` title. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous `mt-8` paragraph top margin className is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 44: GPS Navigation Phase 2 Paragraph Mobile Offset Fine-Tuning ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the description paragraph under `Navigation Lighting` used `mt-24 sm:mt-2` top margin.
+- ⏭️ **AFTER UI STATE**: Fine-tuned top margin on ONLY the Phase 2 `Navigation Lighting` description paragraph to `mt-12 sm:mt-2` (48px) in `FenixGPSNavigation.tsx`. On mobile viewports, the paragraph (*"Integrated illumination for dark environments..."*) moves back up by 48px to settle at a balanced, comfortable offset below the heading. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous `mt-24` paragraph top margin className is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 45: GPS Navigation Phase 2 Title Mobile Two-Line Formatting ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the `Navigation Lighting` heading was rendered on a single inline line.
+- ⏭️ **AFTER UI STATE**: Inserted `<br className="block sm:hidden" />` after `Navigation` in `FenixGPSNavigation.tsx`. On mobile viewports, `Navigation` renders on Line 1 and cyan `Lighting` renders on Line 2. Desktop viewports (`sm:` and larger) maintain single-line composition.
+- *Previous single-line heading structure is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 46: GPS Navigation Phase 2 Title & Container Mobile Downward Offset Increase ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, Phase 2 (`Navigation Lighting`) used `pt-16 sm:pt-0` (64px top padding).
+- ⏭️ **AFTER UI STATE**: Increased mobile top padding on Phase 2's `<motion.div>` to `pt-24 sm:pt-0` (96px) in `FenixGPSNavigation.tsx`. On mobile viewports, the `Navigation Lighting` title and its container block shift down by an additional 32px. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous `pt-16` top padding class name is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 47: GPS Navigation Phase 2 Title Mobile Downward Offset Further Increase ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, Phase 2 (`Navigation Lighting`) used `pt-24 sm:pt-0` (96px top padding).
+- ⏭️ **AFTER UI STATE**: Increased mobile top padding on Phase 2's `<motion.div>` to `pt-32 sm:pt-0` (128px) in `FenixGPSNavigation.tsx`. On mobile viewports, the `Navigation Lighting` title shifts down by an additional 32px. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous `pt-24` top padding class name is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 48: CharacterReveal Word Space Rendering Fix ([CharacterReveal.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/CharacterReveal.tsx))
+- ⏮️ **BEFORE UI STATE**: Inside animated text blocks (such as `No problem!` in `FenixGPSNavigation.tsx`), standard collapsible spaces caused multi-word inline phrases to collapse into continuous text without spacing (`Noproblem!`).
+- ⏭️ **AFTER UI STATE**: Updated space character spans in `CharacterReveal.tsx` to use non-breaking space `\u00A0`, ensuring all multi-word animated text phrases (such as `No problem!`) render explicit, crisp spaces between words.
+- *Previous space span implementation is preserved as a source comment in `CharacterReveal.tsx`.*
+
+#### 📍 Section 49: GPS Navigation Phase 2 Title-to-Paragraph Gap Reduction ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the `Navigation Lighting` two-line heading used `mb-6` bottom margin and the paragraph used `mt-12` top margin, leaving a large empty gap between the heading and description copy.
+- ⏭️ **AFTER UI STATE**: Reduced Phase 2 heading bottom margin to `mb-3 sm:mb-8` and paragraph top margin to `mt-1 sm:mt-2` in `FenixGPSNavigation.tsx`. On mobile viewports, the paragraph (*"Integrated illumination for dark environments..."*) sits close below the `Navigation Lighting` heading with a tight, clean ~16px gap. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous Phase 2 heading and paragraph margin class names are preserved as source comments in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 50: GPS Navigation Phase 2 Title Mobile Upward Offset Adjustment ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, Phase 2 (`Navigation Lighting`) used `pt-32 sm:pt-0` (128px top padding), positioning the heading block lower in the frame.
+- ⏭️ **AFTER UI STATE**: Reduced mobile top padding on Phase 2's `<motion.div>` to `pt-20 sm:pt-0` (80px) in `FenixGPSNavigation.tsx`. On mobile viewports, the `Navigation Lighting` title shifts up by 48px to settle at a balanced, centered vertical placement. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous `pt-32` top padding class name is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 51: GPS Navigation Phase 2 Paragraph Specific Mobile Downward Adjustment ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the description paragraph under `Navigation Lighting` used `mt-1 sm:mt-2` top margin.
+- ⏭️ **AFTER UI STATE**: Increased top margin on ONLY the Phase 2 `Navigation Lighting` description paragraph to `mt-6 sm:mt-2` (24px) in `FenixGPSNavigation.tsx`. On mobile viewports, the paragraph (*"Integrated illumination for dark environments..."*) shifts down by 20px while the heading remains at its fixed placement. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous `mt-1` paragraph top margin class name is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 52: GPS Navigation Phase 1 Title Mobile Upward Offset Adjustment ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, Phase 1 (`No GPS ? No problem!`) used `pt-16 sm:pt-0` (64px top padding).
+- ⏭️ **AFTER UI STATE**: Reduced mobile top padding on Phase 1's `<motion.div>` to `pt-8 sm:pt-0` (32px) in `FenixGPSNavigation.tsx`. On mobile viewports, the `No GPS ? No problem!` title shifts up by 32px. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous `pt-16` top padding class name is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 53: GPS Navigation Phase 1 Title Mobile Offset Fine-Tuning ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, Phase 1 (`No GPS ? No problem!`) used `pt-8 sm:pt-0` (32px top padding).
+- ⏭️ **AFTER UI STATE**: Adjusted mobile top padding on Phase 1's `<motion.div>` to `pt-12 sm:pt-0` (48px) in `FenixGPSNavigation.tsx`. On mobile viewports, the `No GPS ? No problem!` title shifts down by 16px to settle at a balanced vertical position. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous `pt-8` top padding class name is preserved as a source comment in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 54: Turtle Mode Mobile Video Frame Size Increase ([FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports, the central recovery video container used `w-[82vw]` (82% of screen width).
+- ⏭️ **AFTER UI STATE**: Increased video frame width on mobile viewports to `w-[90vw] sm:w-[84vw]` in `FenixTurtleMode.tsx`. On phone displays, the recovery camera video is larger and more prominent while maintaining aspect ratio. Desktop and tablet viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous `w-[82vw]` mobile container size is preserved as a source comment in `FenixTurtleMode.tsx`.*
+
 ---
 
 *Log last updated: August 06, 2026*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

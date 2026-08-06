@@ -44,13 +44,13 @@ export default function FenixPtoP(): React.JSX.Element {
                                 /> <br />
                                 Navigation
                             </motion.h2>
+                            {/* PREVIOUS UI: className="mx-auto max-w-sm px-2 text-center text-sm font-light leading-6 text-neutral-600 sm:max-w-2xl sm:px-4 sm:text-lg sm:leading-relaxed md:text-xl" */}
                             <motion.p
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                                 viewport={{ once: true }}
-                                /* PREVIOUS UI: className="text-lg md:text-xl text-neutral-600 font-light leading-relaxed max-w-2xl mx-auto text-center px-4" */
-                                className="mx-auto max-w-sm px-2 text-center text-sm font-light leading-6 text-neutral-600 sm:max-w-2xl sm:px-4 sm:text-lg sm:leading-relaxed md:text-xl"
+                                className="mx-auto max-w-sm px-2 text-justify text-sm font-light leading-6 text-neutral-600 sm:max-w-2xl sm:px-4 sm:text-lg sm:leading-relaxed md:text-xl"
                             >
                                 Self-directed movement between mission-critical waypoints &mdash; adapts to dynamic environments with precision routing and obstacle avoidance.
                             </motion.p>

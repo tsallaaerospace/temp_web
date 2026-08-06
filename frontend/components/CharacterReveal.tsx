@@ -89,18 +89,34 @@ export default function CharacterReveal({
   }, [stagger, delay, triggerOnScroll, targetColor])
 
   /* PREVIOUS UI: <div ref={containerRef} className={`inline-block ${className}`}> */
+  /* PREVIOUS UI: line.split("").map((char, i) => ...) */
+  /* PREVIOUS UI: <span key={lineIdx} className={`flex whitespace-pre-wrap flex-wrap ${lineClassName}`}> */
+  /* PREVIOUS UI: <span ref={containerRef} className={`inline-block w-full ${className}`}> */
+  /* PREVIOUS UI: <span key={lineIdx} className={`block w-full text-justify ${lineClassName}`}> */
   return (
     <span ref={containerRef} className={`inline-block ${className}`}>
       {text.split("\n").map((line, lineIdx) => (
-        /* PREVIOUS UI: <div key={lineIdx} className={`flex whitespace-pre-wrap flex-wrap ${lineClassName}`}> */
-        <span key={lineIdx} className={`flex whitespace-pre-wrap flex-wrap ${lineClassName}`}>
-          {line.split("").map((char, i) => (
-            <span
-              key={i}
-              className="char inline-block will-change-[opacity,color,filter]"
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
+        <span key={lineIdx} className={`inline-block ${lineClassName}`}>
+          {line.split(" ").map((word, wordIdx, wordArr) => (
+            <React.Fragment key={wordIdx}>
+              {/* PREVIOUS UI: <span className="inline-block whitespace-nowrap"> */}
+              <span className="inline whitespace-nowrap">
+                {word.split("").map((char, charIdx) => (
+                  <span
+                    key={charIdx}
+                    className="char inline-block will-change-[opacity,color,filter]"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
+              {/* PREVIOUS UI: <span className="char inline-block will-change-[opacity,color,filter]">{" "}</span> */}
+              {wordIdx < wordArr.length - 1 && (
+                <span className="char inline-block will-change-[opacity,color,filter]">
+                  {"\u00A0"}
+                </span>
+              )}
+            </React.Fragment>
           ))}
         </span>
       ))}

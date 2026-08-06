@@ -70,20 +70,44 @@ export default function FenixHero(): React.JSX.Element {
           </div>
         </div>
 
-        {/* Right Side: Paragraph (Image 3 - shifted right with 1s additional delay boost relative to Image 2) */}
+        {/* Right Side: Paragraph (Image 3 - expanded container width lg:max-w-lg & clean left alignment) */}
         {/* PREVIOUS UI:
-        <div className="max-w-full pl-2 text-left text-lg font-light leading-relaxed text-white text-balance md:text-xl lg:max-w-md lg:pl-0 lg:flex lg:flex-col lg:justify-end">
-          When intelligence fits in the palm of your hand, missions expand far beyond their footprint — agile, discreet,
-          and ready on demand.
-        </div>
-        */}
-        <div className="max-w-full pl-6 sm:pl-10 text-left text-lg font-light leading-relaxed text-white text-balance md:text-xl lg:max-w-md lg:pl-8 lg:flex lg:flex-col lg:justify-end">
+        <div className="max-w-full pl-6 sm:pl-10 text-justify text-lg font-light leading-relaxed text-white md:text-xl lg:max-w-md lg:pl-8 lg:flex lg:flex-col lg:justify-end">
           <CharacterReveal
             text="When intelligence fits in the palm of your hand, missions expand far beyond their footprint — agile, discreet, and ready on demand."
             targetColor="#ffffff"
             glowColor="#5ce1e6"
             delay={1.4}
             stagger={0.02}
+            className="w-full text-justify"
+            lineClassName="text-justify w-full"
+          />
+        </div>
+        */}
+        {/* Right Side: Paragraph (Image 3 - text-base sm:text-lg font size & whole word wrapping) */}
+        {/* PREVIOUS UI:
+        <div className="max-w-full pl-4 sm:pl-8 text-left text-lg font-light leading-relaxed text-white md:text-xl lg:max-w-lg lg:pl-6 lg:flex lg:flex-col lg:justify-end">
+          <CharacterReveal
+            text="When intelligence fits in the palm of your hand, missions expand far beyond their footprint — agile, discreet, and ready on demand."
+            targetColor="#ffffff"
+            glowColor="#5ce1e6"
+            delay={1.4}
+            stagger={0.02}
+            className="w-full text-left"
+          />
+        </div>
+        */}
+        {/* PREVIOUS UI: <div className="w-full max-w-full px-4 sm:px-8 text-justify text-base sm:text-lg md:text-lg font-light leading-relaxed text-white lg:max-w-lg lg:px-0 lg:pl-6 lg:flex lg:flex-col lg:justify-end"> */}
+        <div className="w-full max-w-full px-4 text-center text-base sm:px-8 sm:text-lg md:text-lg font-light leading-relaxed text-white lg:max-w-lg lg:px-0 lg:pl-6 lg:text-justify lg:flex lg:flex-col lg:justify-end">
+          <CharacterReveal
+            text="When intelligence fits in the palm of your hand, missions expand far beyond their footprint — agile, discreet, and ready on demand."
+            targetColor="#ffffff"
+            glowColor="#5ce1e6"
+            delay={1.4}
+            stagger={0.02}
+            /* PREVIOUS UI: className="w-full text-justify" lineClassName="text-justify w-full" */
+            className="w-full text-center lg:text-justify"
+            lineClassName="text-center lg:text-justify w-full"
           />
         </div>
       </div>

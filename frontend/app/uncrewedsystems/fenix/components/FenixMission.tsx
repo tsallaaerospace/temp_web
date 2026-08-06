@@ -426,13 +426,14 @@ export default function FenixMissionProfiles(): React.JSX.Element {
 
           {/* Section Title */}
           {/* PREVIOUS UI: title used only opacity/y and a static cyan underline. */}
+          {/* PREVIOUS UI: className="absolute top-6 z-[70] px-5 text-center sm:top-7" */}
           <motion.header
             style={{
               opacity: prefersReducedMotion ? 1 : titleOpacity,
               y: prefersReducedMotion ? 0 : titleY,
               scale: prefersReducedMotion ? 1 : titleScale,
             }}
-            className="absolute top-6 z-[70] px-5 text-center sm:top-7"
+            className="absolute top-12 z-[70] px-5 text-center sm:top-14 md:top-16"
           >
             <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.42em] text-cyan-300/70 sm:text-[10px]">
               FENIX / Operational envelope

@@ -26,16 +26,20 @@ export default function FenixFloorMap(): React.JSX.Element {
             {/* Content */}
             <div className="relative z-20 w-full">
                 <ContentWrapper>
-                    <div className="flex flex-col items-start justify-center min-h-screen max-w-4xl pb-32">
+                    {/* PREVIOUS UI: <div className="flex flex-col items-start justify-between md:justify-center min-h-screen max-w-4xl py-16 md:py-0 md:pb-32"> */}
+                    <div className="flex flex-col items-center md:items-start justify-between md:justify-center min-h-screen max-w-4xl py-16 md:py-0 md:pb-32">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
                             viewport={{ once: true }}
+                            /* PREVIOUS UI: className="pt-4 sm:pt-0" */
+                            className="pt-4 sm:pt-0 w-full flex flex-col items-center md:items-start text-center md:text-left"
                         >
                             {/* PREVIOUS UI: style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }} */}
                             {/* PREVIOUS UI: <span style={{ color: '#5ce1e6' }}>Floor Map</span> Generation */}
-                            <h2 className="text-5xl md:text-7xl font-medium tracking-tight mb-8 text-white flex flex-wrap items-center gap-x-3">
+                            {/* PREVIOUS UI: className="text-4xl sm:text-5xl md:text-7xl font-medium tracking-tight mb-4 sm:mb-8 text-white flex flex-wrap items-center gap-x-3" */}
+                            <h2 className="text-4xl sm:text-5xl md:text-7xl font-medium tracking-tight mb-4 sm:mb-8 text-white flex flex-wrap items-center justify-center md:justify-start gap-x-3 text-center md:text-left">
                                 <CharacterReveal
                                     text="Floor Map"
                                     targetColor="#5ce1e6"
@@ -52,8 +56,10 @@ export default function FenixFloorMap(): React.JSX.Element {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                             viewport={{ once: true }}
+                            className="pb-6 sm:pb-0 w-full"
                         >
-                            <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-600 max-w-2xl">
+                            {/* PREVIOUS UI: <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-600 max-w-2xl"> */}
+                            <p className="text-base sm:text-lg md:text-xl font-light leading-relaxed text-neutral-300 md:text-neutral-600 max-w-2xl text-justify w-full">
                                 Real-time mapping for mission planning and situational awareness — creates detailed floor layouts to support navigation, coordination, and post-op analysis.
                             </p>
                         </motion.div>

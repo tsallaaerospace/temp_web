@@ -25,16 +25,19 @@ export default function FenixLast(): React.JSX.Element {
               <span className="block">Others Cannot.</span>
             </h1>
             */}
-            <h1 className="text-5xl md:text-7xl lg:text-7xl font-semibold text-black tracking-[0.05em] leading-[1.05] max-w-5xl text-center uppercase flex flex-col items-center gap-y-2">
+            {/* PREVIOUS ALIGNMENT: CharacterReveal defaults to `w-full`, making every word occupy its own flex row. */}
+            {/* PREVIOUS UI: `text-5xl md:text-7xl lg:text-7xl max-w-5xl` was smaller than the comparable Mesh/AI Pilot closing headings. */}
+            {/* PREVIOUS ATTEMPT: `sm:text-5xl md:text-6xl` made tablet text smaller than the original heading. */}
+            <h1 className="text-6xl xs:text-7xl md:text-7xl lg:text-8xl font-semibold text-black tracking-[0.05em] leading-[1.05] max-w-6xl lg:max-w-[90rem] text-center uppercase flex flex-col items-center gap-y-2">
               <div className="flex flex-wrap justify-center gap-x-3 sm:gap-x-4">
-                <CharacterReveal text="READY" targetColor="#000000" glowColor="#5ce1e6" stagger={0.05} />
-                <CharacterReveal text="TO" targetColor="#000000" glowColor="#5ce1e6" stagger={0.05} />
-                <CharacterReveal text="DEPLOY" targetColor="#5ce1e6" glowColor="#5ce1e6" className="text-[#5ce1e6]" stagger={0.05} />
-                <CharacterReveal text="WHERE" targetColor="#000000" glowColor="#5ce1e6" stagger={0.05} />
+                <CharacterReveal text="READY" targetColor="#000000" glowColor="#5ce1e6" className="!w-auto" lineClassName="!inline !w-auto !text-center" stagger={0.05} />
+                <CharacterReveal text="TO" targetColor="#000000" glowColor="#5ce1e6" className="!w-auto" lineClassName="!inline !w-auto !text-center" stagger={0.05} />
+                <CharacterReveal text="DEPLOY" targetColor="#5ce1e6" glowColor="#5ce1e6" className="!w-auto text-[#5ce1e6]" lineClassName="!inline !w-auto !text-center" stagger={0.05} />
+                <CharacterReveal text="WHERE" targetColor="#000000" glowColor="#5ce1e6" className="!w-auto" lineClassName="!inline !w-auto !text-center" stagger={0.05} />
               </div>
               <div className="flex flex-wrap justify-center gap-x-3 sm:gap-x-4">
-                <CharacterReveal text="OTHERS" targetColor="#000000" glowColor="#5ce1e6" stagger={0.05} />
-                <CharacterReveal text="CANNOT." targetColor="#000000" glowColor="#5ce1e6" stagger={0.05} />
+                <CharacterReveal text="OTHERS" targetColor="#000000" glowColor="#5ce1e6" className="!w-auto" lineClassName="!inline !w-auto !text-center" stagger={0.05} />
+                <CharacterReveal text="CANNOT." targetColor="#000000" glowColor="#5ce1e6" className="!w-auto" lineClassName="!inline !w-auto !text-center" stagger={0.05} />
               </div>
             </h1>
 

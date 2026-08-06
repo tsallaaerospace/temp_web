@@ -56,7 +56,8 @@ export default function FenixCapabilities(): React.JSX.Element {
                   stagger={0.06}
                 />
               </h1>
-              <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-600">
+              {/* PREVIOUS UI: <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-600"> */}
+              <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-600 text-justify">
                 Purpose-built for tight, complex spaces, FENIx merges collision prevention, adaptive routing, and
                 encrypted connectivity — keeping operators ahead with silent precision and mission-ready resilience.
               </p>

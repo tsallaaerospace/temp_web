@@ -37,7 +37,8 @@ export default function FenixResponder2(): React.JSX.Element {
       <div className="mx-auto flex h-full max-w-7xl flex-col sm:block sm:h-auto">
         {/* Header */}
         {/* PREVIOUS UI: <div className="text-center mb-16"> */}
-        <div className="mb-4 shrink-0 text-center sm:mb-16">
+        {/* PREVIOUS MOBILE SPACING: `mb-4` left 1rem between the title and card frame. */}
+        <div className="mb-6 shrink-0 text-center sm:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -52,8 +53,10 @@ export default function FenixResponder2(): React.JSX.Element {
         </div>
 
         {/* Support Grid */}
-        {/* PREVIOUS UI: mobile used `gap-6` with content-height rows and no frame-height constraint. */}
-        <div className="grid min-h-0 flex-1 grid-cols-1 grid-rows-4 gap-2 sm:flex-none sm:grid-rows-none sm:gap-6 md:grid-cols-4 md:gap-0 md:overflow-hidden md:rounded-xl md:border md:border-neutral-800 md:shadow-2xl">
+        {/* PREVIOUS MOBILE UI: `flex-1` and full width stretched the four-card frame to all remaining phone space. */}
+        {/* PREVIOUS MOBILE SPACING: `gap-2` left 0.5rem between the stacked cards. */}
+        {/* PREVIOUS MOBILE SPACING: `gap-3` left 0.75rem between the stacked cards. */}
+        <div className="mx-auto grid h-[76svh] w-[92%] min-h-0 grid-cols-1 grid-rows-4 gap-4 sm:mx-0 sm:h-auto sm:w-auto sm:flex-none sm:grid-rows-none sm:gap-6 md:grid-cols-4 md:gap-0 md:overflow-hidden md:rounded-xl md:border md:border-neutral-800 md:shadow-2xl">
           {steps.map((step, index) => (
             <motion.div
               key={index}

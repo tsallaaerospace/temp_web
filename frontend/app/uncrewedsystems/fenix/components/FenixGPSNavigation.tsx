@@ -80,9 +80,10 @@ export default function FenixGPSNavigation(): React.JSX.Element {
                 className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-16 sm:justify-center sm:pt-0 overflow-hidden"
             >
             */}
+            {/* PREVIOUS UI: className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-12 sm:justify-center sm:pt-0 overflow-hidden" */}
             <motion.div
                 style={{ backgroundColor: bgColor }}
-                className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-24 sm:justify-center sm:pt-0 overflow-hidden"
+                className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-18 sm:justify-center sm:pt-0 overflow-hidden"
             >
                 {/* Background Grid Elements */}
                 <div className="absolute inset-0 z-0 opacity-10">
@@ -105,16 +106,15 @@ export default function FenixGPSNavigation(): React.JSX.Element {
                 />
 
                 {/* Text Content Layer */}
-                {/* PREVIOUS UI:
-                <div className="relative z-30 w-full max-w-5xl px-4 sm:px-8 text-center flex flex-col items-center h-[35vh] sm:h-[40vh] pt-8 sm:pt-20">
-                */}
+                {/* PREVIOUS UI: className="relative z-30 w-full max-w-5xl px-4 sm:px-8 text-center flex flex-col items-center h-auto sm:h-[40vh] pt-1 sm:pt-20" */}
                 <div className="relative z-30 w-full max-w-5xl px-4 sm:px-8 text-center flex flex-col items-center h-auto sm:h-[40vh] pt-4 sm:pt-20">
                     <div className="relative w-full h-full text-wipe-container">
 
                         {/* PHASE 1 TEXT (NO GPS) */}
+                        {/* PREVIOUS UI: className="text-wipe-item flex flex-col items-center w-full font-orbit pt-8 sm:pt-0" */}
                         <motion.div
                             style={{ clipPath: text2Clip }}
-                            className="text-wipe-item flex flex-col items-center w-full font-orbit"
+                            className="text-wipe-item flex flex-col items-center w-full font-orbit pt-12 sm:pt-0"
                         >
                         {/* PREVIOUS UI:
                         <h3 className="text-white text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-6 font-inter" style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }}>
@@ -128,7 +128,8 @@ export default function FenixGPSNavigation(): React.JSX.Element {
                             <span className="text-emerald-400 block sm:inline">No problem!</span>
                         </h3>
                         */}
-                        <h3 className="text-white text-4xl xs:text-5xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4 sm:mb-6 font-orbit">
+                        {/* PREVIOUS UI: className="text-white text-4xl xs:text-5xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4 sm:mb-6 font-orbit" */}
+                        <h3 className="text-white text-4xl xs:text-5xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 sm:mb-8 font-orbit">
                             <span className="block sm:inline">No GPS ? </span>
                             <CharacterReveal
                                 text="No problem!"
@@ -138,19 +139,21 @@ export default function FenixGPSNavigation(): React.JSX.Element {
                                 stagger={0.06}
                             />
                         </h3>
-                            <p className="text-lg md:text-xl max-w-2xl font-light leading-relaxed text-neutral-600">
+                            {/* PREVIOUS UI: <p className="w-full max-w-2xl px-4 sm:px-0 text-base sm:text-lg md:text-xl font-light leading-relaxed text-neutral-600 text-justify"> */}
+                            <p className="mt-2 w-full max-w-2xl px-4 sm:px-0 text-base sm:text-lg md:text-xl font-light leading-relaxed text-neutral-600 text-justify">
                                 Reliable positioning without GPS using SLAM, sensor fusion, and real-time mapping built for tunnels, urban canyons, and signal-jammed zones.
                             </p>
                         </motion.div>
 
                         {/* PHASE 2 TEXT (LIGHTING) */}
+                        {/* PREVIOUS UI: className="text-wipe-item flex flex-col items-center w-full font-orbit pt-32 sm:pt-0" */}
                         <motion.div
                             style={{ clipPath: text1Clip }}
-                            className="text-wipe-item flex flex-col items-center w-full font-orbit"
+                            className="text-wipe-item flex flex-col items-center w-full font-orbit pt-20 sm:pt-0"
                         >
-                            {/* PREVIOUS UI: Navigation <span style={{ color: '#5ce1e6' }}>Lighting</span> */}
-                            <h3 className="text-white text-4xl md:text-6xl font-bold tracking-tight mb-6 font-orbit">
-                                Navigation{" "}
+                            {/* PREVIOUS UI: <h3 className="text-white text-4xl md:text-6xl font-bold tracking-tight mb-6 sm:mb-8 font-orbit text-center"> */}
+                            <h3 className="text-white text-4xl md:text-6xl font-bold tracking-tight mb-3 sm:mb-8 font-orbit text-center">
+                                Navigation <br className="block sm:hidden" />
                                 <CharacterReveal
                                     text="Lighting"
                                     targetColor="#5ce1e6"
@@ -159,7 +162,8 @@ export default function FenixGPSNavigation(): React.JSX.Element {
                                     stagger={0.06}
                                 />
                             </h3>
-                            <p className="text-lg md:text-xl max-w-2xl font-light leading-relaxed text-neutral-600">
+                            {/* PREVIOUS UI: <p className="mt-1 sm:mt-2 w-full max-w-2xl px-4 sm:px-0 text-base sm:text-lg md:text-xl font-light leading-relaxed text-neutral-600 text-justify"> */}
+                            <p className="mt-6 sm:mt-2 w-full max-w-2xl px-4 sm:px-0 text-base sm:text-lg md:text-xl font-light leading-relaxed text-neutral-600 text-justify">
                                 Integrated illumination for dark environments — optimized for pathfinding, obstacle avoidance, and operational safety without compromising stealth.
                             </p>
                         </motion.div>
@@ -167,7 +171,8 @@ export default function FenixGPSNavigation(): React.JSX.Element {
                 </div>
 
                 {/* Drone Visual Center */}
-                <div className="relative z-20 w-full max-w-6xl aspect-[21/9] flex items-center justify-center mt-12 md:mt-0">
+                {/* PREVIOUS UI: className="relative z-20 w-full max-w-6xl aspect-[21/9] flex items-center justify-center mt-12 md:mt-0" */}
+                <div className="relative z-20 w-full max-w-6xl aspect-[21/9] flex items-center justify-center mt-20 sm:mt-16 md:mt-0">
                     <motion.div
                         style={{ scale: droneScale }}
                         className="relative w-full h-full flex items-center justify-center"

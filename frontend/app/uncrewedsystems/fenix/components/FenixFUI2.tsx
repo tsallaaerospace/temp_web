@@ -247,12 +247,26 @@ export default function FenixFUI2(): React.JSX.Element {
                 /* PREVIOUS UI: style={{ maxWidth: "100%", fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif", fontWeight: 700 }} */
                 style={{ maxWidth: "100%", fontWeight: 700 }}
             >
-                {/* PREVIOUS UI: <span className="text-[#5ce1e6]">F</span>AST <span className="text-[#5ce1e6]">E</span>NTRY <span className="text-[#5ce1e6]">N</span>AVIGATIONAL <span className="text-[#5ce1e6]">I</span>NTRUSION E<span className="text-[#5ce1e6]">X</span>PLORER */}
+                {/* PREVIOUS UI:
                 <CharacterReveal text="F" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />AST{" "}
                 <CharacterReveal text="E" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />NTRY{" "}
                 <CharacterReveal text="N" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />AVIGATIONAL{" "}
                 <CharacterReveal text="I" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />NTRUSION E
                 <CharacterReveal text="X" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />PLORER
+                */}
+                {/* PREVIOUS MOBILE UI: unconstrained text wrapped as "FAST ENTRY N" / "AVIGATIONAL I" / "NTRUSION EXPLORER" */}
+                <span className="whitespace-nowrap">
+                    <CharacterReveal text="F" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />AST{" "}
+                    <CharacterReveal text="E" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />NTRY
+                </span>{" "}
+                <br className="block sm:hidden" />
+                <span className="whitespace-nowrap">
+                    <CharacterReveal text="N" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />AVIGATIONAL
+                </span>{" "}
+                <br className="block sm:hidden" />
+                <span className="whitespace-nowrap">
+                    <CharacterReveal text="I" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />NTRUSION E<CharacterReveal text="X" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />PLORER
+                </span>
             </motion.h2>
 
             {/* Background Drone Image */}
