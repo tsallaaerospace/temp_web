@@ -22,7 +22,8 @@ export default function FenixTurtleMode(): React.JSX.Element {
         <motion.div
             ref={containerRef}
             style={{ backgroundColor: sectionBg }}
-            className="relative h-[200vh] text-neutral-900 font-sans selection:bg-cyan-500/30 overflow-clip"
+            /* PREVIOUS UI: className="relative h-[200vh] text-neutral-900 font-sans selection:bg-cyan-500/30 overflow-clip" */
+            className="relative h-[200vh] text-neutral-900 font-orbit selection:bg-cyan-500/30 overflow-clip"
         >
             <style>{`
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
@@ -68,7 +69,8 @@ export default function FenixTurtleMode(): React.JSX.Element {
                         }}
                         className="absolute top-[12%] left-0 w-full text-center px-4"
                     >
-                        <h1 className="text-[9vw] font-black text-neutral-900 uppercase tracking-tighter italic leading-none whitespace-nowrap" style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }}>
+                        {/* PREVIOUS UI: style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }} */}
+                        <h1 className="text-[9vw] font-black text-neutral-900 uppercase tracking-tighter italic leading-none whitespace-nowrap">
                             Turtle Mode
                         </h1>
                     </motion.div>

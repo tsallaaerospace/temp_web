@@ -270,6 +270,41 @@
 
 ---
 
+### 🌐 PAGE: Uncrewed Systems Product Pages (`/fenix`, `/storm`, `/dexter`, `/bat`)
+
+#### 📍 Section 1: Hero Section Overlay Text ([FenixHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixHero.tsx), [StormHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/storm/components/StormHero.tsx), [DexterHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/dexter/components/DexterHero.tsx), [BatHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/bat/components/BatHero.tsx))
+- ⏮️ **BEFORE UI STATE**: Overlay content container used large percentage bottom padding (`pb-[26%] sm:pb-[20%] md:pb-[22%] lg:pb-[12%]`), pushing the product title ("FENIx", "STORM", "DEXTER", "T - BAT"), subtitle, and right description paragraph high up toward the center of the hero video viewport. Main `<h1>` headings had `mb-4` and `leading-tight`, creating a wide gap to the subtitle. Right side paragraph text used `text-neutral-600` (dark grey).
+- ⏭️ **AFTER UI STATE**:
+  - Configured flex layout to `justify-between pt-28 pb-10` on mobile devices, keeping the Title & Subtitle at the **top** of the screen and pushing the description paragraph to the **bottom**.
+  - On desktop (`lg:`), preserved side-by-side bottom positioning (`lg:flex-row lg:justify-between lg:items-end lg:pt-0 lg:pb-16`).
+  - Increased `<h1>` title font size on mobile view from `text-[2rem]` (32px) to `text-[3.25rem]` (52px), making "FENIx" (and all product titles) significantly larger and more impactful on phone screens.
+  - Updated `<h1>` title styling to `leading-none mb-1`, bringing "FENIx" (and all product titles) down closer to the subtitle text and significantly reducing the gap between them.
+  - Changed right-side description paragraph text color to `text-white`, making it high-contrast and readable against dark background video frames.
+- *Previous UI code preserved as comment blocks in all 4 hero component files.*
+
+#### 📍 Section 2: GPS Navigation Section ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx))
+- ⏮️ **BEFORE UI STATE**: Heading displayed "No GPS ? No problem!" with `text-3xl` / `text-4xl` font size on mobile, causing awkward wrapping ("No GPS ? No" on Line 1, "problem!" on Line 2), and top padding was `pt-20` which pushed text towards the center of the mobile screen.
+- ⏭️ **AFTER UI STATE**:
+  - Increased mobile font size to `text-4xl xs:text-5xl sm:text-5xl` for a much bolder and prominent visual appearance on mobile phones.
+  - Configured sticky parent container to `justify-start pt-24 sm:justify-center sm:pt-0` and inner text layer to `h-auto sm:h-[40vh] pt-4 sm:pt-20`, positioning the text block slightly lower on mobile screens below the header while keeping it elevated above the drone visual.
+  - Wrapped text elements in `<span className="block sm:inline">`, ensuring Line 1 is cleanly `No GPS ?` and Line 2 is `No problem!` on mobile viewports while preserving single-line display on desktop screens.
+- *Previous UI code preserved as comment blocks in `FenixGPSNavigation.tsx`.*
+
+#### 📍 Section 3: Mission Profiles Section ([FenixMission.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixMission.tsx))
+- ⏮️ **BEFORE UI STATE**:
+  - Cards were rendered in a static flex row with asymmetric padding (`pl-48 pr-12`). When changing active cards, the active card jumped off-center to the far right edge or far left edge of the screen.
+  - Card description text used `text-neutral-600` (dark grey), rendering it completely unreadable over dark background artwork.
+  - Description text was right-aligned (`text-right ml-auto`), clashing with the left-aligned title.
+  - Side navigation arrows were squished inside deformed side preview cards.
+- ⏭️ **AFTER UI STATE**:
+  - Implemented relative X-transform offsets (`animate={{ x: distanceFromCenter * offset }}`) so the active card stays **100% dead-centered** in the viewport across all 6 slides.
+  - Updated card description text color to `text-white/90` with `drop-shadow-lg` and strengthened dark background gradient overlays (`from-black/95 via-black/50 to-black/20`), making all text crisp and clear.
+  - Unified text alignment to `text-left` for both title and description text overlays.
+  - Added dedicated floating circular prev/next arrow buttons (`ChevronLeft`, `ChevronRight`) on left and right edges for seamless, intuitive navigation.
+- *Previous UI layout and text styling code preserved as comment blocks in `FenixMission.tsx`.*
+
+---
+
 ## 📊 Before UI vs After UI Comparison Summary Table
 
 | Page / Section | Element | Before UI State | After UI State | Reversion Code Location |
@@ -320,7 +355,167 @@
 | **Operations Sections** | Blue Text Reveal Only | `TextReveal` on all lines | `TextReveal` scoped ONLY to cyan/blue text (`NEVER GOES DARK.`, `NO COCKPIT.`, `Actionable`); other lines remain static black text | Updated `MeshOperations.tsx`, `AIOperations.tsx`, `CortexOperations.tsx` |
 | **Home Page (/)** | Missions Section Subtitle | `so must` on line 1, `we!` on line 2 on mobile | `Our adversaries are evolving,` on line 1, `so must we!` on 2nd line on mobile view via `span className="block sm:inline"` | Commented in `components/Missions.tsx` |
 | **FENIX & Hangar Pages** | Navbar Background | Solid `bg-black` bar over hero video | `bg-transparent` navbar when un-scrolled so hero video extends under navbar | Commented in `components/Navbar.tsx` |
+| **Uncrewed Systems Pages** | Hero Overlay Text | All elements stacked at top on mobile | Mobile: Title at top (`pt-28`), paragraph at bottom (`pb-10`). Desktop: side-by-side bottom aligned. | Commented in `FenixHero.tsx`, `StormHero.tsx`, `DexterHero.tsx`, `BatHero.tsx` |
+| **FENIX Page** | GPS Navigation Heading | `No GPS ? No` on line 1, `problem!` on line 2 | `No GPS ?` on line 1, `No problem!` on line 2 via `span className="block sm:inline"` | Commented in `FenixGPSNavigation.tsx` |
+| **FENIX Page** | Mission Profiles Carousel | Active card shifted off-center; dark unreadable text | Active card 100% centered via relative X-transforms; bright `text-white/90` text; floating arrow controls | Commented in `FenixMission.tsx` |
+
+### ðŸŒ PAGE: FENIX Page (`/fenix`)
+
+#### ðŸ“ Section 3: Mission Profiles Stability & Compile Fix ([FenixMission.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixMission.tsx))
+- â®ï¸ **BEFORE UI STATE**: The card return block could be pasted as an invalid JSX comment followed by a malformed `< motion.div` tag, which caused a parser cascade of roughly 98 editor errors and prevented `/fenix` from compiling. Six image cards each created a duplicate set of scroll transforms (including unused X transforms), invisible cards remained mounted, the carousel initially opened on the third profile, and motion opacity declarations competed with one another.
+- â­ï¸ **AFTER UI STATE**: The return tree is valid JSX with a correctly formed `<motion.div>`. Shared, strictly typed motion values are created once at carousel level; only the active card and its two nearest neighbors on each side are mounted; the first mission opens initially; text scroll opacity and entrance opacity no longer conflict; images load asynchronously; cards enter at their correct position; arrow-key navigation, focus styling, button relationships, and boundary-safe previous/next controls are included. The centered-card visual design, readable white copy, gradient treatment, and floating controls are preserved.
+- *Previous implementation lines and UI blocks remain preserved as comments in `FenixMission.tsx`.*
+
+#### Section 4: Five-Card Mission Stage and Scroll Expansion ([FenixMission.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixMission.tsx))
+- **BEFORE UI STATE**: The carousel's raw array distance could leave only three cards visible at the beginning or end of the collection, while the two far cards were positioned outside the viewport. Center-card growth and side-card movement were controlled by separate transforms, navigation stopped at the collection boundaries, and the stage had limited depth or progress feedback.
+- **AFTER UI STATE**:
+  - A circular five-slot model always renders exactly five unique profiles around the active profile (`-2`, `-1`, center, `+1`, `+2`), including when navigating across the first/last profile boundary.
+  - Scrolling progressively expands the center card from `30vw x 58vh` to `76vw x 82vh` on desktop and from `68vw x 48vh` to `92vw x 72vh` on mobile. The four surrounding cards move outward and compress in one coupled geometry calculation, keeping visible edge previews throughout the transition.
+  - Added spring-based slot movement, restrained 3D rotation, image depth, cyan edge light, ambient grid/glow, a scroll-progress HUD, circular navigation, keyboard support, direct side-card selection, and `prefers-reduced-motion` handling.
+  - The former layout and motion architecture remain in source comments and the retained `PreviousProfileCard` implementation for rollback. The corrected JSX has been verified with zero TypeScript parser and strict component diagnostics, and `/fenix` compiles successfully.
+- *Desktop, laptop, large-monitor, and mobile layouts use separate responsive geometry without changing unrelated page sections.*
+
+#### Section 5: Mission Card Cyan Edge Removal ([FenixMission.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixMission.tsx))
+- **BEFORE UI STATE**: The active mission card used an animated cyan gradient edge, cyan border color, and cyan outer glow. When the card expanded, its lower edge appeared as a bright blue horizontal line directly above the `01 / 06` profile counter.
+- **AFTER UI STATE**: Removed the cyan gradient edge and cyan outer glow, and replaced the card border with a subtle neutral-white edge. The five-card animation, pagination counter, active cyan indicator, card imagery, and responsive geometry remain unchanged.
+- *The previous cyan line, border, and glow values remain preserved as source comments.*
+
+#### Section 6: Autonomous Point-to-Point Mobile Responsiveness ([FenixPtoP.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixPtoP.tsx), [container-scroll-animation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/ui/container-scroll-animation.tsx))
+- **BEFORE UI STATE**: Below 640px, the section retained desktop-oriented scroll transforms, a fixed `50rem` stage, `pt-40` spacing, a `text-5xl` heading, and a fixed `25rem` media height. The 1.05 card scale nearly touched narrow viewport edges, the stacked content could exceed its clipped parent, and the portrait source video was heavily cropped inside a mismatched box.
+- **AFTER UI STATE**:
+  - Phone layouts use safe 1rem side gutters, compact 6-degree-to-flat motion, no width overscale, and a shorter 32px scroll translation. These settings are opt-in for FENIX, so the shared homepage `ContainerScroll` remains unchanged.
+  - Mobile typography uses a fluid `clamp(2rem, 11vw, 3rem)` heading, a non-breaking `Point-to-Point` line, smaller body copy, and reduced vertical spacing. Original sizing returns at `sm` and all existing desktop sizing remains at `md` and above.
+  - The video now follows its native `1360 / 1504` portrait ratio below `sm`, has a capped responsive width, and returns to the prior `25rem` / `35rem` heights at larger breakpoints.
+  - Replaced the encoding-sensitive dash with `&mdash;`, and retained the previous layout classes as source comments.
+- *Verified with zero targeted TypeScript diagnostics and an HTTP 200 response from `/fenix`.*
+
+#### Section 7: Point-to-Point Mobile Height Adjustment ([FenixPtoP.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixPtoP.tsx))
+- **BEFORE UI STATE**: The responsive phone layout used a minimum section-stage height of `42rem`.
+- **AFTER UI STATE**: Increased the phone-only minimum height to `45rem`, adding 3rem (48px) of vertical breathing room. At `sm` and above, the original `50rem` / `60rem` heights remain unchanged.
+- *The previous `42rem` mobile value remains preserved as a source comment.*
+
+#### Section 8: Additional Point-to-Point Mobile Height ([FenixPtoP.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixPtoP.tsx))
+- **BEFORE UI STATE**: After the first height adjustment, the phone-only stage used `min-h-[45rem]`.
+- **AFTER UI STATE**: Increased the phone-only minimum height to `48rem`, adding another 3rem (48px). The `sm` breakpoint remains `50rem`, and desktop remains `60rem`.
+- *The previous `45rem` value remains preserved as a source comment.*
+
+#### Section 9: First Responder Mobile Frame Fit ([FenixResponder2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixResponder2.tsx))
+- **BEFORE UI STATE**: Phone layouts retained `py-24`, a large heading margin, `gap-6`, and four cards with `min-h-[180px]`, so the fourth card was cut off below the mobile frame.
+- **AFTER UI STATE**: The phone section now uses one `100svh` frame with compact safe padding, a fluid two-line heading, and four equal flexible card rows. Mobile card minimum heights are removed so all four actions remain visible; the original spacing, card sizes, and four-column desktop layout return at `sm` and `md`.
+- *The previous mobile section, grid, card, icon, and typography classes remain preserved as source comments.*
+
+#### Section 10: First Responder Mobile Card Typography ([FenixResponder2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixResponder2.tsx))
+- **BEFORE UI STATE**: The frame-fit version used `text-xs` titles and `10px` descriptions, which were difficult to read and left unused vertical space inside the cards.
+- **AFTER UI STATE**: Phone card titles are now `text-sm`, descriptions are `text-xs` with a readable `1.4` line height, and content is vertically centered. Descriptions are limited to two lines only on phones, keeping all four cards inside the frame; `sm` and larger typography remains unchanged.
+- *The previous compact phone font sizes remain preserved as source comments.*
+
+#### Section 11: FENIx Specifications Mobile Frame and Container Balance ([FenixSpecifications.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixSpecifications.tsx))
+- **BEFORE UI STATE**: The specifications section was content-height driven on phones, with padded top rows, negative drone margins, and full-size stacked dimension cards. The upper values appeared cramped while the lower cards consumed too much height and could extend beyond the frame.
+- **AFTER UI STATE**: Phone layouts now use a single `100svh` flex frame, a flexible drone region, and matching `94%`-wide upper and lower groups. Upper rows receive slightly larger values and balanced padding, while the three lower dimension cards use shorter rows, smaller icon boxes, and compact gaps. All original spacing and sizing is restored from `sm` upward, preserving tablet, laptop, desktop, and larger-monitor views.
+- *The prior section, specifications-row, drone, and dimension-card classes remain preserved as source comments.*
+
+### PAGE: Home Page (`/`)
+
+#### Section: News and Media ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
+- **BEFORE UI STATE**: On phone widths, the light-grey News and Media section had no minimum height and ended as soon as its heading, carousel, pagination, controls, and fixed padding were rendered.
+- **AFTER UI STATE**: Below the `sm` breakpoint, the section now has `min-h-[100dvh]`, giving the mobile layout more vertical height and breathing room. At `sm` and above, `sm:min-h-0` restores the original content-driven height, so laptop, desktop, `3xl`, and ultra-wide layouts remain unchanged.
+- *The previous section class is preserved as a source comment in `Testimonials.tsx`.*
+
+#### Section: News Card and Navigation Position ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
+- **BEFORE UI STATE**: On phones, the news card began immediately after the heading content, and the pagination plus previous/next arrow buttons followed at the original higher position.
+- **AFTER UI STATE**: The mobile carousel receives `pt-12`, moving the news card, pagination indicator, and both previous/next arrow buttons downward together by 3rem. `sm:pt-0` removes this offset at 640px and above, preserving all tablet, laptop, desktop, and larger-monitor layouts.
+- *The previous carousel-container class is preserved as a source comment in `Testimonials.tsx`.*
+
+#### Section: Mobile News Card Height and Pagination ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
+- **BEFORE UI STATE**: The phone card was `360px` tall inside a `380px` carousel. Pagination always advanced in groups of three articles; because mobile showed and clipped that group as a single-card viewport, only the first article from each of two groups appeared when using the previous/next buttons.
+- **AFTER UI STATE**: Below 640px, the card is slightly taller at `380px` and its carousel is `400px`. Below 768px, pagination now advances one article at a time, creating six reachable mobile pages so every news and event card appears. At 768px and above, pagination remains three cards per page and the existing laptop/desktop dimensions are unchanged.
+- *The previous card height, carousel height, and three-item slicing logic are preserved as source comments in `Testimonials.tsx`.*
+
+#### Section: Additional Mobile News Card Height ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
+- **BEFORE UI STATE**: After the first mobile adjustment, the phone card was `380px` tall inside a `400px` carousel.
+- **AFTER UI STATE**: The phone card is now `400px` tall inside a `420px` carousel, adding another 20px of visible card height. These are the dimensions already used at the `sm` breakpoint, so laptop, desktop, and larger-monitor dimensions remain unchanged.
+- *The prior `380px` card and `400px` carousel classes are preserved as source comments in `Testimonials.tsx`.*
+
+#### Section: Mobile News Typography ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx))
+- **BEFORE UI STATE**: On phones, the introductory “Our integrated suite…” copy used `text-xs` (12px), while the visible news-card headline used `text-sm` (14px).
+- **AFTER UI STATE**: The introductory copy now uses `text-sm` (14px), and the visible news-card headline uses `text-base` (16px) on phones. Their existing sizes resume at the `sm` breakpoint, leaving laptop, desktop, and larger-monitor typography unchanged.
+- *Both previous mobile font classes are preserved as source comments in `Testimonials.tsx`.*
+
+#### Section: Single-Line Desktop News Introduction ([Testimonials.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Testimonials.tsx), [CharacterReveal.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/CharacterReveal.tsx))
+- **BEFORE UI STATE**: The introduction was restricted by `max-w-4xl` and `max-w-5xl`, while `CharacterReveal` always applied `flex-wrap` to its character row. As a result, the sentence wrapped onto a second line on laptop and monitor layouts.
+- **AFTER UI STATE**: From the `lg` breakpoint upward, the width limits are removed and the character row uses `flex-nowrap` plus `whitespace-nowrap`. A responsive `clamp(0.75rem, 1.15vw, 1.125rem)` font size keeps the complete sentence on one line across laptops, monitors, bigger monitors, and ultra-wide displays. Mobile and tablet wrapping remains unchanged.
+- *The previous width-constrained classes and wrapping row remain preserved as source comments.*
+
+#### Section: FENIX Mission Profiles TSX Comment Parsing Fix ([FenixMission.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixMission.tsx))
+- **BEFORE UI STATE**: Multiline JSX comments containing nested `{...}` expressions inside JSX elements (`{/* PREVIOUS UI: <motion.div ...> {MISSION_PROFILES.map...} </motion.div> */}`) caused the TypeScript/TSX parser in IDE tools to misinterpret JSX brackets as generic type syntax and binary comparison operators (`Operator '<' cannot be applied to types '{}' and 'ForwardRefComponent<HTMLDivElement, HTMLMotionProps<"div">>'.`).
+- **AFTER UI STATE**: Refactored the commented-out JSX blocks inside `{/* ... */}` to use line comments (`// <motion.div ...`). The visual appearance and layout of the FENIX Mission Profiles page remain identical, while eliminating the TypeScript language server parsing error.
+- *The original historical implementation remains commented out line-by-line per project code preservation rules.*
+
+#### Section: FENIX First Responder Section Height Fit ([FenixResponder1.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixResponder1.tsx))
+- **BEFORE UI STATE**: The section container used `min-h-screen` combined with `py-16 md:py-24` and nested `min-h-screen` inner containers. As a result, the section exceeded single-viewport screen height (`100vh + vertical padding`), causing the bottom text block ("In disaster zones...") to overflow the screen frame and get cut off at the bottom.
+- **AFTER UI STATE**: Adjusted section height to `h-[100dvh] min-h-[100dvh]` and inner containers to `h-full` with refined vertical padding (`py-10 sm:py-14 md:py-16`). The top heading and bottom description text blocks now fit cleanly into a single viewport frame without overflowing or requiring extra scrolling.
+- *The previous section layout classes are preserved as source comments in `FenixResponder1.tsx`.*
+
+#### Section: First Responder Action Cards Desktop Frame Height ([FenixResponder2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixResponder2.tsx))
+- **BEFORE UI STATE**: From the desktop breakpoint upward, the four-card action section used its natural content height. The section could end before the browser frame, exposing the start of the following light section beneath it.
+- **AFTER UI STATE**: From `md` upward, the section has a `100dvh` minimum height. Its dark background now fills the remaining desktop frame while the existing heading, cards, spacing, and responsive mobile frame-fit behavior remain unchanged.
+- *The previous content-height desktop behavior is preserved as a source comment in `FenixResponder2.tsx`.*
+
+#### Section: Hero Description Mobile Horizontal Offset ([FenixHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixHero.tsx))
+- **BEFORE UI STATE**: The mobile hero description began at the same left edge as the section gutter.
+- **AFTER UI STATE**: The description now has an additional `0.5rem` (8px) left inset below the `lg` breakpoint, moving it slightly right as requested. The desktop right-column position is unchanged.
+- *The previous mobile paragraph position is preserved as a source comment in `FenixHero.tsx`.*
+
+### 🌐 PAGE: Uncrewed Systems Fenix Page (`/fenix`, `/uncrewedsystems/fenix`) & Global Footer
+
+#### 📍 Section: Footer Section ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx))
+- ⏮️ **BEFORE UI STATE**: The Fenix page (`/fenix` and `/uncrewedsystems/fenix`) rendered a custom rotated watermark (`logo2.svg` with high negative vertical margins `mt-[-65vw] mb-[-45vw]`) via an `isFenixPage` route check inside `Footer.tsx`, causing the Fenix footer layout and watermark to look different from the Home page footer.
+- ⏭️ **AFTER UI STATE**: Commented out the Fenix-specific custom logo watermark block and applied the standard global homepage footer watermark (`/Tsalla.svg` text watermark) across all pages including Fenix, ensuring uniform global footer appearance.
+#### 📍 Section 10: First Responder Mobile Card Typography & Contrast ([FenixResponder2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixResponder2.tsx))
+- ⏮️ **BEFORE UI STATE**: Inside the 4 First Responder cards on mobile view, card titles used small `text-sm font-medium` font size, description text used dark `text-xs text-neutral-600` font size with low contrast, icons used `h-4 w-4` size, and icon containers used `h-7 w-7` size.
+- ⏭️ **AFTER UI STATE**: Increased card title font size to bold `text-base font-semibold`, increased description content font size to `text-xs sm:text-sm` (13px/14px) with high-contrast `text-neutral-300` text color, increased icons to `h-5 w-5`, and enlarged icon containers to `h-8 w-8` with `p-3` card padding, making all titles and description content noticeably larger, sharper, and more readable on mobile screens.
+- *Previous mobile typography and icon sizing classes remain preserved as source comments in `FenixResponder2.tsx`.*
+
+#### 📍 Section 11: FENIX Page Global Font System Alignment ([FenixHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixHero.tsx), [FenixCapabilities.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixCapabilities.tsx), [FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx), [FenixTurtleMode.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixTurtleMode.tsx), [FenixFloorMap.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixFloorMap.tsx), [FenixPtoP.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixPtoP.tsx), [FenixResponder1.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixResponder1.tsx), [FenixResponder2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixResponder2.tsx), [FenixSpecifications.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixSpecifications.tsx), [FenixFeatures.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixFeatures.tsx), [FenixFUI.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixFUI.tsx), [FenixFUI2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixFUI2.tsx))
+- ⏮️ **BEFORE UI STATE**: Fenix page components used mismatched fonts (`Clash Grotesk`, `font-sans`, `Inter`, `Rajdhani`) and inline `fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif"` overrides, creating font inconsistencies across the Fenix page compared to the Home page.
+- ⏭️ **AFTER UI STATE**: Updated all Fenix page section components to use the standard global homepage font (`font-orbit` / Orbit), commenting out Clash Grotesk imports and inline font overrides, establishing 100% typographic harmony across the entire Fenix page and the Home page design system.
+- *Previous font import tags and inline font family styles remain preserved as source comments in all component files.*
+
+#### 📍 Section 12: Compact Tactical Intelligence Cyan Text Reveal Animation ([FenixCapabilities.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixCapabilities.tsx))
+- ⏮️ **BEFORE UI STATE**: The cyan "Intelligence" text inside the heading of the `FenixCapabilities` section rendered as a static `<span style={{ color: '#5ce1e6' }}>Intelligence</span>` element without entry animation.
+- ⏭️ **AFTER UI STATE**: Wrapped "Intelligence" in `<CharacterReveal text="Intelligence" targetColor="#5ce1e6" className="text-[#5ce1e6]" stagger={0.06} />`, adding the digital glitch cyan character reveal animation when scrolled into view.
+- *Previous static span element is preserved as a source comment in `FenixCapabilities.tsx`.*
+
+#### 📍 Section 13: GPS Navigation White & Green Text Reveal Animation ([FenixGPSNavigation.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixGPSNavigation.tsx), [CharacterReveal.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/CharacterReveal.tsx))
+- ⏮️ **BEFORE UI STATE**: The character reveal animation in `CharacterReveal.tsx` was hardcoded to flicker cyan (`#5ce1e6`), causing the green "No problem!" text to reveal with cyan flickers.
+- ⏭️ **AFTER UI STATE**: Added a dynamic `glowColor` prop to `CharacterReveal.tsx` and updated keyframes to alternate between crisp white (`#ffffff`) and the target green color (`#34d399`), ensuring the green text reveals with a vibrant white and green digital glitch animation before settling on emerald green.
+- *Previous fixed cyan keyframes in `CharacterReveal.tsx` are preserved as source comments.*
+
+#### 📍 Section 14: Comprehensive FENIX Section Headings Character Reveal Animations ([FenixFloorMap.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixFloorMap.tsx), [FenixPtoP.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixPtoP.tsx), [FenixResponder1.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixResponder1.tsx), [FenixFUI2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixFUI2.tsx), [FenixLast.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixLast.tsx))
+- ⏮️ **BEFORE UI STATE**: Headings across Fenix section components (`Floor Map Generation`, `Point-to-Point`, `Lighting`, `Responder`, `F E N I X`, `READY TO DEPLOY WHERE OTHERS CANNOT.`) used static text spans without digital character reveal animations.
+- ⏭️ **AFTER UI STATE**: Wrapped all cyan/blue text elements and full heading words in `<CharacterReveal>` with white and cyan digital glitch keyframe animations, ensuring dynamic character reveal animations trigger seamlessly as users scroll through every section of the Fenix page.
+- *Previous static heading markup is preserved as source comments across all component files.*
+
+#### 📍 Section 15: FENIX Acronym Blue & Black Text Reveal Animation with 0.7s Delay ([FenixFUI2.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixFUI2.tsx), [CharacterReveal.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/CharacterReveal.tsx))
+- ⏮️ **BEFORE UI STATE**: The cyan acronym letters (`F`, `E`, `N`, `I`, `X`) in `FenixFUI2` used standard keyframe reveals without custom delay or black contrast flickering.
+- ⏭️ **AFTER UI STATE**: Added a `flickerColor` parameter to `CharacterReveal.tsx` and updated `FenixFUI2.tsx` to use `flickerColor="#000000"` (black), `targetColor="#5ce1e6"` (cyan), `glowColor="#5ce1e6"`, and `delay={0.7}` (0.7-second delay), producing a crisp blue-and-black contrast character reveal animation on the section's white background.
+- *Previous character reveal props are preserved as source comments.*
+
+#### 📍 Section 16: Hero Title & Subtitle Character Reveal Animations and Paragraph Shift ([FenixHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixHero.tsx))
+- ⏮️ **BEFORE UI STATE**: The Hero title (`FENIx`), subtitle (`Fast Entry Navigational Intrusion eXplorer`), and right description paragraph rendered static text without character reveal animations, and the paragraph was aligned further left (`pl-2`).
+- ⏭️ **AFTER UI STATE**: Applied `<CharacterReveal>` to `FENIx` (delay: 0.2s) and the subtitle (delay: 0.4s), applied `<CharacterReveal>` to the description paragraph with an increased delay of +1.0 second relative to the subtitle (delay: 1.4s), and shifted the right paragraph content further right (`pl-6 sm:pl-10 lg:pl-8`).
+- *Previous static title, subtitle, and paragraph markup are preserved as source comments.*
+
+#### 📍 Section 17: Fix Hydration & DOM Nesting Error (`<div>` inside `<p>`) ([FenixHero.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixHero.tsx), [CharacterReveal.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/CharacterReveal.tsx))
+- ⏮️ **BEFORE UI STATE**: `<CharacterReveal>` rendered outer `<div>` elements, and `FenixHero.tsx` wrapped `<CharacterReveal>` inside a `<p>` tag (`<p><CharacterReveal ...></p>`), triggering React DOM nesting validation errors (`In HTML, <div> cannot be a descendant of <p>`) and client hydration mismatches.
+- ⏭️ **AFTER UI STATE**: Updated `CharacterReveal.tsx` to render outer `<span>` elements (which are valid inline DOM elements inside `<p>` and `<h1-h6>`), and replaced the outer `<p>` tag in `FenixHero.tsx` with a `<div>` tag. Completely resolved all DOM nesting and React hydration errors while preserving layout and animation behavior.
+- *Previous `<p>` tag markup is preserved as a source comment in `FenixHero.tsx`.*
+
+#### 📍 Section 18: Compact Tactical Intelligence Cyan Text Reveal Blue & Black Contrast ([FenixCapabilities.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixCapabilities.tsx), [FenixPtoP.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixPtoP.tsx))
+- ⏮️ **BEFORE UI STATE**: The character reveal animation on "Intelligence" in `FenixCapabilities` and "Point-to-Point" in `FenixPtoP` defaulted to white keyframe flickering on a white section background.
+- ⏭️ **AFTER UI STATE**: Updated `<CharacterReveal>` props to pass `glowColor="#5ce1e6"` and `flickerColor="#000000"` (black), producing a high-contrast blue and black digital glitch reveal animation optimized for the light section background.
+- *Previous character reveal props are preserved as source comments in both component files.*
 
 ---
 
-*Log last updated: August 05, 2026*
+*Log last updated: August 06, 2026*

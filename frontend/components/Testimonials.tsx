@@ -1,7 +1,8 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+// PREVIOUS IMPORT: import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
@@ -35,9 +36,15 @@ const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
     /* PREVIOUS UI (Standard card height without mobile adjustment):
     <motion.li className={`relative w-full overflow-hidden border border-[#505051]/10 md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] h-[400px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] mb-8 lg:mb-0 group cursor-pointer`} ... >
     */
+    /* PREVIOUS UI (Shorter phone card):
+    <motion.li className="... h-[360px] sm:h-[400px] ...">
+    */
+    /* PREVIOUS UI (First mobile height increase):
+    <motion.li className="... h-[380px] sm:h-[400px] ...">
+    */
     <motion.li
       className={`relative w-full overflow-hidden border border-[#505051]/10
-        md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] h-[360px] sm:h-[400px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] mb-8 lg:mb-0 group cursor-pointer`}
+        md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] h-[400px] sm:h-[400px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] mb-8 lg:mb-0 group cursor-pointer`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -65,7 +72,8 @@ const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
         {/* Title always visible at bottom over image */}
         <div className={`absolute bottom-0 left-0 right-0 z-[6] p-6 transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}>
           <span className="text-[10px] uppercase tracking-widest font-bold text-white/60 mb-2 block">{category}</span>
-          <p className="text-sm font-bold text-white leading-snug font-orbit line-clamp-2">{title}</p>
+          {/* PREVIOUS UI: <p className="text-sm font-bold text-white leading-snug font-orbit line-clamp-2"> */}
+          <p className="text-base sm:text-sm font-bold text-white leading-snug font-orbit line-clamp-2">{title}</p>
         </div>
 
         {/* Hover overlay */}
@@ -165,15 +173,33 @@ const TESTIMONIALS_DATA = [
 const Testimonials: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
 
-  const totalPages = Math.ceil(TESTIMONIALS_DATA.length / 3);
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
+    const updateItemsPerPage = (event: MediaQueryListEvent | MediaQueryList) => {
+      setItemsPerPage(event.matches ? 1 : 3);
+      setCurrentPage(0);
+    };
+
+    updateItemsPerPage(mobileQuery);
+    mobileQuery.addEventListener("change", updateItemsPerPage);
+    return () => mobileQuery.removeEventListener("change", updateItemsPerPage);
+  }, []);
+
+  // PREVIOUS UI: const totalPages = Math.ceil(TESTIMONIALS_DATA.length / 3);
+  const totalPages = Math.ceil(TESTIMONIALS_DATA.length / itemsPerPage);
 
   const paginate = (newDirection: number) => {
     setDirection(newDirection);
     setCurrentPage((prev) => (prev + newDirection + totalPages) % totalPages);
   };
 
-  const currentItems = TESTIMONIALS_DATA.slice(currentPage * 3, (currentPage + 1) * 3);
+  // PREVIOUS UI: const currentItems = TESTIMONIALS_DATA.slice(currentPage * 3, (currentPage + 1) * 3);
+  const currentItems = TESTIMONIALS_DATA.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage,
+  );
 
   const variants = {
     enter: (direction: number) => ({
@@ -192,13 +218,16 @@ const Testimonials: React.FC = () => {
     })
   };
 
+  // PREVIOUS UI (mobile height was determined only by the section content):
+  // <section className="bg-[#eaeaea] text-black py-12 lg:py-16 3xl:py-20 uw:py-8 overflow-hidden">
   return (
-    <section className="bg-[#eaeaea] text-black py-12 lg:py-16 3xl:py-20 uw:py-8 overflow-hidden">
+    <section className="min-h-[100dvh] sm:min-h-0 bg-[#eaeaea] text-black py-12 lg:py-16 3xl:py-20 uw:py-8 overflow-hidden">
       {/* PREVIOUS UI (Standard container padding):
       <div className="w-full px-4 md:px-24 uw:px-24 mb-12 uw:mt-8">
       */}
       <div className="w-full px-5 sm:px-12 md:px-24 uw:px-24 mb-8 sm:mb-12 uw:mt-8">
-        <div className="max-w-4xl uw:max-w-7xl">
+        {/* PREVIOUS UI: <div className="max-w-4xl uw:max-w-7xl"> */}
+        <div className="max-w-4xl lg:max-w-none">
           {/* PREVIOUS UI (Standard title font size):
           <CharacterReveal text="News and media" className="text-black mb-8 lg:mb-10 font-orbit text-xl md:text-2xl lg:text-[4.375rem] 3xl:text-[4.375rem] uw:text-[4.375rem] tracking-[0.2em] font-bold uppercase" stagger={0.04} triggerOnScroll={true} />
           */}
@@ -211,9 +240,16 @@ const Testimonials: React.FC = () => {
           {/* PREVIOUS UI (Standard paragraph font size):
           <CharacterReveal text="..." className="text-black leading-tight text-sm md:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl" ... />
           */}
+          {/* PREVIOUS UI (Smaller phone paragraph):
+          <CharacterReveal text="..." className="text-black leading-tight text-xs sm:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl" ... />
+          */}
+          {/* PREVIOUS UI (Width-constrained desktop paragraph):
+          <CharacterReveal text="..." className="text-black leading-tight text-sm sm:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl" ... />
+          */}
           <CharacterReveal
             text="Our integrated suite of software, hardware, and services empowers businesses to operate smarter and grow faster."
-            className="text-black leading-tight text-xs sm:text-base lg:text-lg uw:text-lg font-medium tracking-tight max-w-5xl uw:max-w-7xl"
+            className="max-w-5xl text-sm font-medium leading-tight tracking-tight text-black sm:text-base lg:max-w-none lg:text-[clamp(0.75rem,1.15vw,1.125rem)]"
+            lineClassName="lg:flex-nowrap lg:whitespace-nowrap"
             stagger={0.015}
             delay={1.2}
             triggerOnScroll={true}
@@ -221,7 +257,8 @@ const Testimonials: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-[1600px] mx-auto px-4 md:px-8 flex items-center justify-between gap-2 md:gap-4 relative">
+      {/* PREVIOUS UI: the mobile card and navigation block had no extra top offset. */}
+      <div className="relative mx-auto flex max-w-[1600px] items-center justify-between gap-2 px-4 pt-12 sm:pt-0 md:gap-4 md:px-8">
         <motion.button
           whileHover={{ x: -3 }}
           whileTap={{ scale: 0.9 }}
@@ -234,7 +271,9 @@ const Testimonials: React.FC = () => {
         {/* PREVIOUS UI (Standard container height):
         <div className="flex-1 relative h-[420px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] overflow-hidden px-2 md:px-4">
         */}
-        <div className="flex-1 relative h-[380px] sm:h-[420px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] overflow-hidden px-2 md:px-4">
+        {/* PREVIOUS UI (Shorter phone carousel): h-[380px] sm:h-[420px] */}
+        {/* PREVIOUS UI (First mobile height increase): h-[400px] sm:h-[420px] */}
+        <div className="flex-1 relative h-[420px] sm:h-[420px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] overflow-hidden px-2 md:px-4">
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.ul
               key={currentPage}

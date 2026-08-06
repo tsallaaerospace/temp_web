@@ -36,7 +36,7 @@ export default function FenixPage() {
     //   <FenixLast />
     // </PageWrapper>
 
-    <PageWrapper>
+    <PageWrapper hasHero={true}>
       <FenixHero />
       <FenixCapabilities />
       <FenixGPSNavigation />

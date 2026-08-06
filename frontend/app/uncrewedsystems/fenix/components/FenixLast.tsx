@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { motion } from "framer-motion"
+import CharacterReveal from "@/components/CharacterReveal"
 
 export default function FenixLast(): React.JSX.Element {
   return (
@@ -18,9 +19,23 @@ export default function FenixLast(): React.JSX.Element {
             viewport={{ once: true }}
             className="flex flex-col items-center"
           >
+            {/* PREVIOUS UI:
             <h1 className="text-5xl md:text-7xl lg:text-7xl font-semibold text-black tracking-[0.05em] leading-[1.05] max-w-5xl text-center uppercase">
               <span className="block">Ready to <span className="text-[#5ce1e6]">Deploy</span> Where</span>
               <span className="block">Others Cannot.</span>
+            </h1>
+            */}
+            <h1 className="text-5xl md:text-7xl lg:text-7xl font-semibold text-black tracking-[0.05em] leading-[1.05] max-w-5xl text-center uppercase flex flex-col items-center gap-y-2">
+              <div className="flex flex-wrap justify-center gap-x-3 sm:gap-x-4">
+                <CharacterReveal text="READY" targetColor="#000000" glowColor="#5ce1e6" stagger={0.05} />
+                <CharacterReveal text="TO" targetColor="#000000" glowColor="#5ce1e6" stagger={0.05} />
+                <CharacterReveal text="DEPLOY" targetColor="#5ce1e6" glowColor="#5ce1e6" className="text-[#5ce1e6]" stagger={0.05} />
+                <CharacterReveal text="WHERE" targetColor="#000000" glowColor="#5ce1e6" stagger={0.05} />
+              </div>
+              <div className="flex flex-wrap justify-center gap-x-3 sm:gap-x-4">
+                <CharacterReveal text="OTHERS" targetColor="#000000" glowColor="#5ce1e6" stagger={0.05} />
+                <CharacterReveal text="CANNOT." targetColor="#000000" glowColor="#5ce1e6" stagger={0.05} />
+              </div>
             </h1>
 
 

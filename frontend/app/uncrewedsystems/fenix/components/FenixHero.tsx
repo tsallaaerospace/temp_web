@@ -1,23 +1,12 @@
 "use client"
-import React, { useEffect } from "react"
+import React from "react"
 import type { JSX } from "react"
+import CharacterReveal from "@/components/CharacterReveal"
 
 export default function FenixHero(): React.JSX.Element {
-  // Dynamically load the Clash Grotesk font
-  useEffect(() => {
-    const link = document.createElement("link")
-    link.href = "https://fonts.googleapis.com/css2?family=Clash+Grotesk:wght@400;500;700&display=swap"
-    link.rel = "stylesheet"
-    document.head.appendChild(link)
-    return () => {
-      document.head.removeChild(link)
-    }
-  }, [])
-
   return (
     <section
-      className="relative h-screen w-full text-white overflow-hidden"
-      style={{ fontFamily: "'Clash Grotesk', Arial, sans-serif" }}
+      className="relative h-screen w-full text-white overflow-hidden font-orbit"
     >
       {/* Background Video */}
       <video
@@ -37,11 +26,12 @@ export default function FenixHero(): React.JSX.Element {
       </video>
 
       {/* Content */}
-      <div className="relative z-20 w-full h-full flex flex-col justify-end px-4 sm:px-6 md:px-8 pb-[26%] sm:pb-[20%] md:pb-[22%] lg:flex-row lg:justify-between lg:items-end lg:px-20 lg:pb-[12%]">
-        {/* Left Side: Title & Subtitle */}
+      <div className="relative z-20 w-full h-full flex flex-col justify-between pt-28 px-4 sm:px-6 md:px-8 pb-10 sm:pb-12 md:pb-16 lg:flex-row lg:justify-between lg:items-end lg:px-20 lg:pb-16 lg:pt-0">
+        {/* Left Side: Title & Subtitle (Images 1 & 2) */}
         <div className="max-w-full lg:max-w-2xl text-left mb-8 lg:mb-0 lg:flex lg:flex-col lg:justify-end">
+          {/* PREVIOUS UI:
           <h1
-            className="text-white font-bold text-[2rem] sm:text-[2.75rem] md:text-[3.75rem] lg:text-[4.5rem] leading-tight tracking-tight mb-4"
+            className="text-white font-bold text-[3.25rem] sm:text-[3.75rem] md:text-[3.75rem] lg:text-[4.5rem] leading-none tracking-tight mb-1"
             style={{ letterSpacing: "-0.03em" }}
           >
             FENIx
@@ -52,12 +42,49 @@ export default function FenixHero(): React.JSX.Element {
           >
             Fast Entry Navigational Intrusion eXplorer
           </p>
+          */}
+          <h1
+            className="text-white font-bold text-[3.25rem] sm:text-[3.75rem] md:text-[3.75rem] lg:text-[4.5rem] leading-none tracking-tight mb-1"
+            style={{ letterSpacing: "-0.03em" }}
+          >
+            <CharacterReveal
+              text="FENIx"
+              targetColor="#ffffff"
+              glowColor="#5ce1e6"
+              delay={0.2}
+              stagger={0.06}
+            />
+          </h1>
+          {/* PREVIOUS UI: <p className="text-white text-base sm:text-lg md:text-xl font-normal tracking-wide text-balance" style={{ letterSpacing: "0.01em" }}> */}
+          <div
+            className="text-white text-base sm:text-lg md:text-xl font-normal tracking-wide text-balance"
+            style={{ letterSpacing: "0.01em" }}
+          >
+            <CharacterReveal
+              text="Fast Entry Navigational Intrusion eXplorer"
+              targetColor="#ffffff"
+              glowColor="#5ce1e6"
+              delay={0.4}
+              stagger={0.03}
+            />
+          </div>
         </div>
 
-        {/* Right Side: Paragraph */}
-        <div className="max-w-full lg:max-w-md text-left text-lg md:text-xl font-light leading-relaxed text-neutral-600 text-balance lg:flex lg:flex-col lg:justify-end">
+        {/* Right Side: Paragraph (Image 3 - shifted right with 1s additional delay boost relative to Image 2) */}
+        {/* PREVIOUS UI:
+        <div className="max-w-full pl-2 text-left text-lg font-light leading-relaxed text-white text-balance md:text-xl lg:max-w-md lg:pl-0 lg:flex lg:flex-col lg:justify-end">
           When intelligence fits in the palm of your hand, missions expand far beyond their footprint — agile, discreet,
           and ready on demand.
+        </div>
+        */}
+        <div className="max-w-full pl-6 sm:pl-10 text-left text-lg font-light leading-relaxed text-white text-balance md:text-xl lg:max-w-md lg:pl-8 lg:flex lg:flex-col lg:justify-end">
+          <CharacterReveal
+            text="When intelligence fits in the palm of your hand, missions expand far beyond their footprint — agile, discreet, and ready on demand."
+            targetColor="#ffffff"
+            glowColor="#5ce1e6"
+            delay={1.4}
+            stagger={0.02}
+          />
         </div>
       </div>
     </section>

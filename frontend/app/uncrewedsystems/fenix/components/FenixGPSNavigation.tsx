@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import CharacterReveal from "@/components/CharacterReveal"
 
 export default function FenixGPSNavigation(): React.JSX.Element {
     const containerRef = useRef<HTMLDivElement>(null)
@@ -67,9 +68,21 @@ export default function FenixGPSNavigation(): React.JSX.Element {
                 }
             `}</style>
 
+            {/* PREVIOUS UI:
             <motion.div
                 style={{ backgroundColor: bgColor }}
                 className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden"
+            >
+            */}
+            {/* PREVIOUS UI:
+            <motion.div
+                style={{ backgroundColor: bgColor }}
+                className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-16 sm:justify-center sm:pt-0 overflow-hidden"
+            >
+            */}
+            <motion.div
+                style={{ backgroundColor: bgColor }}
+                className="sticky top-0 h-screen w-full flex flex-col items-center justify-start pt-24 sm:justify-center sm:pt-0 overflow-hidden"
             >
                 {/* Background Grid Elements */}
                 <div className="absolute inset-0 z-0 opacity-10">
@@ -92,17 +105,39 @@ export default function FenixGPSNavigation(): React.JSX.Element {
                 />
 
                 {/* Text Content Layer */}
-                <div className="relative z-30 w-full max-w-5xl px-8 text-center flex flex-col items-center h-[40vh] pt-20">
+                {/* PREVIOUS UI:
+                <div className="relative z-30 w-full max-w-5xl px-4 sm:px-8 text-center flex flex-col items-center h-[35vh] sm:h-[40vh] pt-8 sm:pt-20">
+                */}
+                <div className="relative z-30 w-full max-w-5xl px-4 sm:px-8 text-center flex flex-col items-center h-auto sm:h-[40vh] pt-4 sm:pt-20">
                     <div className="relative w-full h-full text-wipe-container">
 
                         {/* PHASE 1 TEXT (NO GPS) */}
                         <motion.div
                             style={{ clipPath: text2Clip }}
-                            className="text-wipe-item flex flex-col items-center w-full"
+                            className="text-wipe-item flex flex-col items-center w-full font-orbit"
                         >
-                            <h3 className="text-white text-4xl md:text-6xl font-bold tracking-tight mb-6 font-inter" style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }}>
-                                No GPS ? <span className="text-emerald-400">No problem!</span>
-                            </h3>
+                        {/* PREVIOUS UI:
+                        <h3 className="text-white text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-6 font-inter" style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }}>
+                            <span className="block sm:inline">No GPS ? </span>
+                            <span className="text-emerald-400 block sm:inline">No problem!</span>
+                        </h3>
+                        */}
+                        {/* PREVIOUS UI:
+                        <h3 className="text-white text-4xl xs:text-5xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4 sm:mb-6 font-orbit">
+                            <span className="block sm:inline">No GPS ? </span>
+                            <span className="text-emerald-400 block sm:inline">No problem!</span>
+                        </h3>
+                        */}
+                        <h3 className="text-white text-4xl xs:text-5xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4 sm:mb-6 font-orbit">
+                            <span className="block sm:inline">No GPS ? </span>
+                            <CharacterReveal
+                                text="No problem!"
+                                targetColor="#34d399"
+                                glowColor="#34d399"
+                                className="text-emerald-400 block sm:inline"
+                                stagger={0.06}
+                            />
+                        </h3>
                             <p className="text-lg md:text-xl max-w-2xl font-light leading-relaxed text-neutral-600">
                                 Reliable positioning without GPS using SLAM, sensor fusion, and real-time mapping built for tunnels, urban canyons, and signal-jammed zones.
                             </p>
@@ -111,10 +146,18 @@ export default function FenixGPSNavigation(): React.JSX.Element {
                         {/* PHASE 2 TEXT (LIGHTING) */}
                         <motion.div
                             style={{ clipPath: text1Clip }}
-                            className="text-wipe-item flex flex-col items-center w-full"
+                            className="text-wipe-item flex flex-col items-center w-full font-orbit"
                         >
-                            <h3 className="text-white text-4xl md:text-6xl font-bold tracking-tight mb-6 font-inter" style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }}>
-                                Navigation <span style={{ color: '#5ce1e6' }}>Lighting</span>
+                            {/* PREVIOUS UI: Navigation <span style={{ color: '#5ce1e6' }}>Lighting</span> */}
+                            <h3 className="text-white text-4xl md:text-6xl font-bold tracking-tight mb-6 font-orbit">
+                                Navigation{" "}
+                                <CharacterReveal
+                                    text="Lighting"
+                                    targetColor="#5ce1e6"
+                                    glowColor="#5ce1e6"
+                                    className="text-[#5ce1e6]"
+                                    stagger={0.06}
+                                />
                             </h3>
                             <p className="text-lg md:text-xl max-w-2xl font-light leading-relaxed text-neutral-600">
                                 Integrated illumination for dark environments — optimized for pathfinding, obstacle avoidance, and operational safety without compromising stealth.

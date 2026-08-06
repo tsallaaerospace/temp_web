@@ -161,7 +161,7 @@ export default function Footer() {
       </div>
 
       {/* Massive Brand Watermark */}
-      {/* PREVIOUS UI: watermark div mt-8 mb-8 md:mt-[-5vw] md:mb-[-5vw] */}
+      {/* PREVIOUS UI (Fenix-Specific Custom Watermark):
       <div className={`relative w-full overflow-hidden flex justify-center pointer-events-none select-none z-0 ${isFenixPage ? "mt-[-65vw] mb-[-45vw]" : "mt-4 sm:mt-8 mb-4 sm:mb-8 md:mt-[-5vw] md:mb-[-5vw]"}`}>
         {isFenixPage ? (
           <div
@@ -177,7 +177,6 @@ export default function Footer() {
           </div>
         ) : (
           <div className="relative w-[140vw] h-[22vw] sm:h-[25vw] opacity-[0.03]">
-            {/* PREVIOUS UI: div h-[25vw] - watermark height reduced on mobile */}
             <Image
               src="/Tsalla.svg"
               alt="Tsalla"
@@ -187,6 +186,18 @@ export default function Footer() {
             />
           </div>
         )}
+      </div>
+      */}
+      <div className="relative w-full overflow-hidden flex justify-center pointer-events-none select-none z-0 mt-4 sm:mt-8 mb-4 sm:mb-8 md:mt-[-5vw] md:mb-[-5vw]">
+        <div className="relative w-[140vw] h-[22vw] sm:h-[25vw] opacity-[0.03]">
+          <Image
+            src="/Tsalla.svg"
+            alt="Tsalla"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
       </div>
 
       {/* Bottom Bar */}

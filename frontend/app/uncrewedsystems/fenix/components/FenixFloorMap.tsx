@@ -3,10 +3,11 @@
 import React from "react"
 import { ContentWrapper } from "@/components/ContentWrapper"
 import { motion } from "framer-motion"
+import CharacterReveal from "@/components/CharacterReveal"
 
 export default function FenixFloorMap(): React.JSX.Element {
     return (
-        <section className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden bg-black">
+        <section className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden bg-black font-orbit">
             {/* Background Video */}
             <video
                 src="/images/Fenix/floormap.mp4"
@@ -32,8 +33,17 @@ export default function FenixFloorMap(): React.JSX.Element {
                             transition={{ duration: 0.8, ease: "easeOut" }}
                             viewport={{ once: true }}
                         >
-                            <h2 className="text-5xl md:text-7xl font-medium tracking-tight mb-8 text-white" style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }}>
-                                <span style={{ color: '#5ce1e6' }}>Floor Map</span> Generation
+                            {/* PREVIOUS UI: style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }} */}
+                            {/* PREVIOUS UI: <span style={{ color: '#5ce1e6' }}>Floor Map</span> Generation */}
+                            <h2 className="text-5xl md:text-7xl font-medium tracking-tight mb-8 text-white flex flex-wrap items-center gap-x-3">
+                                <CharacterReveal
+                                    text="Floor Map"
+                                    targetColor="#5ce1e6"
+                                    glowColor="#5ce1e6"
+                                    className="text-[#5ce1e6]"
+                                    stagger={0.06}
+                                />
+                                <span>Generation</span>
                             </h2>
                         </motion.div>
 

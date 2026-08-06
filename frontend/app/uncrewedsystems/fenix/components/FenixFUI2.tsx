@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import CharacterReveal from "@/components/CharacterReveal"
 
 interface MobileConfig {
     position: { top?: string; bottom?: string; left?: string; right?: string }
@@ -82,7 +83,8 @@ const FeatureBox = ({
             >
                 <div className={`${isMobile ? 'p-1.5' : 'p-6'} min-w-0 md:min-w-[320px]`}>
                     <div className="flex items-center justify-between mb-0.5 md:mb-2">
-                        <h3 className={`${isMobile ? 'text-[8px]' : 'text-xl'} font-bold tracking-tight uppercase leading-tight`} style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif", fontWeight: 700 }}>
+                        {/* PREVIOUS UI: style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif", fontWeight: 700 }} */}
+                        <h3 className={`${isMobile ? 'text-[8px]' : 'text-xl'} font-bold tracking-tight uppercase leading-tight`}>
                             {feature.title}
                         </h3>
                         <span className={`${isMobile ? 'text-[6px]' : 'text-xs'} font-mono text-neutral-400 ml-1`}>
@@ -232,7 +234,8 @@ export default function FenixFUI2(): React.JSX.Element {
     ]
 
     return (
-        <div ref={containerRef} className="relative w-full min-h-[120vh] bg-white text-black overflow-hidden font-sans flex flex-col items-center">
+        /* PREVIOUS UI: className="relative w-full min-h-[120vh] bg-white text-black overflow-hidden font-sans flex flex-col items-center" */
+        <div ref={containerRef} className="relative w-full min-h-[120vh] bg-white text-black overflow-hidden font-orbit flex flex-col items-center">
 
             {/* Header Title */}
             <motion.h2
@@ -241,9 +244,15 @@ export default function FenixFUI2(): React.JSX.Element {
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
                 className="relative z-40 text-3xl md:text-5xl lg:text-5xl font-bold tracking-[0.1em] text-center mt-12 md:mt-20 mb-8 px-4"
-                style={{ maxWidth: "100%", fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif", fontWeight: 700 }}
+                /* PREVIOUS UI: style={{ maxWidth: "100%", fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif", fontWeight: 700 }} */
+                style={{ maxWidth: "100%", fontWeight: 700 }}
             >
-                <span className="text-[#5ce1e6]">F</span>AST <span className="text-[#5ce1e6]">E</span>NTRY <span className="text-[#5ce1e6]">N</span>AVIGATIONAL <span className="text-[#5ce1e6]">I</span>NTRUSION E<span className="text-[#5ce1e6]">X</span>PLORER
+                {/* PREVIOUS UI: <span className="text-[#5ce1e6]">F</span>AST <span className="text-[#5ce1e6]">E</span>NTRY <span className="text-[#5ce1e6]">N</span>AVIGATIONAL <span className="text-[#5ce1e6]">I</span>NTRUSION E<span className="text-[#5ce1e6]">X</span>PLORER */}
+                <CharacterReveal text="F" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />AST{" "}
+                <CharacterReveal text="E" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />NTRY{" "}
+                <CharacterReveal text="N" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />AVIGATIONAL{" "}
+                <CharacterReveal text="I" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />NTRUSION E
+                <CharacterReveal text="X" targetColor="#5ce1e6" glowColor="#5ce1e6" flickerColor="#000000" delay={0.7} className="text-[#5ce1e6]" />PLORER
             </motion.h2>
 
             {/* Background Drone Image */}

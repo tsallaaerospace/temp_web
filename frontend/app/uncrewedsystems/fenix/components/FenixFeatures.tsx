@@ -12,7 +12,8 @@ interface FeatureProps {
 // Reusable feature component with left alignment
 const Feature: React.FC<FeatureProps> = ({ title, description }) => (
   <div className="py-4 border-b border-gray-300">
-    <h3 className="text-2xl sm:text-3xl font-medium text-black mb-1" style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }}>{title}</h3>
+    {/* PREVIOUS UI: style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }} */}
+    <h3 className="text-2xl sm:text-3xl font-medium text-black mb-1">{title}</h3>
     <p className="text-lg sm:text-xl font-light leading-relaxed text-neutral-600">{description}</p>
   </div>
 )
@@ -44,19 +45,22 @@ export default function FenixFeatures(): React.JSX.Element {
 
   return (
     <>
+      {/* PREVIOUS UI: Clash Grotesk import
       <style>{`
         @import url('https://fonts.cdnfonts.com/css/clash-grotesk-variable');
         .font-clash-grotesk {
           font-family: 'Clash Grotesk Variable', sans-serif;
         }
       `}</style>
+      */}
 
-      <section className="font-clash-grotesk bg-white w-full min-h-screen flex items-center py-20">
+      <section className="font-orbit bg-white w-full min-h-screen flex items-center py-20">
         <ContentWrapper>
           <div className="w-full">
             {/* Header */}
             <div className="mb-12">
-              <h1 className="text-6xl sm:text-7xl md:text-8xl font-medium tracking-tighter text-black leading-tight" style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }}>
+              {/* PREVIOUS UI: style={{ fontFamily: "'ClashGrotesk Bold (.eot)', sans-serif" }} */}
+              <h1 className="text-6xl sm:text-7xl md:text-8xl font-medium tracking-tighter text-black leading-tight">
                 Key Features
               </h1>
               <p className="text-lg sm:text-xl font-light leading-relaxed text-neutral-600 mt-4">

@@ -19,8 +19,9 @@ export const metadata: Metadata = {
 }
 
 export default function DexterPage() {
+  // PREVIOUS UI: <PageWrapper>
   return (
-    <PageWrapper>
+    <PageWrapper hasHero={true}>
       <DexterHero />
        <DexterCapabilities />
       <Dexter1 />

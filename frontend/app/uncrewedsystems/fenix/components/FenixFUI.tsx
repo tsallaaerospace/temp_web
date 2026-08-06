@@ -104,7 +104,7 @@ export default function FenixFUI(): React.JSX.Element {
         @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600&family=Inter:wght@400;500&family=Roboto+Mono:wght@300&display=swap');
         
         .fui-container {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Orbit', sans-serif;
         }
         
         .grid-overlay {

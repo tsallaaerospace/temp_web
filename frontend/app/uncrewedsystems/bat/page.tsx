@@ -19,8 +19,9 @@ export const metadata: Metadata = {
 }
 
 export default function BatPage() {
+  // PREVIOUS UI: <PageWrapper>
   return (
-    <PageWrapper>
+    <PageWrapper hasHero={true}>
       <BatHero />
       <BatCurtainReveal />
       {/* <BatCapabilities /> */}

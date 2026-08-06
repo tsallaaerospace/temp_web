@@ -34,11 +34,36 @@ export default function BatHero(): React.JSX.Element {
       </video>
 
       {/* Content */}
+      {/* PREVIOUS UI:
       <div className="relative z-20 w-full h-full flex flex-col justify-end px-4 sm:px-6 md:px-8 pb-[26%] sm:pb-[20%] md:pb-[22%] lg:flex-row lg:justify-between lg:items-end lg:px-20 lg:pb-[12%]">
+      */}
+      {/* PREVIOUS UI:
+      <div className="relative z-20 w-full h-full flex flex-col justify-end px-4 sm:px-6 md:px-8 pb-10 sm:pb-12 md:pb-16 lg:flex-row lg:justify-between lg:items-end lg:px-20 lg:pb-16">
+      */}
+      {/* PREVIOUS UI:
+      <div className="relative z-20 w-full h-full flex flex-col justify-start pt-28 px-4 sm:px-6 md:px-8 pb-10 sm:pb-12 md:pb-16 lg:flex-row lg:justify-between lg:items-end lg:px-20 lg:pb-16 lg:pt-0">
+      */}
+      <div className="relative z-20 w-full h-full flex flex-col justify-between pt-28 px-4 sm:px-6 md:px-8 pb-10 sm:pb-12 md:pb-16 lg:flex-row lg:justify-between lg:items-end lg:px-20 lg:pb-16 lg:pt-0">
         {/* Left Side: Title & Subtitle */}
         <div className="max-w-full lg:max-w-2xl text-left mb-8 lg:mb-0 lg:flex lg:flex-col lg:justify-end">
+          {/* PREVIOUS UI:
           <h1
             className="text-white font-bold text-[2rem] sm:text-[2.75rem] md:text-[3.75rem] lg:text-[4.5rem] leading-tight tracking-tight mb-4"
+            style={{ letterSpacing: "-0.03em" }}
+          >
+            T - BAT
+          </h1>
+          */}
+          {/* PREVIOUS UI:
+          <h1
+            className="text-white font-bold text-[2rem] sm:text-[2.75rem] md:text-[3.75rem] lg:text-[4.5rem] leading-none tracking-tight mb-1"
+            style={{ letterSpacing: "-0.03em" }}
+          >
+            T - BAT
+          </h1>
+          */}
+          <h1
+            className="text-white font-bold text-[3.25rem] sm:text-[3.75rem] md:text-[3.75rem] lg:text-[4.5rem] leading-none tracking-tight mb-1"
             style={{ letterSpacing: "-0.03em" }}
           >
             T - BAT

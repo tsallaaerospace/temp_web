@@ -16,8 +16,9 @@ export const metadata: Metadata = {
 }
 
 export default function StormPage() {
+  // PREVIOUS UI: <PageWrapper>
   return (
-    <PageWrapper>
+    <PageWrapper hasHero={true}>
       <StormHero />
       <StormCapabilities />
       <StormSpecifications />
