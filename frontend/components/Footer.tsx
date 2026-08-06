@@ -109,6 +109,7 @@ export default function Footer() {
                   CONNECT WITH US
                 </span>
               </Link>
+              {/* PREVIOUS UI:
               <Link
                 href="#"
                 onClick={(e) => {
@@ -116,6 +117,12 @@ export default function Footer() {
                     e.preventDefault();
                   }
                 }}
+                className="group relative px-4 py-2 sm:px-6 sm:py-3 bg-transparent border border-white/20 overflow-hidden"
+              >
+              */}
+              <Link
+                href="#"
+                onClick={(e) => e.preventDefault()}
                 className="group relative px-4 py-2 sm:px-6 sm:py-3 bg-transparent border border-white/20 overflow-hidden"
               >
                 <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -138,6 +145,7 @@ export default function Footer() {
                 <ul className="footer-short-links flex flex-col space-y-2.5 sm:space-y-3">
                   {links.map((link) => (
                     <li key={link.name}>
+                      {/* PREVIOUS UI:
                       <Link
                         href="#"
                         onClick={(e) => {
@@ -145,6 +153,12 @@ export default function Footer() {
                             e.preventDefault();
                           }
                         }}
+                        className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-nowrap block relative group w-fit"
+                      >
+                      */}
+                      <Link
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
                         className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-nowrap block relative group w-fit"
                       >
                         {link.name}

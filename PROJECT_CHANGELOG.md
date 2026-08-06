@@ -801,10 +801,24 @@
 - ⏭️ **AFTER UI STATE**: Both mobile sections now use the small viewport unit (`100svh`), matching the reliably visible phone screen height on iPhone 14 and iPhone 14 Pro Max. Desktop viewports retain the original `h-screen`/`min-h-screen` behavior from the `md` breakpoint onward.
 - *The previous legacy viewport-height classes are preserved as source comments in both component files.*
 
+#### 📍 Development Runtime: Webpack Cache Memory Stabilization ([next.config.mjs](file:///c:/Users/tsall/Desktop/1st_version/frontend/next.config.mjs))
+- ⏮️ **BEFORE UI STATE**: The development server used Webpack's default PackFile filesystem cache, which had grown to approximately 451 MB. Repacking it triggered `Array buffer allocation failed` and eventually terminated `next dev` with a JavaScript heap out-of-memory error.
+- ⏭️ **AFTER UI STATE**: Enabled Next.js 15's low-memory Webpack optimization and disabled the Webpack filesystem cache only during development. Page behavior and production builds remain unchanged; development recompilation may be slightly slower but avoids the large cache-pack allocation.
+- *The previous default development memory/cache behavior is preserved as comments in `next.config.mjs`.*
+
+#### 📍 Section 62: Footer Dynamic Viewport Height Fix for Mobile Browser Toolbar Collapse ([globals.css](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/globals.css))
+- ⏮️ **BEFORE UI STATE**: The mobile footer used `@media (max-width: 430px) and (max-height: 880px)` with `min-height: 100svh`. When users first scrolled down to the footer, the address bar was expanded so the media query matched and the footer fit the screen. However, on scrolling down, mobile browsers collapsed the address bar, increasing the window height above 880px. Consequently, when visiting the footer a 2nd time with the address bar collapsed, the media query failed to match and `100svh` evaluated to a smaller static height, causing the footer to shrink and fail to fit the screen height.
+- ⏭️ **AFTER UI STATE**: Updated the mobile footer media query to `@media (max-width: 767px)` without the brittle `max-height: 880px` constraint, and applied `min-height: 100dvh` (Dynamic Viewport Height with `100vh` fallback). Now, the footer dynamically scales to 100% of the visible viewport height on both initial visit and subsequent visits regardless of whether the mobile address bar is expanded or collapsed.
+- *The previous `max-height: 880px` and `100svh` CSS rules are preserved as source comments in `globals.css`.*
+
+#### 📍 Section 63: Footer Disabled Button Unconditional Event Prevention Fix ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx), [Founders.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/about/components/Founders.tsx))
+- ⏮️ **BEFORE UI STATE**: Disabled footer links (`VIEW CAREERS` and navigation items using `href="#"`) had conditional event prevention (`if (pathname === "/") { e.preventDefault(); }`). On any subpage other than `/` (such as `/fenix`, `/about`, `/careers`, `/contact`), clicking any disabled footer link executed standard browser `#` navigation, scrolling the page directly to the top (first section).
+- ⏭️ **AFTER UI STATE**: Updated disabled footer links and placeholder social buttons to invoke `onClick={(e) => e.preventDefault()}` unconditionally on all pages. Clicking disabled buttons on mobile or desktop no longer triggers `#` anchor jumps to the top section on any page.
+- *The previous conditional `if (pathname === "/")` onClick code blocks are preserved as comments in `Footer.tsx` and `Founders.tsx`.*
+
 ---
 
 *Log last updated: August 06, 2026*
-
 
 
 

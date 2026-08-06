@@ -47,6 +47,10 @@ class StripDependencyMjsSourceMapUrlsPlugin {
  */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // PREVIOUS DEV MEMORY CONFIG: Webpack used its default module/cache memory behavior.
+  experimental: {
+    webpackMemoryOptimizations: true,
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -58,6 +62,9 @@ const nextConfig = {
   },
   webpack: (config, { dev }) => {
     if (dev) {
+      // PREVIOUS DEV CACHE: Webpack's default filesystem PackFile cache grew beyond 450 MB and exhausted ArrayBuffer memory.
+      config.cache = false
+
       /* PREVIOUS UI: only the post-loader below attempted to strip package map references. */
       config.module.rules.push({
         test: /\.mjs$/,

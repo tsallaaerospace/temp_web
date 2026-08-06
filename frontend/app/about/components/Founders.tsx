@@ -324,9 +324,17 @@ export default function HeroSection() {
       {/* Social Media Links - Top Right */}
       <div className="absolute top-8 right-4 z-50 flex items-center gap-3 p-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
         {[Twitter, Facebook, Instagram, Linkedin, Youtube, Globe].map((Icon, index) => (
+          /* PREVIOUS UI:
           <a
             key={index}
             href="#"
+            className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-black hover:bg-[#00CFFF] hover:text-white transition-all duration-300 transform hover:scale-110"
+          >
+          */
+          <a
+            key={index}
+            href="#"
+            onClick={(e) => e.preventDefault()}
             className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-black hover:bg-[#00CFFF] hover:text-white transition-all duration-300 transform hover:scale-110"
           >
             <Icon size={14} strokeWidth={2.5} />
