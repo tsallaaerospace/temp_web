@@ -202,9 +202,10 @@ const OpposingMotionReveal = () => {
 
                     {/* Drag hint indicator */}
 
-                </div >
-            </div >
-        </section >
+                {/* PREVIOUS UI: </div > </div > </section > */}
+                </div>
+            </div>
+        </section>
     )
 }
 

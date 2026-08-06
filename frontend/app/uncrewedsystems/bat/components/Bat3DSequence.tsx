@@ -732,7 +732,8 @@ export default function Bat3DSequence() {
                 </div>
             </div>
 
-        </section >
+        {/* PREVIOUS UI: </section > */}
+        </section>
     );
 }
 

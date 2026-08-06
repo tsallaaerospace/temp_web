@@ -59,7 +59,7 @@ export default function FenixTurtleMode(): React.JSX.Element {
                     }}
                     /* PREVIOUS UI: video opacity used `[0, 1, 1, 0.7]`, fading it in as the section entered. */
                     /* PREVIOUS DESKTOP WIDTH: `lg:w-[70vw]` left too little room for the title at the video edge. */
-                    {/* PREVIOUS UI: className="relative z-10 flex aspect-video w-[82vw] max-w-[32rem] items-center justify-center border border-neutral-900/10 bg-white p-1.5 shadow-[0_20px_50px_rgba(15,30,32,0.14)] sm:w-[84vw] sm:max-w-none sm:p-2 sm:shadow-[0_30px_80px_rgba(15,30,32,0.16)] lg:w-[64vw] xl:w-[66vw]" */}
+                    /* PREVIOUS UI JSX COMMENT: className="relative z-10 flex aspect-video w-[82vw] max-w-[32rem] items-center justify-center border border-neutral-900/10 bg-white p-1.5 shadow-[0_20px_50px_rgba(15,30,32,0.14)] sm:w-[84vw] sm:max-w-none sm:p-2 sm:shadow-[0_30px_80px_rgba(15,30,32,0.16)] lg:w-[64vw] xl:w-[66vw]" */
                     className="relative z-10 flex aspect-video w-[90vw] max-w-[32rem] items-center justify-center border border-neutral-900/10 bg-white p-1.5 shadow-[0_20px_50px_rgba(15,30,32,0.14)] sm:w-[84vw] sm:max-w-none sm:p-2 sm:shadow-[0_30px_80px_rgba(15,30,32,0.16)] lg:w-[64vw] xl:w-[66vw]"
                 >
                     <video 
@@ -154,104 +154,9 @@ export default function FenixTurtleMode(): React.JSX.Element {
                         <div className="mt-4 flex items-center gap-2 border-t border-neutral-900/10 pt-3 text-[10px] font-bold tracking-[0.12em] text-neutral-600"><CheckCircle2 className="h-3.5 w-3.5 text-[#177f85]" /> RECOVERY READY</div>
                     </motion.div>
 
-                    {/* PREVIOUS UI: <div className="absolute bottom-5 left-5 hidden items-center gap-2 text-[10px] font-bold tracking-[0.18em] text-neutral-400 sm:flex lg:left-[5vw]"><Zap className="h-3.5 w-3.5 text-[#177f85]" /> FAIL-SAFE INTELLIGENCE</div> */}
-
-                    {/* Stage 1 Info Card: Detection - Disabled
-                    <motion.div
-                        style={{ opacity: card1Opacity, y: card1Y }}
-                        className="absolute left-[10%] bottom-[25%] z-30 pointer-events-auto"
-                    >
-                        <div className="relative bg-white shadow-2xl border border-neutral-100 p-6 w-[280px] md:w-[320px]">
-                            <svg className="absolute -right-[120px] top-1/2 -translate-y-1/2 w-[400px] h-[300px] pointer-events-none overflow-visible">
-                                <motion.path
-                                    d="M -20 180 L 150 190 L 230 -20"
-                                    fill="none"
-                                    stroke="#5ce1e6"
-                                    strokeWidth="1.5"
-                                    style={{ pathLength: line1Draw }}
-                                />
-                                <motion.circle
-                                    cx="550" cy="40" r="3" fill="#5ce1e6"
-                                    style={{ opacity: line1Draw }}
-                                />
-                            </svg>
-
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 bg-cyan-50 rounded-lg">
-                                    <ShieldAlert className="w-5 h-5 text-[#5ce1e6]" />
-                                </div>
-                                <h3 className="text-sm font-bold tracking-widest text-[#5ce1e6] uppercase">Detection Mode</h3>
-                            </div>
-
-                            <ul className="space-y-3">
-                                {[
-                                    { label: "IMU Orientation", value: "180° Inverted" },
-                                    { label: "AI Decision", value: "Recovery Required" },
-                                    { label: "Signal Strength", value: "-45 dBm" },
-                                    { label: "Power Status", value: "Optimal" }
-                                ].map((item, i) => (
-                                    <li key={i} className="flex items-center gap-2 group">
-                                        <div className="w-1.5 h-0.5 bg-neutral-200 group-hover:bg-[#5ce1e6] transition-colors" />
-                                        <div className="flex justify-between w-full text-[11px] md:text-xs">
-                                            <span className="text-neutral-400">{item.label}</span>
-                                            <span className="font-bold text-neutral-800">{item.value}</span>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </motion.div>
-                    */}
-
-                    {/* Stage 3 Info Card: Restoration - Disabled
-                    <motion.div
-                        style={{ opacity: card3Opacity, y: card3Y }}
-                        className="absolute right-[10%] top-[25%] z-30 pointer-events-auto"
-                    >
-                        <div className="relative bg-white shadow-2xl border border-neutral-100 p-6 w-[280px] md:w-[320px]">
-                            <svg className="absolute -left-[120px] top-1/2 -translate-y-1/2 w-[120px] h-[300px] pointer-events-none overflow-visible">
-                                <motion.path
-                                    d="M 120 150 L 50 150 L -180 300"
-                                    fill="none"
-                                    stroke="#22c55e"
-                                    strokeWidth="1.5"
-                                    style={{ pathLength: line3Draw }}
-                                />
-                                <motion.circle
-                                    cx="-180" cy="300" r="3" fill="#22c55e"
-                                    style={{ opacity: line3Draw }}
-                                />
-                            </svg>
-
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 bg-green-50 rounded-lg">
-                                    <CheckCircle2 className="w-5 h-5 text-green-600" />
-                                </div>
-                                <h3 className="text-sm font-bold tracking-widest text-green-600 uppercase">Recovery Success</h3>
-                            </div>
-
-                            <ul className="space-y-3">
-                                {[
-                                    { label: "Attitude", value: "0° Nominal" },
-                                    { label: "Gyro State", value: "Stabilized" },
-                                    { label: "Motor Ready", value: "100% Armed" },
-                                    { label: "System Check", value: "Passed ✓" }
-                                ].map((item, i) => (
-                                    <li key={i} className="flex items-center gap-2 group">
-                                        <div className="w-1.5 h-0.5 bg-neutral-200 group-hover:bg-green-400 transition-colors" />
-                                        <div className="flex justify-between w-full text-[11px] md:text-xs">
-                                            <span className="text-neutral-400">{item.label}</span>
-                                            <span className="font-bold text-neutral-800">{item.value}</span>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </motion.div>
-                    */}
-                </div >
-
-            </div >
-        </motion.div >
+                    {/* Stage 1 Info Card & Stage 3 Info Card - Disabled */}
+                </div>
+            </div>
+        </motion.div>
     )
 }
