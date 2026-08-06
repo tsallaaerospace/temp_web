@@ -69,20 +69,22 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative w-full bg-[#050505] text-white flex flex-col items-center pt-16 sm:pt-20 lg:pt-32 uw:pt-8 overflow-hidden z-[10]">
-      {/* PREVIOUS UI: footer pt-20 lg:pt-32 (no mobile-specific padding) */}
+    <footer className="footer-short-mobile relative w-full bg-[#050505] text-white flex flex-col items-center pt-16 sm:pt-20 lg:pt-32 uw:pt-8 overflow-hidden z-[10]">
+      {/* PREVIOUS SHORT-SCREEN UI: no height-aware footer class was applied. */}
+      {/* PREVIOUS UI: <footer className="relative w-full bg-[#050505] text-white flex flex-col items-center pt-10 sm:pt-20 lg:pt-32 uw:pt-8 overflow-hidden z-[10]"> */}
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-[#5ce1e6]/20" />
       <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-[#5ce1e6] to-transparent" />
       <div className="absolute top-0 left-0 w-full h-[4px] bg-[#5ce1e6]/30 blur-[4px]" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[100rem] h-[120px] uw:h-[60px] bg-[#5ce1e6]/10 blur-[100px] rounded-full pointer-events-none" />
 
-      {/* PREVIOUS UI: div className="w-full max-w-[90rem] px-6 lg:px-6 3xl:px-4 uw:px-4 uw:mt-6 mb-10" grid gap-16 lg:gap-8 */}
-      <div className="w-full max-w-[90rem] px-6 lg:px-6 3xl:px-4 uw:px-4 uw:mt-6 mb-6 sm:mb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-16 lg:gap-8 items-start">
+      {/* PREVIOUS UI: <div className="w-full max-w-[90rem] px-6 lg:px-6 3xl:px-4 uw:px-4 uw:mt-6 mb-4 sm:mb-10"> */}
+      <div className="footer-short-main w-full max-w-[90rem] px-6 lg:px-6 3xl:px-4 uw:px-4 uw:mt-6 mb-8 sm:mb-10">
+        {/* PREVIOUS UI: <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-16 lg:gap-8 items-start"> */}
+        <div className="footer-short-grid grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-16 lg:gap-8 items-start">
           {/* ========== Left Column (Brand) ========== */}
-          {/* PREVIOUS UI: div space-y-8, Image h-16 lg:h-20 */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-start space-y-6 sm:space-y-8">
+          {/* PREVIOUS UI: <div className="lg:col-span-5 flex flex-col items-center lg:items-start space-y-4 sm:space-y-8"> */}
+          <div className="footer-short-brand lg:col-span-5 flex flex-col items-center lg:items-start space-y-6 sm:space-y-8">
             <Link href="/" className="group transition-transform duration-500 hover:scale-105">
               <Image
                 src="/tsalla_main.svg"
@@ -93,12 +95,10 @@ export default function Footer() {
                 priority
               />
             </Link>
-            {/* PREVIOUS UI: p text-sm leading-relaxed */}
             <p className="text-white/50 text-center lg:text-justify max-w-md font-orbit text-xs sm:text-sm leading-snug sm:leading-relaxed tracking-wide">
               Pioneering the next generation of autonomous aerospace solutions. Driven by innovation, engineered for excellence, and committed to the future of flight.
             </p>
 
-            {/* PREVIOUS UI: buttons px-6 py-3 */}
             <div className="flex gap-3 sm:gap-4">
               <Link
                 href="/contact"
@@ -127,16 +127,15 @@ export default function Footer() {
           </div>
 
           {/* ========== Right Column (Navigation) ========== */}
-          {/* PREVIOUS UI: div gap-x-8 gap-y-12 pl-8 */}
-          <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-10 sm:gap-y-12 pl-6 sm:pl-8 md:pl-0">
+          {/* PREVIOUS UI: <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-6 sm:gap-y-12 pl-4 sm:pl-8 md:pl-0"> */}
+          <div className="footer-short-nav lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-8 sm:gap-y-12 pl-4 sm:pl-8 md:pl-0">
             {Object.entries(footerLinks).map(([title, links]) => (
-              <div key={title} className="flex flex-col space-y-4 sm:space-y-6">
-                {/* PREVIOUS UI: div space-y-6 */}
+              <div key={title} className="footer-short-link-group flex flex-col space-y-3 sm:space-y-6">
                 <h4 className="font-orbit text-[#5ce1e6] text-xs font-bold uppercase tracking-[0.2em]">
                   {title}
                 </h4>
-                {/* PREVIOUS UI: ul space-y-3 */}
-                <ul className="flex flex-col space-y-2 sm:space-y-3">
+                {/* PREVIOUS UI: <ul className="flex flex-col space-y-1.5 sm:space-y-3"> */}
+                <ul className="footer-short-links flex flex-col space-y-2.5 sm:space-y-3">
                   {links.map((link) => (
                     <li key={link.name}>
                       <Link
@@ -161,35 +160,9 @@ export default function Footer() {
       </div>
 
       {/* Massive Brand Watermark */}
-      {/* PREVIOUS UI (Fenix-Specific Custom Watermark):
-      <div className={`relative w-full overflow-hidden flex justify-center pointer-events-none select-none z-0 ${isFenixPage ? "mt-[-65vw] mb-[-45vw]" : "mt-4 sm:mt-8 mb-4 sm:mb-8 md:mt-[-5vw] md:mb-[-5vw]"}`}>
-        {isFenixPage ? (
-          <div
-            className="relative w-[120vw] h-[120vw] flex items-center justify-center opacity-[0.03]"
-            style={{ transform: 'translateX(17vw) rotate(90deg) scaleY(1.6) scaleX(1.2)' }}
-          >
-            <Image
-              src="/logo2.svg"
-              alt="Watermark"
-              fill
-              className="object-contain"
-            />
-          </div>
-        ) : (
-          <div className="relative w-[140vw] h-[22vw] sm:h-[25vw] opacity-[0.03]">
-            <Image
-              src="/Tsalla.svg"
-              alt="Tsalla"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-        )}
-      </div>
-      */}
-      <div className="relative w-full overflow-hidden flex justify-center pointer-events-none select-none z-0 mt-4 sm:mt-8 mb-4 sm:mb-8 md:mt-[-5vw] md:mb-[-5vw]">
-        <div className="relative w-[140vw] h-[22vw] sm:h-[25vw] opacity-[0.03]">
+      {/* PREVIOUS UI: <div className="relative w-full overflow-hidden flex justify-center pointer-events-none select-none z-0 mt-2 sm:mt-8 mb-2 sm:mb-8 md:mt-[-5vw] md:mb-[-5vw]"> */}
+      <div className="footer-short-watermark relative w-full overflow-hidden flex justify-center pointer-events-none select-none z-0 mt-6 sm:mt-8 mb-6 sm:mb-8 md:mt-[-5vw] md:mb-[-5vw]">
+        <div className="footer-short-watermark-mark relative w-[140vw] h-[22vw] sm:h-[25vw] opacity-[0.03]">
           <Image
             src="/Tsalla.svg"
             alt="Tsalla"
@@ -201,10 +174,10 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      {/* PREVIOUS UI: div py-8 */}
-      <div className="w-full border-t border-white/10 relative bg-black/40 backdrop-blur-md py-6 sm:py-8">
+      {/* PREVIOUS UI: <div className="w-full border-t border-white/10 relative bg-black/40 backdrop-blur-md py-4 sm:py-8"> */}
+      <div className="footer-short-bottom w-full border-t border-white/10 relative bg-black/40 backdrop-blur-md py-6 sm:py-8">
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#5ce1e6]/30 to-transparent" />
-        <div className="max-w-[90rem] mx-auto px-6 lg:px-24 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="footer-short-bottom-inner max-w-[90rem] mx-auto px-6 lg:px-24 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
           <div className="flex items-center space-x-8 order-2 md:order-1">
             <p className="text-white/30 font-orbit text-[10px] uppercase tracking-widest">
               © {new Date().getFullYear()} Tsalla Aerospace. All rights reserved.

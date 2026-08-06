@@ -766,13 +766,39 @@
 - ⏭️ **AFTER UI STATE**: Increased video frame width on mobile viewports to `w-[90vw] sm:w-[84vw]` in `FenixTurtleMode.tsx`. On phone displays, the recovery camera video is larger and more prominent while maintaining aspect ratio. Desktop and tablet viewports (`sm:` and larger) remain 100% unchanged.
 - *Previous `w-[82vw]` mobile container size is preserved as a source comment in `FenixTurtleMode.tsx`.*
 
+#### 📍 Section 55: Global Footer Small-Mobile Height Reduction ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx))
+- ⏮️ **BEFORE UI STATE**: On small phone screens, the footer used generous mobile padding and vertical gaps (`pt-16`, grid `gap-8`, navigation `gap-y-10`, watermark `mt-4 mb-4`, and bottom bar `py-6`), making the footer much taller than necessary.
+- ⏭️ **AFTER UI STATE**: Reduced only the base mobile spacing (`pt-10`, grid `gap-5`, navigation `gap-y-6`, tighter link/brand spacing, watermark `mt-2 mb-2`, and bottom bar `py-4`). `sm` and larger breakpoints retain the existing footer dimensions.
+- *Previous mobile spacing classes are preserved as source comments in `Footer.tsx`.*
+
+#### 📍 Section 56: Footer Mobile Height & Vertical Spacing Expansion ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx))
+- ⏮️ **BEFORE UI STATE**: On mobile viewports (including taller displays like iPhone 14 Pro Max), the footer used compact padding (`pt-10`, grid `gap-5`, `space-y-4` brand spacing, `space-y-1.5` link items, `mb-4` bottom margin), causing the footer black container to appear short and leave an awkward top white gap.
+- ⏭️ **AFTER UI STATE**: Expanded mobile vertical padding and spacing in `Footer.tsx` (`pt-16 sm:pt-20` top padding, grid `gap-8 sm:gap-16`, `space-y-6` brand spacing, `gap-y-8` navigation columns, `space-y-2.5` link list items, `mb-8` bottom margin, watermark `mt-6 mb-6`, and bottom bar `py-6 sm:py-8`). On both iPhone 14 and iPhone 14 Pro Max, the footer black container now expands cleanly across the mobile screen height. Desktop viewports (`sm:` and larger) remain 100% unchanged.
+- *Previous compact mobile footer spacing classes are preserved as source comments in `Footer.tsx`.*
+
+#### 📍 Section 57: Footer Short-Viewport Mobile Compaction ([Footer.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/Footer.tsx), [globals.css](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/globals.css))
+- ⏮️ **BEFORE UI STATE**: iPhone 14-height screens (844px) inherited the same expanded mobile footer spacing as the taller iPhone 14 Pro Max (932px), making the footer feel oversized on the shorter device.
+- ⏭️ **AFTER UI STATE**: Added a height-aware mobile media query for viewports up to 430px wide and 880px tall. It slightly tightens footer padding, content gaps, link spacing, watermark height/margins, and bottom-bar spacing. Taller phones such as iPhone 14 Pro Max remain unchanged.
+- *The prior shared mobile spacing remains in `Footer.tsx` and is only overridden by the documented short-viewport CSS rule.*
+
+#### 📍 Section 58: Footer Short-Viewport Height Further Reduction ([globals.css](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/globals.css))
+- ⏮️ **BEFORE UI STATE**: The initial height-aware override still left excessive vertical space on iPhone 14-height screens, particularly around the logo, navigation rows, watermark, and bottom bar.
+- ⏭️ **AFTER UI STATE**: Strengthened only the short-mobile override with smaller top padding, tighter grid/link spacing, a reduced logo and watermark, compact action buttons, and a shorter bottom bar. Viewports taller than 880px—including iPhone 14 Pro Max—remain unchanged.
+- *The previous short-screen override values are preserved in a source comment in `globals.css`.*
+
+#### 📍 Section 59: Footer iPhone 14 Height Rebalance ([globals.css](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/globals.css))
+- ⏮️ **BEFORE UI STATE**: The extra-compact short-screen override reduced the iPhone 14 footer too far, using a 2.5rem logo, 14vw watermark, 1rem main gaps, and only 0.5rem bottom-bar padding.
+- ⏭️ **AFTER UI STATE**: Increased the iPhone 14 footer to a balanced intermediate height with a 3rem logo, 20vw watermark, 1.5rem content gaps, restored link breathing room, and 1rem bottom-bar padding. The iPhone 14 Pro Max layout remains unchanged because the override still applies only at 880px height and below.
+- *The extra-compact short-screen values are preserved in a source comment in `globals.css`.*
+
+#### 📍 Section 60: Footer iPhone 14 Full-Viewport Height ([globals.css](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/globals.css))
+- ⏮️ **BEFORE UI STATE**: The iPhone 14 footer height was determined only by its content, leaving the black footer slightly shorter than the visible phone viewport.
+- ⏭️ **AFTER UI STATE**: Added `min-height: 100svh` to the short-phone footer rule and anchored the bottom bar with `margin-top: auto`, making the footer fill the complete iPhone 14 viewport while retaining the existing content sizes. Taller iPhone 14 Pro Max screens remain unaffected.
+- *The previous content-driven height behavior is preserved in a source comment in `globals.css`.*
+
 ---
 
 *Log last updated: August 06, 2026*
-
-
-
-
 
 
 
