@@ -66,6 +66,7 @@ export default function HeroSection(rogg: any) {
             <CharacterReveal
               text={"UNMANNED.\nUNMATCHED.\nUNCOMPROMISED."}
               className="font-bold text-3xl sm:text-5xl lg:text-[4.375rem] leading-[1.1] mb-4 sm:mb-5 font-orbit tracking-normal text-white"
+              lineClassName="!block"
               stagger={0.06}
             />
 

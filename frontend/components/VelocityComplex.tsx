@@ -40,8 +40,15 @@ export default function VelocityComplex() {
                 <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[3.2/1] uw:aspect-[3.6/1] overflow-hidden grayscale-[20%] hover:grayscale-0 transition-all duration-700">
                 */}
                 <div className="relative w-full flex-1 min-h-[35vh] sm:min-h-0 aspect-[4/3] sm:aspect-[21/9] lg:aspect-[3.2/1] uw:aspect-[3.6/1] overflow-hidden grayscale-[20%] hover:grayscale-0 transition-all duration-700 my-4 sm:my-0">
+                    {/* PREVIOUS UI (Image src using /building.avif):
                     <img
                         src="/building.avif"
+                        alt="Velocity Complex"
+                        className="w-full h-full object-cover shadow-2xl"
+                    />
+                    */}
+                    <img
+                        src="/Velocity%20Complex.jpg"
                         alt="Velocity Complex"
                         className="w-full h-full object-cover shadow-2xl"
                     />

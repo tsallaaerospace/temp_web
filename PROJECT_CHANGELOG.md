@@ -818,7 +818,26 @@
 
 ---
 
-*Log last updated: August 06, 2026*
+*Log last updated: August 07, 2026*
+
+---
+
+## 📅 Session Log: August 07, 2026
+
+### 🎯 Overview of User Request
+- Replace the main Hero image in the Velocity Complex section (`VelocityComplex.tsx`) on the Home Page (`/`) with `"Velocity Complex.jpg"` located in the `public` folder.
+- Preserve previous code in source files via comment blocks (`{/* PREVIOUS UI: ... */}`).
+
+---
+
+### 🌐 PAGE: Home Page (`/`)
+
+#### 📍 Section 5: Velocity Complex Section ([VelocityComplex.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/components/VelocityComplex.tsx))
+- ⏮️ **BEFORE UI STATE**: The section hero image used `src="/building.avif"`.
+- ⏭️ **AFTER UI STATE**: Updated section hero image source to `src="/Velocity%20Complex.jpg"` referencing the high-resolution Velocity Complex image asset from the `public` directory.
+- *Previous image source tag preserved as comment block in `VelocityComplex.tsx`.*
+
+---
 
 
 
