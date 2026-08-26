@@ -10,6 +10,7 @@ export default function FenixHero(): React.JSX.Element {
       className="relative h-[100svh] w-full text-white overflow-hidden font-orbit md:h-screen"
     >
       {/* Background Video */}
+      {/* PREVIOUS UI:
       <video
         autoPlay
         muted
@@ -21,6 +22,21 @@ export default function FenixHero(): React.JSX.Element {
       >
         <source
           src="https://cdn.sanity.io/files/z5s3oquj/production/f3cab16e70d9afbe1c7a4cef3e496ef06e3dd497.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+      */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      >
+        <source
+          src="/product/fenix/QsmnFp2aCayPv4DNQVxUhw.mp4"
           type="video/mp4"
         />
         Your browser does not support the video tag.
