@@ -858,13 +858,23 @@
 
 ---
 
+## 📅 Session Log: August 27, 2026
 
+### 🎯 Overview of User Request
+- Fix the drone image in the Capabilities section of the FENIX page (`FenixCapabilities.tsx`) so that the drone is fully visible without cropping.
+- Ensure the image card preserves its original portrait height and aspect ratio (`aspect-[1075/1433]`).
+- Preserve all previous code in source files via comment blocks (`{/* PREVIOUS UI: ... */}`).
 
+---
 
+### 🌐 PAGE: FENIX Product Page (`/fenix` / `/uncrewedsystems/fenix`)
 
+#### 📍 Section 2: Capabilities Section ([FenixCapabilities.tsx](file:///c:/Users/tsall/Desktop/1st_version/frontend/app/uncrewedsystems/fenix/components/FenixCapabilities.tsx))
+- ⏮️ **BEFORE UI STATE**:
+  - The Left Column image container used `aspect-[1075/1433]` with `className="object-cover"`, which zoomed in on the square 2400x2400 drone graphic and cropped off the left and right propeller arms and frame.
+- ⏭️ **AFTER UI STATE**:
+  - Maintained the previous tall card container height and aspect ratio (`aspect-[1075/1433] max-w-md`) with matching background color (`bg-[#e2e2e2]`), centered layout, and `className="object-contain"`.
+  - The entire drone image is 100% visible and uncropped inside the full-height card.
+  - *Previous UI implementations preserved as comment blocks in `FenixCapabilities.tsx`.*
 
-
-
-
-
-
+---

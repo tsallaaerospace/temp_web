@@ -28,13 +28,39 @@ export default function FenixCapabilities(): React.JSX.Element {
         <ContentWrapper>
           <div className="flex flex-col md:flex-row items-center justify-center gap-16 lg:gap-24">
             {/* Left Column: Image */}
+            {/* PREVIOUS UI: Cropped portrait aspect ratio image
             <div className="w-full md:w-5/12 flex">
               <div className="relative w-full max-w-md aspect-[1075/1433]">
                 <Image
-                  src="/images/design-mode/5a0c9583711b45a93c29fd9e143682b9ea4a72f6-898x898.png"
+                  src="/product/fenix/FENIX_2nd_section.png"
                   alt="DEXTER Drone"
                   fill
                   className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+            */}
+            {/* PREVIOUS SQUARE CARD UI:
+            <div className="w-full md:w-5/12 lg:w-1/2 flex items-center justify-center">
+              <div className="relative w-full max-w-lg aspect-square">
+                <Image
+                  src="/product/fenix/FENIX_2nd_section.png"
+                  alt="FENIX Drone"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
+            */}
+            <div className="w-full md:w-5/12 flex justify-center">
+              <div className="relative w-full max-w-md aspect-[1075/1433] bg-[#e2e2e2] flex items-center justify-center overflow-hidden">
+                <Image
+                  src="/product/fenix/FENIX_2nd_section.png"
+                  alt="FENIX Drone"
+                  fill
+                  className="object-contain"
                   priority
                 />
               </div>

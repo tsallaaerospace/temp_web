@@ -45,7 +45,7 @@ export default function FenixHero(): React.JSX.Element {
       {/* Content */}
       <div className="relative z-20 w-full h-full flex flex-col justify-between pt-28 px-4 sm:px-6 md:px-8 pb-10 sm:pb-12 md:pb-16 lg:flex-row lg:justify-between lg:items-end lg:px-20 lg:pb-16 lg:pt-0">
         {/* Left Side: Title & Subtitle (Images 1 & 2) */}
-        <div className="max-w-full lg:max-w-2xl text-left mb-8 lg:mb-0 lg:flex lg:flex-col lg:justify-end">
+        <div className="max-w-full lg:max-w-2xl text-left mb-8 lg:mb-0 lg:flex lg:flex-c ol lg:justify-end">
           {/* PREVIOUS UI:
           <h1
             className="text-white font-bold text-[3.25rem] sm:text-[3.75rem] md:text-[3.75rem] lg:text-[4.5rem] leading-none tracking-tight mb-1"
@@ -66,6 +66,8 @@ export default function FenixHero(): React.JSX.Element {
           >
             <CharacterReveal
               text="FENIx"
+
+
               targetColor="#ffffff"
               glowColor="#5ce1e6"
               delay={0.2}
