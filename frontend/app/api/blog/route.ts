@@ -12,11 +12,11 @@ const mockBlogPosts: BlogPost[] = [
     author: {
       name: "Dr. Sarah Chen",
       role: "Chief Technology Officer",
-      avatar: "/placeholder-user.jpg",
+      avatar: "/shared/placeholders/placeholder-user.jpg",
     },
     publishedAt: "2024-01-15T00:00:00Z",
     tags: ["AI", "Autonomous Systems", "Technology"],
-    featuredImage: "/placeholder.jpg",
+    featuredImage: "/shared/placeholders/placeholder.jpg",
     readTime: 8,
   },
 ]

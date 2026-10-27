@@ -7,7 +7,7 @@ const mockMediaItems: MediaItem[] = [
     id: "1",
     title: "Phantom X1 in Action",
     type: "image",
-    url: "/placeholder.jpg",
+    url: "/shared/placeholders/placeholder.jpg",
     description: "Advanced reconnaissance drone during field testing",
     tags: ["drone", "testing", "phantom-x1"],
     uploadedAt: "2024-01-15T00:00:00Z",

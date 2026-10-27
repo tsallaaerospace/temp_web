@@ -23,7 +23,7 @@ export default function Page() {
         {/* Right side - Image */}
         <div className="relative">
           <Image
-            src="/images/design-mode/istock-drone-image-e1462996105863.jpg"
+            src="/about/istock-drone-image-e1462996105863.jpg"
             alt="Drone flying over vineyard landscape"
             fill
             className="object-cover"

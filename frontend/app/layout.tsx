@@ -8,6 +8,7 @@ import InitialLoader from "@/components/InitialLoader"
 import SmoothScroll from "@/components/SmoothScroll"
 import ScrollToTop from "@/components/ScrollToTop"
 import { Analytics } from "@vercel/analytics/next"
+import { MEDIA_RETRY_SCRIPT } from "@/lib/media-retry"
 
 // Load Inter and Farro fonts
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${farro.variable}`}>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: MEDIA_RETRY_SCRIPT }} />
         <link
           href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"

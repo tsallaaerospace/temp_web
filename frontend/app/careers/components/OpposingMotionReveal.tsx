@@ -8,17 +8,17 @@ const OPPOSE_ITEMS = [
     {
         title: "Design",
         description: "We start from first principles, architecting autonomous systems that redefine the physics of flight. Every line and every curve is engineered for extreme performance.",
-        image: "/images/design-mode/08b50f4f-79c5-4ae5-b5bf-fa2fcfb0b544.jpg"
+        image: "/careers/08b50f4f-79c5-4ae5-b5bf-fa2fcfb0b544.jpg"
     },
     {
         title: "Build",
         description: "From carbon composites to custom PCBs, our team turns CAD into reality. We build hardware that survives the harshest environments on Earth and beyond.",
-        image: "/images/design-mode/abb6bab613d7d967786b922562d07d61f60f873e-3840x2160.jpg"
+        image: "/shared/images/abb6bab613d7d967786b922562d07d61f60f873e-3840x2160.jpg"
     },
     {
         title: "Fly",
         description: "Launch. Navigate. Execute. Our autonomous flight controllers manage complex missions with millisecond precision, pushing the edge of what's possible in the sky.",
-        image: "/images/design-mode/v-bat-7c.jpg"
+        image: "/careers/v-bat-7c.jpg"
     },
     {
         title: "Crash",
@@ -28,12 +28,12 @@ const OPPOSE_ITEMS = [
     {
         title: "Modify",
         description: "Analyze the debris. Iterate the code. Refine the structural integrity. We adapt our systems based on every flight, turning weaknesses into unfair advantages.",
-        image: "/images/design-mode/759cf3b1631ac09f8787809500212d9914788964-4064x2286.jpg"
+        image: "/careers/759cf3b1631ac09f8787809500212d9914788964-4064x2286.jpg"
     },
     {
         title: "Repeat",
         description: "Relentless iteration is our heartbeat. We scale our breakthroughs across platforms, constantly evolving to stay one step ahead of the challenge.",
-        image: "/images/design-mode/c30de4a3e1c213e28f4b49a5d01d81652fca6f51-1536x1024.png"
+        image: "/shared/images/c30de4a3e1c213e28f4b49a5d01d81652fca6f51-1536x1024.png"
     }
 
 ]

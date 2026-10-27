@@ -379,7 +379,7 @@ export default function MissionProfiles() {
                     className={`mission-card transition-all duration-300 ease-in-out hover:transform hover:-translate-y-1 hover:shadow-2xl ${index === 1 ? "order-2 lg:order-1" : ""}`}
                   >
                     <img
-                      src={profile.image || "/placeholder.svg"}
+                      src={profile.image || "/shared/placeholders/placeholder.svg"}
                       alt={profile.imageAlt}
                       className="rounded-2xl shadow-2xl w-full h-auto max-h-96 object-cover border border-gray-800"
                       data-testid={`image-${profile.id}`}

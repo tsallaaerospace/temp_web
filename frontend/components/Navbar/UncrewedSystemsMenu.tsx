@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useEffect } from "react"
+import React, { useRef } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion"
 import { ArrowRight, Lock } from "lucide-react"
@@ -44,22 +44,36 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
         mouseY.set(0)
     }
 
-    // GSAP for entrance animation (Simplified for performance)
-    useEffect(() => {
-        const { gsap }: any = window;
-        if (!gsap || !imageContainerRef.current || !hoveredUncrewedSystemDetails) return;
-
-        gsap.fromTo(imageContainerRef.current,
-            { x: 100, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
-        );
-    }, [hoveredUncrewedSystemDetails?.headline]);
+    // PREVIOUS UI (Unused window.gsap entrance):
+    // useEffect(() => {
+    //     const { gsap }: any = window;
+    //     if (!gsap || !imageContainerRef.current || !hoveredUncrewedSystemDetails) return;
+    //     gsap.fromTo(imageContainerRef.current,
+    //         { x: 100, opacity: 0 },
+    //         { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+    //     );
+    // }, [hoveredUncrewedSystemDetails?.headline]);
 
     return (
+        /* PREVIOUS UI (Solid bg-black root container):
         <div className="flex flex-col lg:flex-row h-full lg:h-[calc(100vh-80px)] bg-black overflow-hidden relative">
+        */
+        <div className="flex flex-col lg:flex-row h-full lg:h-[calc(100vh-80px)] bg-transparent overflow-hidden relative">
+            <svg aria-hidden="true" className="pointer-events-none absolute h-0 w-0">
+                <defs>
+                    <filter id="hangar-fragmented-type" x="-15%" y="-40%" width="130%" height="180%">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.13 0.45" numOctaves="2" seed="17" result="noise" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="13" xChannelSelector="R" yChannelSelector="G" />
+                        <feGaussianBlur stdDeviation="0.7" />
+                    </filter>
+                </defs>
+            </svg>
 
             {/* Mobile Header: Integrated Back Button + Centered Title */}
+            {/* PREVIOUS UI (Solid bg-black mobile header):
             <div className="lg:hidden flex items-center justify-center relative w-full p-4 border-b border-white/10 bg-black shrink-0 z-50">
+            */}
+            <div className="lg:hidden flex items-center justify-center relative w-full p-4 border-b border-white/15 bg-white/5 shrink-0 z-50">
                 <button
                     onClick={() => {
                         if (hoveredUncrewedSystemDetails) {
@@ -79,8 +93,14 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
             </div>
 
             {/* Left Side: System Registry */}
+            {/* PREVIOUS UI (Solid bg-black/60 left panel):
             <div className={cn(
                 "w-full lg:w-[320px] bg-black/60 lg:border-r border-white/10 flex flex-col h-full relative z-20 transition-all duration-500",
+                hoveredUncrewedSystemDetails ? "hidden lg:flex" : "flex"
+            )}>
+            */}
+            <div className={cn(
+                "hangar-registry w-full lg:w-[320px] bg-white/[0.025] lg:border-r border-white/15 flex flex-col h-full relative z-20 transition-all duration-500",
                 hoveredUncrewedSystemDetails ? "hidden lg:flex" : "flex"
             )}>
                 <div className="p-4 lg:p-6 border-b border-white/5 flex justify-between items-center hidden">
@@ -101,11 +121,11 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                 </div>
                 */}
 
-                {/* CURRENT UI (Lock UI for all buttons except FENIX) */}
+                {/* PREVIOUS UI (Lock UI for all buttons except FENIX, BAT, MANTIS):
                 <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
                     {data.links.map((link: any, index: number) => {
                         const isFenix = link.name === "FENIX";
-                        const isLocked = !isFenix;
+                        const isLocked = !isFenix && link.name !== "BAT" && link.name !== "MANTIS";
                         const isActive = hoveredUncrewedSystemDetails?.headline === link.details.headline;
                         return (
                             <Link
@@ -113,9 +133,6 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                 href={isLocked ? "#" : link.href}
                                 onMouseEnter={() => {
                                     if (!window.matchMedia('(max-width: 1024px)').matches) {
-                                        {/* PREVIOUS HOVER HANDLER (Showed details even for locked systems):
-                                        setHoveredUncrewedSystemDetails({ ...link.details, href: isLocked ? "#" : link.href, isLocked });
-                                        */}
                                         if (isLocked) {
                                             setHoveredUncrewedSystemDetails(null);
                                         } else {
@@ -154,8 +171,8 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                     <div className={cn(
                                         "text-sm font-semibold tracking-widest transition-all duration-300 font-orbit uppercase flex items-center gap-2",
                                         isLocked
-                                            ? "text-white/40"
-                                            : (isActive ? "text-[#5ce1e6] translate-x-1" : "text-white/60 group-hover:text-[#5ce1e6]")
+                                            ? "text-white/60"
+                                            : (isActive ? "text-[#5ce1e6] translate-x-1" : "text-white/90 group-hover:text-[#5ce1e6]")
                                     )}>
                                         {link.name}
                                         {isLocked && <Lock className="w-3.5 h-3.5 text-white/40 group-hover:text-amber-400/80 transition-colors" />}
@@ -190,30 +207,180 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                         );
                     })}
                 </div>
+                */}
+
+                {/* PREVIOUS UI (Lock icon removed along with words):
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
+                    {data.links.map((link: any, index: number) => {
+                        const isActive = hoveredUncrewedSystemDetails?.headline === link.details?.headline;
+                        return (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                onMouseEnter={() => {
+                                    if (!window.matchMedia('(max-width: 1024px)').matches) {
+                                        setHoveredUncrewedSystemDetails({ ...link.details, href: link.href });
+                                    }
+                                }}
+                                onClick={onClose}
+                                className={cn(
+                                    "group relative flex items-center justify-between p-4 rounded-sm transition-all duration-300 border border-transparent cursor-pointer",
+                                    isActive ? "bg-[#5ce1e6]/10 border-[#5ce1e6]/20" : "hover:bg-white/5"
+                                )}
+                            >
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="hangar-scanline"
+                                        className={cn(
+                                            "absolute inset-0 bg-gradient-to-r via-transparent to-transparent pointer-events-none",
+                                            "from-[#5ce1e6]/5"
+                                        )}
+                                        initial={{ x: "-100%" }}
+                                        animate={{ x: "100%" }}
+                                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                    />
+                                )}
+
+                                <div className="relative z-10">
+                                    <div className={cn(
+                                        "text-sm font-semibold tracking-widest transition-all duration-300 font-orbit uppercase flex items-center gap-2",
+                                        isActive ? "text-[#5ce1e6] translate-x-1" : "text-white/60 group-hover:text-[#5ce1e6]"
+                                    )}>
+                                        {link.name}
+                                    </div>
+                                    <div className="text-[9px] text-white/30 tracking-widest mt-0.5 uppercase font-orbit leading-relaxed">
+                                        {link.description}
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-3">
+                                    {isActive && (
+                                        <motion.div initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-[8px] font-mono text-[#5ce1e6]/60">
+                                            [ONLINE]
+                                        </motion.div>
+                                    )}
+                                    <ArrowRight className={cn(
+                                        "w-3 h-3 transition-all duration-300",
+                                        isActive
+                                            ? "text-[#5ce1e6]"
+                                            : "text-white/20 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
+                                    )} />
+                                </div>
+                            </Link>
+                        );
+                    })}
+                </div>
+                */}
+
+                {/* CURRENT UI (Lock icon preserved next to locked system names; yellow "LOCKED" badge removed from right side) */}
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
+                    {data.links.map((link: any, index: number) => {
+                        const isFenix = link.href === "/fenix";
+                        const isRedacted = /^(VULCAN|SKY[- ]?CAT|DEXTER)$/i.test(link.name);
+                        const isLocked = !["/fenix", "/bat", "/mantis"].includes(link.href);
+                        const isActive = hoveredUncrewedSystemDetails?.headline === link.details?.headline;
+                        return (
+                            <Link
+                                key={link.name}
+                                href={isLocked ? "#" : link.href}
+                                onMouseEnter={() => {
+                                    if (!window.matchMedia('(max-width: 1024px)').matches) {
+                                        if (isLocked) {
+                                            setHoveredUncrewedSystemDetails(null);
+                                        } else {
+                                            setHoveredUncrewedSystemDetails({ ...link.details, href: link.href });
+                                        }
+                                    }
+                                }}
+                                onClick={(e) => {
+                                    if (isLocked) {
+                                        e.preventDefault();
+                                    } else {
+                                        onClose();
+                                    }
+                                }}
+                                className={cn(
+                                    "group relative flex items-center justify-between p-4 rounded-sm transition-all duration-300 border border-transparent",
+                                    isLocked
+                                        ? "opacity-60 cursor-not-allowed hover:bg-white/[0.02]"
+                                        : (isActive ? "bg-[#5ce1e6]/10 border-[#5ce1e6]/20 cursor-pointer" : "hover:bg-white/5 cursor-pointer")
+                                )}
+                            >
+                                {isActive && !isLocked && (
+                                    <motion.div
+                                        layoutId="hangar-scanline"
+                                        className={cn(
+                                            "absolute inset-0 bg-gradient-to-r via-transparent to-transparent pointer-events-none",
+                                            "from-[#5ce1e6]/5"
+                                        )}
+                                        initial={{ x: "-100%" }}
+                                        animate={{ x: "100%" }}
+                                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                    />
+                                )}
+
+                                <div className="relative z-10">
+                                    <div className={cn(
+                                        "text-sm font-semibold tracking-widest transition-all duration-300 font-orbit uppercase flex items-center gap-2",
+                                        isLocked
+                                            ? "text-white/60"
+                                            : (isActive ? "text-[#5ce1e6] translate-x-1" : "text-white/90 group-hover:text-[#5ce1e6]")
+                                    )}>
+                                        {isFenix ? <span className="normal-case text-white">FENI<span className="text-[#5ce1e6]">x</span></span> : isRedacted ? <span className="hangar-scratched-name"><span>{link.name}</span></span> : link.name}
+                                        {/* Lock icon preserved next to locked systems */}
+                                        {isLocked && <Lock className="w-3.5 h-3.5 text-white/40 group-hover:text-amber-400/80 transition-colors" />}
+                                    </div>
+                                    <div className="text-[9px] text-white/65 tracking-widest mt-0.5 uppercase font-orbit leading-relaxed">
+                                        {isRedacted ? <span className="hangar-scratched-detail">{link.description}</span> : link.description}
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-3">
+                                    {/* PREVIOUS UI (Yellow LOCKED badge on right side):
+                                    {isLocked ? (
+                                        <span className="text-[8px] font-mono text-amber-400/80 tracking-widest uppercase border border-amber-500/30 px-1.5 py-0.5 rounded-xs bg-amber-500/10 flex items-center gap-1">
+                                            LOCKED
+                                        </span>
+                                    ) : ...
+                                    */}
+                                    {/* Words "LOCKED" removed; only active unlocked items display ONLINE & Arrow */}
+                                    {isLocked ? null : (
+                                        <>
+                                            {/* PREVIOUS UI: the active item also showed a small "[ONLINE]" badge before the arrow:
+                                            {isActive && (
+                                                <motion.div initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-[8px] font-mono text-[#5ce1e6]/60">
+                                                    [ONLINE]
+                                                </motion.div>
+                                            )}
+                                            */}
+                                            <ArrowRight className={cn(
+                                                "w-3 h-3 transition-all duration-300",
+                                                isActive
+                                                    ? "text-[#5ce1e6]"
+                                                    : "text-white/20 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
+                                            )} />
+                                        </>
+                                    )}
+                                </div>
+                            </Link>
+                        );
+                    })}
+                </div>
 
 
             </div>
 
             {/* Right Side: Main Display */}
+            {/* PREVIOUS UI (Solid blue/black background):
             <div className={cn(
                 "flex-1 relative overflow-hidden transition-all duration-700 flex flex-col",
                 hoveredUncrewedSystemDetails ? "flex bg-[#0b4a9a]" : "hidden lg:flex bg-black"
             )}>
-                {/* Animated Background */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute inset-0 opacity-20"
-                        style={{
-                            backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)`,
-                            backgroundSize: '40px 40px'
-                        }}
-                    />
-                    <motion.div
-                        animate={{ opacity: [0.1, 0.2, 0.1] }}
-                        transition={{ duration: 5, repeat: Infinity }}
-                        className="absolute inset-0 bg-[url('/blueprint-background.png')] bg-cover opacity-20 mix-blend-overlay"
-                    />
-                </div>
-
+            */}
+            <div className={cn(
+                "flex-1 relative overflow-hidden transition-all duration-700 flex flex-col",
+                hoveredUncrewedSystemDetails ? "flex" : "hidden lg:flex"
+            )}>
                 <AnimatePresence mode="wait">
                     {hoveredUncrewedSystemDetails ? (
                         <motion.div
@@ -224,11 +391,17 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                             transition={{ duration: 0.4, ease: "easeOut" }}
                             className="flex-1 p-4 lg:p-12 relative flex flex-col pt-16 lg:pt-12 overflow-hidden"
                         >
-                            {/* HUD Brackets */}
-                            <div className="absolute top-4 lg:top-8 left-4 lg:left-8 w-8 h-8 lg:w-16 lg:h-16 border-t-2 border-l-2 border-[#5ce1e6]/30" />
-                            <div className="absolute top-4 lg:top-8 right-4 lg:right-8 w-8 h-8 lg:w-16 lg:h-16 border-t-2 border-r-2 border-[#5ce1e6]/30" />
-                            <div className="absolute bottom-4 lg:bottom-8 left-4 lg:left-8 w-8 h-8 lg:w-16 lg:h-16 border-b-2 border-l-2 border-[#5ce1e6]/30" />
-                            <div className="absolute bottom-4 lg:bottom-8 right-4 lg:right-8 w-8 h-8 lg:w-16 lg:h-16 border-b-2 border-r-2 border-[#5ce1e6]/30" />
+                            {[
+                                "top-4 left-4 lg:top-8 lg:left-8",
+                                "bottom-4 right-4 lg:bottom-8 lg:right-8 rotate-180",
+                            ].map(position => (
+                                <svg key={position} aria-hidden="true" viewBox="0 0 104 56" fill="none"
+                                    className={cn("hangar-corner absolute w-16 lg:w-28 text-[#5ce1e6] pointer-events-none", position)}>
+                                    <path d="M1 55V19L19 1H103" stroke="currentColor" strokeOpacity=".28" />
+                                    <path d="M8 40V22L22 8H52" stroke="currentColor" strokeOpacity=".65" />
+                                    <path d="M67 1H83" stroke="white" strokeOpacity=".7" />
+                                </svg>
+                            ))}
 
 
 
@@ -236,7 +409,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                 <div className="w-full lg:w-1/2 z-20 text-center lg:text-left">
                                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
                                         <h2 className="text-4xl lg:text-7xl font-bold tracking-tighter text-white mb-1 lg:mb-2 font-orbit group relative inline-block">
-                                            {hoveredUncrewedSystemDetails.headline}
+                                            {hoveredUncrewedSystemDetails.href === "/fenix" ? <>FENI<span className="text-[#5ce1e6]">x</span></> : hoveredUncrewedSystemDetails.headline}
                                         </h2>
                                         <div className="text-[10px] lg:text-lg text-white/60 font-orbit leading-tight mb-4 lg:mb-10 max-w-sm lg:max-w-md uppercase tracking-widest mx-auto lg:mx-0" dangerouslySetInnerHTML={{ __html: hoveredUncrewedSystemDetails.subheadline }} />
                                     </motion.div>
@@ -253,6 +426,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                     </div>
 
                                     <div className="my-4 lg:my-12">
+                                        {/* PREVIOUS UI (Amber SYSTEM RESTRICTED button for locked systems):
                                         {hoveredUncrewedSystemDetails.isLocked ? (
                                             <div className="relative inline-flex items-center px-6 lg:px-10 py-2.5 lg:py-4 bg-amber-500/10 border border-amber-500/30 text-amber-400 opacity-80 cursor-not-allowed">
                                                 <Lock className="w-4 h-4 mr-2" />
@@ -267,6 +441,14 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                                 <ArrowRight className="relative z-10 ml-3 lg:ml-4 w-3 lg:w-4 h-3 lg:h-4 group-hover:translate-x-1 transition-transform" />
                                             </Link>
                                         )}
+                                        */}
+                                        <Link href={hoveredUncrewedSystemDetails.href || "#"}
+                                            onClick={onClose}
+                                            className="relative group inline-flex items-center px-6 lg:px-10 py-2.5 lg:py-4 bg-[#5ce1e6]/5 border border-[#5ce1e6]/20 text-[#5ce1e6] overflow-hidden transition-all duration-500 hover:bg-[#5ce1e6]/20 hover:border-[#5ce1e6] hover:shadow-[0_0_30px_rgba(92,225,230,0.3)]"
+                                        >
+                                            <span className="relative z-10 text-[9px] lg:text-xs font-bold uppercase tracking-[0.3em] font-orbit">Initiate Mission</span>
+                                            <ArrowRight className="relative z-10 ml-3 lg:ml-4 w-3 lg:w-4 h-3 lg:h-4 group-hover:translate-x-1 transition-transform" />
+                                        </Link>
                                     </div>
                                 </div>
 
@@ -275,33 +457,118 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                         className="absolute w-[80%] h-[80%] lg:w-[90%] lg:h-[90%] border border-[#5ce1e6]/10 rounded-full"
                                     />
 
+                                    {/* PREVIOUS UI (Static drone without entrance animation, Mantis rotated -90 and inverted white):
                                     <motion.div
                                         ref={imageContainerRef}
                                         onMouseMove={handleDroneMouseMove}
                                         onMouseLeave={handleDroneMouseLeave}
-                                        style={{ rotateX: tiltX, rotateY: tiltY, transformStyle: "preserve-3d" }}
+                                        style={{ rotateX: tiltX, rotateY: tiltY, rotateZ: ["/fenix", "/mantis"].includes(hoveredUncrewedSystemDetails.href) ? -90 : 0, scale: hoveredUncrewedSystemDetails.href === "/fenix" ? 1.3 : hoveredUncrewedSystemDetails.href === "/mantis" ? 2 : 1, transformStyle: "preserve-3d" }}
                                         className={cn(
-                                            "relative z-10 w-full max-w-[320px] lg:mt-0 lg:max-w-xl group transition-transform duration-500 overflow-hidden rounded-lg lg:rounded-xl",
-                                            hoveredUncrewedSystemDetails.headline === "BAT" && "lg:xl:-translate-y-20 lg:xl:-translate-x-12 lg:scale-110",
+                                            "relative z-10 w-full max-w-[320px] lg:mt-0 lg:max-w-xl group transition-transform duration-500 rounded-lg lg:rounded-xl",
+                                            ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? "overflow-visible" : "overflow-hidden",
+                                            
                                             hoveredUncrewedSystemDetails.headline === "DEXTER" && "lg:xl:-translate-y-16",
-                                            (hoveredUncrewedSystemDetails.headline === "STORM" || hoveredUncrewedSystemDetails.headline === "FENIX") && "lg:xl:-translate-y-20"
+                                            hoveredUncrewedSystemDetails.headline === "STORM" && "lg:xl:-translate-y-20"
                                         )}
                                     >
-                                        <motion.div animate={{ top: ["-20%", "120%"] }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} className="absolute left-0 right-0 z-20 pointer-events-none">
-                                            <div className="h-[2px] w-full bg-[#5ce1e6] shadow-[0_0_15px_rgba(92,225,230,0.8)]" />
-                                            <div className="h-32 w-full bg-gradient-to-b from-[#5ce1e6]/20 to-transparent opacity-40" />
-                                        </motion.div>
-
                                         <motion.img src={hoveredUncrewedSystemDetails.droneImage} alt="" style={{ x: ghostX, y: ghostY, translateZ: "-40px" }} className="absolute inset-0 w-full h-auto object-contain opacity-15 blur-md pointer-events-none" />
 
                                         <motion.img
                                             src={hoveredUncrewedSystemDetails.droneImage}
                                             alt={hoveredUncrewedSystemDetails.headline}
-                                            style={{ translateZ: "40px", WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent)' }}
-                                            animate={{ filter: ["invert(1) brightness(2)", "invert(1) brightness(2.5)", "invert(1) brightness(2)"] }}
+                                            style={{ translateZ: "40px", WebkitMaskImage: hoveredUncrewedSystemDetails.href === "/fenix" ? undefined : 'linear-gradient(to bottom, black 85%, transparent)' }}
+                                            animate={{ filter: hoveredUncrewedSystemDetails.href === "/fenix" ? "none" : ["invert(1) brightness(2)", "invert(1) brightness(2.5)", "invert(1) brightness(2)"] }}
                                             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                                             className="w-full h-auto object-contain opacity-95 group-hover:opacity-100 transition-all duration-700 relative z-10"
                                         />
+                                    </motion.div>
+                                    */}
+
+                                    {/* Drone Entrance Animation from right to left */}
+                                    <motion.div
+                                        key={`drone-stage-${hoveredUncrewedSystemDetails.headline}`}
+                                        initial={{ x: 260, opacity: 0, filter: "blur(6px)" }}
+                                        animate={{ x: 0, opacity: 1, filter: "blur(0px)" }}
+                                        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                                        className="w-full flex items-center justify-center relative"
+                                    >
+                                        <motion.div
+                                            ref={imageContainerRef}
+                                            onMouseMove={handleDroneMouseMove}
+                                            onMouseLeave={handleDroneMouseLeave}
+                                            /* PREVIOUS UI (FENIX scale 1.3, y 0):
+                                            style={{
+                                                rotateX: tiltX,
+                                                rotateY: tiltY,
+                                                rotateZ: ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? -90 : 0,
+                                                scale: hoveredUncrewedSystemDetails.href === "/fenix" ? 1.3 : hoveredUncrewedSystemDetails.href === "/bat" ? 3 : hoveredUncrewedSystemDetails.href === "/mantis" ? 3.4 : 1,
+                                                y: ["/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? 110 : 0,
+                                                x: hoveredUncrewedSystemDetails.href === "/bat" ? 250 : hoveredUncrewedSystemDetails.href === "/mantis" ? 170 : 0,
+                                                transformStyle: "preserve-3d"
+                                            }}
+                                            */
+                                            /* PREVIOUS UI (Mantis scale 3.4 x:170; Bat scale 3 x:250; Fenix scale 1.3 y:0):
+                                            style={{
+                                                rotateX: tiltX,
+                                                rotateY: tiltY,
+                                                rotateZ: ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? -90 : 0,
+                                                scale: hoveredUncrewedSystemDetails.href === "/fenix" ? 1.3 : hoveredUncrewedSystemDetails.href === "/bat" ? 3 : hoveredUncrewedSystemDetails.href === "/mantis" ? 3.4 : 1,
+                                                y: ["/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? 110 : 0,
+                                                x: hoveredUncrewedSystemDetails.href === "/bat" ? 250 : hoveredUncrewedSystemDetails.href === "/mantis" ? 170 : 0,
+                                                transformStyle: "preserve-3d"
+                                            }}
+                                            */
+                                            /* PREVIOUS UI (Mantis scale 3.7 y:110; Fenix y:50):
+                                            style={{
+                                                rotateX: tiltX,
+                                                rotateY: tiltY,
+                                                rotateZ: ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? -90 : 0,
+                                                scale: hoveredUncrewedSystemDetails.href === "/fenix" ? 1.5 : hoveredUncrewedSystemDetails.href === "/bat" ? 3.3 : hoveredUncrewedSystemDetails.href === "/mantis" ? 3.7 : 1,
+                                                y: hoveredUncrewedSystemDetails.href === "/fenix" ? 50 : ["/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? 110 : 0,
+                                                x: hoveredUncrewedSystemDetails.href === "/bat" ? 195 : hoveredUncrewedSystemDetails.href === "/mantis" ? 120 : 0,
+                                                transformStyle: "preserve-3d"
+                                            }}
+                                            */
+                                            style={{
+                                                rotateX: tiltX,
+                                                rotateY: tiltY,
+                                                rotateZ: ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? -90 : 0,
+                                                scale: hoveredUncrewedSystemDetails.href === "/fenix" ? 1.3 : hoveredUncrewedSystemDetails.href === "/bat" ? 3.1 : hoveredUncrewedSystemDetails.href === "/mantis" ? 3.7 : 1,
+                                                y: hoveredUncrewedSystemDetails.href === "/fenix" ? -10 : hoveredUncrewedSystemDetails.href === "/mantis" ? 115 : hoveredUncrewedSystemDetails.href === "/bat" ? 110 : 0,
+                                                x: hoveredUncrewedSystemDetails.href === "/bat" ? 245 : hoveredUncrewedSystemDetails.href === "/mantis" ? 350 : 0,
+                                                transformStyle: "preserve-3d"
+                                            }}
+                                            className={cn(
+                                                "relative z-10 w-full max-w-[320px] lg:mt-0 lg:max-w-xl group transition-transform duration-500 rounded-lg lg:rounded-xl",
+                                                ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? "overflow-visible" : "overflow-hidden",
+
+                                                hoveredUncrewedSystemDetails.headline === "DEXTER" && "lg:xl:-translate-y-16",
+                                                hoveredUncrewedSystemDetails.headline === "STORM" && "lg:xl:-translate-y-20"
+                                            )}
+                                        >
+                                            <motion.img
+                                                src={hoveredUncrewedSystemDetails.droneImage}
+                                                alt=""
+                                                style={{ x: ghostX, y: ghostY, translateZ: "-40px" }}
+                                                className="absolute inset-0 w-full h-auto object-contain opacity-15 blur-md pointer-events-none"
+                                            />
+
+                                            <motion.img
+                                                src={hoveredUncrewedSystemDetails.droneImage}
+                                                alt={hoveredUncrewedSystemDetails.headline}
+                                                style={{
+                                                    translateZ: "40px",
+                                                    WebkitMaskImage: ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? undefined : 'linear-gradient(to bottom, black 85%, transparent)'
+                                                }}
+                                                animate={{
+                                                    filter: ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href)
+                                                        ? "none"
+                                                        : ["invert(1) brightness(2)", "invert(1) brightness(2.5)", "invert(1) brightness(2)"]
+                                                }}
+                                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                                className="w-full h-auto object-contain opacity-95 group-hover:opacity-100 transition-all duration-700 relative z-10"
+                                            />
+                                        </motion.div>
                                     </motion.div>
                                 </div>
                             </div>
@@ -315,10 +582,12 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                 <p className="text-sm lg:text-xl text-white/40 font-orbit leading-relaxed tracking-widest uppercase mb-8 lg:mb-0">
                                     {data?.description}
                                 </p>
+                                {/* PREVIOUS UI (Awaiting selection indicator):
                                 <div className="mt-6 lg:mt-10 flex gap-4 justify-center">
                                     <div className="w-2 h-2 bg-[#5ce1e6] rounded-full animate-ping" />
-                                    <span className="text-[8px] lg:text-[10px] -[#5ce1e6]/60 uppercase tracking-[0.4em] font-orbit">Awaiting Selection</span>
+                                    <span className="text-[8px] lg:text-[10px] text-[#5ce1e6]/60 uppercase tracking-[0.4em] font-orbit">Awaiting Selection</span>
                                 </div>
+                                */}
                             </motion.div>
 
 
@@ -326,6 +595,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                     )}
                 </AnimatePresence>
 
+                {/* PREVIOUS UI (Bottom telemetry ticker):
                 <div className="absolute bottom-4 left-0 right-0 px-6 lg:px-12 flex justify-between items-center pointer-events-none opacity-20 z-30">
                     <div className="text-[5px] lg:text-[6px] text-[#5ce1e6] font-mono tracking-[0.3em] uppercase">
                         system_integrity: 100% | core_temp: 34c | uplink_strength: 98%
@@ -334,6 +604,8 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                         uncrewed_registry_v2.0.4
                     </div>
                 </div>
+                */}
+
             </div>
         </div>
     )

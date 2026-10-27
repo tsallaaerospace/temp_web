@@ -34,7 +34,7 @@ export default function CounterDrones(): React.JSX.Element {
             {/* Right Column: Image */}
             <div className="w-full md:w-1/2">
               <img
-                src="/images/design-mode/83f98b9ad65c714770e4625d0fba18d997e1a451-1016x1018.png"
+                src="/countersystems/83f98b9ad65c714770e4625d0fba18d997e1a451-1016x1018.png"
                 alt="Autonomous Counter-Drone Interceptor"
                 className="w-full h-auto object-contain"
                 onError={(e) => {

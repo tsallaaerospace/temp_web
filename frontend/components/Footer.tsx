@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const pathname = usePathname();
-  const isFenixPage = pathname === "/fenix" || pathname === "/uncrewedsystems/fenix";
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -49,12 +48,20 @@ export default function Footer() {
       { name: "Our Culture", href: "/careers/culture" },
       { name: "Careers", href: "/careers" },
     ],
+    /* PREVIOUS UI (Products list before MANTIS was added, including DEXTER & MAVERICK):
     products: [
       { name: "FENIX", href: "/fenix" },
       { name: "T-BAT", href: "/bat" },
       { name: "STORM", href: "/storm" },
       { name: "DEXTER", href: "/dexter" },
       { name: "MAVERICK", href: "/maverick" },
+    ],
+    */
+    products: [
+      { name: "FENIX", href: "/fenix" },
+      { name: "T-BAT", href: "/bat" },
+      { name: "MANTIS", href: "/mantis" },
+      { name: "STORM", href: "#", disabled: true },
     ],
     media: [
       { name: "Media Coverage", href: "/newsroom" },
@@ -69,7 +76,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="footer-short-mobile relative w-full bg-[#050505] text-white flex flex-col items-center pt-16 sm:pt-20 lg:pt-32 uw:pt-8 overflow-hidden z-[10]">
+    <footer className="footer-short-mobile relative min-h-[100dvh] w-full bg-[#050505] text-white flex flex-col items-center pt-16 sm:pt-20 lg:pt-32 uw:pt-8 overflow-hidden z-[10]">
       {/* PREVIOUS SHORT-SCREEN UI: no height-aware footer class was applied. */}
       {/* PREVIOUS UI: <footer className="relative w-full bg-[#050505] text-white flex flex-col items-center pt-10 sm:pt-20 lg:pt-32 uw:pt-8 overflow-hidden z-[10]"> */}
       {/* Decorative Background Elements */}
@@ -87,7 +94,7 @@ export default function Footer() {
           <div className="footer-short-brand lg:col-span-5 flex flex-col items-center lg:items-start space-y-6 sm:space-y-8">
             <Link href="/" className="group transition-transform duration-500 hover:scale-105">
               <Image
-                src="/tsalla_main.svg"
+                src="/Logo/tsalla_main.svg"
                 alt="Tsalla Aerospace"
                 width={300}
                 height={80}
@@ -99,7 +106,7 @@ export default function Footer() {
               Pioneering the next generation of autonomous aerospace solutions. Driven by innovation, engineered for excellence, and committed to the future of flight.
             </p>
 
-            <div className="flex gap-3 sm:gap-4">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
               <Link
                 href="/contact"
                 className="group relative px-4 py-2 sm:px-6 sm:py-3 bg-white/5 border border-white/10 overflow-hidden"
@@ -135,37 +142,88 @@ export default function Footer() {
 
           {/* ========== Right Column (Navigation) ========== */}
           {/* PREVIOUS UI: <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-6 sm:gap-y-12 pl-4 sm:pl-8 md:pl-0"> */}
-          <div className="footer-short-nav lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-8 sm:gap-y-12 pl-4 sm:pl-8 md:pl-0">
+          <div className="footer-short-nav min-w-0 lg:col-span-7 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-8 sm:gap-y-12">
             {Object.entries(footerLinks).map(([title, links]) => (
-              <div key={title} className="footer-short-link-group flex flex-col space-y-3 sm:space-y-6">
+              <div key={title} className="footer-short-link-group min-w-0 flex flex-col space-y-3 sm:space-y-6">
                 <h4 className="font-orbit text-[#5ce1e6] text-xs font-bold uppercase tracking-[0.2em]">
                   {title}
                 </h4>
                 {/* PREVIOUS UI: <ul className="flex flex-col space-y-1.5 sm:space-y-3"> */}
                 <ul className="footer-short-links flex flex-col space-y-2.5 sm:space-y-3">
-                  {links.map((link) => (
-                    <li key={link.name}>
-                      {/* PREVIOUS UI:
-                      <Link
-                        href="#"
-                        onClick={(e) => {
-                          if (pathname === "/") {
-                            e.preventDefault();
-                          }
-                        }}
-                        className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-nowrap block relative group w-fit"
-                      >
-                      */}
-                      <Link
-                        href="#"
-                        onClick={(e) => e.preventDefault()}
-                        className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-nowrap block relative group w-fit"
-                      >
-                        {link.name}
-                        <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-[#5ce1e6] transition-all duration-300 group-hover:w-full" />
-                      </Link>
-                    </li>
-                  ))}
+                  {links.map((link) => {
+                    const isProductSection = title.toLowerCase() === "products";
+                    const isNonClickable = (link as any).disabled || link.href === "#";
+                    return (
+                      <li key={link.name}>
+                        {/* PREVIOUS UI:
+                        <Link
+                          href="#"
+                          onClick={(e) => {
+                            if (pathname === "/") {
+                              e.preventDefault();
+                            }
+                          }}
+                          className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-nowrap block relative group w-fit"
+                        >
+                        */}
+                        {/* PREVIOUS UI (Global unnavigable link with pointer cursor):
+                        <Link
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                          className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-normal break-words block relative group w-fit max-w-full"
+                        >
+                          {link.name}
+                          <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-[#5ce1e6] transition-all duration-300 group-hover:w-full" />
+                        </Link>
+                        */}
+                        {/* PREVIOUS UI (Direct navigation enabled for all non-disabled links):
+                        {isNonClickable ? (
+                          <span
+                            aria-disabled="true"
+                            className="text-white/40 text-sm font-orbit cursor-default select-none block relative w-fit max-w-full"
+                          >
+                            {link.name}
+                          </span>
+                        ) : (
+                          <Link
+                            href={link.href}
+                            className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-normal break-words block relative group w-fit max-w-full"
+                          >
+                            {link.name}
+                            <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-[#5ce1e6] transition-all duration-300 group-hover:w-full" />
+                          </Link>
+                        )}
+                        */}
+                        {isProductSection ? (
+                          isNonClickable ? (
+                            <span
+                              aria-disabled="true"
+                              className="text-white/40 text-sm font-orbit cursor-default select-none block relative w-fit max-w-full"
+                            >
+                              {link.name}
+                            </span>
+                          ) : (
+                            <Link
+                              href={link.href}
+                              className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-normal break-words block relative group w-fit max-w-full"
+                            >
+                              {link.name}
+                              <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-[#5ce1e6] transition-all duration-300 group-hover:w-full" />
+                            </Link>
+                          )
+                        ) : (
+                          <Link
+                            href="#"
+                            onClick={(e) => e.preventDefault()}
+                            className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-normal break-words block relative group w-fit max-w-full"
+                          >
+                            {link.name}
+                            <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-[#5ce1e6] transition-all duration-300 group-hover:w-full" />
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
@@ -175,31 +233,51 @@ export default function Footer() {
 
       {/* Massive Brand Watermark */}
       {/* PREVIOUS UI: <div className="relative w-full overflow-hidden flex justify-center pointer-events-none select-none z-0 mt-2 sm:mt-8 mb-2 sm:mb-8 md:mt-[-5vw] md:mb-[-5vw]"> */}
-      <div className="footer-short-watermark relative w-full overflow-hidden flex justify-center pointer-events-none select-none z-0 mt-6 sm:mt-8 mb-6 sm:mb-8 md:mt-[-5vw] md:mb-[-5vw]">
-        <div className="footer-short-watermark-mark relative w-[140vw] h-[22vw] sm:h-[25vw] opacity-[0.03]">
+      <div className="footer-short-watermark relative w-full overflow-hidden flex items-center justify-center pointer-events-none select-none z-0 my-6 sm:my-8 px-6 lg:px-12">
+        {/* PREVIOUS UI: opacity-[0.03] sat on this wrapper; it now dims only the logo so the dot layer stays visible. */}
+        <div className="footer-short-watermark-mark relative w-full max-w-[120rem] aspect-[183/25] shrink-0">
+          {/* PREVIOUS UI:
           <Image
-            src="/Tsalla.svg"
+            src="/Logo/Tsalla.svg"
             alt="Tsalla"
             fill
-            className="object-contain"
+            className="object-contain opacity-70"
             priority
           />
+          */}
+          {/* PREVIOUS UI:
+          <Image
+            src="/Logo/Tsalla.svg"
+            alt="Tsalla"
+            fill
+            className="object-contain opacity-20"
+            priority
+          />
+          */}
+          <Image
+            src="/Logo/Tsalla.svg"
+            alt="Tsalla"
+            fill
+            className="object-contain opacity-50"
+            priority
+          />
+          {/* Drifting dot clouds inside the TSALLA letters; dots under the pointer turn cyan */}
         </div>
       </div>
 
       {/* Bottom Bar */}
       {/* PREVIOUS UI: <div className="w-full border-t border-white/10 relative bg-black/40 backdrop-blur-md py-4 sm:py-8"> */}
-      <div className="footer-short-bottom w-full border-t border-white/10 relative bg-black/40 backdrop-blur-md py-6 sm:py-8">
+      <div className="footer-short-bottom mt-auto w-full shrink-0 border-t border-white/10 relative bg-black/40 backdrop-blur-md py-6 sm:py-8">
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#5ce1e6]/30 to-transparent" />
-        <div className="footer-short-bottom-inner max-w-[90rem] mx-auto px-6 lg:px-24 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
-          <div className="flex items-center space-x-8 order-2 md:order-1">
+        <div className="footer-short-bottom-inner max-w-[90rem] mx-auto px-6 lg:px-12 flex flex-col lg:flex-row justify-between items-center gap-4 sm:gap-6 text-center">
+          <div className="flex items-center space-x-8 order-2 lg:order-1">
             <p className="text-white/30 font-orbit text-[10px] uppercase tracking-widest">
               © {new Date().getFullYear()} Tsalla Aerospace. All rights reserved.
             </p>
           </div>
 
           {/* Social Icons Overlay */}
-          <div className="flex items-center space-x-6 order-1 md:order-2">
+          <div className="flex items-center space-x-6 order-1 lg:order-2">
             {[
               { icon: Instagram, href: "https://www.instagram.com/tsallaaerospace/?hl=en" },
               { icon: Linkedin, href: "https://www.linkedin.com/company/tsallaaerospace/" },

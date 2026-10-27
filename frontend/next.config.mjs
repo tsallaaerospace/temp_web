@@ -47,6 +47,8 @@ class StripDependencyMjsSourceMapUrlsPlugin {
  */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Use a separate directory when checking builds alongside the running preview.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   // PREVIOUS DEV MEMORY CONFIG: Webpack used its default module/cache memory behavior.
   experimental: {
     webpackMemoryOptimizations: true,
@@ -54,11 +56,26 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
     unoptimized: true,
+  },
+  // Maverick sub-pages are served at /<name>; the old /maverick/<name> URLs forward there.
+  // PREVIOUS REDIRECTS (Only Maverick sub-pages):
+  // async redirects() {
+  //   return ["ai-pilot", "cortex", "mesh"].map((name) => ({
+  //     source: `/maverick/${name}`,
+  //     destination: `/${name}`,
+  //     permanent: true,
+  //   }))
+  // },
+  async redirects() {
+    return [
+      ...["ai-pilot"].map((name) => ({
+        source: `/maverick/${name}`,
+        destination: `/${name}`,
+        permanent: true,
+      })),
+    ]
   },
   webpack: (config, { dev }) => {
     if (dev) {

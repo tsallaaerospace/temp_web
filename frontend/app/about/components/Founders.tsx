@@ -9,7 +9,7 @@ import { Twitter, Facebook, Instagram, Linkedin, Youtube, Globe } from "lucide-r
 gsap.registerPlugin(ScrollTrigger);
 
 // Hero background image - local image
-const HERO_BG_IMAGE = "/images/company/hero-founder.jpg";
+const HERO_BG_IMAGE = "/leadership/hero-founder.jpg";
 
 export default function HeroSection() {
   // Position configuration for manual adjustment

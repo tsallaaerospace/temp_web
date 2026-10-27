@@ -28,7 +28,7 @@ export default function WhatWeAreHeaded() {
       {/* Full Width Image */}
       <div className="w-full h-[40vh] md:h-[60vh] lg:h-[80vh] relative">
         <Image
-          src="/images/design-mode/abb6bab613d7d967786b922562d07d61f60f873e-3840x2160.jpg"
+          src="/shared/images/abb6bab613d7d967786b922562d07d61f60f873e-3840x2160.jpg"
           alt="Where We're Headed Background"
           fill
           className="object-cover object-center"

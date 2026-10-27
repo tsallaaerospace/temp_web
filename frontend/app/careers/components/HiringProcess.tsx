@@ -5,7 +5,7 @@ import { gsap } from "gsap"
 import { ContentWrapper } from "@/components/ContentWrapper"
 
 // --- Custom Hooks (useMedia, useMeasure) ---
-const useMedia = (queries, values, defaultValue) => {
+const useMedia = (queries: string[], values: number[], defaultValue: number) => {
   const get = () => {
     if (typeof window === "undefined") return defaultValue
     return values[queries.findIndex((q) => matchMedia(q).matches)] ?? defaultValue
@@ -29,7 +29,7 @@ const useMedia = (queries, values, defaultValue) => {
 }
 
 const useMeasure = () => {
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
   const [size, setSize] = useState({ width: 0, height: 0 })
 
   useLayoutEffect(() => {
@@ -42,15 +42,15 @@ const useMeasure = () => {
     return () => ro.disconnect()
   }, [])
 
-  return [ref, size]
+  return [ref, size] as const
 }
 
 // --- Image Preloader ---
-const preloadImages = async (urls) => {
+const preloadImages = async (urls: string[]) => {
   await Promise.all(
     urls.map(
       (src) =>
-        new Promise((resolve) => {
+        new Promise<void>((resolve) => {
           const img = new Image()
           img.src = src
           img.onload = img.onerror = () => resolve()
@@ -60,6 +60,26 @@ const preloadImages = async (urls) => {
 }
 
 // --- Masonry Component ---
+type MasonryItem = {
+  id: string
+  img: string
+  url: string
+  width: number
+  height: number
+}
+
+type MasonryProps = {
+  items: MasonryItem[]
+  ease?: string
+  duration?: number
+  stagger?: number
+  animateFrom?: "top" | "bottom" | "left" | "right" | "center" | "random"
+  scaleOnHover?: boolean
+  hoverScale?: number
+  blurToFocus?: boolean
+  colorShiftOnHover?: boolean
+}
+
 const Masonry = ({
   items,
   ease = "power3.out",
@@ -70,7 +90,7 @@ const Masonry = ({
   hoverScale = 0.95,
   blurToFocus = true,
   colorShiftOnHover = false,
-}) => {
+}: MasonryProps) => {
   const columns = useMedia(
     ["(min-width: 2500px)", "(min-width: 1800px)", "(min-width: 1500px)", "(min-width: 1000px)", "(min-width: 600px)"],
     [7, 6, 5, 4, 3],
@@ -80,12 +100,12 @@ const Masonry = ({
   const [containerRef, { width }] = useMeasure()
   const [imagesReady, setImagesReady] = useState(false)
 
-  const getInitialPosition = (item) => {
+  const getInitialPosition = (item: MasonryItem & { x: number; y: number; w: number; h: number }) => {
     const containerRect = containerRef.current?.getBoundingClientRect()
     if (!containerRect) return { x: item.x, y: item.y }
     let direction = animateFrom
     if (animateFrom === "random") {
-      const dirs = ["top", "bottom", "left", "right"]
+      const dirs = ["top", "bottom", "left", "right"] as const
       direction = dirs[Math.floor(Math.random() * dirs.length)]
     }
     switch (direction) {
@@ -168,7 +188,7 @@ const Masonry = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease])
 
-  const handleMouseEnter = (id, element) => {
+  const handleMouseEnter = (id: string, element: HTMLDivElement) => {
     if (scaleOnHover) {
       gsap.to(`[data-key="${id}"]`, {
         scale: hoverScale,
@@ -182,7 +202,7 @@ const Masonry = ({
     }
   }
 
-  const handleMouseLeave = (id, element) => {
+  const handleMouseLeave = (id: string, element: HTMLDivElement) => {
     if (scaleOnHover) {
       gsap.to(`[data-key="${id}"]`, {
         scale: 1,

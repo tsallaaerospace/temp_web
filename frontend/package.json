@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "node --max-old-space-size=8192 ./node_modules/next/dist/bin/next build",
-    "dev": "node --max-old-space-size=8192 ./node_modules/next/dist/bin/next dev",
+    "build": "node --require ./plugins/exfat-readlink.cjs --max-old-space-size=8192 ./node_modules/next/dist/bin/next build",
+    "dev": "node --require ./plugins/exfat-readlink.cjs --max-old-space-size=8192 ./node_modules/next/dist/bin/next dev --port 3000",
     "lint": "next lint",
-    "start": "next start"
+    "start": "node --require ./plugins/exfat-readlink.cjs ./node_modules/next/dist/bin/next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node --require ./plugins/exfat-readlink.cjs --test plugins/*.test.cjs"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",

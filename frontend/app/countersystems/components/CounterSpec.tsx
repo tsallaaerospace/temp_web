@@ -74,7 +74,7 @@ export default function Counterspec(): React.JSX.Element {
         {/* RIGHT COLUMN */}
         <div className="md:w-1/2 w-full h-72 md:h-screen">
           <img
-            src="/images/design-mode/0649dbe96de92e27212722dbfc01e42c576247ad-1080x1235.png"
+            src="/shared/images/0649dbe96de92e27212722dbfc01e42c576247ad-1080x1235.png"
             alt="Counter System in flight"
             className="object-cover w-full h-full"
             onError={(e) => {

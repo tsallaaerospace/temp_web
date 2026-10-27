@@ -7,77 +7,77 @@ export const products = [
   {
     title: "Company Culture",
     link: "/about",
-    thumbnail: "/images/culture/culture1.webp",
+    thumbnail: "/shared/culture/culture1.webp",
   },
   {
     title: "Innovation Lab",
     link: "/about",
-    thumbnail: "/images/culture/culture2.jpg",
+    thumbnail: "/shared/culture/culture2.jpg",
   },
   {
     title: "Team Collaboration",
     link: "/about",
-    thumbnail: "/images/culture/culture3.jpg",
+    thumbnail: "/shared/culture/culture3.jpg",
   },
   {
     title: "Our Workspace",
     link: "/about",
-    thumbnail: "/images/culture/culture4.jpg",
+    thumbnail: "/shared/culture/culture4.jpg",
   },
   {
     title: "Engineering Excellence",
     link: "/about",
-    thumbnail: "/images/culture/culture5.jpg",
+    thumbnail: "/shared/culture/culture5.jpg",
   },
   {
     title: "Future of Aerospace",
     link: "/about",
-    thumbnail: "/images/culture/culture6.webp",
+    thumbnail: "/shared/culture/culture6.webp",
   },
   {
     title: "Design Process",
     link: "/about",
-    thumbnail: "/images/culture/culture7.png",
+    thumbnail: "/shared/culture/culture7.png",
   },
   {
     title: "Product Development",
     link: "/about",
-    thumbnail: "/images/culture/culture8.webp",
+    thumbnail: "/shared/culture/culture8.webp",
   },
   {
     title: "Aerial Testing",
     link: "/about",
-    thumbnail: "/images/culture/culture9.webp",
+    thumbnail: "/shared/culture/culture9.webp",
   },
   {
     title: "Manufacturing",
     link: "/about",
-    thumbnail: "/images/culture/culture10.jpg",
+    thumbnail: "/shared/culture/culture10.jpg",
   },
   {
     title: "Fenix Systems",
     link: "/fenix",
-    thumbnail: "/images/Fenix/CounterTerrorism.jpg",
+    thumbnail: "/shared/missions/CounterTerrorism.jpg",
   },
   {
     title: "Search & Rescue",
     link: "/fenix",
-    thumbnail: "/images/Fenix/Search_Rescue.jpg",
+    thumbnail: "/shared/missions/Search_Rescue.jpg",
   },
   {
     title: "Warehouse Logistics",
     link: "/fenix",
-    thumbnail: "/images/Fenix/WarehouseManagement.jpeg",
+    thumbnail: "/shared/missions/WarehouseManagement.jpeg",
   },
   {
     title: "Mission Excellence",
     link: "/fenix",
-    thumbnail: "/images/Fenix/CounterInversion.webp",
+    thumbnail: "/shared/missions/CounterInversion.webp",
   },
   {
     title: "Advanced Navigation",
     link: "/fenix",
-    thumbnail: "/images/Fenix/ptop.jpg",
+    thumbnail: "/about/ptop.jpg",
   },
 ];
 

@@ -289,6 +289,15 @@ video[data-loading="true"] {
 }
 
 /* Navbar specific animated links */
+/* One frosted surface replaces the Hangar's stacked black fills and nested blurs. */
+.hangar-glass {
+  background: linear-gradient(145deg, rgb(255 255 255 / .09), rgb(255 255 255 / .025)), rgb(16 22 27 / .38);
+  backdrop-filter: blur(20px) saturate(135%);
+  -webkit-backdrop-filter: blur(20px) saturate(135%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .14), 0 18px 48px rgb(0 0 0 / .16);
+}
+.hangar-registry { text-shadow: 0 1px 3px rgb(0 0 0 / .65); }
+
 .nav-link {
   position: relative;
   display: flex;
@@ -437,7 +446,7 @@ video[data-loading="true"] {
   }
 
   .footer-short-mobile .footer-short-watermark-mark {
-    height: 20vw;
+    height: auto;
   }
 
   .footer-short-mobile .footer-short-bottom {
@@ -506,7 +515,7 @@ video[data-loading="true"] {
   }
 
   .footer-short-mobile .footer-short-watermark-mark {
-    height: 20vw;
+    height: auto;
   }
 
   .footer-short-mobile .footer-short-bottom {
@@ -716,4 +725,840 @@ html.lenis body {
 
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+/* Homepage desktop panels fit one viewport; the second product panel stays content-sized. */
+.home-product-screen {
+  display: contents;
+}
+
+@media (min-width: 1024px) {
+  .home-page {
+    --home-space: clamp(1rem, 3dvh, 3rem);
+    --home-title: clamp(2.5rem, 3.5vw, 4rem);
+    --home-gutter: calc(clamp(2rem, 5vw, 7rem) + 1rem);
+  }
+
+  .home-page .home-product-stack {
+    width: 100%;
+    max-width: none;
+    padding-top: 0;
+    padding-inline: var(--home-gutter);
+  }
+
+  .home-page .home-product-screen,
+  .home-page .home-velocity-screen,
+  .home-page .home-news-screen {
+    height: 100dvh;
+    min-height: 0;
+    padding-block: calc(5rem + var(--home-space)) var(--home-space);
+    display: flex;
+    flex-direction: column;
+    gap: var(--home-space);
+    scroll-snap-align: start;
+  }
+
+  .home-page .home-product-screen > :first-child {
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  .home-page .home-product-details {
+    margin-top: 0;
+    padding-top: calc(5rem + var(--home-space));
+  }
+
+  .home-page .home-product-details > :first-child {
+    margin-inline: 0;
+  }
+
+  .home-page .home-section-title {
+    font-size: var(--home-title);
+    line-height: 1.1;
+    /* PREVIOUS UI: font-weight: 700; */
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    padding: 0;
+    margin-inline: 0;
+  }
+
+  .home-page .home-section-title.font-bold {
+    font-weight: 700;
+  }
+
+  .home-page .home-section-title.font-normal,
+  .home-page .home-section-title.\!font-normal {
+    font-weight: 400 !important;
+  }
+
+  .home-page .home-velocity-screen {
+    padding-inline: var(--home-gutter);
+  }
+
+  .home-page .home-velocity-screen > div > :first-child,
+  .home-page .home-news-screen > :first-child {
+    padding-inline: 0;
+  }
+
+  .home-page .home-news-screen > :first-child {
+    padding-inline: var(--home-gutter);
+  }
+
+  .home-page .home-product-screen > .grid {
+    flex: 0 1 60dvh;
+    min-height: 0;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    gap: clamp(0.75rem, 1.5vw, 2rem);
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .home-page .home-product-screen > .grid > div {
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .home-page .home-product-screen > .grid > div > .product-image-arrival img {
+    object-fit: contain;
+  }
+
+  .home-page .home-velocity-screen > div {
+    min-height: 0;
+    width: 100%;
+    max-width: none;
+    gap: var(--home-space);
+  }
+
+  .home-page .home-velocity-screen > div > :first-child,
+  .home-page .home-velocity-screen > div > :last-child {
+    flex-shrink: 0;
+    margin-block: 0;
+  }
+
+  .home-page .home-velocity-screen > div > :first-child > :first-child {
+    font-size: var(--home-title);
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .home-page .home-velocity-screen > div > :nth-child(2) {
+    flex: 1;
+    min-height: 0;
+    aspect-ratio: auto;
+    margin-block: 0;
+  }
+
+  .home-page .home-velocity-screen img {
+    position: absolute;
+    inset: 0;
+  }
+
+  .home-page .home-news-screen > :first-child,
+  .home-page .home-news-screen > :last-child {
+    flex-shrink: 0;
+    margin-block: 0;
+  }
+
+  .home-page .home-news-screen > :first-child > div > :first-child {
+    font-size: var(--home-title);
+    margin-bottom: var(--home-space);
+  }
+
+  .home-page .home-news-screen > :nth-child(2) {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    max-width: 156.25rem;
+  }
+
+  .home-page .home-news-screen > :nth-child(2) > div,
+  .home-page .home-news-screen li {
+    height: 100%;
+    min-height: 0;
+    margin-bottom: 0;
+  }
+
+  footer.footer-short-mobile {
+    /* Content can outgrow short screens without clipping links or the bottom bar. */
+    height: auto;
+    min-height: 100dvh;
+    padding-top: clamp(3rem, 8dvh, 6rem);
+    justify-content: space-between;
+  }
+
+  .footer-short-mobile .footer-short-main {
+    margin-block: 0;
+    flex-shrink: 0;
+  }
+
+  .footer-short-mobile .footer-short-watermark {
+    flex: 1 0 auto;
+    min-height: 0;
+    margin-block: clamp(1rem, 3dvh, 2rem);
+    align-items: center;
+  }
+
+  .footer-short-mobile .footer-short-watermark-mark {
+    height: auto;
+  }
+
+  .footer-short-mobile .footer-short-bottom {
+    flex-shrink: 0;
+    padding-block: clamp(0.75rem, 2dvh, 2rem);
+  }
+}
+
+/* T-BAT payload selection: the supplied film is the motion, controls stay anchored. */
+.bat-payload-viewer {
+  --bat-payload-gutter: var(--fenix-title-inset);
+  background-color: #09090b;
+  /* PREVIOUS UI: 5rem top padding and a clamped side gutter. */
+  padding: var(--fenix-title-top) var(--bat-payload-gutter) 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.bat-payload-heading { display: flex; flex-direction: column; gap: 1rem; }
+.bat-payload-heading h2 { letter-spacing: -0.03em; }
+/* FENIx section titles use the same scale as the BAT section titles ("Payloads & Sensors", --bat-title) */
+.fenix-page, .bat-page, .mantis-page { --fenix-title-top: max(90px, 10dvh); --fenix-title-inset: 5vw; }
+@media (max-width: 767px) { .fenix-page, .bat-page, .mantis-page { --fenix-title-top: max(88px, 10dvh); --fenix-title-inset: 6vw; } }
+.fenix-section-title, .product-section-title { font-size: clamp(2rem, 3.5vw, 4rem); }
+@media (min-width: 1024px) { .fenix-section-title, .product-section-title { font-size: clamp(2.5rem, 3.5vw, 4rem); } }
+@media (max-width: 1023px) { .fenix-section-title.fenix-title-fit, .product-section-title.product-title-fit { font-size: clamp(1rem, 3.5vw, 2rem); } }
+.product-title-position { position: absolute; top: var(--fenix-title-top); left: var(--fenix-title-inset); right: var(--fenix-title-inset); }
+/* Titles split across a background made of equal photo panels (FENIx First Responder, MANTIS three-phase,
+   BAT Multi Role): each word is centred on the part of its panel that is on screen. object-cover renders the
+   photo max(section width, section height x image aspect) wide, centred, cropping the excess equally off both
+   sides - so the outer columns are one panel minus that crop and the middle ones a full panel.
+   Set --panel-aspect (image width / height), --panels (panel count) and --mid (panels - 2).
+   Portrait screens crop the photo to its middle panels, so there the title keeps the inset grid.
+   PREVIOUS UI: equal grid columns that spanned only the 5vw insets. */
+@media (orientation: landscape) {
+  .title-panel-grid {
+    --img-w: max(100%, 100dvh * var(--panel-aspect));
+    --panel: calc(var(--img-w) / var(--panels));
+    --edge: calc(var(--panel) - (var(--img-w) - 100%) / 2);
+    left: 0 !important;
+    right: 0 !important;
+    grid-template-columns: var(--edge) repeat(var(--mid), var(--panel)) var(--edge);
+  }
+}
+/* FENIx paragraphs all match the Capabilities paragraph ("Purpose-built for tight, complex spaces…"):
+   text-xs md:text-sm, font-light */
+.fenix-body, .product-body { font-size: 0.75rem; line-height: 1.625; font-weight: 300; }
+@media (min-width: 768px) { .fenix-body, .product-body { font-size: 0.875rem; } }
+.bat-payload-stage { position: relative; width: calc(100% + 2 * var(--bat-payload-gutter)); min-height: 16rem; aspect-ratio: 16 / 10; margin-inline: calc(-1 * var(--bat-payload-gutter)); overflow: hidden; }
+.bat-payload-film { position: absolute; top: 0; left: 0; width: 100%; height: auto; aspect-ratio: 14 / 5; object-fit: contain; mask-image: linear-gradient(to bottom, transparent, black 12%, black 80%, transparent); }
+.bat-payload-stage-caption { position: absolute; bottom: 0; left: var(--bat-payload-gutter); right: var(--bat-payload-gutter); display: flex; align-items: center; gap: 1rem; padding-block: 1rem; border-bottom: 1px solid #ffffff20; font-size: 1rem; }
+.bat-payload-caption-index { color: #5ce1e6; font-size: 0.75rem; }
+.bat-payload-caption-index > span { color: #737373; }
+.bat-payload-stage-caption small { display: block; color: #a3a3a3; font-size: 0.75rem; margin-top: 0.3rem; }
+.bat-payload-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+.bat-payload-button { position: relative; min-height: 9rem; border: 1px solid #ffffff26; text-align: left; background-color: #050505; background-repeat: no-repeat; background-size: auto 100%; background-position: center top; transition: border-color 250ms, transform 250ms; }
+.bat-payload-button::before { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #000 0%, #0009 23%, transparent 75%); }
+.bat-payload-button:hover { border-color: #ffffff66; transform: translateY(-3px); }
+.bat-payload-button:active { transform: translateY(0); }
+.bat-payload-button:focus-visible { outline: 2px solid #5ce1e6; outline-offset: 4px; }
+.bat-payload-button.is-selected { border-color: #5ce1e6; }
+.bat-payload-button-index { position: absolute; top: 0.8rem; left: 0.8rem; color: #737373; font-size: 0.625rem; }
+.bat-payload-button-label { position: absolute; bottom: 0.9rem; left: 0.9rem; right: 0.9rem; font-size: 0.875rem; font-weight: 700; }
+.bat-payload-button-label small { display: block; color: #a3a3a3; font-weight: 400; font-size: 0.625rem; margin-top: 0.4rem; }
+.bat-payload-selection { position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: #5ce1e6; }
+@media (min-width: 768px) {
+  .bat-payload-heading { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+  .bat-payload-controls { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .bat-payload-stage { aspect-ratio: 16 / 9; }
+}
+@media (min-width: 1024px) {
+  .bat-payload-viewer { height: 100dvh; min-height: 42rem; gap: clamp(1rem, 2dvh, 2rem); }
+  .bat-payload-heading, .bat-payload-controls { flex-shrink: 0; }
+  .bat-payload-stage { flex: 1; min-height: 0; aspect-ratio: auto; }
+  .bat-payload-button { min-height: clamp(8rem, 17dvh, 13rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bat-payload-button { transition: none; }
+  .bat-payload-button:hover { transform: none; }
+}
+
+.bat-battery-section {
+  background: #09090b;
+  /* PREVIOUS UI: 6.5rem top padding with its own side gutter. */
+  padding: var(--fenix-title-top) var(--fenix-title-inset) 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3dvh, 3rem);
+}
+.bat-battery-section header { position: relative; z-index: 1; }
+.bat-battery-section h2 { letter-spacing: -0.03em; }
+.bat-battery-section header p { margin-top: 1rem; }
+.bat-battery-stage { position: relative; width: 100%; aspect-ratio: 16 / 9; max-width: 100rem; margin-inline: auto; min-height: 16rem; }
+.bat-battery-stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; transform: translateY(2rem) scale(1.08); transform-origin: center bottom; mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); }
+@media (min-width: 1024px) {
+  .bat-battery-section { height: 100dvh; min-height: 38rem; }
+  .bat-battery-section header { flex-shrink: 0; }
+  .bat-battery-stage { flex: 1; min-height: 0; aspect-ratio: auto; }
+}
+
+/* Multi Role Single Solution. PREVIOUS UI: centred title at clamp(2rem, 4.5vw, 4.5rem); drone
+   min(70vw, 86dvh) wide with faded wing tips, then height-capped at 66dvh and anchored 3% from the bottom.
+   Then min(100vw, 152dvh), which kept the tail on screen. Now (as chosen) it spans the full width so the
+   render's cropped wing tips sit on the screen edges, starting a third of the way down; on wide screens
+   the lower wings, tail and legs run off the bottom for a close-up framing. */
+.fenix-specs { min-height: 100svh; padding: clamp(4.5rem, 8vh, 7rem) 5vw clamp(2rem, 4vh, 4rem); background: #fff; color: #171717; display: grid; grid-template-columns: minmax(0, 2.3fr) minmax(18rem, 1fr); grid-template-rows: minmax(0, 1fr) auto; column-gap: 4vw; overflow: hidden; }
+.fenix-specs-visual { grid-column: 1; grid-row: 1; min-width: 0; align-self: center; margin: -2vh -2vw; }
+/* PREVIOUS UI: .fenix-specs-render { width: 100%; height: auto; max-height: 60vh; object-fit: contain; transform: translateX(-16%) scale(1.52); } */
+.fenix-specs-render { width: 100%; height: auto; max-height: 72vh; object-fit: contain; transform: translateX(-14%) scale(1.78); }
+/* PREVIOUS UI: .fenix-specs-performance { grid-column: 2; grid-row: 1 / 3; align-self: center; display: grid; grid-template-columns: 1fr; gap: clamp(1.25rem, 3vh, 3rem); } */
+.fenix-specs-performance { grid-column: 2; grid-row: 1 / 3; align-self: center; display: grid; grid-template-columns: 1fr; gap: clamp(1.25rem, 3vh, 3rem); transform: translateX(clamp(2rem, 3.5vw, 4.5rem)); }
+.fenix-specs-performance > div { border-top: 1px solid #d4d4d4; padding-top: 1rem; }
+.fenix-specs-performance dt, .fenix-specs-dimensions dt { font-size: clamp(.8rem, .85vw, 1rem); color: #656565; }
+.fenix-specs-performance dd { margin-top: .65rem; font-size: clamp(2.5rem, 3.6vw, 4.25rem); line-height: 1.1; color: #29b8c2; white-space: nowrap; }
+.fenix-specs-performance dd span, .fenix-specs-dimensions dd span { font-size: 1rem; margin-left: .6rem; }
+.fenix-specs-dimensions { grid-column: 1; grid-row: 2; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #d4d4d4; padding-top: 1.1rem; gap: 1rem; }
+.fenix-specs-dimensions > div + div { padding-left: 1.5rem; border-left: 1px solid #e5e5e5; }
+.fenix-specs-dimensions dd { font-size: clamp(1.25rem, 1.75vw, 2rem); margin-top: .5rem; }
+@media (max-width: 767px) {
+  .fenix-specs { padding: 5rem 6vw 2.5rem; grid-template-columns: 1fr; grid-template-rows: auto auto auto; gap: 1.75rem; }
+  /* PREVIOUS UI:
+  .fenix-specs-visual { grid-column: 1; grid-row: 1; margin: -.5rem -4vw; }
+  .fenix-specs-render { max-height: none; transform: translateX(-1%) scale(1.18); }
+  .fenix-specs-performance { grid-column: 1; grid-row: 2; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; transform: none; }
+  .fenix-specs-performance dd { font-size: clamp(1.75rem, 8vw, 3rem); }
+  .fenix-specs-performance dd span, .fenix-specs-dimensions dd span { font-size: .75rem; margin-left: .3rem; }
+  .fenix-specs-dimensions { grid-column: 1; grid-row: 3; gap: .5rem; }
+  .fenix-specs-dimensions > div + div { padding-left: .75rem; }
+  */
+  .fenix-specs-visual { grid-column: 1; grid-row: 1; margin: 0.5rem -4vw 1rem; }
+  .fenix-specs-render { max-height: none; transform: translateX(-1%) translateY(6%) scale(1.48); }
+  .fenix-specs-performance { grid-column: 1; grid-row: 2; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; transform: none; }
+  .fenix-specs-performance > div { text-align: center; }
+  .fenix-specs-performance dd { font-size: clamp(1.75rem, 8vw, 3rem); }
+  .fenix-specs-performance dd span, .fenix-specs-dimensions dd span { font-size: .75rem; margin-left: .3rem; }
+  .fenix-specs-dimensions { grid-column: 1; grid-row: 3; gap: .5rem; }
+  .fenix-specs-dimensions > div { text-align: center; }
+  .fenix-specs-dimensions > div + div { padding-left: 0; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .fenix-specs { padding: clamp(5rem, 10vh, 7rem) 5vw 3rem; grid-template-columns: 1fr; grid-template-rows: auto auto auto; gap: 2.25rem; }
+  .fenix-specs-visual { grid-column: 1; grid-row: 1; margin: 0 auto; max-width: 44rem; }
+  .fenix-specs-render { max-height: 48vh; transform: scale(1.15); }
+  .fenix-specs-performance { grid-column: 1; grid-row: 2; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; transform: none; }
+  .fenix-specs-performance dd { font-size: clamp(2rem, 3.8vw, 3rem); }
+  .fenix-specs-dimensions { grid-column: 1; grid-row: 3; max-width: 44rem; margin-inline: auto; width: 100%; }
+}
+@media (min-width: 1920px) {
+  .fenix-specs { max-width: 120rem; margin-inline: auto; }
+}
+@media (min-width: 2560px) {
+  .fenix-specs { max-width: 140rem; }
+  .fenix-specs-performance dd { font-size: clamp(3rem, 3.6vw, 5rem); }
+}
+
+.mantis-details-image { left: 27%; top: -13%; width: 130%; }
+.mantis-details-callouts { left: 5%; top: 34%; width: 37%; display: grid; gap: clamp(2rem, 7vh, 6rem); }
+.mantis-details-callout::after { content: ""; position: absolute; right: -0.2rem; bottom: -0.2rem; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: #36bec5; }
+.mantis-details-callout:nth-child(n + 2)::after { display: none; }
+@media (max-width: 767px) {
+  .mantis-details-image { left: 20%; top: 40%; width: 210%; }
+  .mantis-details-callouts { top: 27%; width: 43%; gap: 1.5rem; }
+}
+
+.mantis-specifications {
+  min-height: 100svh;
+  /* PREVIOUS UI: independent 4.5–6rem title padding and clamped side gutters. */
+  padding: var(--fenix-title-top) var(--fenix-title-inset) clamp(2rem, 4vh, 4rem);
+  display: grid;
+  grid-template-rows: auto minmax(16rem, 1fr) auto;
+  gap: 1.5rem;
+}
+.mantis-specs-header { display: flex; justify-content: space-between; align-items: end; gap: 2rem; }
+.mantis-specs-render { margin: 0; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.mantis-specs-stage { display: grid; grid-template-columns: minmax(8rem, 1fr) minmax(0, 5fr) minmax(8rem, 1fr); align-items: center; gap: clamp(1rem, 2vw, 3rem); }
+.mantis-specs-column { display: grid; gap: clamp(2rem, 6vh, 5rem); min-width: 0; }
+.mantis-specs-left { grid-column: 1; grid-row: 1; }
+.mantis-specs-right { grid-column: 3; grid-row: 1; }
+.mantis-specs-render { grid-column: 2; grid-row: 1; }
+.mantis-specs-render img { width: 100%; height: clamp(22rem, 66vh, 55rem); object-fit: contain; transform: scale(1.08); }
+@media (max-width: 767px) {
+  .mantis-specs-header { align-items: start; flex-direction: column; gap: 1rem; }
+  .mantis-specs-stage { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mantis-specs-render { grid-column: 1 / -1; grid-row: 1; }
+  .mantis-specs-render img { height: clamp(16rem, 40vh, 30rem); }
+  .mantis-specs-left { grid-column: 1; grid-row: 2; }
+  .mantis-specs-right { grid-column: 2; grid-row: 2; }
+}
+
+.bat-multi-role-title {
+  font-size: clamp(2rem, 3.5vw, 4rem); /* same as the payload and battery headings below */
+  padding-inline: 0;
+}
+/* PREVIOUS UI (Drone size 116vw and top 32dvh):
+.bat-multi-role-drone {
+  width: 116vw;
+  max-width: none;
+  top: 32dvh;
+}
+@media (orientation: portrait) {
+  .bat-multi-role-title { font-size: clamp(0.875rem, 3.5vw, 2rem); }
+  .bat-multi-role-drone { width: 134vw; top: auto; bottom: 6%; }
+}
+*/
+.bat-multi-role-drone {
+  width: 182vw;
+  max-width: none;
+  top: 26dvh;
+}
+@media (orientation: portrait) {
+  .bat-multi-role-title { font-size: clamp(0.875rem, 3.5vw, 2rem); }
+  /* Wider than the screen and anchored low, clear of the two-line title */
+  .bat-multi-role-drone { width: 154vw; top: auto; bottom: 4%; }
+}
+
+/* T-BAT specifications: centered drone with two specifications on either side. */
+.bat-specs { min-height: 100dvh; padding: 6.5rem clamp(1.25rem, 5vw, 7rem) 3rem; display: flex; align-items: center; }
+.bat-specs-grid { width: 100%; max-width: 120rem; margin-inline: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.25rem, 3vw, 3rem); }
+/* PREVIOUS UI:
+.bat-specs-figure { grid-column: 1 / -1; min-width: 0; display: flex; align-items: center; justify-content: center; padding: clamp(1.5rem, 3vw, 3rem); }
+*/
+.bat-specs-figure { grid-column: 1 / -1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: clamp(0.75rem, 1.5vw, 1.5rem); gap: clamp(1rem, 2dvh, 1.75rem); }
+/* PREVIOUS UI (Padded frame for corner marks):
+.bat-specs-frame { padding: clamp(1rem, 2.5vw, 2.5rem); width: 100%; }
+*/
+.bat-specs-frame { padding: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+/* PREVIOUS UI (Left-aligned dimension columns):
+.bat-specs-dimensions { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #d4d4d4; padding-top: 1.1rem; gap: 1rem; }
+.bat-specs-dimensions > div + div { padding-left: 1.5rem; border-left: 1px solid #e5e5e5; }
+.bat-specs-dimensions dt { font-size: clamp(.8rem, .85vw, 1rem); color: #656565; }
+.bat-specs-dimensions dd { font-size: clamp(1.25rem, 1.75vw, 2rem); margin-top: .5rem; color: #171717; white-space: nowrap; font-weight: 500; }
+.bat-specs-dimensions dd span { font-size: 1rem; margin-left: .6rem; color: #737373; font-weight: 400; }
+@media (max-width: 767px) {
+  .bat-specs-dimensions { gap: .5rem; padding-top: .85rem; }
+  .bat-specs-dimensions > div + div { padding-left: .75rem; }
+  .bat-specs-dimensions dd span { font-size: .75rem; margin-left: .3rem; }
+}
+*/
+/* PREVIOUS UI (Dimensions top margin without extra vertical clearance):
+.bat-specs-dimensions { width: 100%; max-width: min(100%, 40rem); margin-inline: auto; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #d4d4d4; padding-top: 1.1rem; }
+*/
+.bat-specs-dimensions { width: 100%; max-width: min(100%, 40rem); margin-inline: auto; margin-top: clamp(1.5rem, 3.5dvh, 3rem); display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #d4d4d4; padding-top: 1.1rem; }
+.bat-specs-dimensions > div { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-inline: clamp(0.5rem, 1.5vw, 1.25rem); }
+.bat-specs-dimensions > div + div { border-left: 1px solid #e5e5e5; }
+.bat-specs-dimensions dt { font-size: clamp(.8rem, .85vw, 1rem); color: #656565; text-align: center; font-weight: 400; }
+.bat-specs-dimensions dd { font-size: clamp(1.25rem, 1.75vw, 2rem); margin-top: .5rem; color: #171717; white-space: nowrap; font-weight: 400; display: flex; align-items: baseline; justify-content: center; text-align: center; }
+.bat-specs-dimensions dd span { font-size: 1rem; margin-left: .6rem; color: inherit; font-weight: 400; }
+@media (max-width: 767px) {
+  .bat-specs-drone { transform: scale(1.15); max-height: 48dvh; }
+  .bat-specs-row dd { font-size: clamp(1.75rem, 8vw, 3rem); }
+  .bat-specs-row dd span, .bat-specs-dimensions dd span { font-size: .75rem; margin-left: .3rem; }
+  .bat-specs-dimensions { padding-top: .85rem; }
+  .bat-specs-dimensions > div { padding-inline: .5rem; }
+}
+/* PREVIOUS UI: filter: drop-shadow(0 24px 32px rgb(0 0 0 / 0.12)) under the photoreal render; the flat drawing reads cleaner without it */
+/* PREVIOUS UI:
+.bat-specs-drone { width: 100%; height: auto; max-height: 60dvh; object-fit: contain; }
+*/
+/* PREVIOUS UI (Unscaled clamp(220px, 46dvh, 52dvh)):
+.bat-specs-drone { width: 100%; height: auto; max-height: clamp(220px, 46dvh, 52dvh); object-fit: contain; }
+*/
+.bat-specs-drone { width: 100%; height: auto; max-height: clamp(280px, 56dvh, 64dvh); object-fit: contain; transform: scale(1.28); transform-origin: center center; }
+/* PREVIOUS UI: .bat-specs-list { min-width: 0; border-top: 1px solid #a3a3a3; } */
+.bat-specs-list { min-width: 0; border-top: 1px solid #d4d4d4; }
+.bat-specs-list dt { font-size: clamp(.8rem, .85vw, 1rem); color: #656565; font-weight: 400; }
+.bat-specs-row dd { margin-top: .65rem; font-size: clamp(2.5rem, 3.6vw, 4.25rem); line-height: 1.1; color: #29b8c2; white-space: nowrap; font-weight: 400; }
+.bat-specs-row dd span { font-size: 1rem; margin-left: .6rem; color: inherit; font-weight: 400; }
+.bat-specs-left { grid-column: 1; }
+.bat-specs-right { grid-column: 2; }
+/* PREVIOUS UI: .bat-specs-payload { font-size: clamp(0.875rem, 1.05vw, 1.25rem); line-height: 1.6; overflow-wrap: anywhere; } */
+.bat-specs-payload { font-size: clamp(2.5rem, 3.6vw, 4.25rem); line-height: 1.1; color: #29b8c2; font-weight: 400; }
+/* PREVIOUS UI:
+.bat-specs-row { border-bottom: 1px solid #a3a3a3; padding-block: 1rem 1.25rem; }
+*/
+/* PREVIOUS UI (Uncompact min-height clamp(6rem, 14dvh, 8.5rem)):
+.bat-specs-row { border-bottom: 1px solid #a3a3a3; padding-block: 1rem 1.25rem; display: flex; flex-direction: column; justify-content: flex-start; min-height: clamp(6rem, 14dvh, 8.5rem); }
+*/
+/* PREVIOUS UI (Tight clamp padding without breathing room):
+.bat-specs-row { border-bottom: 1px solid #a3a3a3; padding-block: 0.75rem 0.875rem; display: flex; flex-direction: column; justify-content: flex-start; min-height: calc(clamp(2.5rem, 4vw, 4rem) + 2.5rem); }
+*/
+/* PREVIOUS UI (Moderate clamp padding):
+.bat-specs-row { border-bottom: 1px solid #a3a3a3; padding-block: clamp(0.875rem, 1.5dvh, 1.25rem); display: flex; flex-direction: column; justify-content: flex-start; min-height: calc(clamp(2.5rem, 4vw, 4rem) + 3.25rem); }
+*/
+/* PREVIOUS UI: .bat-specs-row { border-bottom: 1px solid #a3a3a3; padding-block: clamp(1.125rem, 2dvh, 1.625rem); display: flex; flex-direction: column; justify-content: flex-start; min-height: calc(clamp(2.5rem, 4vw, 4rem) + 4.25rem); } */
+.bat-specs-row { border-bottom: 1px solid #d4d4d4; padding-block: clamp(1.125rem, 2dvh, 1.625rem); display: flex; flex-direction: column; justify-content: flex-start; min-height: calc(clamp(2.5rem, 3.6vw, 4.25rem) + 4.25rem); }
+/* PREVIOUS UI: .bat-specs-value { font-size: clamp(2.5rem, 4vw, 4rem); } */
+.bat-specs-value { font-size: clamp(2.5rem, 3.6vw, 4.25rem); }
+.bat-specs-ticks {
+  position: absolute; top: 0; bottom: 0; width: 1.25rem; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, transparent 0 46px, #a3a3a3 46px 47px);
+  -webkit-mask-image: linear-gradient(to right, #000 40%, transparent);
+  mask-image: linear-gradient(to right, #000 40%, transparent);
+}
+.bat-specs-ticks.right-0 { transform: scaleX(-1); }
+/* PREVIOUS UI (Visible edge measurement ticks):
+.bat-specs-ticks { position: absolute; }
+*/
+.bat-specs-ticks { display: none !important; }
+/* PREVIOUS UI (Subgrid with spanning drone figure that added excess drone height):
+@media (min-width: 1024px) {
+  .bat-specs { height: 100dvh; }
+  .bat-specs-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 3rem);
+  }
+  .bat-specs-figure {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+  .bat-specs-left {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    display: grid;
+    grid-template-rows: subgrid;
+    align-self: center;
+  }
+  .bat-specs-right {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    display: grid;
+    grid-template-rows: subgrid;
+    align-self: center;
+  }
+  .bat-specs-row {
+    padding-block: clamp(0.75rem, 1.6dvh, 1.25rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: clamp(6.5rem, 15dvh, 9rem);
+  }
+}
+*/
+@media (min-width: 1024px) {
+  .bat-specs { height: 100dvh; }
+  .bat-specs-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1rem, 2vw, 3rem);
+  }
+  .bat-specs-figure {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  /* PREVIOUS UI (Unshifted desktop left and right columns):
+  .bat-specs-left { grid-column: 1; grid-row: 1; }
+  .bat-specs-right { grid-column: 3; grid-row: 1; }
+  */
+  .bat-specs-left {
+    grid-column: 1;
+    grid-row: 1;
+    transform: translateX(calc(-1 * clamp(1.5rem, 3vw, 4rem)));
+  }
+  .bat-specs-right {
+    grid-column: 3;
+    grid-row: 1;
+    transform: translateX(clamp(1.25rem, 2.5vw, 3.5rem));
+  }
+  .bat-specs-frame { transform: translateY(1.5rem); }
+  .bat-specs-dimensions { transform: translateY(4rem); }
+/* PREVIOUS UI (Tight desktop row height):
+  .bat-specs-row {
+    padding-block: clamp(0.5rem, 1dvh, 0.75rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: calc(clamp(2.5rem, 4vw, 4rem) + 2.5rem);
+  }
+*/
+/* PREVIOUS UI (Moderate clamp padding):
+  .bat-specs-row {
+    padding-block: clamp(0.875rem, 1.5dvh, 1.25rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: calc(clamp(2.5rem, 4vw, 4rem) + 3.25rem);
+  }
+*/
+  .bat-specs-row {
+    padding-block: clamp(1.125rem, 2dvh, 1.625rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* PREVIOUS UI: min-height: calc(clamp(2.5rem, 4vw, 4rem) + 4.25rem); */
+    min-height: calc(clamp(2.5rem, 3.6vw, 4.25rem) + 4.25rem);
+  }
+}
+
+/* BAT-only layout contract: bounded typography, flexible content, unchanged media motion. */
+html:has(.bat-page) { font-size: 100%; }
+/* Every BAT panel, footer included, fills the visible viewport so section paging lands flush. */
+/* The hero is a tall scroll track: its pinned stage plays the film across this distance. */
+.bat-page .bat-hero-track { height: 800svh; }
+.bat-page .bat-hero-track.bat-hero-reduced { height: 100svh; }
+@media (max-width: 767px) {
+  .bat-page .bat-hero-track { height: 100svh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bat-page .bat-hero-track { height: 100svh; }
+  .bat-hero-track video { display: none; }
+  .bat-hero-content { opacity: 1 !important; }
+}
+.bat-page [data-bat-section="multi-role"],
+.bat-page [data-bat-section="curtain"],
+.bat-page [data-bat-section="sequence"],
+.bat-page [data-bat-section="contact"],
+.bat-page .bat-sequence-boundary { height: 100dvh; }
+/* PREVIOUS UI:
+@media (max-width: 1023px) {
+  .bat-page .bat-payload-viewer,
+  .bat-page .bat-battery-section { height: 100dvh; min-height: 0; justify-content: flex-start; }
+  .bat-page .bat-payload-stage, .bat-page .bat-battery-stage { flex: 1; min-height: 0; aspect-ratio: auto; }
+  .bat-page .bat-payload-heading, .bat-page .bat-payload-controls, .bat-page .bat-battery-section header { flex-shrink: 0; }
+  .bat-page .bat-payload-button { min-height: 4.75rem; }
+  .bat-page .bat-payload-button-index { top: .35rem; left: .5rem; font-size: .5rem; }
+  .bat-page .bat-payload-button-label { left: .5rem; right: .5rem; bottom: .5rem; font-size: .75rem; }
+  .bat-page .bat-payload-button-label small { font-size: .625rem; margin-top: .2rem; }
+  .bat-page .bat-payload-controls { gap: .5rem; }
+}
+*/
+@media (max-width: 1023px) {
+  .bat-page .bat-payload-viewer,
+  .bat-page .bat-battery-section { height: 100dvh; min-height: 0; justify-content: flex-start; }
+  /* PREVIOUS UI: 9rem payload tiles pushed the final selection below the phone viewport. */
+  .bat-page .bat-payload-stage, .bat-page .bat-battery-stage { flex: 1; min-height: 0; aspect-ratio: auto; }
+  .bat-page .bat-payload-heading, .bat-page .bat-payload-controls, .bat-page .bat-battery-section header { flex-shrink: 0; }
+  .bat-page .bat-payload-button { min-height: 4.75rem; }
+  .bat-page .bat-payload-button-index { top: .35rem; left: .5rem; font-size: .5rem; }
+  .bat-page .bat-payload-button-label { left: .5rem; right: .5rem; bottom: .5rem; font-size: .75rem; }
+  .bat-page .bat-payload-button-label small { font-size: .625rem; margin-top: .2rem; }
+  .bat-page .bat-payload-controls { gap: .5rem; }
+}
+/* PREVIOUS UI:
+@media (max-width: 767px) {
+  .bat-page .bat-payload-controls > .bat-payload-button:last-child {
+    grid-column: 1 / -1;
+  }
+  .bat-page .bat-battery-stage video {
+    transform: translateY(0.5rem) scale(1.05);
+  }
+}
+*/
+/* PREVIOUS UI:
+@media (max-width: 767px) {
+  .bat-page .bat-payload-film {
+    top: clamp(1.25rem, 3.5svh, 2.5rem);
+    transform: scale(1.08);
+    transform-origin: center top;
+  }
+  .bat-page .bat-payload-stage-caption {
+    bottom: clamp(0.5rem, 1.5svh, 1rem);
+    padding-block: 0.65rem;
+  }
+  .bat-page .bat-payload-controls {
+    margin-bottom: clamp(1.5rem, 4svh, 2.5rem);
+  }
+  .bat-page .bat-payload-controls > .bat-payload-button:last-child {
+    grid-column: 1 / -1;
+  }
+}
+*/
+@media (max-width: 767px) {
+  /* Payloads & Sensors: move drone animation further down, move caption and buttons up */
+  .bat-page .bat-payload-film {
+    top: clamp(2.75rem, 7svh, 5rem);
+    transform: scale(1.1);
+    transform-origin: center top;
+  }
+  .bat-page .bat-payload-stage-caption {
+    bottom: clamp(1.5rem, 4svh, 2.5rem);
+    padding-block: 0.5rem;
+  }
+  .bat-page .bat-payload-controls {
+    transform: translateY(calc(-1 * clamp(1.25rem, 3svh, 2rem)));
+    margin-bottom: clamp(0.75rem, 2svh, 1.5rem);
+  }
+  .bat-page .bat-payload-controls > .bat-payload-button:last-child {
+    grid-column: 1 / -1;
+  }
+  .bat-page .bat-payload-button {
+    min-height: 4.25rem;
+  }
+
+  /* Battery Swap: center video in stage and increase video scale */
+  .bat-page .bat-battery-section {
+    padding-bottom: clamp(1rem, 3svh, 2.5rem);
+  }
+  .bat-page .bat-battery-stage video {
+    object-position: center center;
+    transform-origin: center center;
+    transform: scale(1.28);
+  }
+}
+@media (max-width: 400px) {
+  .bat-page .bat-payload-button {
+    min-height: 4.25rem;
+  }
+}
+body:has(.bat-page) footer,
+body:has(.fenix-page) footer,
+body:has(.maverick-page) footer { min-height: 100dvh; }
+body:has(.bat-page) .footer-short-bottom,
+body:has(.fenix-page) .footer-short-bottom,
+body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
+@media (min-width: 1024px) {
+  .bat-page {
+    --bat-gutter: clamp(2rem, 5vw, 7rem);
+    --bat-space: clamp(1rem, 2dvh, 3rem);
+    --bat-title: clamp(2.5rem, 3.5vw, 4rem);
+  }
+  .bat-page section { min-width: 0; isolation: isolate; }
+  .bat-page [data-bat-section="features"],
+  .bat-page [data-bat-section="missions"] {
+    padding-block: calc(5rem + var(--bat-space)) var(--bat-space);
+    min-height: 100dvh;
+  }
+  .bat-page [data-bat-section="features"] > div,
+  .bat-page [data-bat-section="missions"] > div {
+    max-width: 120rem;
+    padding-inline: var(--bat-gutter);
+  }
+  .bat-page [data-bat-section="features"] h1,
+  .bat-page [data-bat-section="missions"] h1,
+  .bat-page .bat-payload-heading h2,
+  .bat-page .bat-battery-section h2,
+  .bat-page .bat-multi-role-title {
+    font-size: var(--bat-title);
+    line-height: 1.1;
+  }
+  .bat-page [data-bat-section="features"] > div > div > :first-child,
+  .bat-page [data-bat-section="missions"] > div > :first-child {
+    margin-bottom: var(--bat-space);
+  }
+  .bat-page [data-bat-section="features"] h3 {
+    font-size: clamp(1.25rem, 1.4vw, 1.75rem);
+    line-height: 1.2;
+  }
+  .bat-page [data-bat-section="features"] p {
+    font-size: clamp(1rem, 1vw, 1.125rem);
+    line-height: 1.5;
+  }
+  .bat-page [data-bat-section="features"] > div > div > :last-child > div {
+    padding-block: clamp(0.25rem, 0.6dvh, 0.75rem);
+  }
+  .bat-page [data-bat-section="missions"] .grid > div > :first-child {
+    max-height: clamp(12rem, 32dvh, 28rem);
+  }
+  .bat-page [data-bat-section="missions"] .grid > div { min-width: 0; }
+  .bat-page [data-bat-section="missions"] .grid img { object-fit: contain; }
+  .bat-page [data-bat-section="missions"] p { color: #a3a3a3; }
+  .bat-page .bat-hero-content { padding-inline: var(--bat-gutter); }
+  .bat-page [data-bat-section="curtain"] h2 {
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    line-height: 1.1;
+  }
+  .bat-page [data-bat-section="curtain"] > div:nth-last-of-type(2) { padding-top: calc(5rem + var(--bat-space)); }
+  /* PREVIOUS UI: .bat-page [data-bat-section="contact"] h1 { font-size: clamp(2.5rem, 4vw, 4.5rem); } -- the heading now uses the FENIX closing sizes */
+  .bat-page .bat-payload-controls,
+  .bat-page .bat-payload-heading { width: 100%; max-width: 120rem; margin-inline: auto; }
+  .bat-page .bat-payload-button-label { font-size: clamp(0.875rem, 1vw, 1rem); }
+  .bat-page .bat-payload-button-label small,
+  .bat-page .bat-payload-stage-caption small { font-size: 0.875rem; line-height: 1.35; }
+}
+
+
+/* FENIx uses the same open, annotated product layout as MANTIS. */
+.fenix-details { min-height: 100svh; padding: var(--fenix-title-top) 6vw 3rem; }
+.fenix-details-heading { position: relative; z-index: 20; }
+.fenix-details-image { display: block; width: 115%; max-width: none; margin: 2rem -7.5% 1rem; }
+.fenix-details-callouts { display: grid; gap: 1.5rem; }
+.fenix-details-connectors { display: none; }
+@media (min-width: 640px) and (max-width: 1023px) {
+  .fenix-details-callouts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .fenix-details { height: 100svh; min-height: 0; padding: 0; }
+  .fenix-details-heading { position: absolute; top: var(--fenix-title-top); left: 5%; right: 5%; font-size: clamp(1.5rem, 2.9vw, 4rem); white-space: nowrap; }
+  .fenix-details-image { position: absolute; left: 43%; top: 13%; width: 98%; margin: 0; }
+  .fenix-details-callouts { position: absolute; left: 5%; top: max(11rem, 22svh); bottom: 5svh; margin: 0; padding: 0; width: 34%; gap: 1svh; grid-template-rows: repeat(5, minmax(0, 1fr)); }
+  .fenix-details-callouts > div { display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: clamp(.75rem, 2svh, 1.25rem); }
+  .fenix-details-callouts .product-body { min-height: 3em; margin-top: .4rem; font-size: clamp(.75rem, 1.45svh, .875rem); line-height: 1.5; }
+  .fenix-details-connectors { display: block; }
+}
+@media (min-width: 2560px) {
+  .fenix-details-callouts { width: 32%; max-width: 520px; }
+}
+
+
+
+/* Static frosted fragments preserve hints of lettering without a readable reveal. */
+.hangar-scratched-name { position: relative; display: inline-block; isolation: isolate; padding: .15rem .4rem; margin-left: -.4rem; border: 1px solid rgba(187,216,222,.1); border-radius: 3px; background: linear-gradient(110deg,rgba(194,218,224,.07),rgba(125,177,184,.015)); }
+.hangar-scratched-name > span { display: block; opacity: .42; filter: url(#hangar-fragmented-type); }
+.hangar-scratched-name::after { content: ""; position: absolute; width: 3px; height: 3px; right: 3px; bottom: 3px; border-radius: 1px; background: rgba(92,225,230,.45); }
+.hangar-scratched-detail { position: relative; display: inline-block; opacity: .28; filter: url(#hangar-fragmented-type); }
+/* Mobile hero art is composed independently from the wide desktop artwork. */
+@media (max-width: 767px) {
+  .mantis-hero-drone { inset: auto; left: 50%; top: 48%; width: 155%; max-width: none; height: auto; max-height: 62svh; object-fit: contain; transform: translate(-50%, -50%); }
+}
+@media (max-width: 767px) {
+  .mantis-page .mantis-three-drone { top: 37%; width: 270vw; }
+  .mantis-three-heading.title-panel-grid { --mobile-art-width: max(100%, calc(100svh * 941 / 1672)); --mobile-panel-width: calc(var(--mobile-art-width) / 3); --mobile-edge-width: calc((100% - var(--mobile-panel-width)) / 2); left: 0; right: 0; width: 100%; margin-left: 0; grid-template-columns: var(--mobile-edge-width) var(--mobile-panel-width) var(--mobile-edge-width); font-size: clamp(12px, 4vw, 18px); }
+}
+
+/* PREVIOUS UI:
+@media (max-width: 767px) {
+  .mantis-page [data-mantis-section="specs"] .bat-specs-dimensions { margin-top: 3rem; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-row { align-items: center; text-align: center; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-row dd { justify-content: center; }
+}
+*/
+@media (max-width: 767px) {
+  .bat-page [data-bat-section="specs"],
+  .mantis-page [data-mantis-section="specs"] {
+    padding: 5rem 5vw 2.5rem;
+    min-height: 100svh;
+  }
+  .bat-page [data-bat-section="specs"] .bat-specs-drone {
+    transform: scale(1.15);
+    max-height: clamp(160px, 30vh, 230px);
+  }
+  .bat-page [data-bat-section="specs"] .bat-specs-dimensions {
+    margin-top: 1.25rem;
+  }
+  .bat-page [data-bat-section="specs"] .bat-specs-row,
+  .mantis-page [data-mantis-section="specs"] .bat-specs-row {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    min-height: auto;
+    padding-block: 0.75rem 0.85rem;
+  }
+  .bat-page [data-bat-section="specs"] .bat-specs-row dd,
+  .mantis-page [data-mantis-section="specs"] .bat-specs-row dd {
+    font-size: clamp(1.75rem, 8vw, 3rem);
+    justify-content: center;
+    margin-top: 0.4rem;
+  }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-dimensions {
+    margin-top: 3rem;
+  }
+}
+.mantis-mobile-wing-connector { display: none; }
+@media (max-width: 767px) {
+  /* Align the wing anchor (44% of the 16:9 image) with the first callout title. */
+  .mantis-page .mantis-details-image { left: 3%; top: calc(27% + 2rem - 59.4vw + 5svh); width: 240%; }
+  .mantis-page .mantis-details-callouts { top: calc(27% + 12svh); }
+  .mantis-mobile-wing-connector { display: block; }
+  .mantis-details-callout:first-child::after { display: none; }
+  .mantis-page .mantis-swarm-drone { transform: scale(1.6); }
+}
+@media (max-width: 767px) {
+  .fenix-page .fenix-details { height: 100svh; min-height: 0; padding: max(5rem, 11svh) 6vw 1rem; display: flex; flex-direction: column; gap: .5rem; }
+  .fenix-details .fenix-details-heading { font-size: clamp(1.125rem, 5.5vw, 1.75rem); line-height: 1.15; flex-shrink: 0; }
+  .fenix-details .fenix-details-image { width: 94%; max-height: 22svh; object-fit: contain; margin: .25rem auto; flex-shrink: 0; }
+  .fenix-details .fenix-details-callouts { flex: 1; min-height: 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: repeat(5, minmax(min-content, 1fr)); gap: .4rem; }
+  .fenix-details-callouts > div { padding-bottom: .35rem; }
+  .fenix-details-callouts h3 { font-size: clamp(.6875rem, 2.8vw, .875rem); }
+  .fenix-details-callouts .product-body { font-size: clamp(.5625rem, 2.45vw, .75rem); line-height: 1.4; margin-top: .25rem; }
 }

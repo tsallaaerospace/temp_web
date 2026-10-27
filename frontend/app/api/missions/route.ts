@@ -11,7 +11,7 @@ const mockMissions: Mission[] = [
     status: "active",
     startDate: "2024-01-01T00:00:00Z",
     technologies: ["Roadrunner AI", "Phantom X1", "Sentinel Pro"],
-    images: ["/placeholder.jpg"],
+    images: ["/shared/placeholders/placeholder.jpg"],
   },
 ]
 

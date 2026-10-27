@@ -38,7 +38,7 @@ export default function WhatWeDo() {
         {/* Image Display */}
         <div className="relative w-full aspect-[4/5] sm:aspect-square md:aspect-auto md:h-[85vh] lg:h-[100vh] overflow-hidden flex-grow">
           <Image
-            src="/images/design-mode/c30de4a3e1c213e28f4b49a5d01d81652fca6f51-1536x1024.png"
+            src="/shared/images/c30de4a3e1c213e28f4b49a5d01d81652fca6f51-1536x1024.png"
             alt="What We Do - Tsalla Aerospace"
             fill
             className="object-cover object-top md:object-center"

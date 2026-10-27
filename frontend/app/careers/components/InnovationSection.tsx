@@ -8,31 +8,31 @@ export default function InnovationSection() {
         {
             link: '#',
             text: 'Family First',
-            image: '/images/careers/Familyfirst.jpg',
+            image: '/careers/Familyfirst.jpg',
             description: 'Platinum medical, dental, and vision coverage.'
         },
         {
             link: '#',
             text: 'NextGen Care',
-            image: '/images/careers/NextGen.jpg',
+            image: '/careers/NextGen.jpg',
             description: 'Fertility benefits and future family planning.'
         },
         {
             link: '#',
             text: 'Life Leave',
-            image: '/images/careers/lifeleave.jpg',
+            image: '/careers/lifeleave.jpg',
             description: 'Unlimited paid time off when life happens.'
         },
         {
             link: '#',
             text: 'Mind Support',
-            image: '/images/careers/MindSupport.jpg',
+            image: '/careers/MindSupport.jpg',
             description: '24/7 coaching and mental wellness stipends.'
         },
         {
             link: '#',
             text: 'Career Boost',
-            image: '/images/careers/careerboost.jpg',
+            image: '/careers/careerboost.jpg',
             description: 'Annual learning budgets and global mentorship.'
         }
     ];

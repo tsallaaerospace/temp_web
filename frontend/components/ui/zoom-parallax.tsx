@@ -42,7 +42,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                         >
                             <div className="relative h-[25vh] w-[25vw]">
                                 <img
-                                    src={src || '/placeholder.svg'}
+                                    src={src || '/shared/placeholders/placeholder.svg'}
                                     alt={alt || `Parallax image ${index + 1}`}
                                     className="h-full w-full object-cover"
                                 />

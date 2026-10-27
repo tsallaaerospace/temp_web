@@ -5,6 +5,8 @@ frontend/node_modules/
 # next.js build output
 .next/
 frontend/.next/
+.next-build-check/
+.next-recovery-*/
 out/
 build/
 
@@ -14,3 +16,9 @@ build/
 
 # logs
 *.log
+
+# generated knowledge-graph output (graphify)
+graphify-out/
+
+# personal Claude Code settings
+.claude/settings.local.json

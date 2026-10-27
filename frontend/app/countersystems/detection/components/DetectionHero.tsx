@@ -11,7 +11,7 @@ export default function DetectionHero() {
                 className="absolute inset-0 w-full h-full"
             >
                 <img
-                    src="/images/Counter-systems/Detection/detection.png"
+                    src="/countersystems/detection/detection.png"
                     alt="Detection System Hero"
                     className="w-full h-full object-cover"
                 />

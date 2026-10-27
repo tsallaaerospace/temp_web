@@ -37,7 +37,7 @@ export default function InitialLoader() {
                     <div className="min-h-screen bg-black flex items-center justify-center overflow-hidden">
                         <div className="relative w-full h-full flex items-center justify-center">
                             <img
-                                src="/logo2.svg"
+                                src="/Logo/logo2.svg"
                                 alt="Tsalla Aerospace Logo"
                                 className="w-32 h-32 md:w-[12rem] md:h-[12rem] filter drop-shadow-lg absolute"
                                 style={{
@@ -53,7 +53,7 @@ export default function InitialLoader() {
                                 }}
                             >
                                 <img
-                                    src="/svgmaker-editor.svg"
+                                    src="/Logo/svgmaker-editor.svg"
                                     alt="TSALLA AEROSPACE"
                                     className="h-16 md:h-24 w-auto"
                                 />

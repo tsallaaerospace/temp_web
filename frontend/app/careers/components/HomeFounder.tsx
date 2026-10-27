@@ -7,7 +7,7 @@ import React from 'react'
 const FounderNotePage = () => {
   const images = [
     {
-      src: "/images/design-mode/hero-2-2.jpg",
+      src: "/careers/hero-2-2.jpg",
       alt: "Founder team photo",
     },
     {
@@ -15,7 +15,7 @@ const FounderNotePage = () => {
       alt: "Cutting-edge technology lab",
     },
     {
-      src: "/images/design-mode/abb6bab613d7d967786b922562d07d61f60f873e-3840x2160.jpg",
+      src: "/shared/images/abb6bab613d7d967786b922562d07d61f60f873e-3840x2160.jpg",
       alt: "Tsalla Aerospace Innovation",
     },
     {
@@ -23,7 +23,7 @@ const FounderNotePage = () => {
       alt: "Collaborative workspace",
     },
     {
-      src: "/images/design-mode/c30de4a3e1c213e28f4b49a5d01d81652fca6f51-1536x1024.png",
+      src: "/shared/images/c30de4a3e1c213e28f4b49a5d01d81652fca6f51-1536x1024.png",
       alt: "Advanced drone systems",
     },
     {
@@ -31,7 +31,7 @@ const FounderNotePage = () => {
       alt: "Global connectivity and AI",
     },
     {
-      src: "/images/design-mode/759cf3b1631ac09f8787809500212d9914788964-4064x2286.jpg",
+      src: "/careers/759cf3b1631ac09f8787809500212d9914788964-4064x2286.jpg",
       alt: "Tsalla Mission Control",
     },
   ]

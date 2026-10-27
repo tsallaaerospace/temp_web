@@ -10,7 +10,7 @@ const mockNewsItems: NewsItem[] = [
     content: "Full news article content here...",
     publishedAt: "2024-01-15T00:00:00Z",
     category: "press-release",
-    featuredImage: "/placeholder.jpg",
+    featuredImage: "/shared/placeholders/placeholder.jpg",
   },
 ]
 

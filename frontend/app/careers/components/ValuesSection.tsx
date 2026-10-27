@@ -106,7 +106,7 @@ export default function ValuesSection() {
 
             <div className="relative w-full h-full overflow-hidden">
               <Image
-                src={selected.image || "/placeholder.svg"}
+                src={selected.image || "/shared/placeholders/placeholder.svg"}
                 alt={selected.title}
                 fill
                 className="object-cover brightness-125"

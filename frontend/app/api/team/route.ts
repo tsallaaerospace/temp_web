@@ -9,7 +9,7 @@ const mockTeamMembers: TeamMember[] = [
     role: "Chief Technology Officer",
     department: "Engineering",
     bio: "Leading AI and autonomous systems development with 15+ years of experience.",
-    avatar: "/placeholder-user.jpg",
+    avatar: "/shared/placeholders/placeholder-user.jpg",
     linkedin: "https://linkedin.com/in/sarahchen",
   },
 ]

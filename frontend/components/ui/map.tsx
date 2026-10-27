@@ -392,7 +392,7 @@ export function WorldMap({
                                 {/* Part 1: Image */}
                                 <div style={{ width: '100%', height: '70%', position: 'relative', overflow: 'hidden', borderBottom: '1px solid #eee' }}>
                                     <img
-                                        src="/building.avif"
+                                        src="/about/building.avif"
                                         alt="Bengaluru Facility"
                                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                     />

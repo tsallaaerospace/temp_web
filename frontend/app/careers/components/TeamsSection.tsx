@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { MapPin, Briefcase } from "lucide-react"
 import { ContentWrapper } from "@/components/ContentWrapper"
 import { internships, fullTimeRoles } from "../data/jobs"
@@ -82,11 +81,11 @@ export default function JobOpeningsPage() {
         </p>
 
         {/* Job Listings */}
+        <p className="text-neutral-400 text-sm mb-6">Applications are temporarily unavailable.</p>
         {/* Job Listings Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-6">
           {jobs.map((job, index) => (
-            <Link
-              href={`/careers/${job.slug}`}
+            <article
               key={index}
               className="block h-full"
             >
@@ -116,7 +115,7 @@ export default function JobOpeningsPage() {
                   </div>
                 </div>
               </div>
-            </Link>
+            </article>
           ))}
         </div>
       </ContentWrapper>

@@ -33,7 +33,7 @@ export default function AwardsAndCertification() {
     >
       {/* Background Image */}
       <Image
-        src="/images/company/get_in_touch.jpg"
+        src="/shared/images/get_in_touch.jpg"
         alt="Drone Silhouette Hero"
         fill
         className="object-cover object-center"

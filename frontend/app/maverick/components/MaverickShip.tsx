@@ -14,7 +14,7 @@ export default function MaverickShip(): React.JSX.Element {
           {/* Left Column: Image */}
           <div className="w-full md:w-1/2">
             <img
-              src="/images/design-mode/Stage-3.png"
+              src="/mesh/Stage-3.png"
               alt="Network of interconnected drones and ships"
               className="w-full h-[135%] object-cover"
               onError={(e) => {

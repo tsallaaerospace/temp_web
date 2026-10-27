@@ -35,27 +35,77 @@ const megaMenuData = {
     */
     links: [
       {
-        name: "FENIX",
+        name: "FENIx",
         href: "/fenix",
         description: "Fast Entry Navigational Intrusion eXplorer",
         details: {
-          headline: "FENIX",
+          headline: "FENIx",
           subheadline: "Fast Entry Navigational <br /> Intrusion eXplorer",
           droneImage:
-            "https://cdn.sanity.io/images/9w6n0tb6/production/4c840367c7d0ff1e0d69011e86932a7730a8c4f3-1707x1207.png",
+            "/product/fenix/4-phase-drone-old.png",
+          /* PREVIOUS UI:
           stats: { speed: "140 km/h", range: "60 km", endurance: "90 min", payload: "2.5 kg" }
+          */
+          stats: { speed: "5 m/s", range: "5 km", endurance: "20 min", payload: "EO+IR" }
         },
       },
       {
-        name: "BAT",
+        name: "T-BAT",
         href: "/bat",
         description: "Battlefield Aerial Tactical UAS",
         details: {
-          headline: "BAT",
+          headline: "T-BAT",
           subheadline: "Battlefield Aerial <br /> Tactical UAS",
           droneImage:
-            "https://cdn.sanity.io/images/9w6n0tb6/production/59638385bd840eeec0d9986948452b0046ef63a7-1707x1207.png",
+            "/product/T-BAT/multi-role-single-solution-drone.webp",
+          /* PREVIOUS UI:
           stats: { speed: "110 km/h", range: "150 km", endurance: "8 hrs", payload: "12 kg" }
+          */
+          stats: { speed: "18 m/s", range: "20+ km", endurance: "72+ min", payload: "EO+IR" }
+        },
+      },
+      {
+        name: "MANTIS",
+        href: "/mantis",
+        /* PREVIOUS UI:
+        description: "Multi-Role Single Solution",
+        description: "Mission Adaptive networked Targeting and interception system",
+        */
+        description: "Mission Adaptive Networked Targeting And Interception System",
+        /* PREVIOUS UI (Mantis details without stats):
+        details: {
+          headline: "MANTIS",
+          subheadline: "Multi-Role <br /> Single Solution",
+          droneImage: "/product/Mantis/3-phase-drone.png",
+        },
+        */
+        /* PREVIOUS UI (Mantis details with old subheadline):
+        details: {
+          headline: "MANTIS",
+          subheadline: "Multi-Role <br /> Single Solution",
+          droneImage: "/product/Mantis/3-phase-drone.png",
+          stats: { speed: "65 km/h", range: "35 km", endurance: "60 min", payload: "2 kg" },
+        },
+        details: {
+          headline: "MANTIS",
+          subheadline: "Mission Adaptive networked <br /> Targeting and interception system",
+          droneImage: "/product/Mantis/3-phase-drone.png",
+          stats: { speed: "65 km/h", range: "35 km", endurance: "60 min", payload: "2 kg" },
+        },
+        */
+        /* PREVIOUS UI (Mantis stats with Speed 65 km/h, Range 35 km):
+        details: {
+          headline: "MANTIS",
+          subheadline: "Mission Adaptive Networked <br /> Targeting And Interception System",
+          droneImage: "/product/Mantis/3-phase-drone.png",
+          stats: { speed: "65 km/h", range: "35 km", endurance: "60 min", payload: "2 kg" },
+        },
+        */
+        details: {
+          headline: "MANTIS",
+          subheadline: "Mission Adaptive Networked <br /> Targeting And Interception System",
+          droneImage: "/product/Mantis/Mantis-navbar.png",
+          stats: { speed: "30 m/s", range: "20 km", endurance: "60 min", payload: "2 kg" },
         },
       },
       {
@@ -182,11 +232,37 @@ const navigationItems = [
   { name: "JOIN THE MISSION", href: "#" },
 ]
 
+type SectionTone = { bg: string; light: boolean; darkText?: boolean }
+
+// Reads the background of the section currently under the navbar: takes the topmost page element at the
+// navbar's centre line (skipping the navbar itself) and walks up to the first solid background colour.
+// `light` picks the dark logo and links for pale sections.
+function sectionToneBehind(nav: HTMLElement): SectionTone | null {
+  const y = Math.max(1, nav.offsetHeight / 2)
+  const textSection = document.querySelector('[data-navbar-text]')
+  const bounds = textSection?.getBoundingClientRect()
+  if (bounds && bounds.top <= y && bounds.bottom > y) {
+    return { bg: "transparent", light: false, darkText: textSection?.getAttribute('data-navbar-text') === 'black' }
+  }
+  for (const el of document.elementsFromPoint(window.innerWidth / 2, y)) {
+    if (nav.contains(el)) continue
+    for (let node: Element | null = el; node; node = node.parentElement) {
+      const m = getComputedStyle(node).backgroundColor.match(/rgba?\(([^)]+)\)/)
+      if (!m) continue
+      const [r, g, b, a = 1] = m[1].split(/[\s,/]+/).filter(Boolean).map(Number)
+      if (a < 0.9) continue
+      const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255
+      return { bg: `rgb(${r}, ${g}, ${b})`, light: luminance > 0.55 }
+    }
+    return null
+  }
+  return null
+}
+
 export default function Navbar() {
   const pathname = usePathname()
   const router = useRouter()
   const [isVisible, setIsVisible] = useState(true)
-  const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null)
   const [hoveredNavLinkIndex, setHoveredNavLinkIndex] = useState<number | null>(null)
@@ -196,6 +272,31 @@ export default function Navbar() {
   const lastScrollY = useRef(0)
   const imageContainerRef = useRef<HTMLDivElement>(null)
   const [isGsapLoaded, setIsGsapLoaded] = useState(false);
+  // The solid navbar takes the colour of the section scrolled under it (see sectionToneBehind)
+  const navRef = useRef<HTMLElement>(null)
+  const [sectionTone, setSectionTone] = useState<SectionTone | null>(null)
+
+  useEffect(() => {
+    let frame = 0
+    const sample = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        if (!navRef.current) return
+        const next = sectionToneBehind(navRef.current)
+        setSectionTone(prev => (prev?.bg === next?.bg && prev?.darkText === next?.darkText && prev?.light === next?.light ? prev : next))
+      })
+    }
+    sample()
+    const settle = setTimeout(sample, 600) // after the page's sections have painted
+    window.addEventListener("scroll", sample, { passive: true })
+    window.addEventListener("resize", sample)
+    return () => {
+      cancelAnimationFrame(frame)
+      clearTimeout(settle)
+      window.removeEventListener("scroll", sample)
+      window.removeEventListener("resize", sample)
+    }
+  }, [pathname])
 
   // Sync ref with state
   useEffect(() => {
@@ -263,7 +364,6 @@ export default function Navbar() {
           setIsVisible(true)
         }
       }
-      setIsScrolled(currentScrollY > 50)
       lastScrollY.current = currentScrollY
     }
 
@@ -311,56 +411,30 @@ export default function Navbar() {
 
   const isMerchPage = pathname?.startsWith("/merchandise")
   const isHomePage = pathname === "/"
-  {/* PREVIOUS UI: const transparentPaths = ["/countersystems/detection", "/careers", "/maverick/ai-pilot", "/maverick/cortex", "/maverick/mesh"] */}
-  const transparentPaths = [
-    "/countersystems/detection",
-    "/careers",
-    "/maverick/ai-pilot",
-    "/maverick/cortex",
-    "/maverick/mesh",
-    "/fenix",
-    "/uncrewedsystems/fenix",
-    "/bat",
-    "/uncrewedsystems/bat",
-    "/storm",
-    "/uncrewedsystems/storm",
-    "/vulcan",
-    "/uncrewedsystems/vulcan",
-    "/sky-cat",
-    "/uncrewedsystems/sky-cat",
-    "/dexter",
-    "/uncrewedsystems/dexter",
-    "/uncrewedsystems"
-  ]
-  const isTransparentPage = transparentPaths.includes(pathname || "") || pathname?.startsWith("/uncrewedsystems")
-  
-  let navBackground = isScrolled || !isTransparentPage ? "bg-black" : "bg-transparent"
-  if (isHomePage) {
-    navBackground = isScrolled ? "bg-white border-b border-black/5 shadow-sm" : "bg-transparent"
-  } else if (isMerchPage) {
-    navBackground = "bg-white border-b border-black/5 shadow-sm"
-  }
+  const navBackground = "bg-transparent"
+  const darkNavText = sectionTone?.darkText || isMerchPage || Boolean(sectionTone?.light)
 
   return (
     <>
       <nav
+        ref={navRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
     ${isVisible ? "translate-y-0" : "-translate-y-full"}
     ${navBackground}
   `}
       >
         <div className="w-full">
-          <div className="relative flex items-center justify-between h-20 px-4">
+          <div className="relative flex items-center justify-between h-[4.5rem] px-4">
             {/* PREVIOUS UI: Link href="/" className="flex items-center z-50 pl-4 lg:ml-12" */}
             <Link href="/" className="flex items-center z-50 pl-1 sm:pl-4 lg:ml-12">
               <img
-                src={(isMerchPage || (isHomePage && isScrolled)) ? "/merch/TsallaAerospace_black.png" : "/tsalla_main.svg"}
+                src={darkNavText ? "/Logo/TsallaAerospace_black.png" : "/Logo/tsalla_main.svg"}
                 alt="Tsalla Aerospace"
                 width={260}
                 height={70}
                 className={cn(
                   "h-12 sm:h-14 md:h-16 w-auto",
-                  !(isMerchPage || (isHomePage && isScrolled)) && "brightness-150 contrast-125"
+                  !darkNavText && "brightness-150 contrast-125"
                 )}
               />
             </Link>
@@ -375,12 +449,8 @@ export default function Navbar() {
             </div>
             */}
 
-            {/* CURRENT UI (Centered active items & hidden disabled items across all pages) */}
             <div className="hidden lg:flex items-center h-full absolute left-1/2 -translate-x-1/2">
               {navigationItems.map((item, index) => {
-                {/* PREVIOUS CONDITION (Only hidden on Home Page):
-                const isDisabled = isHomePage && ["COUNTER SYSTEMS", "SPACE SYSTEMS", "COMPANY", "JOIN THE MISSION"].includes(item.name);
-                */}
                 const isDisabled = ["COUNTER SYSTEMS", "SPACE SYSTEMS", "COMPANY", "JOIN THE MISSION"].includes(item.name);
                 if (isDisabled) return null;
 
@@ -398,12 +468,13 @@ export default function Navbar() {
                   >
                     <Link
                       href={item.href}
+                      onClick={(event) => { if (item.name === "MAVERICK") { event.preventDefault(); setActiveMegaMenu("/maverick"); } }}
                       className="px-6 text-sm font-medium tracking-wider transition-colors h-full flex items-center"
                     >
                       <span
-                        className={`animated-underline font-orbit font-normal ${((item.name === "MAVERICK" && pathname.startsWith("/maverick")) || pathname === item.href || (item.name === "UNCREWED SYSTEMS" && pathname.startsWith("/uncrewedsystems")))
+                        className={`animated-underline font-orbit font-normal ${sectionTone?.darkText ? "text-black hover:text-[#5ce1e6]" : ((item.name === "MAVERICK" && pathname.startsWith("/maverick")) || pathname === item.href || (item.name === "UNCREWED SYSTEMS" && pathname.startsWith("/uncrewedsystems")))
                           ? "text-[#5ce1e6]"
-                          : (isMerchPage || (isHomePage && isScrolled)) ? "text-black hover:text-[#5ce1e6]" : "text-white hover:text-[#5ce1e6]"
+                          : darkNavText ? "text-black hover:text-[#5ce1e6]" : "text-white hover:text-[#5ce1e6]"
                           }`}
                       >
                         {item.name}
@@ -419,7 +490,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={cn(
                   "p-2 rounded transition-colors",
-                  (isMerchPage || (isHomePage && isScrolled)) ? "text-black hover:bg-black/5" : "text-white hover:bg-white/10"
+                  darkNavText ? "text-black hover:bg-black/5" : "text-white hover:bg-white/10"
                 )}
                 aria-label="Toggle mobile menu"
               >
@@ -446,7 +517,15 @@ export default function Navbar() {
                 }
               }}
               style={{ willChange: "opacity, transform" }}
+              /* PREVIOUS UI (Solid bg-black mega menu container):
               className="hidden lg:block absolute top-full left-0 right-0 bg-black border-b border-white/20 shadow-2xl z-40 overflow-hidden"
+              */
+              className={cn(
+                "hidden lg:block absolute top-full left-0 right-0 shadow-2xl z-40 overflow-hidden transition-all duration-300",
+                activeMegaMenu === "/uncrewedsystems"
+                  ? "hangar-glass border-b border-white/15"
+                  : "bg-black border-b border-white/20"
+              )}
               onMouseEnter={handleMouseEnterMegaMenu}
               onMouseLeave={handleMouseLeaveMegaMenu}
             >
@@ -521,7 +600,7 @@ export default function Navbar() {
                     className={cn(
                       "w-full xl:w-1/2 py-8 px-8 transition-all duration-500  ease-in-out relative overflow-hidden flex flex-col",
                       activeMegaMenu === "/uncrewedsystems"
-                        ? "bg-[linear-gradient(rgba(0,0,0,0.3),_rgba(0,0,0,0.3)),url('/blueprint-background.png')] bg-cover bg-center text-white"
+                        ? "bg-[linear-gradient(rgba(0,0,0,0.3),_rgba(0,0,0,0.3)),url('/shared/images/blueprint-background.png')] bg-cover bg-center text-white"
                         : "bg-white text-black",
                     )}
                   >
@@ -550,7 +629,7 @@ export default function Navbar() {
                         >
                           {hoveredUncrewedSystemDetails.droneImage && (
                             <img
-                              src={hoveredUncrewedSystemDetails.droneImage || "/placeholder.svg"}
+                              src={hoveredUncrewedSystemDetails.droneImage || "/shared/placeholders/placeholder.svg"}
                               alt={`${hoveredUncrewedSystemDetails.headline} drone`}
                               width={650}
                               height={500}
@@ -580,11 +659,14 @@ export default function Navbar() {
 
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 lg:hidden overflow-hidden">
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => {
+          <div className={cn("absolute inset-0", activeMegaMenu === "/uncrewedsystems" ? "bg-black/10" : "bg-black/80 backdrop-blur-sm")} onClick={() => {
             setMobileMenuOpen(false);
             setActiveMegaMenu(null);
           }} />
-          <div className="absolute top-20 left-0 right-0 bottom-0 bg-black/95 border-t border-white/20 overflow-hidden flex flex-col">
+          {/* PREVIOUS UI (Solid bg-black/95 mobile drawer):
+          <div className="absolute top-[4.5rem] left-0 right-0 bottom-0 bg-black/95 border-t border-white/20 overflow-hidden flex flex-col">
+          */}
+          <div className={cn("absolute top-[4.5rem] left-0 right-0 bottom-0 border-t border-white/10 overflow-hidden flex flex-col", activeMegaMenu === "/uncrewedsystems" ? "hangar-glass" : "bg-black/60 backdrop-blur-2xl")}>
             {activeMegaMenu ? (
               <div className="h-full flex flex-col">
                 <div className="flex-1 min-h-0 overflow-y-auto">
@@ -635,9 +717,6 @@ export default function Navbar() {
             ) : (
               <div className="flex flex-col h-full overflow-y-auto">
                 {navigationItems.map((item) => {
-                  {/* PREVIOUS CONDITION (Only hidden on Home Page):
-                  const isDisabled = isHomePage && ["COUNTER SYSTEMS", "SPACE SYSTEMS", "COMPANY", "JOIN THE MISSION"].includes(item.name);
-                  */}
                   const isDisabled = ["COUNTER SYSTEMS", "SPACE SYSTEMS", "COMPANY", "JOIN THE MISSION"].includes(item.name);
                   if (isDisabled) return null;
 
