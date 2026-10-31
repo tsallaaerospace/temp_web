@@ -64,18 +64,18 @@ export default function ValuesSection() {
   }
 
   return (
-    <section id="how-we-operate" className="bg-black text-white py-36 font-orbit">
+    <section id="how-we-operate" className="min-h-[100svh] flex flex-col justify-center bg-black text-white py-36 font-orbit">
       <ContentWrapper>
         <div className="max-w-7xl 2xl:max-w-[90rem] 3xl:max-w-[110rem] mx-auto grid md:grid-cols-2 gap-12 items-center">
           {/* Left: Heading and description */}
-          <div className="md:-mt-39 md:-ml-6 lg:-ml-0 xl:-ml-12 2xl:-ml-3">
-            <h2 className="text-white mb-6 uppercase tracking-widest text-4xl sm:text-5xl md:text-5xl lg:text-[3.5rem] xl:text-[4.0rem] font-semibold leading-tight xl:whitespace-nowrap">
+          <div className="careers-values-intro md:-mt-39 md:-ml-6 lg:-ml-0 xl:-ml-12 2xl:-ml-3">
+            <h2 className="careers-section-title text-white mb-6 uppercase">
               {/* Our Key Values
                */}
               How we Operate
 
             </h2>
-            <p className="text-[15px] sm:text-base lg:text-[0.88rem] font-light leading-relaxed text-gray-300 mb-8 text-justify">              Tsalla Aerospace is where visionaries and veterans converge to reimagine what's possible in flight and
+            <p className="careers-body text-gray-300 text-justify mb-8">              Tsalla Aerospace is where visionaries and veterans converge to reimagine what's possible in flight and
               defense. We prototype by sunrise, refine by midnight, and never settle for ordinary. Shaped by lived
               experience and fearless innovation, our team transforms challenges into breakthroughs.
             </p>
@@ -115,13 +115,13 @@ export default function ValuesSection() {
               <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-6 md:p-8">
                 <h3
                   key={selected.title + selectedIndex}
-                  className="text-2xl md:text-3xl font-semibold border-b border-white pb-2 mb-4 animate-text-up uppercase tracking-[0.1em]"
+                  className="careers-card-title border-b border-white pb-2 mb-4 animate-text-up uppercase"
                 >
                   {selected.title}
                 </h3>
                 <p
                   key={selected.description + selectedIndex}
-                  className="text-gray-200 text-base md:text-lg max-w-xl animate-text-up text-justify"
+                  className="careers-body text-gray-200 max-w-xl animate-text-up"
                   style={{ animationDelay: "0.1s" }}
                 >
                   {selected.description}

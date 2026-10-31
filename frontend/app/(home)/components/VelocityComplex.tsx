@@ -1,7 +1,9 @@
 "use client"
 
 import React from "react"
-import { motion } from "framer-motion"
+// PREVIOUS UI: motion.button animated on hover but had no navigation target.
+// import { motion } from "framer-motion"
+import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
 import CharacterReveal from "@/components/CharacterReveal"
@@ -35,12 +37,17 @@ export default function VelocityComplex() {
                         stagger={0.04}
                         triggerOnScroll={true}
                     />
-                    <motion.button
-                        whileHover={{ x: 3 }}
-                        className="flex items-center gap-2 text-xs md:text-sm font-normal opacity-50 hover:opacity-100 transition-opacity uppercase tracking-widest mr-0 sm:mr-8 lg:mr-12 3xl:mr-14 uw:mr-16"
-                    >
+                    {/* PREVIOUS UI:
+                    <motion.button whileHover={{ x: 3 }} className="flex items-center gap-2 text-xs md:text-sm font-normal opacity-50 hover:opacity-100 transition-opacity uppercase tracking-widest mr-0 sm:mr-8 lg:mr-12 3xl:mr-14 uw:mr-16">
                         Explore Velocity <ArrowUpRight className="w-3.5 h-3.5" />
                     </motion.button>
+                    */}
+                    <Link
+                        href="/velocity"
+                        className="flex min-h-11 items-center gap-2 text-xs md:text-sm font-normal opacity-70 hover:opacity-100 transition-opacity uppercase tracking-widest mr-0 sm:mr-8 lg:mr-12 3xl:mr-14 uw:mr-16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ce1e6]"
+                    >
+                        Explore Velocity <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5" />
+                    </Link>
                 </div>
 
                 {/* Main Hero Image */}

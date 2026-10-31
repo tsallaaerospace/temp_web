@@ -37,6 +37,7 @@ const FounderNotePage = () => {
   ]
 
   return (
+    <>
     <div className="bg-white text-black font-orbit min-h-screen pt-16">
       {/* Header Section */}
       <motion.h1
@@ -44,7 +45,7 @@ const FounderNotePage = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="text-center text-5xl sm:text-5xl md:text-6xl lg:text-[5rem] font-semibold tracking-[0.05em] text-black mb-6 uppercase px-4"
+        className="careers-section-title text-center text-black mb-6 uppercase px-4"
         style={{ fontFamily: "var(--font-orbit, 'Orbit', sans-serif)" }}
       >
         LIFE AT TSALLA
@@ -55,7 +56,7 @@ const FounderNotePage = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-        className="text-center text-neutral-500 text-lg md:text-xl font-light tracking-wide mb-16 sm:mb-24 px-4 mx-auto md:whitespace-nowrap"
+        className="careers-body text-center text-neutral-500 mb-16 sm:mb-24 px-4 mx-auto"
       >
         It's not who we're underneath, it's what we do that defines us.
       </motion.p>
@@ -64,17 +65,18 @@ const FounderNotePage = () => {
       <div className="w-full">
         <ZoomParallax images={images} />
       </div>
+    </div>
 
       {/* Content Section below the animation */}
-      <div className="py-24 sm:py-32 bg-black text-white">
+      <section id="founder-note" className="min-h-[100svh] flex flex-col justify-center py-24 sm:py-32 bg-black text-white">
         <ContentWrapper>
-          <div className="max-w-4xl mx-auto space-y-8 text-xl md:text-2xl font-light leading-relaxed text-neutral-300 text-justify">
+          <div className="careers-body max-w-4xl mx-auto space-y-8 text-neutral-300">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="font-bold text-neutral-500 text-sm md:text-base tracking-[0.3em] uppercase mb-4"
+              className="careers-label text-neutral-400 uppercase mb-4"
             >
               A NOTE FROM OUR FOUNDER
             </motion.p>
@@ -99,14 +101,14 @@ const FounderNotePage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="font-bold text-white text-2xl md:text-4xl mt-12 "
+              className="careers-card-title text-white mt-12"
             >
               This is the place for you.
             </motion.p>
           </div>
         </ContentWrapper>
-      </div>
-    </div>
+      </section>
+    </>
   )
 }
 

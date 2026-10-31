@@ -10,6 +10,7 @@ import HomeCareers2 from "./components/HomeCareers2"
 import HomeFounder from "./components/HomeFounder"
 import HomeHiringProcess from "./components/HomeHiringProcess"
 import OpposingMotionReveal from "./components/OpposingMotionReveal"
+import SectionSnap from "@/components/SectionSnap"
 
 import HiringProcess from "./components/HiringProcess"
 import InnovationSection from "./components/InnovationSection"
@@ -31,7 +32,8 @@ export default function CareersPage() {
   }, [])
 
   return (
-    <main className="bg-black text-white font-orbit">
+    <main className="careers-page bg-black text-white font-orbit snap-y snap-proximity scroll-smooth">
+      <SectionSnap panels=".careers-page > :is(section, main, div), footer" />
       <HomeCareersSection />
       <OpposingMotionReveal />
       <HomeCareers2 />

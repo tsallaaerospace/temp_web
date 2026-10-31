@@ -9,25 +9,25 @@ const features = [
         num: "01",
         title: "Dynamic Routing",
         desc: "Autonomously re-routes traffic through the best available node path when links degrade or fail, keeping data flowing without human intervention.",
-        img: "/images/AI-Pilot/hiw_perception.png"
+        img: "/mesh/hiw_perception.png"
     },
     {
         num: "02",
         title: "Secure Relay",
         desc: "End-to-end encrypted communications ensure mission-critical data cannot be intercepted, spoofed, or exploited across the tactical network.",
-        img: "/images/AI-Pilot/hiw_navigation.png"
+        img: "/mesh/hiw_navigation.png"
     },
     {
         num: "03",
         title: "Swarm Sync",
         desc: "Coordinates simultaneous tasking and shared situational awareness across entire swarms, enabling synchronized multi-platform engagement.",
-        img: "/images/AI-Pilot/hiw_teaming.png"
+        img: "/mesh/hiw_teaming.png"
     },
     {
         num: "04",
         title: "Resilient Denied Ops",
         desc: "Sustains connectivity and command authority in GPS-denied, comms-degraded, and fully contested electromagnetic environments.",
-        img: "/images/AI-Pilot/hiw_resilience.png"
+        img: "/mesh/hiw_resilience.png"
     }
 ]
 

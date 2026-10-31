@@ -277,7 +277,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                     {data.links.map((link: any, index: number) => {
                         const isFenix = link.href === "/fenix";
                         const isRedacted = /^(VULCAN|SKY[- ]?CAT|DEXTER)$/i.test(link.name);
-                        const isLocked = !["/fenix", "/bat", "/mantis"].includes(link.href);
+                        const isLocked = !["/fenix", "/bat", "/mantis", "/storm"].includes(link.href);
                         const isActive = hoveredUncrewedSystemDetails?.headline === link.details?.headline;
                         return (
                             <Link

@@ -1,1 +1,1 @@
-export { default } from "../../cortex/disabled"
+export { default } from "../../cortex/page"

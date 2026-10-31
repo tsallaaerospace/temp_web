@@ -1,5 +1,111 @@
 # Tsalla Aerospace - Project Change Log & Activity Record
 
+## 2026-10-31 — Save latest website updates in local Git
+
+### Website source and media
+- **BEFORE UI STATE:** Careers, navigation, Mesh, STORM and Velocity updates were present as uncommitted working-tree changes.
+- **AFTER UI STATE:** Collected the latest frontend source, media and changelog updates into a local Git commit. Generated previews and temporary files under `output/` are excluded. No push or deployment requested.
+- **Validation:** TypeScript check and Git whitespace checks passed before committing.
+
+## 2026-10-31 — Raise Velocity introduction slightly further
+
+### Velocity Page (/velocity) — Opening heading and paragraph
+- **BEFORE UI STATE:** Introduction top padding was reduced by 20px from its original value.
+- **AFTER UI STATE:** Reduced it by another 15px, for a total upward adjustment of 35px.
+
+## 2026-10-31 — Raise Velocity introduction
+
+### Velocity Page (/velocity) — Opening heading and paragraph
+- **BEFORE UI STATE:** The introduction used equal responsive top and bottom padding.
+- **AFTER UI STATE:** Reduced top padding by 20px, moving the opening heading and content slightly upward while preserving bottom spacing.
+
+## 2026-10-31 — Small STORM image alignment adjustment
+
+### STORM Page (/storm) — Specifications image
+- **BEFORE UI STATE:** The drone image had no horizontal offset.
+- **AFTER UI STATE:** Moved the image 10px left, retaining its current size and vertical position.
+
+## 2026-10-31 — Shift STORM right heading
+
+### STORM Page (/storm) — Specifications heading
+- **BEFORE UI STATE:** “More potential.” aligned with the right edge of the heading container.
+- **AFTER UI STATE:** Shifted that phrase 20px to the right on desktop screens. Mobile heading positioning remains unchanged.
+
+## 2026-10-31 — Lower STORM dimension row
+
+### STORM Page (/storm) — Specifications dimensions
+- **BEFORE UI STATE:** The Span, Width and Height row sat close to the bottom propellers.
+- **AFTER UI STATE:** Added 20px of space above the dimension row to move it lower and separate it from the drone.
+
+## 2026-10-31 — Distinct STORM environment title
+
+### STORM Page (/storm) — Environment panels heading
+- **BEFORE UI STATE:** The section repeated MANTIS's “Built Beyond Boundaries.” heading.
+- **AFTER UI STATE:** Changed the STORM title to “Ready. Rugged. Relentless.”, preserving the three-panel alignment and cyan middle word.
+
+## 2026-10-31 — STORM panel title and section scrolling
+
+### STORM Page (/storm) — Environment panels
+- **BEFORE UI STATE:** The environment background section had no title.
+- **AFTER UI STATE:** Added “Built Beyond Boundaries.” using the existing product heading and character reveal, with Beyond in cyan. Each word is centered over the visible portion of its image panel on desktop and mobile, with a top gradient for readability.
+
+### STORM Page (/storm) — Scroll behavior
+- **BEFORE UI STATE:** STORM used smooth free scrolling without the home/BAT section paging component.
+- **AFTER UI STATE:** Reused SectionSnap for STORM sections and footer, including the hero. Wheel and keyboard navigation move between sections while taller content remains scrollable and reduced-motion preferences remain respected.
+
+## 2026-10-31 — STORM environment background section
+
+### STORM Page (/storm) — Section immediately after hero
+- **BEFORE UI STATE:** The hero led directly into specifications after removal of the offshore autonomy section.
+- **AFTER UI STATE:** Added a full-screen environment image section between the hero and specifications. Uses the supplied `3 phase destop.png` above 767px and `3 phase mobile.png` on smaller screens, covering the section with centered imagery. No extra text or drone overlay was added.
+
+## 2026-10-31 — Delete STORM offshore autonomy section
+
+### STORM Page (/storm) — Resilient Offshore Autonomy
+- **BEFORE UI STATE:** A white section displayed a gimbal-camera image beside the “Resilient Offshore Autonomy” heading and offshore operations paragraph.
+- **AFTER UI STATE:** Removed the section import and render from the STORM page, and deleted `StormCapabilities.tsx` as explicitly requested. STORM now proceeds from its hero to specifications. Shared components and image assets remain available for other uses.
+
+## 2026-10-31 — Justify Velocity paragraphs
+
+### Velocity Page (/velocity) — Article typography
+- **BEFORE UI STATE:** Lead and body paragraphs were left aligned.
+- **AFTER UI STATE:** Lead, introduction and article paragraphs use justified alignment with normal final-line spacing. Headings and photo captions keep their existing alignment.
+
+## 2026-10-31 — Remove Velocity introduction label
+
+### Velocity Page (/velocity) — Introduction
+- **BEFORE UI STATE:** A cyan “Planned integrated campus / Andhra Pradesh” label appeared above the main heading.
+- **AFTER UI STATE:** Removed the label; the introduction starts with the 100-acre heading. The previous label is preserved in a source comment.
+
+## 2026-10-31 — Velocity charcoal background
+
+### Velocity Page (/velocity) — Background and dividers
+- **BEFORE UI STATE:** The introduction and article sections used a near-black `#090c0d` background.
+- **AFTER UI STATE:** These areas use `#3d3d3d`, matching the homepage Velocity section. Section dividers are lighter to remain visible. The existing light Andhra Pradesh section retains its contrast.
+
+## 2026-10-31 — Campus image within Velocity content
+
+### Velocity Page (/velocity) — Introduction image
+- **BEFORE UI STATE:** Removing the repeated homepage banner also removed the campus visual from the dedicated page.
+- **AFTER UI STATE:** Added the original campus image below the introduction as a responsive content figure. The page still opens with the 100-acre introduction, without repeating the homepage title or tagline. The document's meeting photo remains in the Andhra Pradesh section.
+
+## 2026-10-31 — Remove repeated Velocity banner
+
+### Velocity Page (/velocity) — Opening section
+- **BEFORE UI STATE:** The dedicated page repeated the homepage Velocity Complex title, campus image and manufacturing tagline before the document content.
+- **AFTER UI STATE:** The page opens directly with the 100-acre introduction as its main heading. The meeting photo and all document body content remain. The homepage campus banner and link remain unchanged. The removed page banner is preserved in a source comment.
+
+## 2026-10-31 — Velocity Complex page
+
+### Home Page (/) — Velocity Complex section
+- **BEFORE UI STATE:** Explore Velocity was a hover-animated button without a navigation destination.
+- **AFTER UI STATE:** Explore Velocity is a keyboard-accessible Next.js link to `/velocity`, retaining the existing visual style with a 44px minimum touch target. The previous button is preserved in a source comment.
+
+### Velocity Page (/velocity) — Hero and campus content
+- **BEFORE UI STATE:** No Velocity route or dedicated campus article existed.
+- **AFTER UI STATE:** Added a responsive page with the existing campus image and charcoal hero, all copy from `VELOCITY COMPLEX.docx`, the embedded meeting photo with its original caption, and the shared site navigation and footer. The planned status of the campus and runway remains explicit. Page metadata identifies Velocity Complex.
+- **Validation:** Source content assertion confirms all 38 body paragraphs, headings and caption remain in order. Browser checks passed at 320, 390, 768, 1440, 1920 and 3440px with both images loaded and no clipped text or horizontal overflow. Clicking Explore Velocity on the homepage successfully navigates to the page. Desktop/mobile hero and meeting-photo screenshots inspected. `tsc --noEmit --incremental false` passed. Production build not run alongside the active preview.
+
 > **Purpose**: This document maintains a clear, human-understandable record of all changes, updates, feature additions, and temporary feature disables across all prompts and chat sessions starting from **August 04, 2026**.
 > All changes are organized hierarchically by **Page Name** and **Specific Section**, explicitly detailing the **Before UI State** vs **After UI State** so anyone reviewing this repository can immediately understand what was modified and how to restore previous states if desired.
 

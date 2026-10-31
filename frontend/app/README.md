@@ -21,6 +21,15 @@ In Next.js the folder name is the web address: `app/bat/page.tsx` is `/bat`.
 | MANTIS | `mantis/` | `/mantis` | `/uncrewedsystems/mantis` |
 | AI-Pilot | `ai-pilot/` | `/ai-pilot` | `/maverick/ai-pilot` (redirects to `/ai-pilot`, see `next.config.mjs`) |
 | Contact | `contact/` | `/contact` | |
+| About | `about/` | `/about` | |
+| Leadership | `leadership/` | `/leadership` | |
+| Newsroom | `newsroom/` | `/newsroom` | |
+| Merchandise | `merchandise/` (+ `merchandise/[id]/` for each product) | `/merchandise` | |
+| Careers | `careers/` (+ `careers/culture/`, `careers/[slug]/` for each job) | `/careers` | |
+| Counter systems | `countersystems/` (+ `countersystems/detection/`) | `/countersystems` | |
+| Space systems | `hardware/` | `/hardware` | |
+| Cortex | `cortex/` | `/cortex` | `/maverick/cortex` (redirects to `/cortex`) |
+| Mesh | `mesh/` | `/mesh` | `/maverick/mesh` (redirects to `/mesh`) |
 
 The longer addresses work through one-line files in `uncrewedsystems/` and `maverick/` that point at the real page folder. Edit the page in its own folder, never the pointer.
 
@@ -31,24 +40,16 @@ These pages exist but are switched off: the file is named `disabled.tsx`, so Nex
 
 | Page | Folder | Pointer for the long address |
 |---|---|---|
-| About | `about/` | |
 | Blog | `blog/` | |
-| Careers | `careers/` (+ `careers/culture/`, `careers/[slug]/`) | |
 | Coming soon | `coming-soon/` | |
-| Counter systems | `countersystems/` (+ `countersystems/detection/`) | |
-| Cortex | `cortex/` | `maverick/cortex/disabled.tsx` |
 | Dexter | `dexter/` | `uncrewedsystems/dexter/disabled.tsx` |
 | Documents | `documents/` | |
-| Hardware | `hardware/` | |
-| Leadership | `leadership/` | |
-| Maverick | `maverick/disabled.tsx` | |
 | Media | `media/` | |
-| Merchandise | `merchandise/` (+ `merchandise/[id]/`) | |
-| Mesh | `mesh/` | `maverick/mesh/disabled.tsx` |
 | Mission | `mission/` | |
-| Newsroom | `newsroom/` | |
 | Roadrunner | `roadrunner/` | |
 | Storm | `storm/` | `uncrewedsystems/storm/disabled.tsx` |
+
+There is no `/maverick` page: the MAVERICK navbar button only opens its menu (AI-Pilot, Cortex, Mesh, and Integration marked "Coming soon"). The `maverick/` folder holds just the pointer files for the long addresses.
 
 ## Site-wide files (not a page)
 

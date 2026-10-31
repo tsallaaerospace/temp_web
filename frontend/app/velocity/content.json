@@ -1,0 +1,90 @@
+{
+  "lead": "Tsalla Aerospace’s planned integrated campus in Andhra Pradesh will bring aircraft design, simulation, experimentation, manufacturing, production and flight testing together—with one purpose: to put exceptional indigenous technology in the hands of those who protect us.",
+  "introduction": [
+    "The strength of a defence technology company lies in its ability to turn engineering into systems that servicemen can depend on. That requires the infrastructure to build, test, learn and build again.",
+    "Velocity Complex is being planned around that responsibility.",
+    "Envisioned across 100 acres, with land support from the Government of Andhra Pradesh, the campus will bring the full aircraft development cycle into one connected environment. Engineering teams, manufacturing facilities, integration spaces and flight-test operations will work alongside one another, supported by a planned runway and dedicated flight-testing space.",
+    "The ambition is clear: shorten the distance between an idea, a proven aircraft and a system ready to serve."
+  ],
+  "sections": [
+    {
+      "title": "Engineered for the complete development cycle",
+      "paragraphs": [
+        "At Velocity, the decisions made in design will remain connected to what happens on the production floor and in the air.",
+        "Aircraft geometry, structures, propulsion, electronics and autonomy will be developed within a shared engineering environment. Simulation will inform prototypes. Experiments will challenge assumptions. Flight-test data will return directly to the teams responsible for the next revision.",
+        "A lesson discovered in flight should move quickly into a design review, a manufacturing change and the next test.",
+        "Bringing these activities together is intended to reduce the delays and coordination burdens of development across separate locations. It will also help teams address manufacturability, inspection, assembly and maintenance earlier—when those decisions can have the greatest effect on the final system."
+      ],
+      "cycle": "Design. Simulate. Build. Fly. Refine. Produce.",
+      "image": null,
+      "closing": [
+        "One campus, organised around that continuous cycle."
+      ]
+    },
+    {
+      "title": "Built for the next class of uncrewed aircraft",
+      "paragraphs": [
+        "Velocity is being conceived to support increasingly capable uncrewed systems, including the development and testing of loyal wingman-class UAVs.",
+        "That ambition demands infrastructure beyond a prototype workshop. It requires room for aircraft assembly, systems integration, ground evaluation, flight preparation and sustained testing, alongside a path towards repeatable production.",
+        "The planned runway and flight-testing spaces are central to this vision. Their development and use will be aligned with the permissions, airspace access and safety requirements appropriate to the aircraft and programs they support.",
+        "The aim is to give Tsalla the physical foundation to take on larger, more complex aircraft programs and carry them through successive stages of development."
+      ],
+      "cycle": null,
+      "image": null,
+      "closing": []
+    },
+    {
+      "title": "Where autonomy meets the real world",
+      "paragraphs": [
+        "An autonomous aircraft must bring its software, sensors, onboard computing, communications and flight systems together reliably.",
+        "Velocity is intended to provide an environment in which Tsalla can evaluate that complete system—from simulation and controlled ground experiments to integrated flight trials.",
+        "For Maverick, our AI pilot, this means a closer connection between software development and aircraft behaviour. Engineering teams will be able to examine how individual capabilities perform together, investigate discrepancies and carry those lessons into subsequent tests.",
+        "The objective is to build confidence through evidence: progressively demonstrating what a system can do, understanding its limits and improving its reliability."
+      ],
+      "cycle": null,
+      "image": null,
+      "closing": []
+    },
+    {
+      "title": "Andhra Pradesh’s support. India’s capability.",
+      "paragraphs": [
+        "The Government of Andhra Pradesh’s support for the land provides an important foundation for the Velocity vision.",
+        "Access to space for long-term aerospace development can enable a company to plan beyond its next prototype—to establish facilities, develop specialist teams and build manufacturing capacity around an enduring program of work.",
+        "For Tsalla, this support creates an opportunity to bring engineering talent, industrial investment and advanced manufacturing into a shared ecosystem in Andhra Pradesh."
+      ],
+      "cycle": null,
+      "image": {
+        "src": "/velocity/andhra-pradesh-meeting.jpeg",
+        "caption": "Tsalla Aerospace Directors with the Minister of Infrastructure, Shri Janardhan Reddy, Government of Andhra Pradesh"
+      },
+      "closing": [
+        "As the campus develops, our ambition is to create opportunities for skilled engineers, technicians, manufacturing partners, suppliers and research institutions. The value should extend beyond the aircraft leaving the facility to the expertise, processes and industrial capability built around them.",
+        "This is how infrastructure can contribute to nation building: by giving Indian talent the means to create, prove and produce technology here at home and at scale."
+      ]
+    },
+    {
+      "title": "Infrastructure for long-term scale",
+      "paragraphs": [
+        "Velocity is intended to become a shared foundation for successive generations of Tsalla aircraft and autonomy systems.",
+        "Engineering facilities, manufacturing processes and testing infrastructure established for one program can strengthen the next. Teams can retain hard-won knowledge. Production methods can mature. Investment in development can contribute to capability that lasts beyond a single product.",
+        "For partners and investors, that is the significance of the campus: a planned foundation for turning technical ambition into repeatable execution, and individual programs into an enduring aerospace enterprise."
+      ],
+      "cycle": null,
+      "image": null,
+      "closing": []
+    },
+    {
+      "title": "Built for those who serve",
+      "paragraphs": [
+        "Every part of Velocity returns to the same purpose.",
+        "Our servicemen deserve technology developed with a clear understanding of their responsibilities and the conditions in which they operate. Delivering it demands rigorous engineering, sustained testing and the ability to keep improving.",
+        "Velocity Complex is our commitment to building that foundation in India."
+      ],
+      "cycle": null,
+      "image": null,
+      "closing": [
+        "100 acres dedicated to building, proving and producing the technology that will help protect those who protect us."
+      ]
+    }
+  ]
+}

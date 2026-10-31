@@ -1,0 +1,45 @@
+/* PREVIOUS UI: .page { background: #090c0d; color: #f5f5f5; } */
+.page { background: #3d3d3d; color: #f5f5f5; }
+.container { width: min(100% - 40px, 1680px); margin-inline: auto; }
+.hero { padding: max(110px, 12svh) 0 40px; background: #3d3d3d; }
+.hero h1 { margin-bottom: 28px; font-size: clamp(32px, 4.5vw, 80px); font-weight: 400; line-height: 1.1; letter-spacing: -0.04em; }
+.campus { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; }
+.campusFigure { margin-top: clamp(32px, 5vw, 80px); }
+.tagline { margin-top: 24px; text-align: right; font-size: clamp(13px, 1.1vw, 20px); line-height: 1.6; }
+/* PREVIOUS UI: .introduction { padding-block: clamp(64px, 8vw, 136px); } */
+/* PREVIOUS UI: top padding was reduced by 20px. */
+.introduction { padding-top: calc(clamp(64px, 8vw, 136px) - 35px); padding-bottom: clamp(64px, 8vw, 136px); }
+.label { margin-bottom: 24px; color: #5ce1e6; font-size: 12px; line-height: 1.6; letter-spacing: .08em; }
+/* PREVIOUS UI: the introduction used h2 while the campus banner supplied h1. */
+.introduction h1 { max-width: 1100px; font-size: clamp(30px, 3.8vw, 64px); font-weight: 400; line-height: 1.2; letter-spacing: -.035em; }
+.introduction h1 span { color: #5ce1e6; }
+.lead { max-width: 1150px; margin-block: 32px 48px; font-size: clamp(17px, 1.45vw, 24px); line-height: 1.7; }
+.introCopy, .copy { min-width: 0; color: #c4c8ca; font-size: clamp(14px, 1.1vw, 19px); line-height: 1.85; overflow-wrap: break-word; }
+/* PREVIOUS UI: article paragraphs used the default left alignment. */
+.lead, .introCopy p, .copy > p { text-align: justify; text-justify: inter-word; }
+.introCopy p + p, .copy p + p { margin-top: 24px; }
+/* PREVIOUS UI: section dividers used #303637 against the near-black background. */
+.section { padding-block: clamp(56px, 7vw, 120px); border-top: 1px solid #5a5f60; }
+.sectionGrid { display: grid; gap: 32px; }
+.sectionHeading h2 { font-size: clamp(26px, 2.8vw, 48px); font-weight: 400; line-height: 1.25; letter-spacing: -.025em; }
+.cycle { color: #5ce1e6; font-size: clamp(18px, 1.5vw, 26px); line-height: 1.6; }
+.support { background: #f6f6f3; color: #171717; }
+.support .label { color: #177c83; }
+.support .copy { color: #454b4d; }
+.meeting { margin-block: 32px; }
+.meeting img { width: 100%; height: auto; }
+.meeting figcaption { margin-top: 12px; font-size: 12px; line-height: 1.7; color: #5b6264; }
+.section:last-child .copy > p:last-child { color: #5ce1e6; margin-top: 32px; font-size: clamp(19px, 1.8vw, 30px); line-height: 1.6; }
+@media (min-width: 768px) {
+  .container { width: min(90%, 1680px); }
+  .campus { aspect-ratio: 2.65 / 1; }
+  .introCopy { max-width: 960px; margin-left: auto; }
+  .sectionGrid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: clamp(48px, 6vw, 120px); }
+}
+@media (min-width: 2500px) {
+  .container { width: min(88%, 2200px); }
+  .hero h1 { font-size: 96px; }
+  .introCopy, .copy { font-size: 23px; }
+  .introCopy { max-width: 1200px; }
+  .lead { max-width: 1450px; font-size: 28px; }
+}

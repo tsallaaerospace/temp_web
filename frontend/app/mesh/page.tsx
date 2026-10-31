@@ -8,7 +8,7 @@ import MeshDomains from "./components/MeshDomains"
 import MeshCapabilities from "./components/MeshCapabilities"
 import MeshHowItWorks from "./components/MeshHowItWorks"
 import MeshOperations from "./components/MeshOperations"
-import MaverickShip from "../maverick/components/MaverickShip"
+import MaverickShip from "./components/MaverickShip"
 
 export default function MeshPage() {
     return (

@@ -28,7 +28,7 @@ function BenefitRow({ id, text, delay }: { id: string; text: string; delay: numb
             className="border-t border-black/25 pt-3 pb-5"
         >
             <span
-                className="font-orbit text-[10px] tracking-[0.1em] text-neutral-700 uppercase"
+                className="careers-label text-neutral-700 uppercase"
                 style={{ fontFamily: "var(--font-orbit, 'Orbit', monospace)" }}
             >
                 {id}&nbsp;/&nbsp;&nbsp;{text}
@@ -39,7 +39,7 @@ function BenefitRow({ id, text, delay }: { id: string; text: string; delay: numb
 
 export default function FluidBenefitsStack() {
     return (
-        <section id="benefits" className="bg-white pt-16 pb-48 md:pt-28 md:pb-28 lg:pt-40 lg:pb-40 overflow-hidden">
+        <section id="benefits" className="min-h-[100svh] flex flex-col justify-center bg-white pt-16 pb-48 md:pt-28 md:pb-28 lg:pt-40 lg:pb-40 overflow-hidden">
 
             {/* Title — original left edge position */}
             <motion.h2
@@ -47,8 +47,7 @@ export default function FluidBenefitsStack() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
-                className="px-12 md:px-20 text-5xl sm:text-5xl md:text-6xl lg:text-[5rem] font-light tracking-tight text-neutral-900 mb-12 md:mb-16 lg:mb-20"
-                style={{ fontFamily: "var(--font-orbit, 'Orbit', sans-serif)", fontWeight: 300 }}
+                className="careers-section-title px-12 md:px-20 text-neutral-900 mb-12 md:mb-16 lg:mb-20"
             >
                 Benefits
             </motion.h2>
@@ -56,19 +55,11 @@ export default function FluidBenefitsStack() {
             {/* Two-column grid — aligned with title left edge */}
             <div className="px-12 md:px-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 md:gap-x-40 lg:gap-x-56">
-                    {/* Left column */}
-                    <div>
-                        {leftColumn.map((item, i) => (
-                            <BenefitRow key={item.id} id={item.id} text={item.text} delay={i * 0.06} />
+                    {[...leftColumn, ...rightColumn]
+                        .sort((a, b) => Number(a.id) - Number(b.id))
+                        .map((item, i) => (
+                            <BenefitRow key={item.id} id={item.id} text={item.text} delay={i * 0.03} />
                         ))}
-                    </div>
-
-                    {/* Right column */}
-                    <div>
-                        {rightColumn.map((item, i) => (
-                            <BenefitRow key={item.id} id={item.id} text={item.text} delay={item.id === "10" ? 0.3 : i * 0.06 + 0.03} />
-                        ))}
-                    </div>
                 </div>
             </div>
 

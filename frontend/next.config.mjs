@@ -70,7 +70,7 @@ const nextConfig = {
   // },
   async redirects() {
     return [
-      ...["ai-pilot"].map((name) => ({
+      ...["ai-pilot", "cortex", "mesh"].map((name) => ({
         source: `/maverick/${name}`,
         destination: `/${name}`,
         permanent: true,

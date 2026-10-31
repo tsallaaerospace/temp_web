@@ -1,39 +1,39 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence, useInView } from "framer-motion"
+import { motion, AnimatePresence, useInView, useReducedMotion } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const OPPOSE_ITEMS = [
     {
         title: "Design",
         description: "We start from first principles, architecting autonomous systems that redefine the physics of flight. Every line and every curve is engineered for extreme performance.",
-        image: "/careers/08b50f4f-79c5-4ae5-b5bf-fa2fcfb0b544.jpg"
+        video: "/careers/mission-rhythm/design-web.mp4"
     },
     {
         title: "Build",
         description: "From carbon composites to custom PCBs, our team turns CAD into reality. We build hardware that survives the harshest environments on Earth and beyond.",
-        image: "/shared/images/abb6bab613d7d967786b922562d07d61f60f873e-3840x2160.jpg"
+        video: "/careers/mission-rhythm/build-web.mp4"
     },
     {
         title: "Fly",
         description: "Launch. Navigate. Execute. Our autonomous flight controllers manage complex missions with millisecond precision, pushing the edge of what's possible in the sky.",
-        image: "/careers/v-bat-7c.jpg"
+        video: "/careers/mission-rhythm/fly-web.mp4"
     },
     {
         title: "Crash",
         description: "Failure is just data. We push our prototypes beyond their limits to find the breaking point. If we don't crash, we aren't innovating fast enough.",
-        image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&q=80"
+        video: "/careers/mission-rhythm/crash-trim-web.mp4"
     },
     {
         title: "Modify",
         description: "Analyze the debris. Iterate the code. Refine the structural integrity. We adapt our systems based on every flight, turning weaknesses into unfair advantages.",
-        image: "/careers/759cf3b1631ac09f8787809500212d9914788964-4064x2286.jpg"
+        video: "/careers/mission-rhythm/modify-trim-web.mp4"
     },
     {
         title: "Repeat",
         description: "Relentless iteration is our heartbeat. We scale our breakthroughs across platforms, constantly evolving to stay one step ahead of the challenge.",
-        image: "/shared/images/c30de4a3e1c213e28f4b49a5d01d81652fca6f51-1536x1024.png"
+        video: "/careers/mission-rhythm/repeat-web.mp4"
     }
 
 ]
@@ -42,32 +42,43 @@ const DRAG_THRESHOLD = 80 // px needed to trigger a card change
 
 const OpposingMotionReveal = () => {
     const [currentIndex, setCurrentIndex] = useState(0)
+    const [direction, setDirection] = useState(1)
+    const navigationTime = useRef(0)
     const [isPaused, setIsPaused] = useState(false)
+    const reduceMotion = useReducedMotion()
+    const pointerStart = useRef<number | null>(null)
     const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
     const sectionRef = useRef<HTMLElement>(null)
     const isInView = useInView(sectionRef, { amount: 0.5 })
 
     const resetTimer = () => {
         if (timerRef.current) clearInterval(timerRef.current)
-        if (isPaused || !isInView) return
+        if (isPaused || !isInView || reduceMotion) return
 
         timerRef.current = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % OPPOSE_ITEMS.length)
+            navigate(1)
         }, 2000)
     }
 
     useEffect(() => {
         resetTimer()
         return () => { if (timerRef.current) clearInterval(timerRef.current) }
-    }, [isPaused, isInView])
+    }, [isPaused, isInView, reduceMotion])
+
+    const navigate = (step: number) => {
+        if (!reduceMotion && performance.now() - navigationTime.current < 750) return
+        navigationTime.current = performance.now()
+        setDirection(step)
+        setCurrentIndex((prev) => (prev + step + OPPOSE_ITEMS.length) % OPPOSE_ITEMS.length)
+    }
 
     const goNext = () => {
-        setCurrentIndex((prev) => (prev + 1) % OPPOSE_ITEMS.length)
+        navigate(1)
         if (!isPaused) resetTimer()
     }
 
     const goPrev = () => {
-        setCurrentIndex((prev) => (prev - 1 + OPPOSE_ITEMS.length) % OPPOSE_ITEMS.length)
+        navigate(-1)
         if (!isPaused) resetTimer()
     }
 
@@ -83,18 +94,18 @@ const OpposingMotionReveal = () => {
     const visibleItems = getVisibleItems()
 
     return (
-        <section ref={sectionRef} className="relative h-screen w-full bg-black flex flex-col md:flex-row overflow-hidden">
+        <section ref={sectionRef} className="careers-rhythm relative h-screen w-full bg-black flex flex-col md:flex-row overflow-hidden">
             {/* Left 40% - High Impact Title */}
-            <div className="h-[35%] md:h-full w-full md:w-[40%] flex items-center md:items-start justify-center md:justify-start px-10 md:px-16 lg:px-20 pt-0 md:pt-32 lg:pt-40 z-20 bg-black md:border-r border-neutral-900">
+            <div className="careers-rhythm-intro h-[35%] md:h-full w-full md:w-[40%] flex items-center md:items-start justify-center md:justify-start px-10 md:px-16 lg:px-20 pt-0 md:pt-32 lg:pt-40 z-20 bg-black md:border-r border-neutral-900">
                 <div className="flex flex-col gap-6 lg:gap-8">
                     <motion.h1
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, ease: "easeOut" }}
-                        className="text-5xl sm:text-5xl md:text-65l lg:text-[4.7rem] font-black uppercase tracking-[0.05em] text-white font-orbit text-center md:text-left leading-[1.05] select-none"
+                        className="careers-section-title uppercase text-white text-center md:text-left select-none"
                         style={{
                             fontFamily: 'Orbit, sans-serif',
-                            fontWeight: 900
+                            fontWeight: 400
                         }}
                     >
                         {/* How We<br />Work */}
@@ -104,7 +115,7 @@ const OpposingMotionReveal = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-                        className="text-neutral-500 text-xs md:text-sm lg:text-[0.88rem] font-light leading-relaxed font-orbit text-justify [hyphens:auto] max-w-sm md:max-w-md lg:max-w-lg mt-8 lg:mt-34"
+                        className="careers-body text-neutral-400 text-justify max-w-sm md:max-w-md lg:max-w-lg mt-8 lg:mt-34"
                     >
                         Structured iteration under real constraints reveals failure points early. This disciplined engineering rhythm ensures every system is hardened, validated, and built to perform consistently—not occasionally.
                     </motion.p>
@@ -112,40 +123,57 @@ const OpposingMotionReveal = () => {
             </div>
 
             {/* Right 60% - Card UI Carousel */}
-            <div className="h-[65%] md:h-full w-full md:w-[60%] px-2 md:px-6 lg:px-8 flex items-center justify-center bg-black">
+            <div className="careers-rhythm-visual h-[65%] md:h-full w-full md:w-[60%] px-2 md:px-6 lg:px-8 flex items-center justify-center bg-black">
                 <div
-                    className="w-full h-[75%] md:h-[60%] flex gap-2 md:gap-3 lg:gap-1 items-center justify-center relative drag cursor-grab active:cursor-grabbing select-none group/nav"
+                    className="careers-rhythm-carousel w-full h-[75%] md:h-[60%] flex gap-2 md:gap-3 lg:gap-1 items-center justify-center relative drag cursor-grab active:cursor-grabbing select-none group/nav"
                     onPointerDown={(e) => {
-                        const startX = e.clientX
-                        const handlePointerUp = (upEvent: PointerEvent) => {
-                            const delta = upEvent.clientX - startX
-                            if (delta < -DRAG_THRESHOLD) goNext()
-                            else if (delta > DRAG_THRESHOLD) goPrev()
-                            window.removeEventListener("pointerup", handlePointerUp)
-                        }
-                        window.addEventListener("pointerup", handlePointerUp)
+                        if ((e.target as HTMLElement).closest("button")) return
+                        pointerStart.current = e.clientX
+                        e.currentTarget.setPointerCapture(e.pointerId)
                     }}
+                    onPointerUp={(e) => {
+                        if (pointerStart.current === null) return
+                        const delta = e.clientX - pointerStart.current
+                        pointerStart.current = null
+                        if (delta < -DRAG_THRESHOLD) goNext()
+                        else if (delta > DRAG_THRESHOLD) goPrev()
+                    }}
+                    onPointerCancel={() => { pointerStart.current = null }}
+                    style={{ touchAction: "pan-y" }}
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                 >
-                    <AnimatePresence mode="popLayout" initial={false}>
+                    <div className="relative w-full h-full overflow-hidden [--card-gap:8px] md:[--card-gap:12px] lg:[--card-gap:4px]">
+                    <AnimatePresence initial={false} custom={direction}>
                         {visibleItems.map((item, index) => (
                             <motion.div
                                 key={item.title}
-                                layout
-                                initial={{ x: index === 2 ? 500 : 0, opacity: index === 2 ? 0 : 1 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                exit={{ x: -500, opacity: 0 }}
-                                transition={{
-                                    duration: 1.2,
-                                    ease: [0.22, 1, 0.36, 1]
+                                custom={direction}
+                                variants={{
+                                    enter: (step: number) => ({ x: step > 0 ? "calc(300% + var(--card-gap) * 3)" : "calc(-100% - var(--card-gap))" }),
+                                    leave: (step: number) => ({ x: step > 0 ? "calc(-100% - var(--card-gap))" : "calc(300% + var(--card-gap) * 3)" })
                                 }}
-                                className="flex-1 h-full min-w-[260px] md:min-w-0 relative rounded-none overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] group"
+                                initial="enter"
+                                animate={{ x: `calc(${index * 100}% + var(--card-gap) * ${index})` }}
+                                exit="leave"
+                                transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
+                                className="careers-rhythm-card absolute inset-y-0 left-0 w-[calc((100%-var(--card-gap)*2)/3)] min-w-0 rounded-none overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] group"
                             >
-                                {/* Card Background Image */}
-                                <div
-                                    className="absolute inset-0 bg-cover bg-center transition-transform duration-[2000ms] group-hover:scale-110"
-                                    style={{ backgroundImage: `url(${item.image})` }}
+                                <video
+                                    src={item.video}
+                                    style={{ objectPosition: item.title === "Modify" ? "left center" : item.title === "Design" ? "35% center" : "center" }}
+                                    autoPlay={isInView && !reduceMotion}
+                                    muted
+                                    loop
+                                    playsInline
+                                    preload="metadata"
+                                    aria-label={`${item.title} at Tsalla Aerospace`}
+                                    ref={(video) => {
+                                        if (!video) return
+                                        if (isInView && !reduceMotion) void video.play().catch(() => {})
+                                        else video.pause()
+                                    }}
+                                    className="absolute inset-0 w-full h-full object-cover pointer-events-none transition-transform duration-[2000ms] group-hover:scale-110"
                                 />
 
                                 {/* Minimal gradient forw text readability only */}
@@ -157,7 +185,7 @@ const OpposingMotionReveal = () => {
                                         <motion.h3
                                             initial={{ y: -20, opacity: 0 }}
                                             animate={{ y: 0, opacity: 1 }}
-                                            className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-[0.05em] font-orbit text-white"
+                                            className="careers-card-title uppercase text-white"
                                         >
                                             {item.title}
                                         </motion.h3>
@@ -166,7 +194,7 @@ const OpposingMotionReveal = () => {
 
                                 {/* Bottom content - slides up on hover */}
                                 < div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10 translate-y-4 group-hover:-translate-y-20 transition-transform duration-700" >
-                                    <p className="text-xs md:text-sm font-light leading-relaxed text-neutral-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 mb-4">
+                                    <p className="careers-body careers-card-copy text-neutral-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 mb-4">
                                         {item.description}
                                     </p>
                                     {/* Cyan accent bar */}
@@ -175,10 +203,12 @@ const OpposingMotionReveal = () => {
                             </motion.div>
                         ))}
                     </AnimatePresence>
+                    </div>
 
                     {/* Left Button - Appears when mouse is near */}
                     <div className="absolute left-0 inset-y-0 flex items-center z-40 px-4 opacity-0 -translate-x-4 group-hover/nav:opacity-100 group-hover/nav:translate-x-0 transition-all duration-300 pointer-events-none">
                         <motion.button
+                            aria-label="Previous mission stage"
                             onClick={(e) => { e.stopPropagation(); goPrev(); }}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
@@ -191,6 +221,7 @@ const OpposingMotionReveal = () => {
                     {/* Right Button - Appears when mouse is near */}
                     <div className="absolute right-0 inset-y-0 flex items-center z-40 px-4 opacity-0 translate-x-4 group-hover/nav:opacity-100 group-hover/nav:translate-x-0 transition-all duration-300 pointer-events-none">
                         <motion.button
+                            aria-label="Next mission stage"
                             onClick={(e) => { e.stopPropagation(); goNext(); }}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}

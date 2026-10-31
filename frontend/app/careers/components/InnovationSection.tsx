@@ -38,11 +38,11 @@ export default function InnovationSection() {
     ];
 
     return (
-        <section className="w-full bg-white text-black py-20 md:py-32 relative overflow-hidden">
+        <section className="w-full min-h-[100svh] flex flex-col justify-center bg-white text-black py-20 md:py-32 relative overflow-hidden">
             <ContentWrapper>
                 <div className="flex flex-col items-center justify-center mb-4 md:-mb-19 relative">
                     <h2
-                        className="text-5xl md:text-8xl lg:text-[11rem] 2xl:text-[13rem] font-bold uppercase tracking-[0.05em] text-center leading-[1.1] md:leading-[0.85] mb-12 font-orbit"
+                        className="careers-display-title uppercase text-center mb-12"
                     >
                         Innovation<br />
                         in <span className="text-[#5ce1e6]">our</span><br />

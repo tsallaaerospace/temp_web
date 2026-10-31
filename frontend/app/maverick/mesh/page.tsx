@@ -1,1 +1,1 @@
-export { default } from "../../mesh/disabled"
+export { default } from "../../mesh/page"

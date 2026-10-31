@@ -1,5 +1,5 @@
 "use client"
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, useReducedMotion } from "framer-motion"
 import { useState, useEffect, useRef } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -22,6 +22,8 @@ const InsideTsallaAerospace = () => {
   const [index, setIndex] = useState(total)
   const [isPaused, setIsPaused] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(true)
+  const [offset, setOffset] = useState(0)
+  const reduceMotion = useReducedMotion()
 
   const goNext = () => {
     setIsTransitioning(true)
@@ -46,16 +48,24 @@ const InsideTsallaAerospace = () => {
     return -card.offsetLeft
   }
 
+  useEffect(() => {
+    const measure = () => setOffset(getOffset())
+    const observer = new ResizeObserver(measure)
+    if (containerRef.current) observer.observe(containerRef.current)
+    measure()
+    return () => observer.disconnect()
+  }, [index])
+
   // Auto slide
   useEffect(() => {
-    if (isPaused || !isInView) return
+    if (isPaused || !isInView || reduceMotion) return
     const timer = setInterval(() => {
       setIsTransitioning(true)
       setIndex((prev) => prev + 1)
     }, 3000)
 
     return () => clearInterval(timer)
-  }, [isPaused, isInView])
+  }, [isPaused, isInView, reduceMotion])
 
   // Seamless jump logic
   useEffect(() => {
@@ -95,16 +105,16 @@ const InsideTsallaAerospace = () => {
   }
 
   return (
-    <section ref={sectionRef} className="bg-[#fdfcfb] text-black font-orbit overflow-hidden">
+    <section ref={sectionRef} className="careers-culture bg-[#fdfcfb] text-black font-orbit overflow-hidden">
       {/* HEADER */}
       <div className="h-screen w-full flex flex-col items-center justify-center px-6 md:px-10 relative bg-[#fdfcfb]">
-        <div className="max-w-5xl mx-auto text-center px-4">
+        <div className="w-full max-w-[90rem] mx-auto text-center px-4">
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-[4.5rem] font-extrabold tracking-[0.1em] mb-4 uppercase leading-[0.9] whitespace-nowrap"
+            className="careers-inside-title mb-4 uppercase"
           >
             INSIDE TSALLA AEROSPACE
           </motion.h1>
@@ -113,7 +123,7 @@ const InsideTsallaAerospace = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
             viewport={{ once: true }}
-            className="text-gray-500 text-[10px] md:text-sm tracking-[0.35em] uppercase font-medium"
+            className="text-gray-500 text-sm md:text-lg tracking-[0.2em] uppercase font-normal"
           >
             REAL PEOPLE. REAL PASSION. REAL RESULTS.
           </motion.p>
@@ -121,12 +131,13 @@ const InsideTsallaAerospace = () => {
       </div>
 
       {/* CAROUSEL */}
-      <div className="bg-[#fdfcfb] text-black relative pt-12 pb-32 overflow-hidden">
+      <div className="careers-culture-carousel bg-[#fdfcfb] text-black relative pt-12 pb-32 overflow-hidden">
         <div className="ml-[4.5vw] md:ml-[5.3vw] lg:ml-[7vw] xl:ml-[6.5vw] 2xl:ml-[5.1vw] bg-[#fdfcfb]">
           <div
             ref={containerRef}
-            className="relative w-full overflow-hidden pr-[5vw] cursor-grab active:cursor-grabbing group/nav"
+            className="relative w-full pr-[5vw] cursor-grab active:cursor-grabbing group/nav"
           >
+            <div className="overflow-hidden">
             <motion.div
               ref={trackRef}
               className="flex relative"
@@ -137,9 +148,9 @@ const InsideTsallaAerospace = () => {
               onDragEnd={handleDragEnd}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
-              animate={{ x: getOffset() }}
+              animate={{ x: offset }}
               transition={
-                isTransitioning
+                isTransitioning && !reduceMotion
                   ? { type: "spring", stiffness: 70, damping: 18, mass: 0.8 }
                   : { duration: 0 }
               }
@@ -147,7 +158,7 @@ const InsideTsallaAerospace = () => {
               {slides.map((item, i) => (
                 <div
                   key={`${item.id}-${i}`}
-                  className="flex-[0_0_85vw] sm:flex-[0_0_30vw] md:flex-[0_0_21.75vw] border-y border-black relative px-6 md:px-10 py-20 min-h-[480px] flex flex-col justify-start hover:bg-black/5 transition-colors duration-500 select-none"
+                  className="careers-culture-card flex-[0_0_85vw] sm:flex-[0_0_30vw] md:flex-[0_0_21.75vw] border-y border-black relative px-6 md:px-10 py-20 min-h-[480px] flex flex-col justify-start hover:bg-black/5 transition-colors duration-500 select-none"
                 >
                   <div className="absolute left-0 top-[-1px] bottom-[-1px] w-[1px] bg-black z-10" />
                   <span className="text-gray-400 text-[10px] md:text-sm font-medium mb-3 block opacity-60 tracking-[0.2em]">
@@ -155,21 +166,23 @@ const InsideTsallaAerospace = () => {
                   </span>
 
                   <div className="min-h-[5rem] md:min-h-[4rem] mb-12">
-                    <h2 className="text-lg md:text-xl font-bold leading-[1.1] uppercase tracking-[0.05em] whitespace-pre-line">
+                    <h2 className="careers-card-title uppercase whitespace-pre-line">
                       {item.title}
                     </h2>
                   </div>
 
-                  <p className="text-gray-900 text-[10px] md:text-[14px] leading-relaxed font-light text-justify text-pretty [hyphens:auto]">
+                  <p className="careers-body text-gray-700 text-justify [hyphens:auto]">
                     {item.description}
                   </p>
                 </div>
               ))}
             </motion.div>
+            </div>
 
             {/* Left Button - Appears when mouse is near */}
-            <div className="absolute left-0 inset-y-0 flex items-center z-40 px-4 opacity-0 -translate-x-4 group-hover/nav:opacity-100 group-hover/nav:translate-x-0 transition-all duration-300 pointer-events-none">
+            <div className="absolute -left-6 inset-y-0 flex items-center z-40 opacity-0 -translate-x-4 group-hover/nav:opacity-100 group-hover/nav:translate-x-0 transition-all duration-300 pointer-events-none">
               <motion.button
+                aria-label="Previous culture card"
                 onClick={(e) => { e.stopPropagation(); goPrev(); }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -182,6 +195,7 @@ const InsideTsallaAerospace = () => {
             {/* Right Button - Appears when mouse is near */}
             <div className="absolute right-0 inset-y-0 flex items-center z-40 px-4 opacity-0 translate-x-4 group-hover/nav:opacity-100 group-hover/nav:translate-x-0 transition-all duration-300 pointer-events-none">
               <motion.button
+                aria-label="Next culture card"
                 onClick={(e) => { e.stopPropagation(); goNext(); }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}

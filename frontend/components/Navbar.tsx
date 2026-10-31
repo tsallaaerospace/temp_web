@@ -449,27 +449,23 @@ export default function Navbar() {
             </div>
             */}
 
-            <div className="hidden lg:flex items-center h-full absolute left-1/2 -translate-x-1/2">
+            {/* Right-aligned; from xl up the last label sits as far from the right edge as the logo does from the left */}
+            <div className="hidden lg:flex items-center h-full absolute right-6 xl:right-[56px] 2xl:right-[61px]">
               {navigationItems.map((item, index) => {
-                const isDisabled = ["COUNTER SYSTEMS", "SPACE SYSTEMS", "COMPANY", "JOIN THE MISSION"].includes(item.name);
-                if (isDisabled) return null;
-
                 return (
                   <div
                     key={item.name}
                     className="relative h-full"
                     onMouseEnter={() => {
                       const megaKey = item.name === "MAVERICK" ? "/maverick" : (item.name === "UNCREWED SYSTEMS" ? "/uncrewedsystems" : (item.name === "COMPANY" ? "/about" : (item.name === "JOIN THE MISSION" ? "/careers" : item.href)));
-                      if (item.name !== "SPACE SYSTEMS") {
-                        handleMouseEnterNav(megaKey);
-                      }
+                      handleMouseEnterNav(megaKey);
                     }}
                     onMouseLeave={handleMouseLeaveNav}
                   >
                     <Link
                       href={item.href}
                       onClick={(event) => { if (item.name === "MAVERICK") { event.preventDefault(); setActiveMegaMenu("/maverick"); } }}
-                      className="px-6 text-sm font-medium tracking-wider transition-colors h-full flex items-center"
+                      className="px-2.5 xl:px-4 2xl:px-6 text-xs xl:text-sm font-medium tracking-wider whitespace-nowrap transition-colors h-full flex items-center"
                     >
                       <span
                         className={`animated-underline font-orbit font-normal ${sectionTone?.darkText ? "text-black hover:text-[#5ce1e6]" : ((item.name === "MAVERICK" && pathname.startsWith("/maverick")) || pathname === item.href || (item.name === "UNCREWED SYSTEMS" && pathname.startsWith("/uncrewedsystems")))
@@ -717,15 +713,12 @@ export default function Navbar() {
             ) : (
               <div className="flex flex-col h-full overflow-y-auto">
                 {navigationItems.map((item) => {
-                  const isDisabled = ["COUNTER SYSTEMS", "SPACE SYSTEMS", "COMPANY", "JOIN THE MISSION"].includes(item.name);
-                  if (isDisabled) return null;
-
                   return (
                     <button
                       key={item.name}
                       onClick={() => {
                         const megaKey = item.name === "MAVERICK" ? "/maverick" : (item.name === "UNCREWED SYSTEMS" ? "/uncrewedsystems" : (item.name === "COMPANY" ? "/about" : (item.name === "JOIN THE MISSION" ? "/careers" : item.href)));
-                        if (["/uncrewedsystems", "/countersystems", "/about", "/careers", "/maverick"].includes(megaKey)) {
+                        if (["/uncrewedsystems", "/countersystems", "/about", "/careers", "/maverick", "/hardware"].includes(megaKey)) {
                           setActiveMegaMenu(megaKey);
                         } else {
                           // For other links, we can just navigate

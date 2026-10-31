@@ -1,11 +1,12 @@
 import type { Metadata } from "next"
 import PageWrapper from "@/components/PageWrapper"
 import StormHero from "./components/StormHero"
-import StormCapabilities from "./components/StormCapabilities"
+import StormThreePhase from "./components/StormThreePhase"
 import StormSpecifications from "./components/StormSpecifications"
 import StormLast from "./components/StormLast"
 import StormFeatures from "./components/StormFeatures"
 import StormMission from "./components/StormMission"
+import SectionSnap from "@/components/SectionSnap"
 
 
 
@@ -18,9 +19,10 @@ export const metadata: Metadata = {
 export default function StormPage() {
   // PREVIOUS UI: <PageWrapper>
   return (
-    <PageWrapper hasHero={true}>
+    <PageWrapper hasHero={true} className="storm-page font-orbit">
+      <SectionSnap panels=".storm-page > section, footer" />
       <StormHero />
-      <StormCapabilities />
+      <StormThreePhase />
       <StormSpecifications />
       <StormMission />
       <StormFeatures />

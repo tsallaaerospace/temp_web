@@ -924,6 +924,164 @@ html.lenis body {
 .fenix-page, .bat-page, .mantis-page { --fenix-title-top: max(90px, 10dvh); --fenix-title-inset: 5vw; }
 @media (max-width: 767px) { .fenix-page, .bat-page, .mantis-page { --fenix-title-top: max(88px, 10dvh); --fenix-title-inset: 6vw; } }
 .fenix-section-title, .product-section-title { font-size: clamp(2rem, 3.5vw, 4rem); }
+html:has(.careers-page) { font-size: 100%; }
+.careers-page > :is(section, main, div) { min-height: 100svh; }
+.careers-page .careers-section-title {
+  font-size: clamp(2rem, 3.5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.careers-page .careers-hero-title {
+  font-size: clamp(1.125rem, 3.4vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: normal;
+  white-space: nowrap;
+}
+.careers-page .careers-card-title {
+  font-size: clamp(1.125rem, 1.4vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+.careers-page .careers-body {
+  font-size: .875rem;
+  font-weight: 300;
+  line-height: 1.625;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+.careers-page .careers-label {
+  font-size: .75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: .1em;
+}
+.careers-page .careers-display-title {
+  font-size: clamp(3rem, 10vw, 10rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.careers-page .careers-inside-title {
+  font-size: clamp(2.25rem, 5vw, 6rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+@media (min-width: 1024px) {
+  .careers-page .careers-section-title { font-size: clamp(2.5rem, 3.5vw, 4rem); }
+  .careers-page .careers-body { font-size: clamp(1rem, 1vw, 1.125rem); }
+  .careers-page .careers-label { font-size: .875rem; }
+}
+.careers-page .careers-card-copy { font-size: .75rem; line-height: 1.6; }
+/* Careers adapts independently of the established desktop composition. */
+.careers-page #open-positions button { min-height: 44px; }
+@media (max-width: 767px) {
+  .careers-page .careers-hero-title { font-size: clamp(20px, 5.8vw, 28px); font-weight: 400; }
+  .careers-page .careers-jobs-intro { font-size: 12px; }
+  .careers-page .careers-display-title { font-size: clamp(42px, 13.5vw, 64px); }
+  .careers-page .careers-hero-subtitle { font-size: 16px; }
+  .careers-page .careers-hero-copy { font-size: 12px; }
+}
+@media (max-width: 1023px) {
+  .careers-page .careers-rhythm { height: auto; flex-direction: column; padding-block: max(88px, 10svh) 32px; gap: 28px; }
+  .careers-page .careers-rhythm-intro { width: 100%; height: auto; padding: 0 6vw; border: 0; }
+  .careers-page .careers-rhythm-intro > div { gap: 16px; width: 100%; }
+  .careers-page .careers-rhythm-intro h1 { text-align: left; }
+  .careers-page .careers-rhythm-intro p { margin-top: 0; max-width: 65ch; }
+  .careers-page .careers-rhythm-visual { width: 100%; height: clamp(320px, 50svh, 580px); padding-inline: 6vw; }
+  .careers-page .careers-rhythm-carousel { height: 100%; }
+  .careers-page .careers-rhythm-card { width: 100%; }
+  .careers-page .careers-rhythm-card > div:last-child { transform: none; padding: 24px 64px 24px 24px; }
+  .careers-page .careers-rhythm-card .careers-card-copy { opacity: 1; }
+  .careers-page .careers-rhythm-carousel > div:has(> button) { opacity: 1; transform: none; padding-inline: 8px; }
+  .careers-page .careers-rhythm-carousel button { display: flex; width: 44px; height: 44px; padding: 10px; }
+  .careers-page .careers-culture-card { flex-basis: 82vw; padding: 40px 24px; min-height: 440px; }
+  .careers-page .careers-culture-card h2 { min-height: 3.6em; }
+  .careers-page .careers-culture div:has(> button) { opacity: 1; transform: none; }
+  .careers-page .careers-culture button { display: flex; width: 44px; height: 44px; padding: 10px; }
+  .careers-page .careers-culture div:has(> button[aria-label="Previous culture card"]) { left: -12px; }
+  .careers-page #how-we-operate { padding-block: max(88px, 10svh) 48px; }
+  .careers-page #how-we-operate > div > div { grid-template-columns: 1fr; gap: 32px; }
+  .careers-page .careers-values-intro { margin: 0; }
+  .careers-page #how-we-operate button { min-height: 44px; font-size: 12px; padding-inline: 10px; letter-spacing: normal; }
+  .careers-page #how-we-operate button span { letter-spacing: normal; }
+  .careers-page #benefits { padding-block: max(88px, 10svh) 48px; }
+  .careers-page #benefits > h2, .careers-page #benefits > div { padding-inline: 6vw; }
+  .careers-page #benefits .grid { gap: 0 32px; }
+  .careers-page #open-positions { padding-block: max(88px, 10svh) 48px; }
+  .careers-page #open-positions button { padding-inline: 16px; flex: 1; }
+  .careers-page #open-positions div:has(> button) { gap: 12px; padding-inline: 0; }
+  .careers-page #open-positions button + button { margin-left: 0; }
+  .careers-page #founder-note { padding-block: max(88px, 10svh) 48px; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .careers-page .careers-culture-card { flex-basis: 44vw; }
+  .careers-page .careers-rhythm-card { width: calc((100% - var(--card-gap)) / 2); }
+}
+@media (max-width: 767px) {
+  .careers-page .careers-rhythm { height: 100svh; gap: 24px; padding-top: max(72px, 8svh); }
+  .careers-page .careers-culture-card { flex-basis: 100%; border: 1px solid #000; }
+  .careers-page .careers-culture-card > .absolute { display: none; }
+  .careers-page .careers-culture-carousel { padding-top: 72px; }
+  .careers-page .careers-culture div:has(> button[aria-label$="culture card"]) {
+    top: -56px;
+    bottom: auto;
+    height: 44px;
+    padding-inline: 0;
+  }
+  .careers-page .careers-culture div:has(> button[aria-label="Previous culture card"]) { left: 0; }
+  .careers-page .careers-culture div:has(> button[aria-label="Next culture card"]) { right: 5vw; }
+  .careers-page .careers-rhythm-intro { flex-shrink: 0; }
+  .careers-page .careers-rhythm-visual { height: auto; flex: 1; min-height: 0; }
+}
+@media (max-width: 767px) and (max-height: 600px) {
+  .careers-page .careers-rhythm { gap: 16px; padding-bottom: 20px; }
+  .careers-page .careers-rhythm-intro h1 { font-size: 28px; }
+  .careers-page .careers-rhythm-intro p { font-size: 12px; line-height: 1.5; }
+  .careers-page .careers-rhythm-card > div:last-child { padding: 12px 52px 12px 16px; }
+}
+@media (max-width: 767px) {
+  .careers-page #how-we-operate { height: 100svh; padding-block: 72px 16px; }
+  .careers-page #how-we-operate > div { display: flex; flex: 1; min-height: 0; padding-inline: 6vw; }
+  .careers-page #how-we-operate > div > div { display: flex; flex-direction: column; flex: 1; min-height: 0; gap: 16px; width: 100%; }
+  .careers-page .careers-values-intro { flex-shrink: 0; width: 100%; }
+  .careers-page .careers-values-intro h2 { margin-bottom: 12px; }
+  .careers-page .careers-values-intro p { font-size: 12px; line-height: 1.5; margin-bottom: 16px; }
+  .careers-page .careers-values-intro > .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .careers-page #how-we-operate button { min-height: 44px; padding: 8px; font-size: 10px; }
+  .careers-page .careers-values-intro + div { height: auto; flex: 1; min-height: 0; padding: 0; }
+  .careers-page .careers-values-intro + div .careers-body { font-size: 11px; line-height: 1.4; }
+  .careers-page .careers-values-intro + div .careers-card-title { font-size: 16px; margin-bottom: 8px; }
+  .careers-page .careers-values-intro + div .absolute { padding: 16px; }
+}
+@media (max-width: 767px) and (max-height: 600px) {
+  .careers-page #how-we-operate { padding-top: 64px; }
+  .careers-page .careers-values-intro h2 { font-size: 28px; margin-bottom: 8px; }
+  .careers-page .careers-values-intro p { font-size: 11px; margin-bottom: 12px; }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .careers-page #how-we-operate button { padding-inline: 8px; font-size: 12px; }
+  .careers-page .careers-rhythm-intro { padding-inline: 32px; padding-top: max(88px, 10svh); }
+  .careers-page .careers-rhythm-intro p { margin-top: 24px; }
+}
+@media (min-width: 2500px) {
+  .careers-page .careers-section-title { font-size: clamp(64px, 2.5vw, 112px); }
+  .careers-page .careers-hero-title { font-size: clamp(60px, 2vw, 96px); }
+  .careers-page .careers-card-title { font-size: clamp(28px, 1vw, 44px); }
+  .careers-page .careers-body { font-size: clamp(18px, .7vw, 28px); }
+  .careers-page .careers-label { font-size: clamp(16px, .6vw, 24px); }
+  .careers-page .careers-rhythm-intro { align-items: center; justify-content: flex-start; padding-top: 0; }
+  .careers-page #benefits > h2, .careers-page #benefits > div { width: 90%; max-width: 2400px; margin-inline: auto; }
+  .careers-page #open-positions > div:first-child { max-width: 2560px; margin-inline: auto; }
+}
+@media (min-width: 768px) {
+  .careers-page .careers-card-copy { font-size: .875rem; }
+}
 @media (min-width: 1024px) { .fenix-section-title, .product-section-title { font-size: clamp(2.5rem, 3.5vw, 4rem); } }
 @media (max-width: 1023px) { .fenix-section-title.fenix-title-fit, .product-section-title.product-title-fit { font-size: clamp(1rem, 3.5vw, 2rem); } }
 .product-title-position { position: absolute; top: var(--fenix-title-top); left: var(--fenix-title-inset); right: var(--fenix-title-inset); }
@@ -1199,6 +1357,46 @@ html.lenis body {
 .bat-specs-ticks { position: absolute; }
 */
 .bat-specs-ticks { display: none !important; }
+html:has(.storm-page) { font-size: 100%; }
+.storm-three-phase { --fenix-title-top: max(90px, 10svh); --fenix-title-inset: 0px; }
+.storm-three-heading {
+  --phase-art-width: max(100%, calc(100svh * 1672 / 941));
+  --phase-panel-width: calc(var(--phase-art-width) / 3);
+  --phase-edge-width: calc((100% - var(--phase-panel-width)) / 2);
+  grid-template-columns: var(--phase-edge-width) var(--phase-panel-width) var(--phase-edge-width);
+}
+@media (max-width: 767px) {
+  .storm-three-heading.product-section-title {
+    --phase-art-width: max(100%, calc(100svh * 940 / 1672));
+    font-size: clamp(12px, 4vw, 18px);
+  }
+}
+.storm-specs { --fenix-title-top: max(90px, 10dvh); --fenix-title-inset: 5vw; flex-direction: column; padding-top: var(--fenix-title-top); }
+.storm-specs .product-title-position { position: static; width: 100%; margin-bottom: 24px; }
+.storm-specs .bat-specs-grid { flex: 1; align-content: center; }
+.storm-specs .bat-specs-figure { padding: 0; gap: 0; }
+/* PREVIOUS UI: transform: translateY(-60px) scale(1.4); */
+.storm-specs .bat-specs-drone { transform: translate(-10px, -60px) scale(1.4); max-height: calc(100svh - max(90px, 10svh) - 18rem); }
+.storm-specs .bat-specs-frame, .storm-specs .bat-specs-dimensions { transform: none; }
+/* PREVIOUS UI: .storm-specs .bat-specs-dimensions { margin-top: 1rem; } */
+.storm-specs .bat-specs-dimensions { margin-top: calc(1rem + 20px); }
+@media (min-width: 1024px) {
+  .storm-specs .product-title-position { display: flex; justify-content: space-between; gap: 24px; }
+  .storm-specs .product-title-position > span:last-child { transform: translateX(20px); }
+}
+@media (max-width: 1023px) {
+  .storm-specs { flex-direction: column; padding-top: max(88px, 10svh); }
+  .storm-specs .product-title-position { position: static; width: 100%; margin-bottom: 24px; }
+  .storm-specs .bat-specs-figure { grid-column: 1 / -1; }
+  .storm-specs .bat-specs-drone { max-height: 50svh; }
+  .storm-specs .bat-specs-row { align-items: center; text-align: center; }
+  .storm-specs .bat-specs-row dd { justify-content: center; }
+}
+@media (max-width: 767px) {
+  .storm-specs { padding-bottom: 20px; }
+  .storm-specs .bat-specs-drone { max-height: 34svh; }
+  .storm-specs .bat-specs-row { min-height: 0; padding-block: 8px; }
+}
 /* PREVIOUS UI (Subgrid with spanning drone figure that added excess drone height):
 @media (min-width: 1024px) {
   .bat-specs { height: 100dvh; }

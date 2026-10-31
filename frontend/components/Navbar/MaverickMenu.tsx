@@ -5,6 +5,18 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 
+// href: null = no page yet (shown as "Coming soon", not clickable)
+const menuItems: { title: string; subtitle: string; href: string | null }[] = [
+    { title: "AI-Pilot", subtitle: "Advanced operation design", href: "/ai-pilot" },
+    { title: "Cortex", subtitle: "Real-time mission control", href: "/cortex" },
+    { title: "Mesh", subtitle: "Post-mission intelligence", href: "/mesh" },
+    { title: "Integration", subtitle: "Coming soon", href: null },
+]
+
+// 2x2 grid borders: right edge on the left column, bottom edge on the top row
+const borderFor = (index: number) =>
+    ["md:border-r border-b", "border-b", "md:border-r border-b md:border-b-0", ""][index] + " border-gray-200"
+
 interface MaverickMenuProps {
     onClose: () => void;
 }
@@ -49,18 +61,31 @@ export const MaverickMenu: React.FC<MaverickMenuProps> = ({ onClose }) => {
             </div>
 
             {/* Right Side - Grid */}
-            <div className="w-full xl:w-2/3 bg-white flex-1">
-                <Link
-                    href="/ai-pilot"
-                    onClick={onClose}
-                    className="relative h-full bg-gray-100 hover:bg-white p-6 lg:p-8 flex flex-col justify-center group hover:z-20 transition-all duration-500 ease-out overflow-hidden"
-                >
-                    <div className="absolute inset-0 bg-[#5ce1e6]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="relative z-10 w-full">
-                        <h4 className="text-xl lg:text-3xl font-light mb-1 group-hover:text-[#5ce1e6] transition-colors duration-300 font-orbit">AI-Pilot</h4>
-                        <p className="text-[9px] uppercase tracking-[0.2em] text-gray-400 font-mono group-hover:text-black transition-colors delay-75">Real time mission control</p>
-                    </div>
-                </Link>
+            <div className="w-full xl:w-2/3 bg-white grid grid-cols-1 md:grid-cols-2 xl:grid-rows-2 flex-1">
+                {menuItems.map((item, index) => {
+                    const content = (
+                        <div className="relative z-10 w-full">
+                            <h4 className={`text-xl lg:text-3xl font-light mb-1 font-orbit ${item.href ? "group-hover:text-[#5ce1e6] transition-colors duration-300" : "text-gray-400"}`}>{item.title}</h4>
+                            <p className="text-[9px] uppercase tracking-[0.2em] text-gray-400 font-mono group-hover:text-black transition-colors delay-75">{item.subtitle}</p>
+                        </div>
+                    )
+                    const tileClass = `relative bg-gray-100 p-6 lg:p-8 flex flex-col justify-center overflow-hidden ${borderFor(index)}`
+
+                    if (!item.href) {
+                        return <div key={item.title} className={`${tileClass} cursor-default`}>{content}</div>
+                    }
+                    return (
+                        <Link
+                            key={item.title}
+                            href={item.href}
+                            onClick={onClose}
+                            className={`${tileClass} hover:bg-white group hover:z-20 transition-all duration-500 ease-out`}
+                        >
+                            <div className="absolute inset-0 bg-[#5ce1e6]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            {content}
+                        </Link>
+                    )
+                })}
             </div>
         </div>
     )
