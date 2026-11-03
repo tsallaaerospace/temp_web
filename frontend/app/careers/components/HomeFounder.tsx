@@ -79,7 +79,7 @@ const FounderNotePage = () => {
 
   return (
     <>
-    <div className="bg-white text-black font-orbit min-h-screen pt-16">
+    <div id="life-at-tsalla" className="bg-white text-black font-orbit min-h-screen pt-16">
       {/* Header Section */}
       <motion.h1
         initial={{ opacity: 0, y: 30 }}

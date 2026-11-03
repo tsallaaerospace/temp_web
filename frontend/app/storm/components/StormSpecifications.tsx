@@ -25,7 +25,7 @@ export default function StormSpecifications() {
       <div className="bat-specs-grid">
         <figure className="bat-specs-figure relative">
           <div className="bat-specs-frame">
-            <img className="bat-specs-drone" src="/product/STORM/storm-top-view-black-outline.webp" alt="Technical top view of STORM with a black outlined white airframe and dark faceted carbon-fiber propellers" width={2048} height={2048} loading="lazy" decoding="async" />
+            <img className="bat-specs-drone" src="/product/STORM/storm-3-phase-top-view.webp" alt="Technical top view of STORM with a black outlined white airframe and dark faceted carbon-fiber propellers" width={2048} height={2048} loading="lazy" decoding="async" />
           </div>
           <dl className="bat-specs-dimensions">
             {dimensions.map(({ label, value }) => <div key={label}><dt>{label}</dt><dd>{value}<span>mm</span></dd></div>)}

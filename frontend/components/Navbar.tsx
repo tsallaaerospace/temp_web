@@ -215,10 +215,10 @@ const megaMenuData = {
     description:
       "Join a team of innovators, engineers, and visionaries pushing the boundaries of what's possible in autonomous systems and aerospace technology.",
     links: [
-      { name: "Open Positions", href: "/careers", description: "Current opportunities" },
+      { name: "Open Positions", href: "/careers#open-positions", description: "Current opportunities" },
       { name: "Engineering", href: "/careers#engineering", description: "Build the future" },
       { name: "Research", href: "/careers#research", description: "Advance the science" },
-      { name: "Culture", href: "/careers#culture", description: "Our work environment" },
+      { name: "Culture", href: "/careers#life-at-tsalla", description: "Our work environment" },
     ],
   },
 }

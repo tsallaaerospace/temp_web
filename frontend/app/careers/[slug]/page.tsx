@@ -24,7 +24,9 @@ export default function JobDetailsPage({ params }: { params: Promise<{ slug: str
                     {/* LEFT COLUMN - STICKY INFO */}
                     <div className="lg:col-span-5 lg:sticky lg:top-32 h-fit">
                         <Link
-                            href="/careers#open-positions"
+                            // PREVIOUS UI: href="/careers#open-positions" reset the list position.
+                            href="/careers"
+                            scroll={false}
                             className="group inline-flex items-center gap-3 px-5 py-2 bg-white border border-neutral-200 hover:border-black rounded-full transition-all duration-300 mb-12 hover:shadow-[0_4px_20px_-10px_rgba(0,0,0,0.1)]"
                         >
                             <div className="w-6 h-6 rounded-full bg-neutral-100 group-hover:bg-black flex items-center justify-center transition-all duration-300">

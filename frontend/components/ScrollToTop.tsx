@@ -42,23 +42,37 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     if (!lenis) return
-    const navigated = lastPath.current !== null && lastPath.current !== pathname
+    const previousPath = lastPath.current
+    const returningToCareers = pathname === "/careers" && !!previousPath?.startsWith("/careers/")
+    const careersAnchor = pathname === "/careers"
+      ? sessionStorage.getItem("tsalla_careers_section") || window.location.hash.slice(1)
+      : ""
+    if (pathname === "/careers") sessionStorage.removeItem("tsalla_careers_section")
+    const navigated = previousPath !== null && previousPath !== pathname
     lastPath.current = pathname
 
     if (navigated) {
-      savedOnLoad.current = 0
-      lenis.scrollTo(0, { immediate: true, force: true })
-      return
+      // PREVIOUS UI: Every route change reset scrolling to the hero.
+      savedOnLoad.current = returningToCareers ? Number(sessionStorage.getItem("tsalla_careers_return_y")) || 0 : 0
+      if (!returningToCareers && !careersAnchor) {
+        lenis.scrollTo(0, { immediate: true, force: true })
+        return
+      }
     }
 
     // Same page as loaded (React may run this effect twice in development): restore the saved spot
     const saved = savedOnLoad.current
-    if (!saved) return
+    if (!saved && !careersAnchor && !returningToCareers) return
 
     // One-shot: once the restore window ends or the reader scrolls, never pull them back again
     let cancelled = false
     const stop = () => { cancelled = true; savedOnLoad.current = 0 }
-    const restore = () => { if (!cancelled) lenis.scrollTo(saved, { immediate: true, force: true }) }
+    const restore = () => {
+      if (cancelled) return
+      const target = document.getElementById(careersAnchor || (returningToCareers && !saved ? "open-positions" : ""))
+      const top = target ? target.getBoundingClientRect().top + window.scrollY : saved || 0
+      lenis.scrollTo(top, { immediate: true, force: true })
+    }
     const timers = RESTORE_TIMES_MS.map(ms => setTimeout(restore, ms))
     timers.push(setTimeout(stop, RESTORE_TIMES_MS[RESTORE_TIMES_MS.length - 1] + 50))
     window.addEventListener("load", restore)

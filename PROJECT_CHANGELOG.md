@@ -2740,3 +2740,63 @@
 #### Section: Qualifications and application
 - BEFORE UI STATE: Qualifications and divider each added mb-20, creating a large blank gap before Ready to apply?.
 - AFTER UI STATE: Both margins use mb-8, reducing the combined spacing from 160px to 64px at the default root size.
+
+
+## November 3, 2026 — Careers return position and navigation targets
+
+### Page: Career role details (/careers/[slug])
+#### Section: Back navigation
+- BEFORE UI STATE: Back linked to the jobs anchor but global scroll handling reset the page to its hero. Internship tab selection was lost.
+- AFTER UI STATE: Back returns to /careers without a forced scroll, restoring the saved job-list position and selected job tab. Direct role visits without a saved position fall back to Job Openings.
+### Page: Global navigation and Careers (/careers)
+#### Section: Join the Mission menu
+- BEFORE UI STATE: Culture targeted How We Operate; hash links could be overridden by the route scroll reset.
+- AFTER UI STATE: Culture targets Life at Tsalla, Benefits targets Benefits and Open Positions targets Job Openings. Navigation honours the section anchor across routes and on the careers page, with an 80px header allowance. Other routes retain their existing scroll-to-top behaviour.
+
+
+## November 3, 2026 — Clean careers section navigation URLs
+
+### Page: Global navigation / Careers (/careers)
+#### Section: Join the Mission menu
+- BEFORE UI STATE: Section jumps displayed #life-at-tsalla, #benefits or #open-positions in the address bar.
+- AFTER UI STATE: Menu links display /careers only. Cross-page jumps pass the selected section through a one-use session value; same-page jumps scroll directly and keep the clean URL. Role Back navigation continues restoring its saved job-list position.
+
+- Verification refinement: Section jumps align to the section top to match the existing section-snap behaviour on desktop and mobile. Job-list return uses the exact saved scroll position.
+
+## November 3, 2026 — STORM three-panel drone entrance
+
+### Page: STORM (/storm)
+#### Section: Ready. Rugged. Relentless.
+- BEFORE UI STATE: Three environment panels and their headings appeared without a drone overlay.
+- AFTER UI STATE: The supplied transparent STORM top veiw.png is centred across the lower foreground, with responsive mobile sizing. When the section enters view and the image is loaded, the drone glides upward from below over 1.5 seconds using the existing MANTIS easing. Reduced-motion users see the settled image without the entrance. Background images, titles and section paging remain intact.
+
+
+## November 3, 2026 — Double STORM foreground drone size
+
+### Page: STORM (/storm)
+#### Section: Ready. Rugged. Relentless.
+- BEFORE UI STATE: Drone width was min(78vw,120svh) on desktop and min(180vw,100svh) on mobile.
+- AFTER UI STATE: Both responsive widths are doubled, keeping horizontal centring and the upward entrance.
+
+
+## November 3, 2026 — Refine STORM drone scale and position
+
+### Page: STORM (/storm)
+#### Section: Ready. Rugged. Relentless.
+- BEFORE UI STATE: Doubled drone width with its top at 20% desktop and 23% mobile.
+- AFTER UI STATE: Reduced the enlarged drone by about 15% and raised it to -10% desktop / 0% mobile so more of the body appears in frame. Entrance motion and horizontal centring remain.
+
+
+## November 3, 2026 — STORM section cleanup and mobile drone position
+
+### Page: STORM (/storm)
+#### Section: Final call to action above the footer
+- BEFORE UI STATE: Ready to Deploy Where Others Cannot and a Request a Demo button appeared before the footer.
+- AFTER UI STATE: Removed the section import, render and StormLast.tsx component as explicitly requested.
+#### Section: Mission Profiles
+- BEFORE UI STATE: The mission profile carousel and its large scrolling section were visible.
+- AFTER UI STATE: Hidden by commenting its import and render; its component code remains available.
+#### Section: Ready. Rugged. Relentless.
+- BEFORE UI STATE: The drone occupied the upper portion on mobile.
+- AFTER UI STATE: Anchored the mobile drone to the bottom at -4svh, retaining its displayed mobile width and entrance animation. Explicit mobile CSS avoids max-breakpoint generation limitations from mixed-unit Tailwind screens.
+- Validation: The STORM foreground asset loads and its entrance progresses upward to its final position at 390px, 1440px and 3440px widths. Reduced-motion placement is immediate. Confirmed Mission Profiles and the deleted final call-to-action are absent; TypeScript passes.

@@ -979,6 +979,8 @@ html:has(.careers-page) { font-size: 100%; }
   .careers-page .careers-label { font-size: .875rem; }
 }
 .careers-page .careers-card-copy { font-size: .75rem; line-height: 1.6; }
+/* Justified copy in narrow columns left wide gaps between words; hyphenation closes them. */
+.careers-page .text-justify { hyphens: auto; -webkit-hyphens: auto; }
 .careers-page .careers-hero-subtitle { font-size: clamp(18px, 1.2vw, 24px); }
 .careers-page .careers-hero-copy { font-size: clamp(12px, .85vw, 16px); }
 /* The revised copy adds a separate tagline; keep the old paragraph margins from doubling its spacing. */
@@ -1004,7 +1006,8 @@ html:has(.careers-page) { font-size: 100%; }
   .careers-page .careers-rhythm-visual { width: 100%; height: clamp(320px, 50svh, 580px); padding-inline: 6vw; }
   .careers-page .careers-rhythm-carousel { height: 100%; }
   .careers-page .careers-rhythm-card { width: 100%; }
-  .careers-page .careers-rhythm-card > div:last-child { transform: none; padding: 24px 64px 24px 24px; }
+  /* PREVIOUS UI: padding: 24px 64px 24px 24px (left arrow covered the card text). */
+  .careers-page .careers-rhythm-card > div:last-child { transform: none; padding: 24px 64px; }
   .careers-page .careers-rhythm-card .careers-card-copy { opacity: 1; }
   .careers-page .careers-rhythm-carousel > div:has(> button) { opacity: 1; transform: none; padding-inline: 8px; }
   .careers-page .careers-rhythm-carousel button { display: flex; width: 44px; height: 44px; padding: 10px; }
@@ -1051,7 +1054,8 @@ html:has(.careers-page) { font-size: 100%; }
   .careers-page .careers-rhythm { gap: 16px; padding-bottom: 20px; }
   .careers-page .careers-rhythm-intro h1 { font-size: 28px; }
   .careers-page .careers-rhythm-intro p { font-size: 12px; line-height: 1.5; }
-  .careers-page .careers-rhythm-card > div:last-child { padding: 12px 52px 12px 16px; }
+  /* PREVIOUS UI: padding: 12px 52px 12px 16px. */
+  .careers-page .careers-rhythm-card > div:last-child { padding: 12px 52px; }
 }
 @media (max-width: 767px) {
   .careers-page #how-we-operate { height: 100svh; padding-block: 72px 16px; }
@@ -1427,11 +1431,16 @@ html:has(.storm-page) { font-size: 100%; }
   .storm-specs .product-title-position { display: flex; justify-content: space-between; gap: 24px; }
   .storm-specs .product-title-position > span:last-child { transform: translateX(20px); }
 }
+/* Small laptops: the title halves sit closer, so a smaller zoom/lift keeps the propellers off the words. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .storm-specs .bat-specs-drone { transform: translate(-10px, -20px) scale(1.15); }
+}
 @media (max-width: 1023px) {
   .storm-specs { flex-direction: column; padding-top: max(88px, 10svh); }
   .storm-specs .product-title-position { position: static; width: 100%; margin-bottom: 24px; }
   .storm-specs .bat-specs-figure { grid-column: 1 / -1; }
-  .storm-specs .bat-specs-drone { max-height: 50svh; }
+  /* The 3-phase top view fills its frame, so the desktop zoom/lift pushed the propellers into the title here. */
+  .storm-specs .bat-specs-drone { max-height: 50svh; transform: none; }
   .storm-specs .bat-specs-row { align-items: center; text-align: center; }
   .storm-specs .bat-specs-row dd { justify-content: center; }
 }
@@ -1821,4 +1830,9 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
   /* Keep a pixel of paint space for borders at fractional carousel positions. */
   .careers-culture-window > .overflow-hidden { padding: 1px; margin: -1px; }
   .careers-culture-window > .overflow-hidden > div { column-gap: 2px; }
+}
+
+@media (max-width: 767px) {
+  /* PREVIOUS UI: The STORM foreground drone sat at the top of the mobile section. */
+  .storm-three-drone { top: auto; bottom: -4svh; width: 133vw; }
 }

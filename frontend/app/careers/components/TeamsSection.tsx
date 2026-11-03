@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { MapPin, Briefcase } from "lucide-react"
 import { ContentWrapper } from "@/components/ContentWrapper"
@@ -8,6 +8,11 @@ import { internships, fullTimeRoles } from "../data/jobs"
 
 export default function JobOpeningsPage() {
   const [activeTab, setActiveTab] = useState("fulltime")
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem("tsalla_careers_job_tab")
+    if (saved === "internships" || saved === "fulltime") setActiveTab(saved)
+  }, [])
 
   const jobs = activeTab === "internships" ? internships : fullTimeRoles
 
@@ -38,6 +43,7 @@ export default function JobOpeningsPage() {
           <button
             onClick={() => {
               setActiveTab("fulltime")
+              sessionStorage.setItem("tsalla_careers_job_tab", "fulltime")
             }}
             className={`group relative px-8 py-3 bg-black/40 border transition-all duration-300 overflow-hidden ${activeTab === "fulltime" ? "border-white" : "border-white/10"
               }`}
@@ -57,6 +63,7 @@ export default function JobOpeningsPage() {
           <button
             onClick={() => {
               setActiveTab("internships")
+              sessionStorage.setItem("tsalla_careers_job_tab", "internships")
             }}
             className={`group relative px-8 py-3 bg-black/40 border transition-all duration-300 overflow-hidden ${activeTab === "internships" ? "border-white" : "border-white/10"
               }`}
@@ -90,6 +97,10 @@ export default function JobOpeningsPage() {
           {jobs.map((job, index) => (
             <Link
               href={`/careers/${job.slug}`}
+              onClick={() => {
+                sessionStorage.setItem("tsalla_scroll:/careers", String(window.scrollY))
+                sessionStorage.setItem("tsalla_careers_return_y", String(window.scrollY))
+              }}
               key={index}
               className="block h-full"
             >

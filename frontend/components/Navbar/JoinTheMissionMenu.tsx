@@ -3,6 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { useLenis } from "lenis/react"
 import { ArrowRight } from "lucide-react"
 
 // --- "Sexy", Synced & Perfectly Contained 3D Icons ---
@@ -16,7 +17,8 @@ const menuItems = [
     {
         title: "Culture",
         subtitle: "BUILD THE FUTURE",
-        href: "/careers#how-we-operate",
+        // PREVIOUS UI: href: "/careers#how-we-operate",
+        href: "/careers#life-at-tsalla",
     },
     {
         title: "Benefits",
@@ -35,6 +37,8 @@ interface JoinTheMissionMenuProps {
 }
 
 export const JoinTheMissionMenu: React.FC<JoinTheMissionMenuProps> = ({ onClose }) => {
+    const lenis = useLenis()
+
     return (
         <div className="flex flex-col xl:flex-row w-full h-auto xl:h-[50vh] bg-white text-black overflow-hidden relative shadow-2xl">
             {/* Left Side - Black Panel */}
@@ -91,8 +95,22 @@ export const JoinTheMissionMenu: React.FC<JoinTheMissionMenuProps> = ({ onClose 
                     return (
                         <Link
                             key={item.title}
-                            href={item.href}
-                            onClick={onClose}
+                            // PREVIOUS UI: Section hashes were included in the visible URL.
+                            href={item.href.split("#")[0]}
+                            onClick={(event) => {
+                                onClose()
+                                const anchor = item.href.split("#")[1]
+                                const target = anchor && document.getElementById(anchor)
+                                if (window.location.pathname === "/careers" && target) {
+                                    event.preventDefault()
+                                    window.history.replaceState(null, "", "/careers")
+                                    const top = target.getBoundingClientRect().top + window.scrollY
+                                    if (lenis) lenis.scrollTo(top, { immediate: true, force: true })
+                                    else window.scrollTo({ top, behavior: "instant" })
+                                } else if (anchor) {
+                                    sessionStorage.setItem("tsalla_careers_section", anchor)
+                                }
+                            }}
                             className={`
                                 relative bg-gray-100 hover:bg-white px-4 lg:px-6 py-5 lg:py-12 flex flex-col justify-center group hover:z-20 transition-all duration-500 ease-out overflow-hidden
                                 ${borderClass}

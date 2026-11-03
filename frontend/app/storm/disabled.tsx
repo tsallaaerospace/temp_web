@@ -3,9 +3,9 @@ import PageWrapper from "@/components/PageWrapper"
 import StormHero from "./components/StormHero"
 import StormThreePhase from "./components/StormThreePhase"
 import StormSpecifications from "./components/StormSpecifications"
-import StormLast from "./components/StormLast"
 import StormFeatures from "./components/StormFeatures"
-import StormMission from "./components/StormMission"
+// PREVIOUS UI: Mission Profiles is temporarily hidden.
+// import StormMission from "./components/StormMission"
 import SectionSnap from "@/components/SectionSnap"
 
 
@@ -24,9 +24,8 @@ export default function StormPage() {
       <StormHero />
       <StormThreePhase />
       <StormSpecifications />
-      <StormMission />
+      {/* <StormMission /> */}
       <StormFeatures />
-      <StormLast />
     </PageWrapper>
   )
 }
