@@ -933,7 +933,8 @@ html:has(.careers-page) { font-size: 100%; }
   letter-spacing: -0.03em;
 }
 .careers-page .careers-hero-title {
-  font-size: clamp(1.125rem, 3.4vw, 3.75rem);
+  /* PREVIOUS UI: font-size: clamp(1.125rem, 3.4vw, 3.75rem); */
+  font-size: clamp(18px, 2.2vw, 40px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: normal;
@@ -978,14 +979,21 @@ html:has(.careers-page) { font-size: 100%; }
   .careers-page .careers-label { font-size: .875rem; }
 }
 .careers-page .careers-card-copy { font-size: .75rem; line-height: 1.6; }
+.careers-page .careers-hero-subtitle { font-size: clamp(18px, 1.2vw, 24px); }
+.careers-page .careers-hero-copy { font-size: clamp(12px, .85vw, 16px); }
+/* The revised copy adds a separate tagline; keep the old paragraph margins from doubling its spacing. */
+.careers-page .careers-rhythm-intro .careers-rhythm-tagline { margin-top: 0; }
+.careers-page .careers-rhythm-intro > div > p.careers-body { margin-top: 0; }
 /* Careers adapts independently of the established desktop composition. */
 .careers-page #open-positions button { min-height: 44px; }
 @media (max-width: 767px) {
-  .careers-page .careers-hero-title { font-size: clamp(20px, 5.8vw, 28px); font-weight: 400; }
+  /* PREVIOUS UI: mobile title clamp(20px, 5.8vw, 28px). */
+  .careers-page .careers-hero-title { font-size: clamp(16px, 4.4vw, 24px); font-weight: 400; }
   .careers-page .careers-jobs-intro { font-size: 12px; }
   .careers-page .careers-display-title { font-size: clamp(42px, 13.5vw, 64px); }
-  .careers-page .careers-hero-subtitle { font-size: 16px; }
-  .careers-page .careers-hero-copy { font-size: 12px; }
+  /* PREVIOUS UI: mobile subtitle 16px and paragraph 12px. */
+  .careers-page .careers-hero-subtitle { font-size: 14px; }
+  .careers-page .careers-hero-copy { font-size: 11px; }
 }
 @media (max-width: 1023px) {
   .careers-page .careers-rhythm { height: auto; flex-direction: column; padding-block: max(88px, 10svh) 32px; gap: 28px; }
@@ -1070,14 +1078,49 @@ html:has(.careers-page) { font-size: 100%; }
   .careers-page .careers-rhythm-intro p { margin-top: 24px; }
 }
 @media (min-width: 2500px) {
+  /* PREVIOUS UI: headings scaled, but hero, image, paragraph and carousel widths retained desktop caps. */
+  .careers-page { --careers-wide-content: min(90vw, 2880px); }
   .careers-page .careers-section-title { font-size: clamp(64px, 2.5vw, 112px); }
-  .careers-page .careers-hero-title { font-size: clamp(60px, 2vw, 96px); }
+  /* PREVIOUS UI: ultrawide title clamp(60px, 2vw, 96px). */
+  .careers-page .careers-hero-title { font-size: clamp(40px, 1.6vw, 72px); }
   .careers-page .careers-card-title { font-size: clamp(28px, 1vw, 44px); }
   .careers-page .careers-body { font-size: clamp(18px, .7vw, 28px); }
   .careers-page .careers-label { font-size: clamp(16px, .6vw, 24px); }
   .careers-page .careers-rhythm-intro { align-items: center; justify-content: flex-start; padding-top: 0; }
   .careers-page #benefits > h2, .careers-page #benefits > div { width: 90%; max-width: 2400px; margin-inline: auto; }
   .careers-page #open-positions > div:first-child { max-width: 2560px; margin-inline: auto; }
+  .careers-page .careers-hero-layout { max-width: var(--careers-wide-content); gap: clamp(64px, 4vw, 160px); }
+  .careers-page .careers-hero-description { width: 38%; max-width: 960px; }
+  .careers-page .careers-rhythm { padding-inline: max(0px, calc((100vw - 2880px) / 2)); }
+  .careers-page .careers-rhythm-intro { padding-inline: clamp(48px, 3vw, 96px); }
+  .careers-page .careers-rhythm-intro > div { width: 100%; }
+  .careers-page .careers-rhythm-intro p { max-width: 780px; width: 100%; margin-top: clamp(24px, 4svh, 64px); }
+  .careers-page .careers-rhythm-carousel { height: min(72svh, 1080px); }
+  .careers-page .careers-rhythm-card .careers-card-copy { font-size: clamp(16px, .7vw, 24px); }
+  .careers-page .careers-inside-title { font-size: clamp(96px, 3vw, 144px); }
+  .careers-page .careers-culture > div:first-child > div { max-width: 2400px; }
+  .careers-page .careers-culture > div:first-child p { font-size: clamp(18px, .7vw, 28px); }
+  .careers-page .careers-culture-carousel > div { width: var(--careers-wide-content); margin-inline: auto; }
+  .careers-page .careers-culture-window { padding-right: 0; }
+  .careers-page .careers-culture-card { flex-basis: 25%; min-height: clamp(560px, 52svh, 860px); padding: clamp(40px, 2vw, 72px); }
+  .careers-page #how-we-operate > div,
+  .careers-page #open-positions > div,
+  .careers-page #open-positions > div:first-child,
+  .careers-page #benefits > h2,
+  .careers-page #benefits > div { width: var(--careers-wide-content); max-width: none; padding-inline: 0; margin-inline: auto; }
+  .careers-page .careers-values-layout { max-width: none; gap: clamp(64px, 4vw, 144px); }
+  .careers-page .careers-values-intro { margin: 0; }
+  .careers-page .careers-values-visual { height: clamp(560px, 58svh, 1000px); padding: 0; }
+  .careers-page .careers-values-visual .careers-body { max-width: 65ch; }
+  .careers-page #how-we-operate button { min-height: 64px; padding: 16px 24px; font-size: clamp(18px, .65vw, 24px); }
+  .careers-page #founder-note .careers-body { max-width: min(60vw, 1440px); }
+  .careers-page #open-positions button { min-height: 60px; padding: 16px 32px; }
+  .careers-page #open-positions button span,
+  .careers-page .careers-job-metadata { font-size: clamp(16px, .6vw, 22px); }
+  .careers-page .careers-job-metadata svg { width: 1.1em; height: 1.1em; }
+  .careers-page .careers-job-card { min-height: 240px; padding: clamp(32px, 1.3vw, 48px); }
+  .careers-page .careers-hero-subtitle { font-size: clamp(24px, .9vw, 32px); }
+  .careers-page .careers-hero-copy { font-size: clamp(16px, .55vw, 22px); }
 }
 @media (min-width: 768px) {
   .careers-page .careers-card-copy { font-size: .875rem; }
@@ -1759,4 +1802,23 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
   .fenix-details-callouts > div { padding-bottom: .35rem; }
   .fenix-details-callouts h3 { font-size: clamp(.6875rem, 2.8vw, .875rem); }
   .fenix-details-callouts .product-body { font-size: clamp(.5625rem, 2.45vw, .75rem); line-height: 1.4; margin-top: .25rem; }
+}
+
+/* Mobile gallery: rotate landscape photos and contain the complete image. */
+@media (max-width: 767px) {
+  .zoom-parallax-photo { container-type: size; }
+  .zoom-parallax-landscape {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100cqh;
+    height: 100cqw;
+    max-width: none;
+    object-fit: contain;
+    /* PREVIOUS UI: Landscape photos used the same upright cover crop as desktop. */
+    transform: translate(-50%, -50%) rotate(90deg) translateZ(0) !important;
+  }
+  /* Keep a pixel of paint space for borders at fractional carousel positions. */
+  .careers-culture-window > .overflow-hidden { padding: 1px; margin: -1px; }
+  .careers-culture-window > .overflow-hidden > div { column-gap: 2px; }
 }

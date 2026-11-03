@@ -4,7 +4,9 @@ import { ContentWrapper } from "@/components/ContentWrapper"
 import { motion } from "framer-motion"
 import { ZoomParallax } from "@/components/ui/zoom-parallax"
 import React from 'react'
+import content from "../content.json"
 const FounderNotePage = () => {
+  /* PREVIOUS UI: Stock and shared gallery photos.
   const images = [
     {
       src: "/careers/hero-2-2.jpg",
@@ -35,6 +37,45 @@ const FounderNotePage = () => {
       alt: "Tsalla Mission Control",
     },
   ]
+  */
+  // PREVIOUS UI: 8.jpg occupied the centre and 4.jpg occupied the upper slot.
+  const images = [
+  {
+    "src": "/careers/Life%20at%20tsalla/4.jpg",
+    rotateOnMobile: true,
+    "alt": "Tsalla team in the aircraft workshop"
+  },
+  {
+    "src": "/careers/Life%20at%20tsalla/8.jpg",
+    rotateOnMobile: true,
+    "alt": "Tsalla Aerospace team together in the workshop"
+  },
+  {
+    "src": "/careers/Life%20at%20tsalla/3.JPG",
+    "alt": "Flight testing at the field"
+  },
+  {
+    "src": "/careers/Life%20at%20tsalla/2.JPG",
+    rotateOnMobile: true,
+    "alt": "Team meal together"
+  },
+  {
+    "src": "/careers/Life%20at%20tsalla/7.jpeg",
+    "alt": "Team member at the flight test field at sunset"
+  },
+  {
+    "src": "/careers/Life%20at%20tsalla/5.JPG",
+    rotateOnMobile: true,
+    "alt": "Team members enjoying an outing"
+  },
+  // PREVIOUS UI: { src: "/careers/Life%20at%20tsalla/6.jpg", alt: "Team and visitors at the workshop" },
+  {
+    "src": "/careers/Life%20at%20tsalla/1.JPG",
+    rotateOnMobile: true,
+    "alt": "A candid moment during a team trip"
+  }
+]
+
 
   return (
     <>
@@ -78,7 +119,8 @@ const FounderNotePage = () => {
               transition={{ duration: 0.8 }}
               className="careers-label text-neutral-400 uppercase mb-4"
             >
-              A NOTE FROM OUR FOUNDER
+              {/* PREVIOUS CONTENT: A NOTE FROM OUR FOUNDER */}
+              {content.founder.label}
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -86,7 +128,8 @@ const FounderNotePage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              When we started this company, the goal wasn't just to build cutting-edge systems. It was to build a team that believes in doing meaningful work. We are solving hard problems that matter.
+              {/* PREVIOUS CONTENT: When we started this company, the goal wasn't just to build cutting-edge systems. It was to build a team that believes in doing meaningful work. We are solving hard problems that matter. */}
+              {content.founder.paragraphs[0]}
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -94,8 +137,11 @@ const FounderNotePage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Every feature we ship and every product we launch is a step toward making the world safer and smarter. If you're someone who thrives on autonomy, loves solving challenges, and cares about creating real impact,
+              {/* PREVIOUS CONTENT: Every feature we ship and every product we launch is a step toward making the world safer and smarter. If you're someone who thrives on autonomy, loves solving challenges, and cares about creating real impact, */}
+              {content.founder.paragraphs[1]}
             </motion.p>
+            <p>{content.founder.paragraphs[2]}</p>
+            <p>{content.founder.paragraphs[3]}</p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -103,7 +149,7 @@ const FounderNotePage = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="careers-card-title text-white mt-12"
             >
-              This is the place for you.
+              {content.founder.closing}
             </motion.p>
           </div>
         </ContentWrapper>

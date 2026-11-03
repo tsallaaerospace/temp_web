@@ -44,8 +44,8 @@ const InsideTsallaAerospace = () => {
   const getOffset = () => {
     if (!trackRef.current || !trackRef.current.children[index]) return 0
     const card = trackRef.current.children[index] as HTMLElement
-    // Using offsetLeft provides precise layout alignment that accounts for browser rounding
-    return -card.offsetLeft
+    // PREVIOUS UI: return -card.offsetLeft (rounded away fractional pixels and clipped borders).
+    return trackRef.current.getBoundingClientRect().left - card.getBoundingClientRect().left
   }
 
   useEffect(() => {
@@ -135,7 +135,7 @@ const InsideTsallaAerospace = () => {
         <div className="ml-[4.5vw] md:ml-[5.3vw] lg:ml-[7vw] xl:ml-[6.5vw] 2xl:ml-[5.1vw] bg-[#fdfcfb]">
           <div
             ref={containerRef}
-            className="relative w-full pr-[5vw] cursor-grab active:cursor-grabbing group/nav"
+            className="careers-culture-window relative w-full pr-[5vw] cursor-grab active:cursor-grabbing group/nav"
           >
             <div className="overflow-hidden">
             <motion.div

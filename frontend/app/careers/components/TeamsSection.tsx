@@ -93,7 +93,7 @@ export default function JobOpeningsPage() {
               key={index}
               className="block h-full"
             >
-              <div className="relative p-5 md:p-8 min-h-[96px] md:min-h-0 bg-neutral-900/50 border border-white/5 flex flex-col justify-center md:justify-between text-center md:text-left h-full group transition-all duration-300 hover:bg-neutral-900">
+              <div className="careers-job-card relative p-5 md:p-8 min-h-[96px] md:min-h-0 bg-neutral-900/50 border border-white/5 flex flex-col justify-center md:justify-between text-center md:text-left h-full group transition-all duration-300 hover:bg-neutral-900">
                 <div>
                   <h3
                     className="careers-card-title text-white md:mb-4 md:min-h-[3.75rem]"
@@ -105,7 +105,7 @@ export default function JobOpeningsPage() {
                   </p>
 
                   {/* Metadata Icons */}
-                  <div className="hidden md:flex flex-row flex-wrap items-center gap-6 mb-2 text-neutral-400 text-xs tracking-wide">
+                  <div className="careers-job-metadata hidden md:flex flex-row flex-wrap items-center gap-6 mb-2 text-neutral-400 text-xs tracking-wide">
                     <div className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-[#5ce1e6]" />
                       <span>

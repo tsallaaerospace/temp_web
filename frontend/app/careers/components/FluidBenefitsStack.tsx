@@ -1,6 +1,7 @@
 "use client"
 import React from "react"
 import { motion } from "framer-motion"
+import content from "../content.json"
 
 const leftColumn = [
     { id: "01", text: "EXCELLENT MEDICAL COVERAGE" },
@@ -8,12 +9,14 @@ const leftColumn = [
     { id: "05", text: "FLEXIBLE WORK HOURS" },
     { id: "07", text: "FREE PARKING" },
     { id: "09", text: "401K SERVICES AND MATCH" },
+    // PREVIOUS UI: { id: "11", text: content.learningSupport.toUpperCase() },
 ]
 
 const rightColumn = [
     { id: "02", text: "RELAXED DRESS CODE" },
     { id: "04", text: "GOOD AQI" },
-    { id: "06", text: "GYM DISCOUNT (SD) / ONSITE GYM (DC)" },
+    // PREVIOUS CONTENT: { id: "06", text: "GYM DISCOUNT (SD) / ONSITE GYM (DC)" },
+    { id: "06", text: content.learningSupport },
     { id: "08", text: "COMPETITIVE COMPENSATION" },
     { id: "10", text: "STOCK BENEFITS" },
 ]

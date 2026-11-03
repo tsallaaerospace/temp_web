@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence, useInView, useReducedMotion } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import content from "../content.json"
 
 const OPPOSE_ITEMS = [
     {
@@ -111,13 +112,15 @@ const OpposingMotionReveal = () => {
                         {/* How We<br />Work */}
                         Mission Rhythm
                     </motion.h1>
+                    <p className="careers-label careers-rhythm-tagline text-[#5ce1e6]">{content.rhythm.tagline}</p>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
                         className="careers-body text-neutral-400 text-justify max-w-sm md:max-w-md lg:max-w-lg mt-8 lg:mt-34"
                     >
-                        Structured iteration under real constraints reveals failure points early. This disciplined engineering rhythm ensures every system is hardened, validated, and built to perform consistently—not occasionally.
+                        {/* PREVIOUS CONTENT: Structured iteration under real constraints reveals failure points early. This disciplined engineering rhythm ensures every system is hardened, validated, and built to perform consistently—not occasionally. */}
+                        {content.rhythm.description}
                     </motion.p>
                 </div>
             </div>

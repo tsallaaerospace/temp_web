@@ -6,10 +6,12 @@ import { useRef } from 'react';
 interface Image {
     src: string;
     alt?: string;
+    rotateOnMobile?: boolean;
 }
 
 interface ZoomParallaxProps {
-    /** Array of images to be displayed in the parallax effect max 7 images */
+    // PREVIOUS UI: The collage supported seven image positions.
+    /** Images displayed in the original seven-slot parallax collage. */
     images: Image[];
 }
 
@@ -28,23 +30,29 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 
     const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9];
 
+    // PREVIOUS UI: Eighth image at top -30vh, left 33vw, height 30vh, width 17vw.
     return (
         <div ref={container} className="relative h-[300vh]">
             <div className="sticky top-0 h-screen overflow-hidden">
-                {images.map(({ src, alt }, index) => {
+                {images.map(({ src, alt, rotateOnMobile }, index) => {
                     const scale = scales[index % scales.length];
 
                     return (
                         <motion.div
                             key={index}
-                            style={{ scale }}
+                            // PREVIOUS UI: Full-viewport layers were scaled, creating oversized GPU tiles.
+                            style={{ scale, top: "50%", left: "50%", width: 0, height: 0 }}
                             className={`absolute top-0 flex h-full w-full items-center justify-center ${index === 1 ? '[&>div]:!-top-[30vh] [&>div]:!left-[5vw] [&>div]:!h-[30vh] [&>div]:!w-[35vw]' : ''} ${index === 2 ? '[&>div]:!-top-[10vh] [&>div]:!-left-[25vw] [&>div]:!h-[45vh] [&>div]:!w-[20vw]' : ''} ${index === 3 ? '[&>div]:!left-[27.5vw] [&>div]:!h-[25vh] [&>div]:!w-[25vw]' : ''} ${index === 4 ? '[&>div]:!top-[27.5vh] [&>div]:!left-[5vw] [&>div]:!h-[25vh] [&>div]:!w-[20vw]' : ''} ${index === 5 ? '[&>div]:!top-[27.5vh] [&>div]:!-left-[22.5vw] [&>div]:!h-[25vh] [&>div]:!w-[30vw]' : ''} ${index === 6 ? '[&>div]:!top-[22.5vh] [&>div]:!left-[25vw] [&>div]:!h-[15vh] [&>div]:!w-[15vw]' : ''} `}
                         >
-                            <div className="relative h-[25vh] w-[25vw]">
+                            {/* PREVIOUS UI: The photo box could shrink inside its flex layer. */}
+                            <div className="zoom-parallax-photo relative h-[25vh] w-[25vw] shrink-0">
                                 <img
                                     src={src || '/shared/placeholders/placeholder.svg'}
                                     alt={alt || `Parallax image ${index + 1}`}
-                                    className="h-full w-full object-cover"
+                                    // Keep each scaled photo on its own layer to prevent thin tile seams.
+                                    // PREVIOUS UI: className="h-full w-full object-cover"
+                                    className={`h-full w-full object-cover${rotateOnMobile ? " zoom-parallax-landscape" : ""}`}
+                                    style={{ transform: "translateZ(0)", backfaceVisibility: "hidden" }}
                                 />
                             </div>
                         </motion.div>

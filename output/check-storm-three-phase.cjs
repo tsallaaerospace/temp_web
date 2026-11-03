@@ -18,11 +18,11 @@ const assert=require('node:assert/strict');
       await page.waitForFunction(()=>{const image=document.querySelector('[data-storm-section="three-phase"] img');return image?.complete && image.naturalWidth>0});
       const result=await section.evaluate(el=>{
         const image=el.querySelector('img');
-        return {width:el.clientWidth,height:el.clientHeight,src:decodeURI(image.currentSrc),previous:el.previousElementSibling?.querySelector('h1')?.textContent?.trim(),next:el.nextElementSibling?.classList.contains('storm-specs'),removed:document.body.innerText.includes('Resilient Offshore Autonomy')};
+        return {width:el.clientWidth,height:el.clientHeight,src:decodeURI(image.currentSrc),previous:!!el.previousElementSibling?.querySelector('video'),next:el.nextElementSibling?.classList.contains('storm-specs'),removed:document.body.innerText.includes('Resilient Offshore Autonomy')};
       });
       assert.equal(result.width,width);
       assert.equal(result.height,height);
-      assert.equal(result.previous,'STORM');
+      assert(result.previous);
       assert(result.next);
       assert(!result.removed);
       assert(result.src.endsWith(width<768?'3 phase mobile.png':'3 phase destop.png'));

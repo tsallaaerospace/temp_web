@@ -1,5 +1,101 @@
 # Tsalla Aerospace - Project Change Log & Activity Record
 
+## 2026-11-03 — Final STORM subtitle spacing adjustment
+
+### STORM Page (/storm) — Hero subtitle
+- **BEFORE UI STATE:** Bottom spacing was 16px on mobile and 40px on desktop.
+- **AFTER UI STATE:** Reduced spacing to 8px and 32px, moving the subtitle another 8px down.
+
+## 2026-11-03 — Lower STORM subtitle slightly further
+
+### STORM Page (/storm) — Hero subtitle
+- **BEFORE UI STATE:** Bottom spacing was 28px on mobile and 52px on desktop.
+- **AFTER UI STATE:** Reduced spacing to 16px and 40px, moving the subtitle another 12px down.
+
+## 2026-11-03 — Remove black flash before STORM freeze
+
+### STORM Page (/storm) — Hero video ending
+- **BEFORE UI STATE:** Original clip played its short black tail before seeking back to the drone shot.
+- **AFTER UI STATE:** Created `storm-v2-hero.mp4`, ending at 5.4 seconds before the black frames, using stream copy to preserve video quality. Original STORM V2 file remains unchanged. Hero uses the trimmed clip and holds its last visible frame without replaying black frames. The 5.1-second subtitle and refresh replay remain.
+- **Validation:** FFmpeg black-frame analysis found no black sequence in the trimmed ending. Browser test samples decoded video pixels throughout playback-to-freeze transition and verifies final-frame visibility and refresh reset.
+
+## 2026-11-03 — Hold the last visible STORM shot
+
+### STORM Page (/storm) — Hero end-frame correction
+- **BEFORE UI STATE:** Seeking one millisecond before the media duration selected black frames already present at the end of STORM V2.
+- **AFTER UI STATE:** Inspected the final two seconds with FFmpeg and confirmed approximately 67ms of black at the end. Hold playback 100ms before the duration, on the final drone shot with the STORM background lettering. Retain the timed subtitle and refresh replay.
+- **Validation:** Browser regression test now samples the held video's pixels to reject a black frame, alongside playback, subtitle timing and refresh checks on desktop/mobile.
+
+## 2026-11-03 — Lower STORM hero subtitle
+
+### STORM Page (/storm) — Hero subtitle positioning
+- **BEFORE UI STATE:** Subtitle used 40px bottom padding on mobile and 64px on desktop.
+- **AFTER UI STATE:** Reduced bottom padding to 28px and 52px respectively, moving the subtitle 12px lower.
+
+## 2026-11-03 — Timed STORM hero subtitle
+
+### STORM Page (/storm) — Hero subtitle
+- **BEFORE UI STATE:** The product expansion subtitle appeared immediately at the left in small inherited typography.
+- **AFTER UI STATE:** Uses Orbit, a responsive 20–36px size and centered bottom placement. Appears when actual video playback reaches 5.1 seconds and stays visible on the held final frame. Refresh resets both playback and subtitle visibility.
+
+## 2026-11-03 — Explicitly hold STORM final video frame
+
+### STORM Page (/storm) — Hero playback end
+- **BEFORE UI STATE:** Video relied on the browser's default ended-frame display.
+- **AFTER UI STATE:** On playback end, pause and seek one millisecond inside the duration so the final decoded frame remains visible. Refresh continues to start playback from the beginning.
+
+## 2026-11-03 — Play STORM hero video once
+
+### STORM Page (/storm) — Hero playback
+- **BEFORE UI STATE:** The hero video looped continuously.
+- **AFTER UI STATE:** Removed looping. The video autoplays once, remains on its final frame, and starts again on a page refresh. No persistent playback state was added.
+
+## 2026-11-03 — STORM hero video and text
+
+### STORM Page (/storm) — Hero
+- **BEFORE UI STATE:** Hero played the external Avenger video with a STORM heading, offshore operations paragraph and product expansion subtitle.
+- **AFTER UI STATE:** Hero plays the supplied `/product/STORM/STORM V2.mp4` with autoplay, muted, loop and inline playback preserved. Removed the visible STORM heading and offshore paragraph. Kept the product expansion subtitle at the bottom. Removed the unrelated external poster. Previous markup/source retained in comments.
+
+## 2026-11-02 — Revise careers hero headings
+
+### Careers Page (/careers) — Hero
+- **BEFORE UI STATE:** Main heading was “BUILD FOR THOSE WHO SERVE.” and the supporting heading was “Be Part Of Something Bigger.”
+- **AFTER UI STATE:** Main heading is “WORK WITH PURPOSE” and the supporting heading is “BUILD FOR THOSE WHO SERVE”. Existing typography, positioning and paragraph remain unchanged.
+
+## 2026-11-02 — Replace gym benefit with Learning support
+
+### Careers Page (/careers) — Benefits
+- **BEFORE UI STATE:** Benefit 06 listed gym discounts; Learning Support appeared separately as benefit 11.
+- **AFTER UI STATE:** Benefit 06 is Learning support. Removed the duplicate entry at 11, keeping ten benefits in order.
+
+## 2026-11-02 — Careers hero typography refinement
+
+### Careers Page (/careers) — Hero title and description
+- **BEFORE UI STATE:** The revised main heading used two block lines. The supporting title and longer paragraph retained larger typography.
+- **AFTER UI STATE:** Reduced the main heading and rendered it as one line, with smaller supporting title and paragraph sizes across mobile, desktop and ultrawide breakpoints. Retained the existing content and positioning.
+
+## 2026-11-02 — Careers copy from Join the mission document
+
+### Careers Page (/careers) — Hero and Mission Rhythm
+- **BEFORE UI STATE:** Hero said “WORK WITH PURPOSE” with a general innovation paragraph; Mission Rhythm described structured iteration without a separate process tagline.
+- **AFTER UI STATE:** Hero uses “BUILD FOR THOSE WHO SERVE.” and the document's revised introduction. Mission Rhythm includes “DESIGN. BUILD. FLY. CRASH. MODIFY. REPEAT.” and the new testing-focused paragraph. Preserved existing imagery, video carousel behavior and responsive layout.
+
+### Careers Page (/careers) — Operating values, founder note and benefits
+- **BEFORE UI STATE:** Operating values used shorter general descriptions with category-only image headings; the founder note used the prior company introduction; benefits had ten entries.
+- **AFTER UI STATE:** Added the document's operating tagline and introduction, six revised value headlines/descriptions, and complete revised founder note. Added Learning Support as benefit 11 without inventing further terms. Document copy is stored in `frontend/app/careers/content.json`; unaffected culture, job openings and innovation content remains. Previous replaced copy is retained in source comments.
+- **Validation:** TypeScript passed. Responsive/slide checks passed from 320px to 5120px. Content checks confirmed the supplied wording and all six value tabs at 320, 390, 1920 and 3440px, including hero and image-caption bounds. Mobile hero, Mission Rhythm and values screenshots inspected. Production build not run.
+
+## 2026-11-02 — Careers ultrawide monitor layouts
+
+### Careers Page (/careers) — Hero, Mission Rhythm and culture carousel
+- **BEFORE UI STATE:** Some headings scaled at ultrawide breakpoints, but the hero text, Mission Rhythm paragraph and culture title still retained narrower desktop caps. Video-card copy and supporting labels remained small.
+- **AFTER UI STATE:** Above 2500px, hero content expands within a centered 2880px limit; Mission Rhythm uses a wider introduction with proportionate video panels and larger card copy. The culture title and subtitle scale, and four culture cards share a centered content area. Existing motion and carousel controls are reused.
+
+### Careers Page (/careers) — Values, founder note, benefits and jobs
+- **BEFORE UI STATE:** The values image stopped at 500px, content wrappers used different maximum widths, and job metadata/buttons retained small desktop text.
+- **AFTER UI STATE:** Added consistent bounded ultrawide gutters, a viewport-scaled values image, larger controls and job metadata, more readable founder-note width and aligned job introduction/cards. All changes are scoped to the careers page above 2500px; existing mobile and standard desktop sizing remains intact.
+- **Validation:** Browser layout, text overflow and sliding-card checks passed at 390, 1920, 2560, 3440, 3840 and 5120px. TypeScript passed. Reviewed 3440x1440 screenshots of hero, Mission Rhythm and values. Production build not run.
+
 ## 2026-10-31 — Save latest website updates in local Git
 
 ### Website source and media
@@ -2526,3 +2622,72 @@
   - *Previous opacity settings (70% and 20%) are preserved as comments in `Footer.tsx`.*
 
 ---
+
+
+## November 3, 2026 — Careers gallery photos
+
+### Page: Careers (/careers)
+#### Section: Life at Tsalla
+- BEFORE UI STATE: Seven stock and shared images appeared in the scrolling zoom collage.
+- AFTER UI STATE: All eight photos from public/careers/Life at tsalla appear with descriptive alt text. The original scroll animation is retained, with an eighth upper-right slot to avoid covering the centre photo. Previous image configuration is preserved in a source comment.
+
+
+## November 3, 2026 — Restore original careers gallery pattern
+
+### Page: Careers (/careers)
+#### Section: Life at Tsalla
+- BEFORE UI STATE: Eight supplied photos appeared, including the team-and-visitors photo and an extra upper-right slot.
+- AFTER UI STATE: Removed the specified team-and-visitors photo (6.jpg) from the gallery and restored the original seven-image placement pattern. The other supplied photos and scroll zoom remain. Source photo files are unchanged.
+
+
+## November 3, 2026 — Centre the selected team photo
+
+### Page: Careers (/careers)
+#### Section: Life at Tsalla
+- BEFORE UI STATE: The selected team photo (4.jpg) appeared above the central group photo (8.jpg).
+- AFTER UI STATE: Swapped those two photos so 4.jpg occupies the central zoom position. The seven-image pattern and animation remain unchanged.
+
+
+## November 3, 2026 — Remove gallery scroll seams
+
+### Page: Careers (/careers)
+#### Section: Life at Tsalla
+- BEFORE UI STATE: Thin horizontal white rendering seams crossed photos during scroll scaling. Reproduced in the local browser at multiple zoom positions.
+- AFTER UI STATE: Each photo uses its own composited layer with hidden backface, eliminating the reproduced seams while preserving the image pattern and scroll transforms.
+
+
+## November 3, 2026 — Further gallery seam correction
+
+### Page: Careers (/careers)
+#### Section: Life at Tsalla
+- BEFORE UI STATE: Image compositing alone did not reliably prevent the reported lines during zoom. Each animation layer still covered the entire viewport before scaling.
+- AFTER UI STATE: Animation layers now use a zero-sized origin at the viewport centre with non-shrinking photo boxes. This preserves the collage offsets and zoom while avoiding oversized transparent layers. Tested at multiple scroll positions in the local desktop preview.
+
+
+## November 3, 2026 — How We Operate photos
+
+### Page: Careers (/careers)
+#### Section: How We Operate
+- BEFORE UI STATE: Impact, Ownership and Innovation displayed externally hosted stock photos.
+- AFTER UI STATE: Those three tabs display their matching IMPACT.jpg, Ownership.jpg and Innovation.JPG photos from public/careers/how we operate. Existing captions, tab order, autoplay and responsive layout are retained. Previous image URLs are commented in source.
+
+
+## November 3, 2026 — Complete How We Operate photo selection
+
+### Page: Careers (/careers)
+#### Section: How We Operate
+- BEFORE UI STATE: Autonomy, Speed and Excellence still displayed external stock images.
+- AFTER UI STATE: Autonomy uses the airborne drone photo (20260316_151102.JPG); Speed uses the aircraft flight-test photo (20240810_172134.JPG); Excellence uses the wind-tunnel team photo (20240529_153120.JPG). All six tabs now use supplied local photos, with captions, autoplay and layout retained.
+
+
+## November 3, 2026 — Mobile gallery rotation and carousel borders
+
+### Page: Careers (/careers)
+#### Section: Life at Tsalla
+- BEFORE UI STATE: Landscape photos were cropped upright in narrow mobile collage slots.
+- AFTER UI STATE: Five landscape photos rotate 90 degrees on mobile and use contain sizing to show the complete picture. Portrait photos and desktop layout retain their orientation.
+#### Section: Culture cards
+- BEFORE UI STATE: Rounded offsetLeft measurements could shift the card beyond the clipping edge, hiding its left or right border.
+- AFTER UI STATE: Carousel offsets use fractional bounding rectangles, and the mobile clip has one pixel of paint clearance. Single-pixel card borders and arrows above the cards are preserved.
+
+- Verification: Checked all seven culture cards in both navigation directions at 320px, 390px and 430px widths; borders and both arrows remain visible. Added a 2px track gap on mobile so the neighbouring card cannot double the visible edge. Verified all five landscape photos rotate with contain sizing; TypeScript check passed.

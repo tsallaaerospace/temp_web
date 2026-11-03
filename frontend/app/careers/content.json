@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "title": "WORK WITH PURPOSE",
+    "subtitle": "BUILD FOR THOSE WHO SERVE",
+    "description": "We choose hard problems because those on the front line don’t get to choose easy conditions. At Tsalla Aerospace, you’ll build autonomous aircraft and defence technology to protect those who protect us. Own the engineering. See it fly. Help build India’s strength."
+  },
+  "rhythm": {
+    "title": "MISSION RHYTHM",
+    "tagline": "DESIGN. BUILD. FLY. CRASH. MODIFY. REPEAT.",
+    "description": "Real testing exposes what simulations miss. Every failure is data. Every test reveals what to improve. We turn those lessons into stronger designs, prove them in the next flight, and keep pushing. Every cycle moves us closer to systems our servicemen can depend on."
+  },
+  "values": {
+    "title": "HOW WE OPERATE",
+    "tagline": "ENGINEERING RIGOUR. OPERATIONAL EXPERIENCE. SHARED PURPOSE.",
+    "description": "Engineers and veterans work side by side to solve problems faced by those who serve. We challenge assumptions, build early, and let testing settle the debate. Everyone owns the outcome, from the first design to performance in the field.",
+    "items": [
+      {
+        "title": "Impact",
+        "headline": "YOUR WORK. THEIR ADVANTAGE.",
+        "description": "Every line of code, every component, every test serves a purpose: giving those on the front line better awareness, greater capability, and less exposure to danger."
+      },
+      {
+        "title": "Autonomy",
+        "headline": "TAKE INITIATIVE. BUILD THE PROOF.",
+        "description": "You have the freedom to challenge assumptions and act on your ideas. Bring sound judgement, build something testable, and let the results speak."
+      },
+      {
+        "title": "Speed",
+        "headline": "SHORTEN THE PATH TO PROVEN CAPABILITY.",
+        "description": "Make clear decisions. Test early. Put learning straight back into the build. Move with urgency—the people who need this technology cannot wait."
+      },
+      {
+        "title": "Ownership",
+        "headline": "OWN THE OUTCOME.",
+        "description": "Take responsibility from the first decision to the final result. Close the gaps, bring others in when needed, and see the work through."
+      },
+      {
+        "title": "Innovation",
+        "headline": "GO DEEP. SOLVE THE HARD PART.",
+        "description": "Question the approach. Understand the physics. Find the root cause. Build solutions that hold up when real conditions challenge every assumption."
+      },
+      {
+        "title": "Excellence",
+        "headline": "HOLD THE STANDARD.",
+        "description": "Precision in the design. Discipline in the build. Evidence in the test. We move fast and hold ourselves accountable for the quality of everything we deliver."
+      }
+    ]
+  },
+  "founder": {
+    "label": "A NOTE FROM THE FOUNDER",
+    "paragraphs": [
+      "We started Tsalla to build a team willing to take on the hard problems that stand in the way.",
+      "You could spend your career building many things. I’m asking you to help build technology that someone serving this country will one day depend on.",
+      "The work will be difficult. You’ll have the freedom to shape it, a team that backs you, and a reason to make it count.",
+      "If you're someone who thrives on autonomy, loves solving challenges, and cares about creating real impact,"
+    ],
+    "closing": "This is the place for you."
+  },
+  "learningSupport": "Learning support"
+}
