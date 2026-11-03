@@ -2691,3 +2691,52 @@
 - AFTER UI STATE: Carousel offsets use fractional bounding rectangles, and the mobile clip has one pixel of paint clearance. Single-pixel card borders and arrows above the cards are preserved.
 
 - Verification: Checked all seven culture cards in both navigation directions at 320px, 390px and 430px widths; borders and both arrows remain visible. Added a 2px track gap on mobile so the neighbouring card cannot double the visible edge. Verified all five landscape photos rotate with contain sizing; TypeScript check passed.
+
+
+## November 3, 2026 — Update full-time job openings and descriptions
+
+### Page: Careers (/careers)
+#### Section: Job Openings
+- BEFORE UI STATE: Thirteen generic full-time jobs with generated descriptions were listed.
+- AFTER UI STATE: Lists the four supplied roles in order: Design Engineer, UAV Pilot, Systems Engineer and Aerial Robotics Engineer. Internship listings are unchanged; totals derive from the four active full-time roles.
+### Page: Career role details (/careers/[slug])
+#### Section: Job description
+- BEFORE UI STATE: Generic about, responsibility and requirement text; no general expectations, experience or skills sections.
+- AFTER UI STATE: All four roles use the supplied responsibilities and qualifications, plus ten shared general expectations. Experience is 1–3 years for Design, Systems and Aerial Robotics, and 1–2 years for UAV Pilot. Supplied skill summaries display where available. Removed accidental pasted bullet line breaks without changing meaning. Existing full-time data is preserved in comments.
+- Application links were clipped in the screenshot and have not been supplied; no application destination was changed.
+
+
+## November 3, 2026 — Update internship openings
+
+### Page: Careers (/careers)
+#### Section: Internship openings
+- BEFORE UI STATE: Ten older internship positions with generated role descriptions.
+- AFTER UI STATE: Seven supplied openings: Systems Engineering, Embedded Engineer, Design Engineer, Fabrication, Aerial Robotics, Mechatronics and AI/ML, each labelled Intern.
+### Page: Internship details (/careers/[slug])
+#### Section: Description
+- BEFORE UI STATE: Generic role-specific summaries, responsibilities and requirements were displayed.
+- AFTER UI STATE: Each internship displays the same ten supplied General Expectations. Empty summary, responsibilities and qualifications sections are hidden. Previous listing data remains commented in source.
+
+## November 3, 2026 — Google Forms application buttons
+
+### Page: All career role and internship detail pages (/careers/[slug])
+#### Section: Apply for this role
+- BEFORE UI STATE: An on-site application form displayed contact, attachment and personal note fields with a Submit Application button.
+- AFTER UI STATE: The form is hidden and preserved in source. A compact dark application panel includes a cyan Apply Now link, arrow, hover and keyboard focus styles. The four full-time positions use their corresponding supplied Google Forms URLs; all seven internships share the supplied internship URL. Clicking opens the form in the same tab.
+- Link verification: All five short URLs resolve to docs.google.com/forms. Google returned HTTP 401 for unauthenticated access; form contents were not inspected and no application was submitted.
+
+
+## November 3, 2026 — Simplify application button section
+
+### Page: All career role and internship details (/careers/[slug])
+#### Section: Apply Now
+- BEFORE UI STATE: Dark padded panel with Join the mission, Ready to apply?, the cyan button and Google Forms helper text.
+- AFTER UI STATE: Removed the panel background, border and inset padding; removed both requested text lines. Ready to apply? uses black text on the existing light page, and the cyan Apply Now link remains. Hover uses black to preserve contrast on the light background.
+
+
+## November 3, 2026 — Tighten spacing before Apply Now
+
+### Page: All career role details (/careers/[slug])
+#### Section: Qualifications and application
+- BEFORE UI STATE: Qualifications and divider each added mb-20, creating a large blank gap before Ready to apply?.
+- AFTER UI STATE: Both margins use mb-8, reducing the combined spacing from 160px to 64px at the default root size.

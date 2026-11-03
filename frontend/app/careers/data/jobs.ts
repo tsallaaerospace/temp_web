@@ -1,3 +1,5 @@
+import fullTimeContent from "./full-time-roles.json";
+
 export interface JobPosition {
     id: string;
     slug: string;
@@ -9,6 +11,10 @@ export interface JobPosition {
     about: string;
     responsibilities: string[];
     requirements: string[];
+    applicationUrl?: string;
+    generalExpectations?: string[];
+    experience?: string;
+    skills?: string[];
 }
 
 const formatSlug = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
@@ -90,6 +96,7 @@ const createJob = (title: string, category: "Internship" | "Full-Time", shortDes
     };
 };
 
+/* PREVIOUS CONTENT: Internship openings.
 export const internships: JobPosition[] = [
     createJob("Aerospace Engineering Intern, EMEA", "Internship", "Support UAV hardware development, flight testing, and component integration in agile engineering teams."),
     createJob("Communications Intern, EMEA", "Internship", "Assist in internal/external communications, social media strategy, and brand alignment for Tsalla Aerospace."),
@@ -102,7 +109,32 @@ export const internships: JobPosition[] = [
     createJob("Supply Chain & Operations Intern, EMEA", "Internship", "Analyze supply chain logistics and assist in procurement for aerospace components."),
     createJob("UAV Flight Operations Intern, EMEA", "Internship", "Participate in flight test planning, execution, and data analysis for experimental aircraft.")
 ];
+*/
+export const internships: JobPosition[] = [
+    "Systems Engineering Intern",
+    "Embedded Engineer Intern",
+    "Design Engineer Intern",
+    "Fabrication Intern",
+    "Aerial Robotics Intern",
+    "Mechatronics Intern",
+    "AI/ML Intern"
+].map((title) => ({
+    id: formatSlug(title),
+    slug: formatSlug(title),
+    title,
+    category: "Internship",
+    location: "Bengaluru, India",
+    department: "Early Career Program",
+    applicationUrl: "https://forms.gle/bcoTXhawfW8RypWX9",
+    about: "",
+    shortDescription: "",
+    responsibilities: [],
+    requirements: [],
+    generalExpectations: fullTimeContent.generalExpectations,
+}));
 
+
+/* PREVIOUS CONTENT: Full-time openings.
 export const fullTimeRoles: JobPosition[] = [
     createJob("Autonomy Software Engineer", "Full-Time", "Design and implement advanced AI algorithms for real-time UAV navigation and object detection."),
     createJob("Flight Test Engineer", "Full-Time", "Lead system validation missions and post-flight data analysis to iterate on drone platforms."),
@@ -118,5 +150,15 @@ export const fullTimeRoles: JobPosition[] = [
     createJob("Quality Assurance Engineer", "Full-Time", "Establish and maintain rigorous quality standards for flight-critical hardware and software."),
     createJob("Field Deployment Specialist", "Full-Time", "Travel to client sites to lead system deployment, training, and technical support operations.")
 ];
+*/
+export const fullTimeRoles: JobPosition[] = fullTimeContent.roles.map((role) => ({
+    ...role,
+    id: formatSlug(role.title),
+    slug: formatSlug(role.title),
+    category: "Full-Time",
+    location: "Bengaluru, India",
+    shortDescription: "",
+    generalExpectations: fullTimeContent.generalExpectations,
+}));
 
 export const allJobs = [...internships, ...fullTimeRoles];

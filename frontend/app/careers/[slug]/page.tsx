@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { MoveLeft, MapPin, Briefcase, Paperclip, ChevronsRight } from "lucide-react"
+import { MoveLeft, MapPin, Briefcase, Paperclip, ChevronsRight, ArrowUpRight } from "lucide-react"
 import { allJobs } from "../data/jobs"
 import { ContentWrapper } from "@/components/ContentWrapper"
 import { useState, use } from "react"
@@ -55,20 +55,31 @@ export default function JobDetailsPage({ params }: { params: Promise<{ slug: str
                     {/* RIGHT COLUMN - CONTENT & FORM */}
                     <div className="lg:col-span-7">
                         {/* ABOUT */}
-                        <section className="mb-16">
+                        {(job.about || job.shortDescription) && <section className="mb-16">
                             <h2 className="text-xl font-medium mb-6">About The Position</h2>
                             <p className="text-neutral-600 leading-relaxed text-sm md:text-base text-justify">
                                 {job.about}
                             </p>
-                            <br />
-                            <p className="text-neutral-600 leading-relaxed text-sm md:text-base text-justify">
+                            {/* PREVIOUS UI: Always rendered a second paragraph, including when empty. */}
+                            {job.shortDescription && <p className="mt-4 text-neutral-600 leading-relaxed text-sm md:text-base text-justify">
                                 {job.shortDescription}
-                            </p>
-                        </section>
+                            </p>}
+                        </section>}
+
+                        {job.experience && <p className="mb-4 text-neutral-600 text-sm md:text-base"><strong>Experience:</strong> {job.experience}</p>}
+                        {!!job.skills?.length && <p className="mb-10 text-neutral-600 text-sm md:text-base"><strong>Skills:</strong> {job.skills.join(", ")}</p>}
+
+                        {job.generalExpectations && <section className="mb-16">
+                            <h2 className="text-xl font-medium mb-6">General Expectations:</h2>
+                            <ol className="list-decimal pl-5 space-y-3 text-neutral-600 text-sm md:text-base leading-relaxed">
+                                {job.generalExpectations.map((item, i) => <li key={i}>{item}</li>)}
+                            </ol>
+                        </section>}
 
                         {/* RESPONSIBILITIES */}
-                        <section className="mb-16">
-                            <h2 className="text-xl font-medium mb-6">Key Responsibilities:</h2>
+                        {job.responsibilities.length > 0 && <section className="mb-16">
+                            {/* PREVIOUS UI: Key Responsibilities: for every role. */}
+                            <h2 className="text-xl font-medium mb-6">{job.title === "UAV Pilot" ? "What You Will Be Doing Here:" : "Key Responsibilities:"}</h2>
                             <ul className="space-y-4">
                                 {job.responsibilities.map((item, i) => (
                                     <li key={i} className="flex items-start gap-3 text-neutral-600 text-sm md:text-base leading-relaxed text-justify">
@@ -77,11 +88,13 @@ export default function JobDetailsPage({ params }: { params: Promise<{ slug: str
                                     </li>
                                 ))}
                             </ul>
-                        </section>
+                        </section>}
 
                         {/* REQUIREMENTS */}
-                        <section className="mb-20">
-                            <h2 className="text-xl font-medium mb-6">Requirements</h2>
+                        {/* PREVIOUS UI: Qualifications used mb-20 before the divider. */}
+                        {job.requirements.length > 0 && <section className="mb-8">
+                            {/* PREVIOUS UI: Requirements */}
+                            <h2 className="text-xl font-medium mb-6">{job.generalExpectations ? "It Would Be Awesome If You:" : "Requirements"}</h2>
                             <ul className="space-y-4">
                                 {job.requirements.map((item, i) => (
                                     <li key={i} className="flex items-start gap-3 text-neutral-600 text-sm md:text-base leading-relaxed text-justify">
@@ -90,16 +103,32 @@ export default function JobDetailsPage({ params }: { params: Promise<{ slug: str
                                     </li>
                                 ))}
                             </ul>
-                        </section>
+                        </section>}
 
                         {/* DIVIDER */}
-                        <div className="w-full h-px bg-[#E5E5E0] mb-20 relative overflow-hidden">
+                        {/* PREVIOUS UI: Divider used mb-20 above the application section. */}
+                        <div className="w-full h-px bg-[#E5E5E0] mb-8 relative overflow-hidden">
                             <div className="absolute left-0 top-0 w-4 h-4 -translate-y-1/2 -ml-2 -rotate-45 border border-neutral-400" />
                             <div className="absolute right-0 top-0 w-4 h-4 -translate-y-1/2 -mr-2 -rotate-45 border border-neutral-400" />
                         </div>
 
-                        {/* APPLICATION FORM */}
-                        <section id="application-form">
+                        {/* PREVIOUS UI: Dark bordered panel with p-6 sm:p-10 padding. */}
+                        <section id="application-form" className="font-orbit">
+                            {/* PREVIOUS UI: Join the mission */}
+                            <h2 className="text-xl sm:text-2xl text-black mb-6">Ready to apply?</h2>
+                            <a
+                                href={job.applicationUrl}
+                                className="group flex w-full items-center justify-between gap-4 border border-[#5ce1e6] bg-[#5ce1e6] px-6 py-5 text-sm uppercase tracking-widest text-black transition-colors hover:bg-black hover:text-[#5ce1e6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ce1e6]"
+                                aria-label={`Apply now for ${job.title}`}
+                            >
+                                Apply Now
+                                <ArrowUpRight aria-hidden="true" className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none" />
+                            </a>
+                            {/* PREVIOUS UI: Complete your application on Google Forms. */}
+                        </section>
+
+                        {/* PREVIOUS UI: On-site application form, hidden while applications use Google Forms. */}
+                        {false && <section>
                             <div className="relative p-8 md:p-12 bg-neutral-900 border border-white/5">
                                 {/* Corner Accents */}
                                 <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-white" />
@@ -194,7 +223,7 @@ export default function JobDetailsPage({ params }: { params: Promise<{ slug: str
 
                                 </form>
                             </div>
-                        </section>
+                        </section>}
                     </div>
                 </div>
             </ContentWrapper>
