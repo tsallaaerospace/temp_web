@@ -116,7 +116,8 @@ const megaMenuData = {
           headline: "STORM",
           subheadline: "Smart Transport Operations <br /> for Rugged Missions",
           droneImage:
-            "https://cdn.sanity.io/images/e2g21cdj/production/3af09f241d205d17afd828cff54cb8aed969ea52-1707x1207.png",
+            // PREVIOUS UI: "https://cdn.sanity.io/images/e2g21cdj/production/3af09f241d205d17afd828cff54cb8aed969ea52-1707x1207.png"
+            "/product/STORM/STORM%20top%20veiw.png",
           stats: { speed: "85 km/h", range: "300 km", endurance: "12 hrs", payload: "45 kg" }
         },
       },

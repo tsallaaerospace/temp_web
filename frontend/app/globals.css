@@ -1836,3 +1836,27 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
   /* PREVIOUS UI: The STORM foreground drone sat at the top of the mobile section. */
   .storm-three-drone { top: auto; bottom: -4svh; width: 133vw; }
 }
+
+/* STORM component overview, matching the MANTIS detail section. */
+.storm-details { --fenix-title-top: max(90px, 10svh); --fenix-title-inset: 5vw; }
+.storm-details-image { left: max(calc(6vw + 24px), calc(76vw - 109svh + 24px)); top: -5%; width: min(140vw, 210svh); }
+/* PREVIOUS UI: Callouts were evenly spaced in a grid with angled connectors. */
+.storm-details-callouts > div { left: 5%; width: 34%; }
+.storm-details-callouts > div:first-child { top: 32%; }
+@media (max-width: 767px) {
+  .storm-details { --fenix-title-top: max(88px, 10svh); --fenix-title-inset: 6vw; }
+  .storm-details .product-section-title { font-size: clamp(1.375rem, 5.7vw, 2rem); }
+  .storm-details-image { left: 8px; top: 29%; width: 185%; }
+  .storm-details-callouts > div { width: 36%; }
+  .storm-details-callouts > div:first-child { top: 30%; }
+  .storm-details-callouts h3 { font-size: clamp(.6875rem, 3vw, .875rem); }
+  .storm-details-callouts .product-body { font-size: clamp(.5625rem, 2.5vw, .75rem); line-height: 1.5; }
+}
+
+/* PREVIOUS UI: Ship bottom 0; drone width min(50vw,85svh), top 2svh. */
+.storm-maritime-ship { right: -2vw; bottom: -3svh; width: min(68vw, 130svh); }
+.storm-maritime-drone { left: 4vw; top: -5svh; width: min(27vw, 46svh); }
+@media (max-width: 767px) {
+  .storm-maritime-ship { right: -10vw; width: 110vw; }
+  .storm-maritime-drone { left: 0; top: -3svh; width: 49vw; }
+}

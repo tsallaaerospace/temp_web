@@ -2800,3 +2800,96 @@
 - BEFORE UI STATE: The drone occupied the upper portion on mobile.
 - AFTER UI STATE: Anchored the mobile drone to the bottom at -4svh, retaining its displayed mobile width and entrance animation. Explicit mobile CSS avoids max-breakpoint generation limitations from mixed-unit Tailwind screens.
 - Validation: The STORM foreground asset loads and its entrance progresses upward to its final position at 390px, 1440px and 3440px widths. Reduced-motion placement is immediate. Confirmed Mission Profiles and the deleted final call-to-action are absent; TypeScript passes.
+
+
+## November 3, 2026 — STORM navbar preview
+
+### Page: Global navbar
+#### Section: Uncrewed Systems / STORM
+- BEFORE UI STATE: A small remote oblique STORM rendering used an inverted wireframe appearance and fade mask.
+- AFTER UI STATE: Uses the supplied local STORM top veiw.png with the same natural-colour, rotated, oversized presentation as BAT and MANTIS. STORM preview uses scale 2.2 and offsets x120/y100 for its square asset, retains pointer tilt, and removes the inversion and bottom mask. Other product previews are unchanged.
+
+
+## November 3, 2026 — STORM detail overview and navbar positioning
+
+### Page: STORM (/storm)
+#### Section: Component overview after Specifications
+- BEFORE UI STATE: No MANTIS-style side-view detail section was present.
+- AFTER UI STATE: Added a white full-screen overview using STORM_side_view.png, a large cyan-accent heading, a right-to-left image entrance and three labelled connectors. Callouts identify visible paired rotors, the central airframe and landing gear; connector endpoints follow source-image coordinates during animation and resizing. Reduced-motion settings disable the image movement. Mobile positions and type sizes are scoped to STORM.
+### Page: Global navbar
+#### Section: Uncrewed Systems / STORM preview
+- BEFORE UI STATE: STORM preview used a y offset of 100px.
+- AFTER UI STATE: Raised it 60px to y40; scale, rotation and other product previews remain unchanged.
+- Validation: New detail section checked at 320px, 390px, 1440px, 1920px and 3440px, including source-coordinate connector alignment and reduced-motion placement. Ultrawide image size is capped by viewport height to keep the landing-gear connector visible. Navbar preview checked at 1440px and 1920px; TypeScript passes.
+
+
+## November 3, 2026 — Straight STORM detail leaders and remove legacy features
+
+### Page: STORM (/storm)
+#### Section: Component overview
+- BEFORE UI STATE: Central airframe and Landing gear used angled leaders; the detail image sat at its original horizontal position.
+- AFTER UI STATE: Those two leaders are horizontal, with their labels vertically aligned to the original image anchors. The image moves 24px right on desktop and 8px right on mobile. Connector positions still track the image during entrance and resizing.
+#### Section: Legacy flight photo and specification table
+- BEFORE UI STATE: The Where control meets motion text, specifications table and flight photo followed the detail section.
+- AFTER UI STATE: Deleted StormFeatures.tsx and removed its import/render as requested. The detail section is now followed by the shared footer.
+
+
+## November 3, 2026 — Reduce STORM callout gap
+
+### Page: STORM (/storm)
+#### Section: Component overview
+- BEFORE UI STATE: Aligning the landing-gear label to the lower leg at image y0.70 created a large desktop gap below Central airframe.
+- AFTER UI STATE: The desktop landing-gear leader targets a higher point on the same leg at y0.59, bringing the label upward. Both leaders stay horizontal. Mobile retains the lower attachment point to preserve readable spacing.
+
+## November 3, 2026 — Equal STORM callout spacing
+
+### Page: STORM (/storm)
+#### Section: Component overview
+- BEFORE UI STATE: Labels aligned to image anchors had inconsistent visible gaps due to different text heights.
+- AFTER UI STATE: Label positions account for their measured heights and use an equal gap between all three boxes. Central airframe and Landing gear leaders stay horizontal. A minimum 12px gap protects wrapped mobile text.
+
+
+## November 3, 2026 — Add STORM ocean composition
+
+### Page: STORM (/storm)
+#### Section: Maritime scene after Specifications
+- BEFORE UI STATE: The specification overview led directly into the side-view detail section.
+- AFTER UI STATE: A new full-screen ocean scene appears between them. The supplied ocean.png fills the background, ship.png sits at bottom right, and STORM_approach_spinning_4096.png sits at top left. Responsive sizes preserve the composition on phones and ultrawide screens. Next Image serves appropriately sized versions of the supplied high-resolution assets.
+
+
+## November 3, 2026 — Refine STORM maritime image positions
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: Drone width min(50vw,85svh) / mobile 90vw, positioned at top 2svh / mobile 3svh. Ship aligned to bottom 0.
+- AFTER UI STATE: Drone is 20% smaller, raised to top -2svh / mobile 0; responsive image sizes are updated. Ship is lowered by 3svh. Background and section placement remain unchanged.
+
+
+## November 3, 2026 — Smaller upper-left maritime drone
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: Drone width min(40vw,68svh), left -3vw, top -2svh; mobile width72vw, left -10vw, top0.
+- AFTER UI STATE: Reduced another approximately 15%, moved right to left4vw and up to top-5svh. Mobile uses width61vw, left0 and top-3svh. Ship remains lowered by3svh.
+
+
+## November 3, 2026 — Further reduce maritime drone
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: Drone width min(34vw,58svh), mobile49vw before this change used61vw.
+- AFTER UI STATE: Drone width min(27vw,46svh), mobile49vw, approximately20% smaller. Position and ship placement are unchanged.
+
+## November 3, 2026 — Maritime background interaction
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: Ocean, ship and drone were static image layers.
+- AFTER UI STATE: Hovering either foreground image with a mouse blurs only the ocean background. On touchscreens, tapping an image toggles the blur; tapping the ocean clears it. Foreground images remain sharp. Native buttons provide keyboard activation, pressed state and focus outlines; reduced-motion settings remove the blur transition.
+
+## November 3, 2026 — Ignore transparent maritime image padding
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: Hovering or tapping transparent portions of either foreground PNG triggered the ocean blur.
+- AFTER UI STATE: Cached image alpha masks restrict mouse hover and touch selection to visible ship/drone pixels. Moving onto transparent padding clears hover; tapping it clears selection. Keyboard activation remains available and image sizing/placement are unchanged.

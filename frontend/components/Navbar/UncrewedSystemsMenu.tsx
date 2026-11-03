@@ -529,18 +529,19 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                                 transformStyle: "preserve-3d"
                                             }}
                                             */
+                                            /* PREVIOUS UI: STORM used the small upright inverted preview with a bottom fade mask. */
                                             style={{
                                                 rotateX: tiltX,
                                                 rotateY: tiltY,
-                                                rotateZ: ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? -90 : 0,
-                                                scale: hoveredUncrewedSystemDetails.href === "/fenix" ? 1.3 : hoveredUncrewedSystemDetails.href === "/bat" ? 3.1 : hoveredUncrewedSystemDetails.href === "/mantis" ? 3.7 : 1,
-                                                y: hoveredUncrewedSystemDetails.href === "/fenix" ? -10 : hoveredUncrewedSystemDetails.href === "/mantis" ? 115 : hoveredUncrewedSystemDetails.href === "/bat" ? 110 : 0,
-                                                x: hoveredUncrewedSystemDetails.href === "/bat" ? 245 : hoveredUncrewedSystemDetails.href === "/mantis" ? 350 : 0,
+                                                rotateZ: ["/fenix", "/mantis", "/bat", "/storm"].includes(hoveredUncrewedSystemDetails.href) ? -90 : 0,
+                                                scale: hoveredUncrewedSystemDetails.href === "/fenix" ? 1.3 : hoveredUncrewedSystemDetails.href === "/bat" ? 3.1 : hoveredUncrewedSystemDetails.href === "/mantis" ? 3.7 : hoveredUncrewedSystemDetails.href === "/storm" ? 2.2 : 1,
+                                                y: hoveredUncrewedSystemDetails.href === "/fenix" ? -10 : hoveredUncrewedSystemDetails.href === "/mantis" ? 115 : hoveredUncrewedSystemDetails.href === "/bat" ? 110 : hoveredUncrewedSystemDetails.href === "/storm" ? 40 : 0,
+                                                x: hoveredUncrewedSystemDetails.href === "/bat" ? 245 : hoveredUncrewedSystemDetails.href === "/mantis" ? 350 : hoveredUncrewedSystemDetails.href === "/storm" ? 120 : 0,
                                                 transformStyle: "preserve-3d"
                                             }}
                                             className={cn(
                                                 "relative z-10 w-full max-w-[320px] lg:mt-0 lg:max-w-xl group transition-transform duration-500 rounded-lg lg:rounded-xl",
-                                                ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? "overflow-visible" : "overflow-hidden",
+                                                ["/fenix", "/mantis", "/bat", "/storm"].includes(hoveredUncrewedSystemDetails.href) ? "overflow-visible" : "overflow-hidden",
 
                                                 hoveredUncrewedSystemDetails.headline === "DEXTER" && "lg:xl:-translate-y-16",
                                                 hoveredUncrewedSystemDetails.headline === "STORM" && "lg:xl:-translate-y-20"
@@ -558,10 +559,10 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                                 alt={hoveredUncrewedSystemDetails.headline}
                                                 style={{
                                                     translateZ: "40px",
-                                                    WebkitMaskImage: ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href) ? undefined : 'linear-gradient(to bottom, black 85%, transparent)'
+                                                    WebkitMaskImage: ["/fenix", "/mantis", "/bat", "/storm"].includes(hoveredUncrewedSystemDetails.href) ? undefined : 'linear-gradient(to bottom, black 85%, transparent)'
                                                 }}
                                                 animate={{
-                                                    filter: ["/fenix", "/mantis", "/bat"].includes(hoveredUncrewedSystemDetails.href)
+                                                    filter: ["/fenix", "/mantis", "/bat", "/storm"].includes(hoveredUncrewedSystemDetails.href)
                                                         ? "none"
                                                         : ["invert(1) brightness(2)", "invert(1) brightness(2.5)", "invert(1) brightness(2)"]
                                                 }}
