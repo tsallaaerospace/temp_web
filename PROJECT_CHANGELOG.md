@@ -3034,3 +3034,10 @@
 #### Section: Ready / Rugged / Relentless
 - BEFORE UI STATE: The laptop drone position at top 8% pushed its center cap below the frame.
 - AFTER UI STATE: Raised it to top -4% and slightly reduced its responsive width to min(120vw,180svh), revealing the center cap while keeping propellers clear of the headings. The wider desktop and mobile compositions are preserved.
+
+## November 4, 2026 — Redesign mobile Life at Tsalla collage
+
+### Page: Careers (/careers)
+#### Section: Life at Tsalla photo gallery
+- BEFORE UI STATE: Mobile used the desktop collage positions and rotated landscape photos sideways; the field photo sat on the left.
+- AFTER UI STATE: Mobile now centers the field photo, places wide team photos above and below it, and arranges the remaining images in balanced side slots. Every image stays upright in its natural landscape or portrait orientation, with the full photograph contained in its slot. Desktop layout and scroll zoom are preserved.

@@ -34,7 +34,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
     // PREVIOUS UI: on phones the third image kept its desktop 20vw x 45vh slot, cropping the 3:4 photo to a thin strip;
     // phones now use a 3:4 slot (33vw x 44vw) so the whole photo shows.
     return (
-        <div ref={container} className="relative h-[300vh]">
+        <div ref={container} className="zoom-parallax-gallery relative h-[300vh]">
             <div className="sticky top-0 h-screen overflow-hidden">
                 {images.map(({ src, alt, rotateOnMobile }, index) => {
                     const scale = scales[index % scales.length];

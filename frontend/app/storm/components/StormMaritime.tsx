@@ -1,9 +1,10 @@
 "use client"
 
-import { useRef, useState } from "react"
+// PREVIOUS UI: import { useRef, useState } from "react"
 import Image from "next/image"
 
 export default function StormMaritime() {
+  /* PREVIOUS UI: Foreground drone interactions, retained with the removed image.
   const [hovered, setHovered] = useState<string | null>(null)
   const [selected, setSelected] = useState<string | null>(null)
   const masks = useRef(new WeakMap<HTMLImageElement, { src: string; pixels: ImageData }>())
@@ -53,15 +54,14 @@ export default function StormMaritime() {
       }
     },
   })
+  */
 
   return (
     <section
       data-storm-section="maritime"
       aria-label="STORM maritime approach"
       className="storm-maritime relative h-[100svh] w-full overflow-hidden bg-[#086da3]"
-      onPointerDown={event => {
-        if (!(event.target as HTMLElement).closest("button")) setSelected(null)
-      }}
+      // PREVIOUS UI: onPointerDown cleared the foreground image selection.
     >
       {/* PREVIOUS UI: Ocean background used a fill Image with src="/product/STORM/final section/ocean.png". */}
       {/* PREVIOUS UI: Ocean background was a looping video (ocean.mp4, poster ocean.png) with a separate ship.png
@@ -74,8 +74,9 @@ export default function StormMaritime() {
         sizes="100vw"
         quality={90}
         className="storm-maritime-ocean scale-[1.03] object-cover transition-[filter] duration-300 motion-reduce:transition-none"
-        style={{ filter: hovered || selected ? "blur(8px)" : "blur(0px)" }}
+        // PREVIOUS UI: style={{ filter: hovered || selected ? "blur(8px)" : "blur(0px)" }}
       />
+      {/* PREVIOUS UI: Removed foreground drone image and its interactive button.
       <button {...imageInteraction("STORM drone")} className="storm-maritime-drone absolute z-10 border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ce1e6]">
       <Image
         src="/product/STORM/final section/STORM_approach_spinning_4096.png"
@@ -89,6 +90,7 @@ export default function StormMaritime() {
         className="h-auto w-full max-w-none"
       />
       </button>
+      */}
     </section>
   )
 }
