@@ -57,10 +57,10 @@ export default function Footer() {
 
   const footerLinks = {
     company: [
-      // PREVIOUS UI: About Us, Mission Autonomy and Our Team were clickable (their pages are switched off for now).
-      { name: "About Us", href: "/about", disabled: true },
-      { name: "Mission Autonomy", href: "/about#mission", disabled: true },
-      { name: "Our Team", href: "/leadership", disabled: true },
+      // PREVIOUS UI: About Us, Mission Autonomy and Our Team had disabled: true while their pages were switched off.
+      { name: "About Us", href: "/about" },
+      { name: "Mission Autonomy", href: "/about#mission" },
+      { name: "Our Team", href: "/leadership" },
       // PREVIOUS UI: Our Culture pointed to /careers/culture.
       { name: "Our Culture", href: "/careers" },
       { name: "Careers", href: "/careers" },
@@ -78,12 +78,12 @@ export default function Footer() {
       { name: "FENIX", href: "/fenix" },
       { name: "T-BAT", href: "/bat" },
       { name: "MANTIS", href: "/mantis" },
-      // PREVIOUS UI: { name: "STORM", href: "/storm" } (page switched off for now).
-      { name: "STORM", href: "/storm", disabled: true },
+      // PREVIOUS UI: { name: "STORM", href: "/storm", disabled: true } (while the page was switched off).
+      { name: "STORM", href: "/storm" },
     ],
     media: [
-      // PREVIOUS UI: Media Coverage was clickable (/newsroom is switched off for now).
-      { name: "Media Coverage", href: "/newsroom", disabled: true },
+      // PREVIOUS UI: Media Coverage had disabled: true while /newsroom was switched off.
+      { name: "Media Coverage", href: "/newsroom" },
       { name: "Press Releases", href: "/press-releases" },
       { name: "Blog", href: "/blog" },
     ],

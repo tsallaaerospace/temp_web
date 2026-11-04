@@ -16,9 +16,11 @@ const REF_PANEL_H = 1000 // detail panel height at 1920x1080
 const REF_BOX_W = 702    // drone image box width at 1920x1080 (lg:max-w-xl, with the site's 19.5px root font there)
 const REF_FREE_W = 1073  // px between the spec cards and the panel's right edge at 1920x1080
 const DESKTOP_PLACEMENT: Record<string, { right: number; cy: number; scale: number }> = {
+    "/fenix": { right: 470, cy: 0.5, scale: 1.43 },
     "/bat": { right: 184, cy: 0.468, scale: 3.1 },
     "/mantis": { right: 240, cy: 0.49, scale: 3.3 },
-    "/storm": { right: 309, cy: 0.438, scale: 1.9 },
+    // PREVIOUS UI: "/storm": { right: 309, cy: 0.438, scale: 1.9 } (drone sat higher and further right)
+    "/storm": { right: 380, cy: 0.48, scale: 1.9 },
 }
 type PanelFit = { pl: number; pt: number; pw: number; ph: number; sx: number; sy: number; bw: number; free: number }
 
@@ -590,6 +592,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                                 rotateY: tiltY,
                                                 rotateZ: ["/fenix", "/mantis", "/bat", "/storm"].includes(hoveredUncrewedSystemDetails.href) ? -90 : 0,
                                                 // Laptop/desktop: T-BAT, MANTIS and STORM follow DESKTOP_PLACEMENT; the values after it are the phone/fallback ones.
+                                                // PREVIOUS UI: FENIX used scale 1.36 (centred in the stage) on laptops/desktops too; it now follows DESKTOP_PLACEMENT.
                                                 scale: placement ? placement.scale : hoveredUncrewedSystemDetails.href === "/fenix" ? 1.36 : hoveredUncrewedSystemDetails.href === "/bat" ? 3.1 : hoveredUncrewedSystemDetails.href === "/mantis" ? 3.3 : hoveredUncrewedSystemDetails.href === "/storm" ? 1.9 : 1,
                                                 y: placement ? placement.y : hoveredUncrewedSystemDetails.href === "/fenix" ? (fit ? fit.pt + fit.ph / 2 - fit.sy : 35) : hoveredUncrewedSystemDetails.href === "/mantis" ? 115 : hoveredUncrewedSystemDetails.href === "/bat" ? 110 : hoveredUncrewedSystemDetails.href === "/storm" ? -30 : 0,
                                                 x: placement ? placement.x : hoveredUncrewedSystemDetails.href === "/bat" ? 245 : hoveredUncrewedSystemDetails.href === "/mantis" ? 280 : hoveredUncrewedSystemDetails.href === "/storm" ? 120 : 0,

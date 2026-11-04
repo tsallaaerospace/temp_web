@@ -4,6 +4,7 @@ import type { JSX } from "react"
 
 export default function StormHero(): React.JSX.Element {
   const [showSubtitle, setShowSubtitle] = useState(false)
+  const [finished, setFinished] = useState(false)
   // Dynamically load the Clash Grotesk font
   useEffect(() => {
     const link = document.createElement("link")
@@ -29,14 +30,14 @@ export default function StormHero(): React.JSX.Element {
         muted
         playsInline
         preload="auto"
+        controlsList="nodownload"
+        onContextMenu={(event) => event.preventDefault()}
         onTimeUpdate={({ currentTarget: video }) => {
           if (!showSubtitle && video.currentTime >= 5.1) setShowSubtitle(true)
         }}
-        onEnded={({ currentTarget: video }) => {
-          video.pause()
-          // The hero clip has its black tail removed; hold inside its final decoded frame.
-          // PREVIOUS UI: original clip used video.duration - 0.1 after briefly playing its black tail.
-          video.currentTime = Math.max(0, video.duration - 0.001)
+        onEnded={() => {
+          setFinished(true)
+          setShowSubtitle(true)
         }}
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
@@ -45,6 +46,15 @@ export default function StormHero(): React.JSX.Element {
         <source src="/product/STORM/storm-v2-hero.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      {/* Keep the final drone frame visible without seeking at the media boundary. */}
+      <img
+        src="/product/STORM/storm-hero-end.jpg"
+        alt=""
+        aria-hidden="true"
+        loading="eager"
+        onContextMenu={(event) => event.preventDefault()}
+        className={`absolute inset-0 h-full w-full object-cover z-0 ${finished ? "visible" : "invisible"}`}
+      />
 
 
       {/* PREVIOUS UI:
@@ -89,7 +99,8 @@ export default function StormHero(): React.JSX.Element {
           */}
           {/* PREVIOUS UI: subtitle was always visible, text-base through md:text-xl, inheriting the section font. */}
           {showSubtitle && <p
-            className="font-orbit text-white text-[clamp(20px,2.2vw,36px)] font-normal tracking-wide text-balance drop-shadow-md"
+            // PREVIOUS UI: Subtitle appeared immediately when the video reached 5.1 seconds.
+            className="storm-hero-subtitle font-orbit text-white text-[clamp(20px,2.2vw,36px)] font-normal tracking-wide text-balance drop-shadow-md"
             style={{ letterSpacing: "0.01em" }}
           >
             Smart Transport Operations for Rugged Missions

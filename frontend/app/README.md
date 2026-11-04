@@ -34,13 +34,7 @@ These pages exist but are switched off: the file is named `disabled.tsx`, so Nex
 
 | Page | Folder | Pointer for the long address |
 |---|---|---|
-| About | `about/` | |
 | Blog | `blog/` | |
-| Counter systems | `countersystems/` (+ `countersystems/detection/`) | |
-| Leadership | `leadership/` | |
-| Merchandise | `merchandise/` (+ `merchandise/[id]/`) | |
-| Newsroom | `newsroom/` | |
-| Space systems | `hardware/` | |
 | Coming soon | `coming-soon/` | |
 | Dexter | `dexter/` | `uncrewedsystems/dexter/disabled.tsx` |
 | Documents | `documents/` | |
@@ -49,7 +43,7 @@ These pages exist but are switched off: the file is named `disabled.tsx`, so Nex
 | Roadrunner | `roadrunner/` | |
 | Storm | `storm/` (turn on by adding `page.tsx` with `export { default, metadata } from "./disabled"`) | `uncrewedsystems/storm/disabled.tsx` |
 
-The COUNTER SYSTEMS, SPACE SYSTEMS and COMPANY navbar buttons are hidden by `HIDDEN_NAV_ITEMS` in `components/Navbar.tsx`; STORM shows as locked in the UNCREWED SYSTEMS menu. When turning those pages back on, also update those two places and the `disabled: true` links in `components/Footer.tsx`.
+To hide a navbar button, set `disabled: true` on it in `navigationItems` (`components/Navbar.tsx`); footer links use the same flag in `components/Footer.tsx`.
 
 There is no `/maverick` page: the MAVERICK navbar button only opens its menu (AI-Pilot, Cortex, Mesh, and Integration marked "Coming soon"). The `maverick/` folder holds just the pointer files for the long addresses.
 

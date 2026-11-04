@@ -224,9 +224,10 @@ const megaMenuData = {
   },
 }
 
-const navigationItems = [
+const navigationItems: { name: string; href: string; disabled?: boolean }[] = [
   { name: "MAVERICK", href: "/maverick" },
   { name: "UNCREWED SYSTEMS", href: "#" },
+  // PREVIOUS UI: Counter Systems, Space Systems and Company were hidden with disabled: true.
   { name: "COUNTER SYSTEMS", href: "/countersystems" },
   { name: "SPACE SYSTEMS", href: "/hardware" },
   { name: "COMPANY", href: "#" },
@@ -452,8 +453,15 @@ export default function Navbar() {
             */}
 
             {/* PREVIOUS UI (right-aligned while six buttons were shown): absolute right-6 xl:right-[56px] 2xl:right-[61px] */}
-            <div className="hidden lg:flex items-center h-full absolute left-1/2 -translate-x-1/2">
-              {navigationItems.map((item, index) => {
+            {/* Centred from 1440px; on smaller laptops the six centred buttons ran into the logo, so they sit right there. */}
+            <div className="hidden lg:flex items-center h-full absolute left-1/2 -translate-x-1/2 [@media(max-width:1439px)]:left-auto [@media(max-width:1439px)]:right-6 [@media(max-width:1439px)]:translate-x-0">
+              {/* PREVIOUS UI: Disabled navigation items remained visible. */}
+              {navigationItems.filter(item => !item.disabled).map((item, index) => {
+                if (item.disabled) return (
+                  <button key={item.name} type="button" disabled className={cn("site-nav-link px-2.5 xl:px-4 2xl:px-6 text-xs xl:text-sm font-medium tracking-wider whitespace-nowrap h-full flex items-center cursor-default opacity-60 font-orbit", darkNavText ? "text-black" : "text-white")}>
+                    {item.name}
+                  </button>
+                );
                 return (
                   <div
                     key={item.name}
@@ -723,10 +731,12 @@ export default function Navbar() {
               </div>
             ) : (
               <div className="flex flex-col h-full overflow-y-auto">
-                {navigationItems.map((item) => {
+                {/* PREVIOUS UI: Disabled navigation items remained visible in the mobile menu. */}
+                {navigationItems.filter(item => !item.disabled).map((item) => {
                   return (
                     <button
                       key={item.name}
+                      disabled={item.disabled}
                       onClick={() => {
                         const megaKey = item.name === "MAVERICK" ? "/maverick" : (item.name === "UNCREWED SYSTEMS" ? "/uncrewedsystems" : (item.name === "COMPANY" ? "/about" : (item.name === "JOIN THE MISSION" ? "/careers" : item.href)));
                         if (["/uncrewedsystems", "/countersystems", "/about", "/careers", "/maverick", "/hardware"].includes(megaKey)) {
@@ -737,7 +747,7 @@ export default function Navbar() {
                           router.push(item.href);
                         }
                       }}
-                      className={`px-6 py-5 text-base font-medium border-b border-white/10 transition-colors flex justify-between items-center font-orbit w-full text-left
+                      className={`px-6 py-5 text-base font-medium border-b border-white/10 transition-colors flex justify-between items-center font-orbit w-full text-left disabled:opacity-60 disabled:cursor-default
                         ${(pathname === item.href || (item.name === "UNCREWED SYSTEMS" && pathname.startsWith("/uncrewedsystems")))
                           ? "text-[#5ce1e6] bg-white/5"
                           : "text-white hover:text-[#5ce1e6] hover:bg-white/5"

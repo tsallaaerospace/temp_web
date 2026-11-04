@@ -26,9 +26,9 @@ export default function StormPage() {
       <StormHero />
       <StormThreePhase />
       <StormSpecifications />
-      <StormMaritime />
       <StormDetails />
       {/* <StormMission /> */}
+      <StormMaritime />
       <StormLast />
     </PageWrapper>
   )

@@ -1420,6 +1420,14 @@ html:has(.careers-page) { font-size: 100%; }
 */
 .bat-specs-ticks { display: none !important; }
 html:has(.storm-page) { font-size: 100%; }
+.storm-hero-subtitle { animation: storm-subtitle-fade 1.1s cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes storm-subtitle-fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .storm-hero-subtitle { animation: none; }
+}
 .storm-three-phase { --fenix-title-top: max(90px, 10svh); --fenix-title-inset: 0px; }
 .storm-three-heading {
   --phase-art-width: max(100%, calc(100svh * 1672 / 941));

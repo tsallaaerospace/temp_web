@@ -8,6 +8,7 @@ import { ArrowRight } from "lucide-react"
 // href: null = no page yet (shown as "Coming soon", not clickable)
 const menuItems: { title: string; subtitle: string; href: string | null }[] = [
     { title: "AI-Pilot", subtitle: "Advanced operation design", href: "/ai-pilot" },
+    // PREVIOUS UI: Cortex and Mesh had href: null (not clickable).
     { title: "Cortex", subtitle: "Real-time mission control", href: "/cortex" },
     { title: "Mesh", subtitle: "Post-mission intelligence", href: "/mesh" },
     { title: "Integration", subtitle: "Coming soon", href: null },
@@ -72,7 +73,7 @@ export const MaverickMenu: React.FC<MaverickMenuProps> = ({ onClose }) => {
                     const tileClass = `relative bg-gray-100 p-6 lg:p-8 flex flex-col justify-center overflow-hidden ${borderFor(index)}`
 
                     if (!item.href) {
-                        return <div key={item.title} className={`${tileClass} cursor-default`}>{content}</div>
+                        return <button key={item.title} type="button" disabled className={`${tileClass} cursor-default text-left`}>{content}</button>
                     }
                     return (
                         <Link

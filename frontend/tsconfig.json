@@ -31,17 +31,8 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    ".next-build-check-bathero/types/**/*.ts",
-    ".next-build-check-scroll/types/**/*.ts",
-    ".next-build-check-wix-assets/types/**/*.ts",
-    ".next-build-check/types/**/*.ts",
-    ".next-wix-latest/types/**/*.ts",
-    ".next-wix-payload-names/types/**/*.ts",
-    ".next-wix-publish-2/types/**/*.ts",
-    ".next-wix-release-20261027-final/types/**/*.ts",
-    ".next-wix-release-20261027/types/**/*.ts",
-    ".next/types/**/*.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    ".next-wix-storm-20261104/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

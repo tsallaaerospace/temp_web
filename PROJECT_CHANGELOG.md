@@ -3041,3 +3041,38 @@
 #### Section: Life at Tsalla photo gallery
 - BEFORE UI STATE: Mobile used the desktop collage positions and rotated landscape photos sideways; the field photo sat on the left.
 - AFTER UI STATE: Mobile now centers the field photo, places wide team photos above and below it, and arranges the remaining images in balanced side slots. Every image stays upright in its natural landscape or portrait orientation, with the full photograph contained in its slot. Desktop layout and scroll zoom are preserved.
+
+## November 4, 2026 — Remove maritime foreground drone
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: STORM_approach_spinning_4096.png appeared as a separate interactive foreground image above the ocean/deck background.
+- AFTER UI STATE: Removed the foreground drone and its hover/tap blur behavior, leaving the current ocean/deck background. Previous image code is retained in comments; the asset file is preserved.
+
+## November 4, 2026 — STORM mobile ocean background
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: Desktop and mobile both displayed ocean.png.
+- AFTER UI STATE: Phones up to 767px display the supplied ocean_mobile.png through a responsive picture source. Desktop continues to use ocean.png, with the existing full-screen cover layout.
+
+## November 4, 2026 — STORM hero tagline fade
+
+### Page: STORM (/storm)
+#### Section: Hero subtitle
+- BEFORE UI STATE: The subtitle appeared instantly at video time 5.1 seconds.
+- AFTER UI STATE: It fades in over 1.1 seconds with a subtle 10px rise, preserving the video timing and final frame. Reduced-motion preferences show the line immediately at the same trigger.
+
+## November 4, 2026 — Disable requested navigation items
+
+### Page: Shared navbar (all pages)
+#### Section: Desktop navigation and mobile menu
+- BEFORE UI STATE: Counter Systems, Space Systems and Company opened navigation menus.
+- AFTER UI STATE: These three items remain visible as disabled controls on desktop and mobile. The six-item desktop navigation retains its viewport-centered positioning; Maverick, Uncrewed Systems and Join the Mission remain active.
+
+## November 4, 2026 — Hide unavailable navigation items
+
+### Page: Shared navbar (all pages)
+#### Section: Desktop navigation and mobile menu
+- BEFORE UI STATE: Counter Systems, Space Systems and Company remained visible as disabled controls.
+- AFTER UI STATE: These three disabled items are omitted from desktop and mobile navigation. The remaining Maverick, Uncrewed Systems and Join the Mission group stays centered on desktop.

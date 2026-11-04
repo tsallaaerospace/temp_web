@@ -272,7 +272,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
     // PREVIOUS UI: product.title === "FENIX"; keyed on the link so the display name can change freely
     const isFenix = product.href === "/fenix";
-    const isLinked = isFenix || isMantis || product.href === "/bat";
+    const isLinked = isFenix || isMantis || product.href === "/bat" || product.href === "/storm";
     const image = (
         <motion.img
             src={product.imageUrl}

@@ -66,6 +66,9 @@ export default function StormMaritime() {
       {/* PREVIOUS UI: Ocean background used a fill Image with src="/product/STORM/final section/ocean.png". */}
       {/* PREVIOUS UI: Ocean background was a looping video (ocean.mp4, poster ocean.png) with a separate ship.png
           button at the lower right; the new ocean.png already shows the ship's deck. */}
+      {/* PREVIOUS UI: Both desktop and mobile used ocean.png. */}
+      <picture>
+      <source media="(max-width: 767px)" srcSet="/product/STORM/final%20section/ocean_mobile.png" />
       <Image
         src="/product/STORM/final section/ocean.png"
         alt=""
@@ -76,6 +79,7 @@ export default function StormMaritime() {
         className="storm-maritime-ocean scale-[1.03] object-cover transition-[filter] duration-300 motion-reduce:transition-none"
         // PREVIOUS UI: style={{ filter: hovered || selected ? "blur(8px)" : "blur(0px)" }}
       />
+      </picture>
       {/* PREVIOUS UI: Removed foreground drone image and its interactive button.
       <button {...imageInteraction("STORM drone")} className="storm-maritime-drone absolute z-10 border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ce1e6]">
       <Image
