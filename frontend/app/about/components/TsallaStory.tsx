@@ -88,7 +88,8 @@ export default function TsallaStory() {
   return (
     <section ref={sectionRef} id="our-story" aria-labelledby="our-story-title" className="relative w-full bg-white text-neutral-900">
       {/* Header */}
-      <div className="px-6 pt-28 md:px-12 md:pt-32 lg:px-24">
+      {/* PREVIOUS UI: pt-28 on phones (too much space above the title). pt-20 still clears the 72px navbar. */}
+      <div className="px-6 pt-20 md:px-12 md:pt-32 lg:px-24">
         <p className="font-orbit text-xs uppercase tracking-[0.3em] text-neutral-500 md:text-sm">Our story</p>
         <ProductHeading id="our-story-title" className="mt-5">
           Built in India.{" "}
