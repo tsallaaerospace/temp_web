@@ -10,7 +10,8 @@ export default function StormLast() {
   return (
     <section data-storm-section="contact" aria-labelledby="storm-contact-title" className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden bg-black font-orbit">
       {/* PREVIOUS UI: Background used STORM_Deployed Where Others Cannot.JPG. */}
-      <Image src="/product/STORM/STORM_Deployed%20Where%20Others%20Cannot.png" alt="" fill sizes="100vw" className="object-cover" />
+      {/* PREVIOUS UI: className="object-cover" (drone sat behind the headline). Enlarging from the bottom edge lifts the drone above it. */}
+      <Image src="/product/STORM/STORM_Deployed%20Where%20Others%20Cannot.png" alt="" fill sizes="100vw" className="object-cover origin-bottom scale-[1.25]" />
       <div aria-hidden="true" className="absolute inset-0 bg-black/45" />
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 24 }}

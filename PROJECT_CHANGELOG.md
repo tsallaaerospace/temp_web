@@ -2984,3 +2984,53 @@
 #### Section: Maritime scene
 - BEFORE UI STATE: Drone width min(24vw,41svh), mobile44vw.
 - AFTER UI STATE: Reduced another approximately 13% to min(21vw,36svh), mobile38vw, keeping its position unchanged.
+
+## November 4, 2026 — Updated STORM performance and dimensions
+
+### Page: STORM (/storm)
+#### Section: Product specifications
+- BEFORE UI STATE: Cruise speed 7 m/s, lift capacity 20–25 kg, Span and Length 2488 mm, Height 751 mm.
+- AFTER UI STATE: Cruise speed 10 m/s, lift capacity 30 kg, Span and Length 1420 mm, Height 750 mm, using the latest user-supplied figures.
+
+## November 4, 2026 — Careers section paging
+
+### Page: Careers (/careers)
+#### Section: Inside Tsalla Aerospace and culture cards
+- BEFORE UI STATE: The introduction and carousel were a single tall snap panel, requiring repeated scrolling to reach the cards.
+- AFTER UI STATE: Registered the introduction and carousel as separate snap panels so one wheel gesture advances from the introduction to the cards, using the existing paging animation.
+
+## November 4, 2026 — Open application forms in new tabs
+
+### Page: Careers role and internship details
+#### Section: Apply Now
+- BEFORE UI STATE: Google Forms replaced the current browser tab.
+- AFTER UI STATE: All Apply Now links open in a new tab with noopener/noreferrer and an accessible new-tab label.
+
+## November 4, 2026 — Enable requested footer navigation
+
+### Page: Shared footer (all pages)
+#### Section: Careers and product links
+- BEFORE UI STATE: View Careers, Our Team, Our Culture and Careers clicks were prevented; STORM was disabled.
+- AFTER UI STATE: Enabled View Careers and Careers to /careers, Our Team to /leadership, Our Culture to the Life at Tsalla section with a clean /careers URL, and STORM to /storm.
+
+## November 4, 2026 — Improve mobile Velocity paragraph justification
+
+### Page: Velocity (/velocity)
+#### Section: Introduction and article paragraphs
+- BEFORE UI STATE: Narrow justified paragraphs had no automatic hyphenation, creating large spaces around long words; the lead remained 17px on phones.
+- AFTER UI STATE: Added automatic English hyphenation, natural word/letter spacing and left-aligned final lines on mobile. Reduced the mobile lead to 15px with 1.8 line height for more even wrapping. Desktop typography is unchanged.
+
+## November 4, 2026 — Keep STORM laptop propellers clear of headings
+
+### Page: STORM (/storm)
+#### Section: Ready / Rugged / Relentless
+- BEFORE UI STATE: The drone used top -10% at every desktop size; propellers overlapped the right heading on narrower laptops.
+- AFTER UI STATE: Laptop widths 768–1599px use top 8%, reserving clear space above the drone for all three headings. Larger desktop and mobile placement retain their existing settings and entrance animation.
+- Verification refinement: The same overlap also occurred on taller 1920x1080 desktops. The lowered placement also applies to desktop aspect ratios up to 1.9, while wider desktop compositions keep the original position.
+
+## November 4, 2026 — Reveal STORM center cap on laptops
+
+### Page: STORM (/storm)
+#### Section: Ready / Rugged / Relentless
+- BEFORE UI STATE: The laptop drone position at top 8% pushed its center cap below the frame.
+- AFTER UI STATE: Raised it to top -4% and slightly reduced its responsive width to min(120vw,180svh), revealing the center cap while keeping propellers clear of the headings. The wider desktop and mobile compositions are preserved.

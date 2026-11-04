@@ -21,13 +21,7 @@ In Next.js the folder name is the web address: `app/bat/page.tsx` is `/bat`.
 | MANTIS | `mantis/` | `/mantis` | `/uncrewedsystems/mantis` |
 | AI-Pilot | `ai-pilot/` | `/ai-pilot` | `/maverick/ai-pilot` (redirects to `/ai-pilot`, see `next.config.mjs`) |
 | Contact | `contact/` | `/contact` | |
-| About | `about/` | `/about` | |
-| Leadership | `leadership/` | `/leadership` | |
-| Newsroom | `newsroom/` | `/newsroom` | |
-| Merchandise | `merchandise/` (+ `merchandise/[id]/` for each product) | `/merchandise` | |
 | Careers | `careers/` (+ `careers/culture/`, `careers/[slug]/` for each job) | `/careers` | |
-| Counter systems | `countersystems/` (+ `countersystems/detection/`) | `/countersystems` | |
-| Space systems | `hardware/` | `/hardware` | |
 | Cortex | `cortex/` | `/cortex` | `/maverick/cortex` (redirects to `/cortex`) |
 | Mesh | `mesh/` | `/mesh` | `/maverick/mesh` (redirects to `/mesh`) |
 
@@ -40,14 +34,22 @@ These pages exist but are switched off: the file is named `disabled.tsx`, so Nex
 
 | Page | Folder | Pointer for the long address |
 |---|---|---|
+| About | `about/` | |
 | Blog | `blog/` | |
+| Counter systems | `countersystems/` (+ `countersystems/detection/`) | |
+| Leadership | `leadership/` | |
+| Merchandise | `merchandise/` (+ `merchandise/[id]/`) | |
+| Newsroom | `newsroom/` | |
+| Space systems | `hardware/` | |
 | Coming soon | `coming-soon/` | |
 | Dexter | `dexter/` | `uncrewedsystems/dexter/disabled.tsx` |
 | Documents | `documents/` | |
 | Media | `media/` | |
 | Mission | `mission/` | |
 | Roadrunner | `roadrunner/` | |
-| Storm | `storm/` | `uncrewedsystems/storm/disabled.tsx` |
+| Storm | `storm/` (turn on by adding `page.tsx` with `export { default, metadata } from "./disabled"`) | `uncrewedsystems/storm/disabled.tsx` |
+
+The COUNTER SYSTEMS, SPACE SYSTEMS and COMPANY navbar buttons are hidden by `HIDDEN_NAV_ITEMS` in `components/Navbar.tsx`; STORM shows as locked in the UNCREWED SYSTEMS menu. When turning those pages back on, also update those two places and the `disabled: true` links in `components/Footer.tsx`.
 
 There is no `/maverick` page: the MAVERICK navbar button only opens its menu (AI-Pilot, Cortex, Mesh, and Integration marked "Coming soon"). The `maverick/` folder holds just the pointer files for the long addresses.
 

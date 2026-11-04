@@ -38,10 +38,10 @@
     ".next-wix-latest/types/**/*.ts",
     ".next-wix-payload-names/types/**/*.ts",
     ".next-wix-publish-2/types/**/*.ts",
+    ".next-wix-release-20261027-final/types/**/*.ts",
     ".next-wix-release-20261027/types/**/*.ts",
     ".next/types/**/*.ts",
-    "next-env.d.ts",
-    ".next-wix-release-20261027-final/types/**/*.ts"
+    "next-env.d.ts"
   ],
   "exclude": [
     "node_modules"

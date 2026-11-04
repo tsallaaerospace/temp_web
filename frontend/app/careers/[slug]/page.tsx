@@ -120,8 +120,11 @@ export default function JobDetailsPage({ params }: { params: Promise<{ slug: str
                             <h2 className="text-xl sm:text-2xl text-black mb-6">Ready to apply?</h2>
                             <a
                                 href={job.applicationUrl}
+                                // PREVIOUS UI: Application forms opened in the current tab.
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="group flex w-full items-center justify-between gap-4 border border-[#5ce1e6] bg-[#5ce1e6] px-6 py-5 text-sm uppercase tracking-widest text-black transition-colors hover:bg-black hover:text-[#5ce1e6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ce1e6]"
-                                aria-label={`Apply now for ${job.title}`}
+                                aria-label={`Apply now for ${job.title} (opens in a new tab)`}
                             >
                                 Apply Now
                                 <ArrowUpRight aria-hidden="true" className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none" />

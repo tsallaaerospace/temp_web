@@ -6,7 +6,8 @@ import ProductHeading from "@/components/ProductHeading"
 import CharacterReveal from "@/components/CharacterReveal"
 
 const CALLOUTS = [
-  { title: "Coaxial propulsion", detail: "Paired rotors positioned on each arm.", anchor: [0.33, 0.36] },
+  // PREVIOUS UI: anchor [0.33, 0.36] (leader bent up to the rotor hub). Now a straight leader ending a little earlier.
+  { title: "Coaxial propulsion", detail: "Paired rotors positioned on each arm.", anchor: [0.31, 0.36] },
   { title: "Central airframe", detail: "A central body connecting the four rotor arms.", anchor: [0.52, 0.48] },
   { title: "Landing gear", detail: "Support legs beneath the airframe.", anchor: [0.49, 0.70] },
 ]
@@ -32,7 +33,9 @@ export default function StormDetails() {
       centreY + heights[2] + 12,
     )
     const gap = legY - heights[2] - centreY
-    const tops = [centreY - heights[1] - gap - heights[0], centreY - heights[1], legY - heights[2]]
+    // Phones: labels sit a little lower than their dots (PREVIOUS UI: no shift), so leaders bend up to the dots there.
+    const phoneShift = section.width < 768 ? 40 : 0
+    const tops = [centreY - heights[1] - gap - heights[0], centreY - heights[1], legY - heights[2]].map(top => top + phoneShift)
     CALLOUTS.forEach(({ anchor: [x, y] }, index) => {
       const element = calloutRefs.current[index]
       const callout = boxes[index]
@@ -40,14 +43,23 @@ export default function StormDetails() {
       if (element) element.style.top = `${tops[index]}px`
       const startX = callout.left - section.left
       const elbowX = callout.right - section.left
-      const endX = image.left - section.left + image.width * x
+      // Phones keep the original rotor-hub point (0.33) for the first leader's elbow.
+      const anchorX = index === 0 && section.width < 768 ? 0.33 : x
+      const endX = image.left - section.left + image.width * anchorX
       // Equal visible gaps account for the actual height of each label, including wrapped mobile text.
       const endY = index === 2 ? legY : image.top - section.top + image.height * y
-      const startY = index > 0 ? endY : tops[index] + heights[index] - 0.5
+      const startY = index > 0 && !phoneShift ? endY : tops[index] + heights[index] - 0.5
       // PREVIOUS UI: All leaders used an elbow before connecting diagonally to the image.
-      pathRefs.current[index]?.setAttribute("d", index > 0
-        ? `M ${startX} ${endY} L ${endX} ${endY}`
-        : `M ${startX} ${startY} L ${elbowX} ${startY} L ${endX} ${endY}`)
+      // PREVIOUS UI: the first leader kept an elbow: `M ${startX} ${startY} L ${elbowX} ${startY} L ${endX} ${endY}`.
+      // PREVIOUS UI: on phones the first leader bent down to the rotor hub: `M ${startX} ${startY} L ${elbowX} ${startY} L ${endX} ${endY}`.
+      // The first leader is now straight on every screen, along its label's underline.
+      const firstLeader = `M ${startX} ${startY} L ${endX} ${startY}`
+      // Phones: the bend starts close to the part it points at (PREVIOUS UI: bend started at the label's right edge, elbowX).
+      const nearPartX = Math.max(elbowX, endX - 48)
+      const otherLeader = phoneShift
+        ? `M ${startX} ${startY} L ${nearPartX} ${startY} L ${endX} ${endY}`
+        : `M ${startX} ${endY} L ${endX} ${endY}`
+      pathRefs.current[index]?.setAttribute("d", index > 0 ? otherLeader : firstLeader)
     })
   }, [])
 

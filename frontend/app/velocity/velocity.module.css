@@ -30,6 +30,18 @@
 .meeting img { width: 100%; height: auto; }
 .meeting figcaption { margin-top: 12px; font-size: 12px; line-height: 1.7; color: #5b6264; }
 .section:last-child .copy > p:last-child { color: #5ce1e6; margin-top: 32px; font-size: clamp(19px, 1.8vw, 30px); line-height: 1.6; }
+@media (max-width: 767px) {
+  /* PREVIOUS UI: Mobile justification had no hyphenation, leaving large gaps around long words. */
+  .lead, .introCopy p, .copy > p {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    text-align-last: left;
+    word-spacing: normal;
+    letter-spacing: normal;
+  }
+  /* PREVIOUS UI: Lead copy started at 17px even on narrow phones. */
+  .lead { font-size: 15px; line-height: 1.8; }
+}
 @media (min-width: 768px) {
   .container { width: min(90%, 1680px); }
   .campus { aspect-ratio: 2.65 / 1; }

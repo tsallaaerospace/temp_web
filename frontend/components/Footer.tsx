@@ -5,9 +5,24 @@ import Image from "next/image";
 import { Instagram, ArrowUp, Linkedin, Youtube, Twitter } from "lucide-react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useLenis } from "lenis/react";
 
 export default function Footer() {
   const pathname = usePathname();
+  const lenis = useLenis();
+
+  const openCulture = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    const target = document.getElementById("life-at-tsalla");
+    if (pathname === "/careers" && target) {
+      event.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY;
+      if (lenis) lenis.scrollTo(top, { immediate: true, force: true });
+      else window.scrollTo({ top, behavior: "instant" });
+    } else {
+      sessionStorage.setItem("tsalla_careers_section", "life-at-tsalla");
+    }
+  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -42,10 +57,12 @@ export default function Footer() {
 
   const footerLinks = {
     company: [
-      { name: "About Us", href: "/about" },
-      { name: "Mission Autonomy", href: "/about#mission" },
-      { name: "Our Team", href: "/leadership" },
-      { name: "Our Culture", href: "/careers/culture" },
+      // PREVIOUS UI: About Us, Mission Autonomy and Our Team were clickable (their pages are switched off for now).
+      { name: "About Us", href: "/about", disabled: true },
+      { name: "Mission Autonomy", href: "/about#mission", disabled: true },
+      { name: "Our Team", href: "/leadership", disabled: true },
+      // PREVIOUS UI: Our Culture pointed to /careers/culture.
+      { name: "Our Culture", href: "/careers" },
       { name: "Careers", href: "/careers" },
     ],
     /* PREVIOUS UI (Products list before MANTIS was added, including DEXTER & MAVERICK):
@@ -61,10 +78,12 @@ export default function Footer() {
       { name: "FENIX", href: "/fenix" },
       { name: "T-BAT", href: "/bat" },
       { name: "MANTIS", href: "/mantis" },
-      { name: "STORM", href: "#", disabled: true },
+      // PREVIOUS UI: { name: "STORM", href: "/storm" } (page switched off for now).
+      { name: "STORM", href: "/storm", disabled: true },
     ],
     media: [
-      { name: "Media Coverage", href: "/newsroom" },
+      // PREVIOUS UI: Media Coverage was clickable (/newsroom is switched off for now).
+      { name: "Media Coverage", href: "/newsroom", disabled: true },
       { name: "Press Releases", href: "/press-releases" },
       { name: "Blog", href: "/blog" },
     ],
@@ -128,8 +147,8 @@ export default function Footer() {
               >
               */}
               <Link
-                href="#"
-                onClick={(e) => e.preventDefault()}
+                // PREVIOUS UI: href="#" with preventDefault disabled View Careers.
+                href="/careers"
                 className="group relative px-4 py-2 sm:px-6 sm:py-3 bg-transparent border border-white/20 overflow-hidden"
               >
                 <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -194,7 +213,8 @@ export default function Footer() {
                           </Link>
                         )}
                         */}
-                        {isProductSection ? (
+                        {/* PREVIOUS UI: Only product links could navigate. */}
+                        {isProductSection || ["Our Team", "Our Culture", "Careers"].includes(link.name) ? (
                           isNonClickable ? (
                             <span
                               aria-disabled="true"
@@ -205,6 +225,7 @@ export default function Footer() {
                           ) : (
                             <Link
                               href={link.href}
+                              onClick={link.name === "Our Culture" ? openCulture : undefined}
                               className="text-white/60 hover:text-white text-sm transition-colors duration-300 font-orbit whitespace-normal break-words block relative group w-fit max-w-full"
                             >
                               {link.name}

@@ -183,7 +183,7 @@ const megaMenuData = {
     description:
       "Comprehensive counter-drone and defensive systems for complex autonomous operations. Advanced protection against aerial threats.",
     links: [
-      { name: "ANTI-DRONE", href: "/countersystems/anti-drone", description: "Advanced counter-drone systems" },
+      { name: "ANTI-DRONE", href: "/countersystems", description: "Advanced counter-drone systems" },
       { name: "Detection Systems", href: "/countersystems/detection", description: "Early threat identification" },
       { name: "Jamming Technology", href: "/countersystems#jamming", description: "Signal disruption capabilities" },
       { name: "Kinetic Solutions", href: "/countersystems#kinetic", description: "Physical threat neutralization" },
@@ -425,16 +425,17 @@ export default function Navbar() {
   `}
       >
         <div className="w-full">
-          <div className="relative flex items-center justify-between h-[4.5rem] px-4">
+          {/* site-nav-* classes keep the bar the same size on every page (see globals.css) */}
+          <div className="site-nav-bar relative flex items-center justify-between h-[4.5rem] px-4">
             {/* PREVIOUS UI: Link href="/" className="flex items-center z-50 pl-4 lg:ml-12" */}
-            <Link href="/" className="flex items-center z-50 pl-1 sm:pl-4 lg:ml-12">
+            <Link href="/" className="site-nav-logo-link flex items-center z-50 pl-1 sm:pl-4 lg:ml-12">
               <img
                 src={darkNavText ? "/Logo/TsallaAerospace_black.png" : "/Logo/tsalla_main.svg"}
                 alt="Tsalla Aerospace"
                 width={260}
                 height={70}
                 className={cn(
-                  "h-12 sm:h-14 md:h-16 w-auto",
+                  "site-nav-logo h-12 sm:h-14 md:h-16 w-auto",
                   !darkNavText && "brightness-150 contrast-125"
                 )}
               />
@@ -450,8 +451,8 @@ export default function Navbar() {
             </div>
             */}
 
-            {/* Right-aligned; from xl up the last label sits as far from the right edge as the logo does from the left */}
-            <div className="hidden lg:flex items-center h-full absolute right-6 xl:right-[56px] 2xl:right-[61px]">
+            {/* PREVIOUS UI (right-aligned while six buttons were shown): absolute right-6 xl:right-[56px] 2xl:right-[61px] */}
+            <div className="hidden lg:flex items-center h-full absolute left-1/2 -translate-x-1/2">
               {navigationItems.map((item, index) => {
                 return (
                   <div
@@ -463,13 +464,22 @@ export default function Navbar() {
                     }}
                     onMouseLeave={handleMouseLeaveNav}
                   >
-                    <Link
-                      href={item.href}
-                      onClick={(event) => { if (item.name === "MAVERICK") { event.preventDefault(); setActiveMegaMenu("/maverick"); } }}
-                      className="px-2.5 xl:px-4 2xl:px-6 text-xs xl:text-sm font-medium tracking-wider whitespace-nowrap transition-colors h-full flex items-center"
+                      <Link
+                        href={item.href}
+                        onClick={(event) => {
+                          if (item.name === "MAVERICK" || item.name === "JOIN THE MISSION") {
+                            event.preventDefault()
+                            setActiveMegaMenu(item.name === "MAVERICK" ? "/maverick" : "/careers")
+                          }
+                        }}
+                        className={cn(
+                          "site-nav-link px-2.5 xl:px-4 2xl:px-6 text-xs xl:text-sm font-medium tracking-wider whitespace-nowrap transition-colors h-full flex items-center",
+                          // PREVIOUS UI: JOIN THE MISSION was an outlined cyan button:
+                          // "ml-2 xl:ml-3 rounded-sm border border-[#5ce1e6]/70 px-3 xl:px-4 text-[#5ce1e6] hover:bg-[#5ce1e6]/10"
+                        )}
                     >
                       <span
-                        className={`animated-underline font-orbit font-normal ${sectionTone?.darkText ? "text-black hover:text-[#5ce1e6]" : ((item.name === "MAVERICK" && pathname.startsWith("/maverick")) || pathname === item.href || (item.name === "UNCREWED SYSTEMS" && pathname.startsWith("/uncrewedsystems")))
+                          className={`animated-underline font-orbit font-normal ${sectionTone?.darkText ? "text-black hover:text-[#5ce1e6]" : ((item.name === "MAVERICK" && pathname.startsWith("/maverick")) || pathname === item.href || (item.name === "UNCREWED SYSTEMS" && pathname.startsWith("/uncrewedsystems")))
                           ? "text-[#5ce1e6]"
                           : darkNavText ? "text-black hover:text-[#5ce1e6]" : "text-white hover:text-[#5ce1e6]"
                           }`}

@@ -1,0 +1,228 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    },
+    {
+      "source": "/maverick/ai-pilot",
+      "destination": "/ai-pilot",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/maverick/ai-pilot(?:/)?$"
+    },
+    {
+      "source": "/maverick/cortex",
+      "destination": "/cortex",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/maverick/cortex(?:/)?$"
+    },
+    {
+      "source": "/maverick/mesh",
+      "destination": "/mesh",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/maverick/mesh(?:/)?$"
+    }
+  ],
+  "headers": [],
+  "dynamicRoutes": [
+    {
+      "page": "/careers/[slug]",
+      "regex": "^/careers/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/careers/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/merchandise/[id]",
+      "regex": "^/merchandise/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/merchandise/(?<nxtPid>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/about",
+      "regex": "^/about(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/about(?:/)?$"
+    },
+    {
+      "page": "/ai-pilot",
+      "regex": "^/ai\\-pilot(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/ai\\-pilot(?:/)?$"
+    },
+    {
+      "page": "/bat",
+      "regex": "^/bat(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/bat(?:/)?$"
+    },
+    {
+      "page": "/careers",
+      "regex": "^/careers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/careers(?:/)?$"
+    },
+    {
+      "page": "/careers/culture",
+      "regex": "^/careers/culture(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/careers/culture(?:/)?$"
+    },
+    {
+      "page": "/contact",
+      "regex": "^/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact(?:/)?$"
+    },
+    {
+      "page": "/cortex",
+      "regex": "^/cortex(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cortex(?:/)?$"
+    },
+    {
+      "page": "/countersystems",
+      "regex": "^/countersystems(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/countersystems(?:/)?$"
+    },
+    {
+      "page": "/countersystems/detection",
+      "regex": "^/countersystems/detection(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/countersystems/detection(?:/)?$"
+    },
+    {
+      "page": "/fenix",
+      "regex": "^/fenix(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/fenix(?:/)?$"
+    },
+    {
+      "page": "/hardware",
+      "regex": "^/hardware(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/hardware(?:/)?$"
+    },
+    {
+      "page": "/leadership",
+      "regex": "^/leadership(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/leadership(?:/)?$"
+    },
+    {
+      "page": "/mantis",
+      "regex": "^/mantis(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/mantis(?:/)?$"
+    },
+    {
+      "page": "/maverick/ai-pilot",
+      "regex": "^/maverick/ai\\-pilot(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/maverick/ai\\-pilot(?:/)?$"
+    },
+    {
+      "page": "/maverick/cortex",
+      "regex": "^/maverick/cortex(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/maverick/cortex(?:/)?$"
+    },
+    {
+      "page": "/maverick/mesh",
+      "regex": "^/maverick/mesh(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/maverick/mesh(?:/)?$"
+    },
+    {
+      "page": "/merchandise",
+      "regex": "^/merchandise(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/merchandise(?:/)?$"
+    },
+    {
+      "page": "/mesh",
+      "regex": "^/mesh(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/mesh(?:/)?$"
+    },
+    {
+      "page": "/newsroom",
+      "regex": "^/newsroom(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/newsroom(?:/)?$"
+    },
+    {
+      "page": "/storm",
+      "regex": "^/storm(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/storm(?:/)?$"
+    },
+    {
+      "page": "/uncrewedsystems/bat",
+      "regex": "^/uncrewedsystems/bat(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/uncrewedsystems/bat(?:/)?$"
+    },
+    {
+      "page": "/uncrewedsystems/fenix",
+      "regex": "^/uncrewedsystems/fenix(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/uncrewedsystems/fenix(?:/)?$"
+    },
+    {
+      "page": "/uncrewedsystems/mantis",
+      "regex": "^/uncrewedsystems/mantis(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/uncrewedsystems/mantis(?:/)?$"
+    },
+    {
+      "page": "/velocity",
+      "regex": "^/velocity(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/velocity(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "RSC",
+    "varyHeader": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch",
+    "prefetchHeader": "Next-Router-Prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "Next-Router-Segment-Prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  },
+  "rewrites": []
+}

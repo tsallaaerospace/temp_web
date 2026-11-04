@@ -9,7 +9,7 @@ const menuItems = [
     {
         title: "Anti-Drone",
         subtitle: "ADVANCED COUNTER-DRONE SYSTEMS",
-        href: "/countersystems/anti-drone",
+        href: "/countersystems",
     },
     {
         title: "Detection Systems",

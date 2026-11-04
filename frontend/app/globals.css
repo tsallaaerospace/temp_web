@@ -65,6 +65,13 @@
     }
   }
 
+  /* The same scaled size as a variable, so parts like the navbar stay identical on pages that pin
+     the root font to 16px (careers, storm, bat). */
+  :root { --site-rem: 16px; }
+  @media (min-width: 1575px) {
+    :root { --site-rem: calc(100vw / 1575 * 16); }
+  }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -925,6 +932,14 @@ html.lenis body {
 @media (max-width: 767px) { .fenix-page, .bat-page, .mantis-page { --fenix-title-top: max(88px, 10dvh); --fenix-title-inset: 6vw; } }
 .fenix-section-title, .product-section-title { font-size: clamp(2rem, 3.5vw, 4rem); }
 html:has(.careers-page) { font-size: 100%; }
+/* Navbar bar on wide screens: same size on every page, even where the root font is pinned to 16px.
+   Matches the Tailwind sizes it replaces (h-[4.5rem], px-4, lg:ml-12, pl-4, md:h-16, 2xl:px-6, xl:text-sm). */
+@media (min-width: 1575px) {
+  nav .site-nav-bar { height: calc(var(--site-rem) * 4.5); padding-inline: var(--site-rem); }
+  nav .site-nav-logo-link { margin-left: calc(var(--site-rem) * 3); padding-left: var(--site-rem); }
+  nav .site-nav-logo { height: calc(var(--site-rem) * 4); }
+  nav .site-nav-link { padding-inline: calc(var(--site-rem) * 1.5); font-size: calc(var(--site-rem) * .875); line-height: calc(var(--site-rem) * 1.25); }
+}
 .careers-page > :is(section, main, div) { min-height: 100svh; }
 .careers-page .careers-section-title {
   font-size: clamp(2rem, 3.5vw, 4rem);
@@ -1412,6 +1427,10 @@ html:has(.storm-page) { font-size: 100%; }
   --phase-edge-width: calc((100% - var(--phase-panel-width)) / 2);
   grid-template-columns: var(--phase-edge-width) var(--phase-panel-width) var(--phase-edge-width);
 }
+@media (min-width: 768px) and (max-width: 1599px), (min-width: 1600px) and (max-aspect-ratio: 19/10) {
+  /* PREVIOUS UI: top 8% cleared the headings but hid the center cap below the frame. */
+  .storm-three-drone { top: -4%; width: min(120vw, 180svh); }
+}
 @media (max-width: 767px) {
   .storm-three-heading.product-section-title {
     --phase-art-width: max(100%, calc(100svh * 940 / 1672));
@@ -1832,6 +1851,29 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
   .careers-culture-window > .overflow-hidden > div { column-gap: 2px; }
 }
 
+.careers-page .careers-culture-carousel {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 72px;
+}
+@media (min-width: 1024px) {
+  .careers-page .careers-culture-card {
+    min-height: clamp(420px, 62svh, 560px);
+    padding-block: clamp(32px, 5svh, 64px);
+  }
+  .careers-page .careers-culture-card > div:not(.absolute) {
+    margin-bottom: clamp(24px, 4svh, 48px);
+  }
+}
+@media (min-width: 1024px) and (max-width: 1599px) {
+  .careers-page .careers-culture-card { padding-inline: 24px; }
+  .careers-page .careers-culture-card .careers-card-title { font-size: clamp(18px, 1.4vw, 22px); line-height: 1.2; }
+  .careers-page .careers-culture-card .careers-body { font-size: clamp(14px, 1vw, 16px); line-height: 1.55; }
+  .careers-page .careers-culture-card > div:not(.absolute) { min-height: 3.25rem; margin-bottom: 24px; }
+}
+
 @media (max-width: 767px) {
   /* PREVIOUS UI: The STORM foreground drone sat at the top of the mobile section. */
   .storm-three-drone { top: auto; bottom: -4svh; width: 133vw; }
@@ -1846,7 +1888,8 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
 @media (max-width: 767px) {
   .storm-details { --fenix-title-top: max(88px, 10svh); --fenix-title-inset: 6vw; }
   .storm-details .product-section-title { font-size: clamp(1.375rem, 5.7vw, 2rem); }
-  .storm-details-image { left: 8px; top: 29%; width: 185%; }
+  /* PREVIOUS UI: left: 8px; top: 29%. */
+  .storm-details-image { left: -24px; top: 25%; width: 185%; }
   .storm-details-callouts > div { width: 36%; }
   .storm-details-callouts > div:first-child { top: 30%; }
   .storm-details-callouts h3 { font-size: clamp(.6875rem, 3vw, .875rem); }
@@ -1859,8 +1902,10 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
 .storm-maritime-ship { right: -4vw; bottom: -5svh; width: min(68vw, 130svh); }
 /* PREVIOUS UI: Drone width min(27vw,46svh), mobile 49vw. */
 /* PREVIOUS UI: Drone width min(24vw,41svh), mobile 44vw. */
-.storm-maritime-drone { left: 4vw; top: -5svh; width: min(21vw, 36svh); }
+/* PREVIOUS UI: left: 4vw. */
+.storm-maritime-drone { left: 9vw; top: -5svh; width: min(21vw, 36svh); }
 @media (max-width: 767px) {
   .storm-maritime-ship { right: -12vw; width: 110vw; }
-  .storm-maritime-drone { left: 0; top: -3svh; width: 38vw; }
+  /* PREVIOUS UI: left: 0; top: -3svh (drone sat over the logo). */
+  .storm-maritime-drone { left: 8vw; top: 5svh; width: 38vw; }
 }

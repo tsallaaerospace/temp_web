@@ -33,7 +33,8 @@ export default function CareersPage() {
 
   return (
     <main className="careers-page bg-black text-white font-orbit snap-y snap-proximity scroll-smooth">
-      <SectionSnap panels=".careers-page > :is(section, main, div), footer" />
+      {/* PREVIOUS UI: The combined culture section was one tall snap panel, requiring multiple scrolls between its intro and cards. */}
+      <SectionSnap panels=".careers-page > :is(section, main, div):not(.careers-culture), .careers-culture > div, footer" />
       <HomeCareersSection />
       <OpposingMotionReveal />
       <HomeCareers2 />

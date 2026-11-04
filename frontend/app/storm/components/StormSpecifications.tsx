@@ -7,15 +7,17 @@ const specifications = [
   { label: "Communication range", value: "15+", unit: "km LOS" },
   { label: "Endurance", value: "30+", unit: "min" },
   // PREVIOUS UI: { label: "Cruise speed", value: "15", unit: "m/s" },
-  { label: "Cruise speed", value: "7", unit: "m/s" },
-  { label: "Lift capacity", value: "20–25", unit: "kg" },
+  // PREVIOUS UI: Cruise speed 7 m/s; lift capacity 20–25 kg.
+  { label: "Cruise speed", value: "10", unit: "m/s" },
+  { label: "Lift capacity", value: "30", unit: "kg" },
 ]
 // PREVIOUS UI: glTF bounds were Span 2275, Width 2275, Height 800 mm.
 // Dimensions supplied by the product team.
 const dimensions = [
-  { label: "Span", value: "2488" },
-  { label: "Length", value: "2488" },
-  { label: "Height", value: "751" },
+  // PREVIOUS UI: Span 2488 mm, Length 2488 mm, Height 751 mm.
+  { label: "Span", value: "1420" },
+  { label: "Length", value: "1420" },
+  { label: "Height", value: "750" },
 ]
 
 export default function StormSpecifications() {

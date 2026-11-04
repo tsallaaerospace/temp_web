@@ -1,11 +1,26 @@
 "use client"
 
-import React, { useRef } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion"
 import { ArrowRight, Lock } from "lucide-react"
 
 const cn = (...classes: (string | boolean | undefined | null)[]) => classes.filter(Boolean).join(' ');
+
+// Laptop/desktop drone placement, so every screen size looks like the 1920x1080 layout.
+// Values are taken at 1920x1080: right = px from the panel's right edge to the drone centre,
+// cy = drone centre down the panel (share of its height), scale = zoom there.
+// The whole drone shrinks by k = min(panel height ratio, free width ratio) so it keeps the same gap to the
+// spec cards on laptops, where the text column is relatively wider.
+const REF_PANEL_H = 1000 // detail panel height at 1920x1080
+const REF_BOX_W = 702    // drone image box width at 1920x1080 (lg:max-w-xl, with the site's 19.5px root font there)
+const REF_FREE_W = 1073  // px between the spec cards and the panel's right edge at 1920x1080
+const DESKTOP_PLACEMENT: Record<string, { right: number; cy: number; scale: number }> = {
+    "/bat": { right: 184, cy: 0.468, scale: 3.1 },
+    "/mantis": { right: 240, cy: 0.49, scale: 3.3 },
+    "/storm": { right: 309, cy: 0.438, scale: 1.9 },
+}
+type PanelFit = { pl: number; pt: number; pw: number; ph: number; sx: number; sy: number; bw: number; free: number }
 
 interface HangarMenuProps {
     data: any
@@ -21,6 +36,43 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
     onClose
 }) => {
     const imageContainerRef = useRef<HTMLDivElement>(null)
+    const panelRef = useRef<HTMLDivElement>(null)
+    const stageObserver = useRef<ResizeObserver | null>(null)
+    const [fit, setFit] = useState<PanelFit | null>(null)
+
+    // Measure the detail panel and the drone stage (both untransformed) so placement can follow the screen size
+    const measureFit = useCallback(() => {
+        const box = imageContainerRef.current, panel = panelRef.current, stage = box?.closest<HTMLElement>("[data-drone-stage]")
+        if (!panel || !stage || !box || window.innerWidth < 1024) { setFit(null); return }
+        const p = panel.getBoundingClientRect(), s = stage.getBoundingClientRect()
+        // Spec cards = the 2-column stats grid in the text column next to the stage
+        const cards = stage.previousElementSibling?.querySelector<HTMLElement>('[class*="grid-cols-2"]')
+        const cardsRight = cards ? cards.getBoundingClientRect().right : p.left + p.width / 2
+        setFit({ pl: p.left, pt: p.top, pw: p.width, ph: p.height, sx: s.left + s.width / 2, sy: s.top + s.height / 2, bw: box.offsetWidth, free: p.right - cardsRight })
+    }, [])
+    const stageRef = useCallback((stage: HTMLDivElement | null) => {
+        stageObserver.current?.disconnect()
+        stageObserver.current = null
+        if (!stage) return
+        // The observer's first callback runs after this commit, once the panel ref is attached too
+        stageObserver.current = new ResizeObserver(() => measureFit())
+        stageObserver.current.observe(stage)
+    }, [measureFit])
+    useEffect(() => {
+        window.addEventListener("resize", measureFit)
+        return () => { window.removeEventListener("resize", measureFit); stageObserver.current?.disconnect() }
+    }, [measureFit])
+    const placement = fit && DESKTOP_PLACEMENT[hoveredUncrewedSystemDetails?.href]
+        ? (() => {
+            const d = DESKTOP_PLACEMENT[hoveredUncrewedSystemDetails.href]
+            const k = Math.min(fit.ph / REF_PANEL_H, fit.free / REF_FREE_W)
+            return {
+                x: fit.pl + fit.pw - d.right * k - fit.sx,
+                y: fit.pt + d.cy * fit.ph - fit.sy,
+                scale: d.scale * (REF_BOX_W / fit.bw) * k,
+            }
+        })()
+        : null
 
     // 3D Tilt Values
     const mouseX = useMotionValue(0)
@@ -389,6 +441,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                             animate={{ opacity: 1, filter: "blur(0px) brightness(1)" }}
                             exit={{ opacity: 0, filter: "blur(10px) brightness(0.5)" }}
                             transition={{ duration: 0.4, ease: "easeOut" }}
+                            ref={panelRef}
                             className="flex-1 p-4 lg:p-12 relative flex flex-col pt-16 lg:pt-12 overflow-hidden"
                         >
                             {[
@@ -452,7 +505,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                     </div>
                                 </div>
 
-                                <div className="w-full lg:w-1/2 relative flex items-center justify-center min-h-[180px] lg:min-h-[400px]" style={{ perspective: "1200px" }}>
+                                <div ref={stageRef} data-drone-stage className="w-full lg:w-1/2 relative flex items-center justify-center min-h-[180px] lg:min-h-[400px]" style={{ perspective: "1200px" }}>
                                     <motion.div animate={{ scale: [0.8, 1.1, 0.8], opacity: [0.05, 0.12, 0.05], rotate: 360 }} transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                                         className="absolute w-[80%] h-[80%] lg:w-[90%] lg:h-[90%] border border-[#5ce1e6]/10 rounded-full"
                                     />
@@ -530,13 +583,16 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                             }}
                                             */
                                             /* PREVIOUS UI: STORM used the small upright inverted preview with a bottom fade mask. */
+                                            /* PREVIOUS UI: MANTIS scale 3.7, x 350. */
+                                            /* PREVIOUS UI: STORM scale 2.2, y 40. */
                                             style={{
                                                 rotateX: tiltX,
                                                 rotateY: tiltY,
                                                 rotateZ: ["/fenix", "/mantis", "/bat", "/storm"].includes(hoveredUncrewedSystemDetails.href) ? -90 : 0,
-                                                scale: hoveredUncrewedSystemDetails.href === "/fenix" ? 1.3 : hoveredUncrewedSystemDetails.href === "/bat" ? 3.1 : hoveredUncrewedSystemDetails.href === "/mantis" ? 3.7 : hoveredUncrewedSystemDetails.href === "/storm" ? 2.2 : 1,
-                                                y: hoveredUncrewedSystemDetails.href === "/fenix" ? -10 : hoveredUncrewedSystemDetails.href === "/mantis" ? 115 : hoveredUncrewedSystemDetails.href === "/bat" ? 110 : hoveredUncrewedSystemDetails.href === "/storm" ? 40 : 0,
-                                                x: hoveredUncrewedSystemDetails.href === "/bat" ? 245 : hoveredUncrewedSystemDetails.href === "/mantis" ? 350 : hoveredUncrewedSystemDetails.href === "/storm" ? 120 : 0,
+                                                // Laptop/desktop: T-BAT, MANTIS and STORM follow DESKTOP_PLACEMENT; the values after it are the phone/fallback ones.
+                                                scale: placement ? placement.scale : hoveredUncrewedSystemDetails.href === "/fenix" ? 1.36 : hoveredUncrewedSystemDetails.href === "/bat" ? 3.1 : hoveredUncrewedSystemDetails.href === "/mantis" ? 3.3 : hoveredUncrewedSystemDetails.href === "/storm" ? 1.9 : 1,
+                                                y: placement ? placement.y : hoveredUncrewedSystemDetails.href === "/fenix" ? (fit ? fit.pt + fit.ph / 2 - fit.sy : 35) : hoveredUncrewedSystemDetails.href === "/mantis" ? 115 : hoveredUncrewedSystemDetails.href === "/bat" ? 110 : hoveredUncrewedSystemDetails.href === "/storm" ? -30 : 0,
+                                                x: placement ? placement.x : hoveredUncrewedSystemDetails.href === "/bat" ? 245 : hoveredUncrewedSystemDetails.href === "/mantis" ? 280 : hoveredUncrewedSystemDetails.href === "/storm" ? 120 : 0,
                                                 transformStyle: "preserve-3d"
                                             }}
                                             className={cn(
