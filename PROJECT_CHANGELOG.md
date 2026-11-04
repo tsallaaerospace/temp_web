@@ -2956,3 +2956,17 @@
 #### Section: Maritime scene
 - BEFORE UI STATE: Ship right offset was -2vw on desktop and -10vw on mobile.
 - AFTER UI STATE: Moved the ship right by 2vw using -4vw on desktop and -12vw on mobile, preserving its lowered position and size.
+
+## November 4, 2026 — Revise STORM specifications
+
+### Page: STORM (/storm)
+#### Section: Product specifications
+- BEFORE UI STATE: Cruise speed 15 m/s; Span 2275 mm, Width 2275 mm, Height 800 mm.
+- AFTER UI STATE: Cruise speed 7 m/s; Span 2488 mm, Length 2488 mm, Height 751 mm, as supplied by the user.
+
+## November 4, 2026 — Fill Excellence image box
+
+### Page: Careers (/careers)
+#### Section: How We Operate — Excellence
+- BEFORE UI STATE: Excellence.png contained dark side bars inside the source image, leaving visible gaps despite object-cover.
+- AFTER UI STATE: Applied a 2.4x crop inside the existing clipped image box for Excellence, filling its width with the photograph. Other tab images and the source PNG are unchanged.

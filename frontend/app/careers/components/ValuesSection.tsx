@@ -131,7 +131,8 @@ export default function ValuesSection() {
                 src={selected.image || "/shared/placeholders/placeholder.svg"}
                 alt={selected.title}
                 fill
-                className="object-cover brightness-125"
+                // PREVIOUS UI: object-cover alone retained the dark bars embedded in Excellence.png.
+                className={`object-cover brightness-125 ${selected.title === "Excellence" ? "scale-[2.4]" : ""}`}
                 priority
               />
               <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-6 md:p-8">

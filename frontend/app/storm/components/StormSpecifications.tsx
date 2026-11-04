@@ -6,14 +6,16 @@ import CharacterReveal from "@/components/CharacterReveal"
 const specifications = [
   { label: "Communication range", value: "15+", unit: "km LOS" },
   { label: "Endurance", value: "30+", unit: "min" },
-  { label: "Cruise speed", value: "15", unit: "m/s" },
+  // PREVIOUS UI: { label: "Cruise speed", value: "15", unit: "m/s" },
+  { label: "Cruise speed", value: "7", unit: "m/s" },
   { label: "Lift capacity", value: "20–25", unit: "kg" },
 ]
-// Overall assembly bounds from the supplied glTF, including propellers and landing gear.
+// PREVIOUS UI: glTF bounds were Span 2275, Width 2275, Height 800 mm.
+// Dimensions supplied by the product team.
 const dimensions = [
-  { label: "Span", value: "2275" },
-  { label: "Width", value: "2275" },
-  { label: "Height", value: "800" },
+  { label: "Span", value: "2488" },
+  { label: "Length", value: "2488" },
+  { label: "Height", value: "751" },
 ]
 
 export default function StormSpecifications() {
