@@ -5,6 +5,7 @@ import StormThreePhase from "./components/StormThreePhase"
 import StormSpecifications from "./components/StormSpecifications"
 import StormDetails from "./components/StormDetails"
 import StormMaritime from "./components/StormMaritime"
+import StormLast from "./components/StormLast"
 // PREVIOUS UI: Mission Profiles is temporarily hidden.
 // import StormMission from "./components/StormMission"
 import SectionSnap from "@/components/SectionSnap"
@@ -28,6 +29,7 @@ export default function StormPage() {
       <StormMaritime />
       <StormDetails />
       {/* <StormMission /> */}
+      <StormLast />
     </PageWrapper>
   )
 }

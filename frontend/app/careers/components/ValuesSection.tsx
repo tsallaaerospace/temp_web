@@ -21,7 +21,8 @@ export default function ValuesSection() {
       headline: content.values.items[1].headline,
       description: content.values.items[1].description,
       // PREVIOUS UI: image: "https://cdn.sanity.io/images/z5s3oquj/production/bbb0f40d0f389e428cfb75c2dece4ff485db0503-7892x5264.jpg?auto=format&fit=max&w=1200&q=90"
-      image: "/careers/how%20we%20operate/20260316_151102.JPG",
+      // PREVIOUS UI: image: "/careers/how%20we%20operate/20260316_151102.JPG",
+      image: "/careers/how%20we%20operate/Autonomy.png",
     },
     {
       title: "Speed",
@@ -29,7 +30,8 @@ export default function ValuesSection() {
       headline: content.values.items[2].headline,
       description: content.values.items[2].description,
       // PREVIOUS UI: image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80"
-      image: "/careers/how%20we%20operate/20240810_172134.JPG",
+      // PREVIOUS UI: image: "/careers/how%20we%20operate/20240810_172134.JPG",
+      image: "/careers/how%20we%20operate/Speed.png",
     },
     {
       title: "Ownership",
@@ -53,7 +55,9 @@ export default function ValuesSection() {
       headline: content.values.items[5].headline,
       description: content.values.items[5].description,
       // PREVIOUS UI: image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80"
-      image: "/careers/how%20we%20operate/20240529_153120.JPG",
+      // PREVIOUS UI: image: "/careers/how%20we%20operate/20240529_153120.JPG",
+      // PREVIOUS UI: image: "/careers/how%20we%20operate/Excellence.JPG",
+      image: "/careers/how%20we%20operate/Excellence.png",
     }
   ]
 

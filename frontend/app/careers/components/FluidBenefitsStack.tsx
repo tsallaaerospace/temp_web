@@ -8,7 +8,7 @@ const leftColumn = [
     { id: "03", text: "UNLIMITED SNACKS AND BEVERAGES" },
     { id: "05", text: "FLEXIBLE WORK HOURS" },
     { id: "07", text: "FREE PARKING" },
-    { id: "09", text: "401K SERVICES AND MATCH" },
+    { id: "09", text: "Provident Fund" },
     // PREVIOUS UI: { id: "11", text: content.learningSupport.toUpperCase() },
 ]
 

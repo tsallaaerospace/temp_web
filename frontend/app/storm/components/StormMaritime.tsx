@@ -63,14 +63,16 @@ export default function StormMaritime() {
         if (!(event.target as HTMLElement).closest("button")) setSelected(null)
       }}
     >
-      <Image
-        src="/product/STORM/final section/ocean.png"
-        alt="Open ocean beneath a blue sky"
-        fill
-        sizes="100vw"
-        quality={85}
-        // PREVIOUS UI: Static background without image interactions.
-        className="storm-maritime-ocean scale-[1.03] object-cover transition-[filter] duration-300 motion-reduce:transition-none"
+      {/* PREVIOUS UI: Ocean background used a fill Image with src="/product/STORM/final section/ocean.png". */}
+      <video
+        src="/product/STORM/final%20section/ocean.mp4"
+        poster="/product/STORM/final%20section/ocean.png"
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+        className="storm-maritime-ocean absolute inset-0 h-full w-full scale-[1.03] object-cover transition-[filter] duration-300 motion-reduce:transition-none"
         style={{ filter: hovered || selected ? "blur(8px)" : "blur(0px)" }}
       />
       <button {...imageInteraction("ship")} className="storm-maritime-ship absolute z-10 border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ce1e6]">

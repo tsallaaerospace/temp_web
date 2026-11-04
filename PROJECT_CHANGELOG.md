@@ -2893,3 +2893,66 @@
 #### Section: Maritime scene
 - BEFORE UI STATE: Hovering or tapping transparent portions of either foreground PNG triggered the ocean blur.
 - AFTER UI STATE: Cached image alpha masks restrict mouse hover and touch selection to visible ship/drone pixels. Moving onto transparent padding clears hover; tapping it clears selection. Keyboard activation remains available and image sizing/placement are unchanged.
+
+## November 4, 2026 — Updated operating values imagery
+
+### Page: Careers (/careers)
+#### Section: How We Operate
+- BEFORE UI STATE: Autonomy, Speed and Excellence used the previously selected dated photographs.
+- AFTER UI STATE: Their matching buttons now display Autonomy.png, Speed.png and Excellence.JPG from the supplied careers/how we operate folder. Existing captions, layout and automatic rotation are preserved.
+
+## November 4, 2026 — STORM closing deployment section
+
+### Page: STORM (/storm)
+#### Section: Closing section before footer
+- BEFORE UI STATE: The product details section led directly to the shared footer.
+- AFTER UI STATE: Added a full-screen closing section using STORM_Deployed Where Others Cannot.JPG, a dark overlay, centered Orbit headline with cyan DEPLOY, a Request a Demo link to /contact, and the reference layout's subtle bottom accent. Responsive typography and reduced-motion support follow the existing MANTIS closing section.
+
+## November 4, 2026 — Lower STORM closing headline
+
+### Page: STORM (/storm)
+#### Section: Closing deployment section
+- BEFORE UI STATE: The centered headline and demo link used 25svh top padding.
+- AFTER UI STATE: Increased top padding to 33svh, shifting the content group down approximately 4% of the viewport height while keeping the background unchanged.
+
+## November 4, 2026 — Further lower STORM closing content
+
+### Page: STORM (/storm)
+#### Section: Closing deployment section
+- BEFORE UI STATE: Headline and demo link used 33svh top padding.
+- AFTER UI STATE: Increased top padding to 45svh to move the full content group further down.
+
+## November 4, 2026 — Replace STORM closing background with PNG
+
+### Page: STORM (/storm)
+#### Section: Closing deployment section
+- BEFORE UI STATE: Background used STORM_Deployed Where Others Cannot.JPG.
+- AFTER UI STATE: Background uses the supplied STORM_Deployed Where Others Cannot.png. Existing text placement, overlay and demo link are preserved.
+
+## November 4, 2026 — Fix Excellence image source
+
+### Page: Careers (/careers)
+#### Section: How We Operate — Excellence
+- BEFORE UI STATE: Excellence referenced Excellence.JPG and the user reported a broken image.
+- AFTER UI STATE: Excellence references the supplied Excellence.png, preserving the existing caption and layout.
+
+## November 4, 2026 — STORM ocean video background
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: The ship and drone appeared over a static ocean PNG.
+- AFTER UI STATE: Replaced the background with the supplied ocean.mp4, playing muted and looping inline. The ocean PNG remains as the loading poster; ship/drone placement and pixel-aware blur interactions are preserved.
+
+## November 4, 2026 — Lower maritime ship
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: The ship was anchored at bottom -3svh.
+- AFTER UI STATE: Lowered the ship to bottom -5svh, a further 2% of viewport height, on desktop and mobile.
+
+## November 4, 2026 — Shift maritime ship right
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: Ship right offset was -2vw on desktop and -10vw on mobile.
+- AFTER UI STATE: Moved the ship right by 2vw using -4vw on desktop and -12vw on mobile, preserving its lowered position and size.
