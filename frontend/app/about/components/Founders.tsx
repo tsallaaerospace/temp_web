@@ -15,10 +15,11 @@ export default function HeroSection() {
   // Position configuration for manual adjustment
   // These will be used with CSS variables to handle larger screens
   const LEFT_PARAGRAPH_X_OFFSET = "0px";
-  const LEFT_PARAGRAPH_X_OFFSET_XL = "-100px";
+  // PREVIOUS UI: LEFT_PARAGRAPH_X_OFFSET_XL "-100px", RIGHT_PARAGRAPH_X_OFFSET_XL "150px" (right text ran off-screen on wide screens).
+  const LEFT_PARAGRAPH_X_OFFSET_XL = "0px";
 
   const RIGHT_PARAGRAPH_X_OFFSET = "0px";
-  const RIGHT_PARAGRAPH_X_OFFSET_XL = "150px";
+  const RIGHT_PARAGRAPH_X_OFFSET_XL = "0px";
 
   const LEFT_PARAGRAPH_TOP_OFFSET = "-120px";
   const RIGHT_PARAGRAPH_TOP_OFFSET = "140px";
@@ -282,14 +283,15 @@ export default function HeroSection() {
                   :root { --left-x-offset: ${LEFT_PARAGRAPH_X_OFFSET_XL}; --right-x-offset: ${RIGHT_PARAGRAPH_X_OFFSET_XL}; }
                 }
               `}} />
-              <p className="text-xl md:text-2xl lg:text-2xl xl:text-3xl text-white leading-tight font-light">
-                <span className="text-[#00CFFF] font-semibold">Vinayak Tsalla</span> is the founder and CEO of{" "}
-                <span className="text-[#00CFFF] font-semibold">Tsalla Aerospace Technologies</span> Private Limited,
+              {/* PREVIOUS UI: "Vinayak Tsalla is the founder and CEO of Tsalla Aerospace Technologies Private Limited, an
+                  innovative drone technology company based in Bengaluru..." in text-xl..xl:text-3xl with cyan highlights. */}
+              {/* Lead sentence a step larger than the standard product-body size (12/14px) */}
+              <p className="product-body !text-[0.875rem] md:!text-[1rem] text-justify [hyphens:auto] text-white">
+                Vinayak Tsalla is the <span className="text-[#00CFFF]">Founder</span> and <span className="text-[#00CFFF]">CEO</span> of{" "}
+                <span className="text-[#00CFFF]">Tsalla Aerospace</span>, building autonomous aircraft and defence technology in India.
               </p>
-
-              <p className="text-lg md:text-xl lg:text-xl xl:text-2xl text-gray-300 leading-relaxed font-light mt-4">
-                an innovative drone technology company based in <span className="text-[#00CFFF] font-semibold">Bengaluru</span>,
-                working to revolutionize the future of unmanned systems.
+              <p className="product-body text-justify [hyphens:auto] text-white mt-4">
+                An aerospace engineer by training, he leads the company with a clear purpose: give those who protect us technology they can depend on.
               </p>
             </div>
 
@@ -301,9 +303,12 @@ export default function HeroSection() {
                 transform: `translateX(var(--right-x-offset))`
               }}
             >
-              <p className="text-lg md:text-xl lg:text-xl xl:text-2xl text-white leading-relaxed font-light">
-                Vinayak has always loved science and technology. His passion for engineering led him to establish Tsalla Aerospace
-                to build indigenous, world-class aerospace solutions for both defense and commercial sectors.
+              {/* PREVIOUS UI: "Vinayak has always loved science and technology..." in text-lg..xl:text-2xl. */}
+              <p className="product-body text-justify [hyphens:auto] text-white">
+                After studying and working in Europe, Vinayak returned to India to build a company around a conviction: India must have the capability to create the technology it depends on.
+              </p>
+              <p className="product-body text-justify [hyphens:auto] text-white mt-4">
+                At Tsalla, he brings together engineering ambition and operational purpose—to turn difficult problems into proven capability, and build a team that can carry that mission forward.
               </p>
             </div>
           </div>
@@ -315,14 +320,16 @@ export default function HeroSection() {
 
 
       {/* Section Title - Top Left */}
-      <div className="absolute top-10 left-12 z-50">
+      {/* PREVIOUS UI: top-10 (the page started below the navbar then). Now offset by the navbar height (4.5rem). */}
+      <div className="absolute top-[7rem] left-12 z-50">
         <span className="text-xs font-bold tracking-[0.5em] text-white/40 uppercase">
           Leadership
         </span>
       </div>
 
       {/* Social Media Links - Top Right */}
-      <div className="absolute top-8 right-4 z-50 flex items-center gap-3 p-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
+      {/* PREVIOUS UI: top-8. Now offset by the navbar height (4.5rem). */}
+      <div className="absolute top-[6.5rem] right-4 z-50 flex items-center gap-3 p-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
         {[Twitter, Facebook, Instagram, Linkedin, Youtube, Globe].map((Icon, index) => (
           /* PREVIOUS UI:
           <a
