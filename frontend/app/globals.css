@@ -1857,8 +1857,10 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
 /* PREVIOUS UI: Ship bottom: -3svh. */
 /* PREVIOUS UI: Ship right: -2vw on desktop and -10vw on mobile. */
 .storm-maritime-ship { right: -4vw; bottom: -5svh; width: min(68vw, 130svh); }
-.storm-maritime-drone { left: 4vw; top: -5svh; width: min(27vw, 46svh); }
+/* PREVIOUS UI: Drone width min(27vw,46svh), mobile 49vw. */
+/* PREVIOUS UI: Drone width min(24vw,41svh), mobile 44vw. */
+.storm-maritime-drone { left: 4vw; top: -5svh; width: min(21vw, 36svh); }
 @media (max-width: 767px) {
   .storm-maritime-ship { right: -12vw; width: 110vw; }
-  .storm-maritime-drone { left: 0; top: -3svh; width: 49vw; }
+  .storm-maritime-drone { left: 0; top: -3svh; width: 38vw; }
 }

@@ -2970,3 +2970,17 @@
 #### Section: How We Operate — Excellence
 - BEFORE UI STATE: Excellence.png contained dark side bars inside the source image, leaving visible gaps despite object-cover.
 - AFTER UI STATE: Applied a 2.4x crop inside the existing clipped image box for Excellence, filling its width with the photograph. Other tab images and the source PNG are unchanged.
+
+## November 4, 2026 — Slightly reduce maritime drone
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: Drone width min(27vw,46svh), mobile49vw.
+- AFTER UI STATE: Reduced the drone approximately 10% to min(24vw,41svh), mobile44vw, with its existing position preserved. Updated responsive image sizing accordingly.
+
+## November 4, 2026 — Further reduce maritime drone
+
+### Page: STORM (/storm)
+#### Section: Maritime scene
+- BEFORE UI STATE: Drone width min(24vw,41svh), mobile44vw.
+- AFTER UI STATE: Reduced another approximately 13% to min(21vw,36svh), mobile38vw, keeping its position unchanged.

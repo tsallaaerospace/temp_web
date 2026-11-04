@@ -92,7 +92,9 @@ export default function StormMaritime() {
         alt="STORM drone approaching from the upper left"
         width={4096}
         height={4096}
-        sizes="(max-width: 767px) 49vw, 27vw"
+        // PREVIOUS UI: sizes="(max-width: 767px) 49vw, 27vw"
+        // PREVIOUS UI: sizes="(max-width: 767px) 44vw, 24vw"
+        sizes="(max-width: 767px) 38vw, 21vw"
         quality={90}
         className="h-auto w-full max-w-none"
       />
