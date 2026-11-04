@@ -3,6 +3,8 @@ import PageWrapper from "@/components/PageWrapper"
 import AboutUsVideoPage from "./components/AboutUsVideoPage"
 import WhatWeDo from "./components/WhatWeDo"
 import OurStory from "./components/OurStory"
+import TsallaStory from "./components/TsallaStory"
+import SectionSnap from "@/components/SectionSnap"
 import OurMission from "./components/OurMission"
 import WhatWeAreHeaded from "./components/WhatWeAreHeaded"
 import OurValues from "./components/OurValues"
@@ -22,11 +24,15 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <PageWrapper>
-      <div className="font-orbit">
+      {/* PREVIOUS UI: <div className="font-orbit"> without section snapping. */}
+      <div className="about-page font-orbit">
+        {/* Same section-by-section scroll as the product and careers pages */}
+        <SectionSnap panels=".about-page > :is(section, div), footer" />
         <WhatWeAreHeaded />
         {/* <OurMission /> */}
         {/* <AboutUsVideoPage /> */}
-        <WhatWeDo />
+        {/* PREVIOUS UI: <WhatWeDo /> ("OUR STORY" title, one paragraph, full-width photo) */}
+        <TsallaStory />
         <OurStory />
 
 
