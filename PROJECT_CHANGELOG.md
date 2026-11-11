@@ -3076,3 +3076,361 @@
 #### Section: Desktop navigation and mobile menu
 - BEFORE UI STATE: Counter Systems, Space Systems and Company remained visible as disabled controls.
 - AFTER UI STATE: These three disabled items are omitted from desktop and mobile navigation. The remaining Maverick, Uncrewed Systems and Join the Mission group stays centered on desktop.
+
+## November 5, 2026 — Merchandise coming-soon presentation and section scrolling
+
+### Page: Merchandise (/merchandise)
+#### Section: Hero, Accessories and Apparel collections
+- BEFORE UI STATE: Collections scrolled freely, category headings used a blinking character animation, product cards displayed mixed availability states and prices, and their disabled CTA read Unavailable.
+- AFTER UI STATE: Added the existing section paging component for the hero, collections and footer; tall product grids retain free scrolling so every item remains reachable. Category headings are static text, every item displays Coming Soon, prices and Unit Value labels are hidden, and card actions remain disabled.
+
+### Page: Merchandise product details (/merchandise/[id])
+#### Section: Availability and purchase action
+- BEFORE UI STATE: Direct product pages showed original availability, prices and active purchase-style actions.
+- AFTER UI STATE: Shared product availability is Coming Soon, prices are hidden and purchase actions are disabled with Coming Soon labels. Product descriptions, images and options remain available.
+- Tooling note: Graphify query/update integration was unavailable because its uv launcher failed to canonicalize its script path; direct source inspection was used.
+
+## November 5, 2026 — FENIX Cloudinary adaptive hero video
+
+### Page: FENIX (/fenix)
+#### Section: Hero background video
+- BEFORE UI STATE: The hero loaded the original local 24 MB 4K MP4 directly, with no poster or adaptive quality selection.
+- AFTER UI STATE: The same uploaded video streams from Cloudinary with automatic bitrate selection up to 3840 x 2160 at 60 fps. A compressed first-frame poster appears while loading. Muted inline autoplay, looping, sizing and existing text/motion are preserved. HLS.js is loaded on demand and registered as a direct dependency; native HLS is used on browsers without MediaSource support. Failure falls back to an optimized Cloudinary 1080p MP4, then the original local file. Original media and previous JSX remain preserved.
+- Validation: Cloudinary master playlist returned seven quality levels, all at 60 fps; browser checks passed at 390, 1440 and 3440 pixels and both fallback paths; TypeScript passed. Physical Safari/iOS and production deployment were not checked. Graphify query/update failed with the existing uv trampoline canonicalization error.
+
+## November 10, 2026 — FENIX awareness in one view
+
+### Page: FENIX (/fenix)
+#### Section: Every detail. Greater awareness.
+- BEFORE UI STATE: A 600-viewport-height scroll sequence displayed one sensor card and one highlighted region at a time. The underlying render had a visible light-grey rectangular background.
+- AFTER UI STATE: All five sensor cards are visible together in a static single-screen overview. The RGB, LiDAR, thermal, white LED and blue LED regions use cyan housing outlines and translucent areas traced from their respective original video frames. Five blue dashed connectors link the cards to the matching sensor points; their endpoints are recalculated when the layout changes. Desktop retains previews and full descriptions; mobile uses compact purpose summaries so all five features fit. There is no awareness frame preloading, timed sequence or scroll scrub. The original sequence remains commented in its source file.
+- Background request: Created a transparent PNG cutout with the built-in image generation tool, preserving the source composition for overlay alignment. Original JPG and video frames are unchanged. The saved prompt is in output/fenix-awareness-cutout-prompt.txt.
+- Validation: TypeScript passed. Local browser checks covered 320x568, 390x844, 768x1024, 1366x768, 1920x1080 and 3440x1440, checking all five cards, five outlines, five connectors, viewport fit and normal section exit. PNG alpha was verified. Physical devices and production deployment were not checked. Graphify update remains unavailable because its uv launcher fails to canonicalize its script path.
+
+### Page: FENIX (/fenix) — Blue LED highlight alignment correction
+#### Section: Every detail. Greater awareness.
+- BEFORE UI STATE: The lower-left blue LED highlight used a rectangular bottom boundary across the raised lens rims, with incorrect ellipse proportions.
+- AFTER UI STATE: Compared the original video frame 054 with the displayed transparent render. The lower boundary now follows both protruding circular rims; lens outlines are fitted to the displayed housing and the connector terminates at the blue lens rim. Previous coordinates remain commented in source.
+- Validation: Magnified browser SVG preview and TypeScript check. Physical devices and production were not checked.
+
+
+### Page: FENIX (/fenix) — Remove dark-lens circle
+#### Section: Blue LED awareness highlight
+- BEFORE UI STATE: Both the blue LED and adjacent dark lens had cyan circular outlines.
+- AFTER UI STATE: Removed the dark-lens circle and its curved lower boundary. The blue LED circle, housing highlight and dashed connector remain.
+- Validation: Inspected the active SVG paths; no runtime logic changed. Browser rendering was not rechecked.
+
+
+### Page: Leadership (/leadership)
+#### Section: Founder photo hero and name
+- BEFORE UI STATE: Oversized centered Inter lettering used duplicated front/back text and a radial portrait mask designed for the previous photograph, hiding letters and covering the face in the new cockpit image.
+- AFTER UI STATE: Positioned the complete two-line name at the lower-left, using the website Orbit font in regular weight with responsive sizing. Disabled the obsolete foreground mask and duplicate decorative text; original JSX remains preserved. The existing split-away scroll animation and story reveal remain.
+- Validation: Browser previews at 390x844, 1366x768 and 1920x1080 confirmed Orbit, normal weight and title bounds; TypeScript passed. Production and physical devices were not checked. Graphify remains unavailable due to the uv trampoline path error.
+
+### Page: Leadership (/leadership) — Center founder name
+#### Section: Founder hero title
+- BEFORE UI STATE: Orbit name was positioned at the lower-left of the cockpit photograph.
+- AFTER UI STATE: Restored horizontal and vertical centering near the face on desktop and mobile, retaining Orbit, complete lettering and the existing scroll-away motion.
+- Validation: TypeScript check; live browser appearance not rechecked.
+
+
+
+### Page: Leadership (/leadership) — Larger centered name
+#### Section: Founder hero title
+- BEFORE UI STATE: Centered Orbit name used 10.5vw capped at 200px, with 14vw on mobile.
+- AFTER UI STATE: Increased desktop sizing to 12.5vw capped at 240px and mobile to 17vw; centering and motion remain unchanged.
+- Validation: Checked CSS and diff; browser preview not rechecked.
+
+
+### Page: Leadership (/leadership) — Split name and story reveal
+#### Section: Founder photo hero
+- BEFORE UI STATE: Complete centered name was visible immediately; the first reveal attempt used a short .16-duration letter fade. The Leadership eyebrow and globe icon remained visible.
+- AFTER UI STATE: Increased Orbit name to 14.2vw (maximum 280px), 19vw on mobile, weight 700. NA in VINAYAK and AL in TSALLA start hidden, then gradually reveal as the first line moves up and the second moves down. Explicit timing keeps the full name visible before fading out; both original story columns then reveal. Reverse scrolling restores the hidden-letter opening. Removed the Leadership eyebrow and last globe icon, preserving previous JSX in comments.
+- Validation: Browser checks at 1366x768 and 390x844 verified hidden initial letters, intermediate opacity around .40, full story opacity, paragraph viewport bounds and reverse scrolling. TypeScript passed. Physical devices and production were not checked.
+
+
+### Page: Leadership (/leadership) — Website cyan title
+#### Section: Founder hero name
+- BEFORE UI STATE: Bold Orbit name used #00CFFF for VINAYAK.
+- AFTER UI STATE: VINAYAK now uses the website cyan #5CE1E6. Orbit typography, boldness and scroll reveal remain unchanged.
+- Validation: Verified active title color in source. Browser preview was not rechecked.
+
+
+### Page: Leadership (/leadership) — Consistent website cyan throughout
+#### Section: Hero, biography, social links and founder letter
+- BEFORE UI STATE: The main name used #5CE1E6 while biography highlights, social hover states and founder-letter highlights used other blue/cyan values.
+- AFTER UI STATE: All page-specific cyan accents now use #5CE1E6, including the preserved decorative title layer, story text, social hover backgrounds and letter emphasis.
+- Validation: Source color audit and TypeScript. Browser appearance and production were not rechecked.
+
+
+### Page: Leadership (/leadership) — Letter alignment and vertical social links
+#### Section: Founder letter
+- BEFORE UI STATE: Handwritten body paragraphs were left aligned.
+- AFTER UI STATE: Body paragraphs use justified alignment with the last line left aligned. Heading and signature retain their original alignment.
+#### Section: Hero social links
+- BEFORE UI STATE: Five social icons formed a horizontal row at the top-right.
+- AFTER UI STATE: The same icons form a vertical column at the right, retaining their existing styling and spacing.
+- Validation: Source and diff checks; browser rendering not rechecked.
+
+
+### Page: Leadership (/leadership) — Center vertical social icons
+#### Section: Hero social links
+- BEFORE UI STATE: Vertical social icons sat near the top-right.
+- AFTER UI STATE: Icons are vertically centered on the right edge using top: 50% and translateY(-50%).
+- Validation: Source alignment checked; browser preview not rechecked.
+
+
+### Page: Leadership (/leadership) — Founder social profile links
+#### Section: Hero social buttons
+- BEFORE UI STATE: The five social icons used placeholder links and prevented navigation.
+- AFTER UI STATE: Connected X, Facebook, Instagram, LinkedIn and YouTube to the exact supplied founder profile URLs. Links open in a new tab with noopener/noreferrer and accessible names.
+- Validation: TypeScript and source URL mapping checks. External profile availability was not checked.
+
+
+### Page: Leadership (/leadership) — Mobile photo, social row and title alignment
+#### Section: Founder hero
+- BEFORE UI STATE: Center-cropped mobile photo placed the face left of center; social icons were a vertical column, and Y was visible at the opening.
+- AFTER UI STATE: Mobile photo uses 40% horizontal background positioning to move the face toward center. Social icons form a horizontal row below the header at the top-right; desktop retains the centered vertical column. Both mobile name lines shift right by 3vw. Y starts hidden on mobile and reveals gradually with the other middle letters; desktop Y remains visible initially.
+- Validation: Browser checks at 320px, 390px and 1366px covered social layout and bounds; visually inspected 390px photo framing. Mobile and desktop Y reveal checks and TypeScript passed. Physical devices and production were not checked.
+
+
+### Page: Leadership (/leadership) — Center mobile text and nudge photo left
+#### Section: Founder hero
+- BEFORE UI STATE: Mobile name lines had a 3vw right offset and photo position was 40% horizontally.
+- AFTER UI STATE: Removed the text offset to restore true horizontal centering. Adjusted photo position to 43%, shifting the displayed photo slightly left. Reveal animation and desktop layout remain unchanged.
+- Validation: Source and diff checks; browser preview not rechecked.
+
+
+### Page: Leadership (/leadership) — Mobile story positioning
+#### Section: Scroll-revealed biography
+- BEFORE UI STATE: Social icons remained over the mobile paragraph stage, and the first biography block overlapped the face.
+- AFTER UI STATE: Mobile social buttons fade out as the paragraph stage begins and return on reverse scroll. The first biography block is anchored near the top (90–120px) on mobile. Opening social links and desktop positioning remain available.
+- Validation: TypeScript and diff checks; browser rendering not rechecked.
+
+
+### Page: Leadership (/leadership) — Mobile scroll and desktop photo refinement
+#### Section: Founder hero animation and biography
+- BEFORE UI STATE: Mobile used a three-screen pinned scroll; social controls could overlap the early story transition and intro began around 100px. Desktop photo placed the face left of the title gap.
+- AFTER UI STATE: Mobile pin distance is 150% with .5 scrub smoothing. Social buttons finish fading before the story and explicitly use display:none during that stage; reverse scroll restores them. Intro top is 72–90px. Desktop photo extends 12vw to the right to reframe the face inside the title gap without exposing empty edges. Mobile framing remains separate.
+- Validation: Browser tests verified mobile story visible by 1.5 viewport scroll, social display:none, intro top near 76px, reverse restoration and desktop social visibility. Visually inspected mobile story and laptop opening. TypeScript passed. Physical devices and production were not checked.
+
+
+### Page: Leadership (/leadership) — Equal visible name-letter spacing
+#### Section: Founder hero title
+- BEFORE UI STATE: Orbit's different glyph side bearings and negative tracking produced uneven visible letter gaps.
+- AFTER UI STATE: Each letter is measured using the loaded bold Orbit font, its side bearings are accounted for, and a uniform .035em gap separates visible glyph bounds. Both lines remain centered; hidden middle-letter and mobile Y scroll reveals are preserved. Accessible full-name labels remain available.
+- Validation: Browser spacing assertions at mobile and laptop widths check uniform nonzero gaps, title bounds and hidden-to-visible scroll states. TypeScript passed. Production and physical devices were not checked.
+
+
+### Page: Leadership (/leadership) — Undo added letter gaps
+#### Section: Founder hero title
+- BEFORE UI STATE: Per-letter measurement and .035em gaps normalized visible letter spacing.
+- AFTER UI STATE: Reverted that change at user request. Restored original inline name markup and -.025em tracking. All other layout, color, boldness and scroll-reveal changes remain.
+- Validation: TypeScript check.
+
+
+### Page: T-BAT (/bat) — Replace hero sensor close-up scene
+#### Section: Scroll-based hero and mobile playback
+- BEFORE UI STATE: Both hero videos showed the previous close-up at frames 315–435 (13.125–18.167 seconds). The tank/zoom overlay began at frame 436.
+- AFTER UI STATE: Replaced only that segment with the complete supplied hf_20261110_120408_0e1086a6-6ffc-4290-815c-08b6334a8cd4.mp4 (97 frames at 24fps). Rebuilt versioned 1080p scrub and 720p mobile videos, preserving the original assets. The following scene now begins at frame 412; tracking and zoom timing use that updated start. The total edit is 557 frames / 23.208 seconds. The opening poster and existing scroll behavior remain unchanged.
+- Media workflow: Original hero sources were combined files; used the existing high-quality scrub master for the unchanged prefix and suffix. Desktop retains H.264 CRF18, four-frame GOP and no B-frames for quick scrubbing. A temporary FFmpeg tool was downloaded outside the project; no application dependency was added. Rebuild recipe: output/rebuild-bat-hero-scene.ps1.
+- Validation: Reviewed source/replacement contact sheets and cut-boundary frames; FFmpeg decoded both complete outputs without errors, each with 557 frames. Browser checks confirmed dimensions, duration and seven seeks including both boundaries and the final frame for both versions. TypeScript passed. Production playback was not checked. Graphify integration remains unavailable due to its uv launcher path error.
+
+
+## November 11, 2026 — Correct STORM navigation specifications
+### Page: Shared navbar
+#### Section: Uncrewed Systems — STORM preview
+- BEFORE UI STATE: Menu showed stale values of 85 km/h, 300 km, 12 hrs and 45 kg.
+- AFTER UI STATE: Values match the current STORM page: 10 m/s cruise speed, 15+ km LOS communication range, 30+ min endurance and 30 kg lift capacity. The shared navigation data supplies both desktop and mobile menus.
+- Validation: Compared directly with StormSpecifications.tsx and ran TypeScript and diff checks. Browser rendering was not rechecked. Graphify query/update remains unavailable due to its uv launcher canonicalization error.
+
+
+### Page: T-BAT (/bat)
+#### Section: Payloads & Sensors
+- BEFORE UI STATE: The selected payload's number, name and type appeared over the preview, duplicating the card labels.
+- AFTER UI STATE: Removed that visible caption for every payload. The live announcement remains screen-reader-only; all five selection cards and animation remain unchanged.
+- Validation: TypeScript and diff checks. Browser preview not rechecked.
+
+
+### Page: FENIx (/fenix)
+#### Section: Drone feature callouts
+- BEFORE UI STATE: Payload appeared above Sensor Suite.
+- AFTER UI STATE: Swapped both headings and their descriptions: Sensor Suite now appears above Payload. Connector positions are preserved.
+- Validation: Reviewed the feature data and checked the diff. No runtime logic changed; browser rendering was not rechecked. Graphify query/update fails with its uv launcher canonicalization error.
+
+
+### Page: FENIx (/fenix)
+#### Section: Sensor exploration hint
+- BEFORE UI STATE: The hover/tap hint sat at its original position in the left panel.
+- AFTER UI STATE: On desktop and laptop, the hint sits 24px higher and 24px farther right. Mobile positioning is preserved.
+- Validation: Checked the scoped CSS and diff; browser preview was not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Sensor exploration hint
+- BEFORE UI STATE: Desktop hint was offset 24px up and right.
+- AFTER UI STATE: Moved the hint another 16px up, retaining its horizontal position.
+- Validation: CSS diff checked; browser preview not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Sensor Suite and Payload connectors
+- BEFORE UI STATE: The third connector targeted the main camera and the fourth targeted the lower lighting assembly.
+- AFTER UI STATE: The third targets the small left optical sensor, and the fourth targets the main camera lens, using image-relative coordinates.
+- Validation: Compared anchor locations against FENIX-Specs.png and checked the diff. Browser preview not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Feature heading and fourth connector
+- BEFORE UI STATE: Heading read Explorer; fourth connector targeted the main lens.
+- AFTER UI STATE: Heading reads eXplorer; fourth connector targets the rectangular panel beneath the main lens shown in the reference.
+- Validation: Source image coordinates and diff checked; browser preview not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Fourth feature connector
+- BEFORE UI STATE: Payload endpoint used image-relative x 0.342.
+- AFTER UI STATE: Endpoint moved slightly left to x 0.337; its height is unchanged.
+- Validation: Diff checked; browser alignment not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Fourth feature connector
+- BEFORE UI STATE: Endpoint x was 0.337.
+- AFTER UI STATE: Moved endpoint left by three previous adjustment steps to x 0.322, preserving height.
+- Validation: Diff checked; browser alignment not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Third feature connector
+- BEFORE UI STATE: Sensor Suite endpoint x was 0.285.
+- AFTER UI STATE: Moved endpoint slightly right to x 0.290, preserving height.
+- Validation: Diff checked; browser alignment not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Third feature connector
+- BEFORE UI STATE: Sensor Suite endpoint x was 0.290.
+- AFTER UI STATE: Moved endpoint right by five previous adjustment steps to x 0.315, preserving height.
+- Validation: Diff checked; browser alignment not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Third feature connector
+- BEFORE UI STATE: Sensor Suite endpoint x was 0.315.
+- AFTER UI STATE: Moved endpoint right another two adjustment steps to x 0.325, preserving height.
+- Validation: Diff checked; browser alignment not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Third feature connector
+- BEFORE UI STATE: Sensor Suite endpoint y was 0.459.
+- AFTER UI STATE: Moved endpoint down two adjustment steps to y 0.469, preserving its horizontal position.
+- Validation: Diff checked; browser alignment not rechecked.
+
+### Page: Contact (/contact)
+#### Section: Main heading
+- BEFORE UI STATE: Reach out to us had a forced line break after out.
+- AFTER UI STATE: Heading stays on one line with responsive sizing for narrow screens and the desktop two-column header.
+- Validation: Diff checked; browser preview not rechecked.
+
+### Page: Contact (/contact)
+#### Section: Introduction and headquarters heading
+- BEFORE UI STATE: Introduction paragraph was left aligned; Bengaluru was white.
+- AFTER UI STATE: Introduction paragraph is justified; Bengaluru uses the website cyan (#5CE1E6).
+- Validation: Diff checked; browser preview not rechecked.
+
+### Page: Contact (/contact)
+#### Section: Main content spacing
+- BEFORE UI STATE: Top padding was 64px on mobile and 96px on larger screens.
+- AFTER UI STATE: Reduced top padding by 16px, moving the Contact content up while retaining bottom spacing.
+- Validation: Diff checked; browser preview not rechecked.
+
+### Page: Contact (/contact)
+#### Section: Main content spacing
+- BEFORE UI STATE: Top padding was 48px on mobile and 80px on larger screens.
+- AFTER UI STATE: Reduced top padding another 16px to 32px and 64px respectively.
+- Validation: Diff checked; browser preview not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Sensor exploration dashed connectors
+- BEFORE UI STATE: Desktop connectors bent 36px before the sensor endpoint.
+- AFTER UI STATE: Bend occurs 120px before the endpoint, shifting it left by 84px where space permits. Sensor endpoints and mobile paths are preserved.
+- Validation: Diff checked; browser preview not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Sensor exploration dashed connectors
+- BEFORE UI STATE: Desktop bend offset was 120px left of the sensor.
+- AFTER UI STATE: Increased offset to 200px, moving the bend another 80px left where space permits.
+- Validation: Diff checked; browser preview not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Sensor exploration dashed connectors
+- BEFORE UI STATE: Desktop bend offset was 200px left of the sensor.
+- AFTER UI STATE: Increased offset to 280px, moving the bend another 80px left where space permits.
+- Validation: Diff checked; browser preview not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Sensor exploration dashed connectors
+- BEFORE UI STATE: Each connector bend was positioned relative to its own sensor endpoint.
+- AFTER UI STATE: All desktop connector bends share the approved Blue LED bend position; individual endpoints and mobile paths are preserved.
+- Validation: Diff checked; browser preview not rechecked.
+
+
+### Page: Shared navbar (all pages)
+#### Section: Join the Mission menu
+- BEFORE UI STATE: Engineering, Culture, Benefits and Open Positions used rem-based title sizes, which grew with the home page root font scaling.
+- AFTER UI STATE: Shared titles use 30px/36px desktop typography and 20px/28px smaller-screen typography, matching the requested smaller sizing independently of route root font size.
+- Validation: Reviewed global root scaling and shared component usage; diff check and TypeScript validation. Live deployment not performed.
+
+### Page: Shared navbar (all pages)
+#### Section: Top navigation and every dropdown
+- BEFORE UI STATE: Top links, menu headings, descriptions, product specifications and action labels used rem-based text sizes, causing route-dependent enlargement on wide screens.
+- AFTER UI STATE: Converted shared navbar typography to the equivalent pixel sizes at a 16px root. All menus and mobile navigation now use consistent sizes across routes; desktop tile titles retain the approved 30px size. Removed the wide-screen top-link font scaling override.
+- Validation: TypeScript and diff checks passed. Browser rendering and live deployment were not performed. Graphify update remains blocked by its uv launcher error.
+
+### Page: Shared navbar (all pages)
+#### Section: Uncrewed Systems drone previews
+- BEFORE UI STATE: Drone previews slid 260px in 0.85s with blur, while the full panel flashed blur/brightness and mouse tilt reached 15 degrees.
+- AFTER UI STATE: Shared entrance slides only 48px over 1.2s with gentle easing, panel transitions use opacity only, and mouse tilt is limited to 3 degrees with a softer spring. Reduced-motion preferences disable the entrance movement and pointer tilt.
+- Validation: TypeScript and diff checks; browser playback not rechecked.
+
+### Page: Shared navbar (all pages)
+#### Section: Four Uncrewed Systems drone previews
+- BEFORE UI STATE: The shared drone entrance used a short 48px slide and fade.
+- AFTER UI STATE: FENIx, T-BAT, MANTIS and STORM enter from the right by one stage width and slide left into position over 1.5 seconds, with gentle easing and reduced-motion support.
+- Validation: TypeScript and diff checks; browser playback not rechecked.
+
+### Page: About (/about)
+#### Section: Get in Touch
+- BEFORE UI STATE: Drone photograph, dark overlay and downward-offset text with bold heading and thick button borders.
+- AFTER UI STATE: Gray (#3c3c3b) background, Orbit heading with the home hero CharacterReveal, thin button borders and a large white standalone Tsalla emblem on the right. Emblem uses a one-time white/cyan flicker on section entry; mobile stacks the content and emblem. Existing contact/careers links remain functional.
+- Validation: TypeScript and diff checks passed. Desktop/mobile browser check was attempted but Edge failed to launch in this environment. Graphify update failed with its existing uv canonicalization error.
+
+### Page: About (/about)
+#### Section: Get in Touch logo
+- BEFORE UI STATE: Logo sat at the right edge and remained white with only a cyan glow during flicker.
+- AFTER UI STATE: Desktop logo moved 40px left. Existing transparent silhouette is used as a CSS mask so its fill alternates between white and website cyan (#5CE1E6), preserving the exact logo shape and reduced-motion support.
+- Validation: TypeScript and diff checked; browser animation not rechecked.
+
+### Page: About (/about)
+#### Section: Get in Touch logo animation
+- BEFORE UI STATE: White/cyan logo blink completed in 1.1 seconds.
+- AFTER UI STATE: Slowed the same sequence to 2.5 seconds for more readable color changes.
+- Validation: CSS diff checked; browser playback not rechecked.
+
+### Page: About (/about)
+#### Section: Operations Location and section scrolling
+- BEFORE UI STATE: Large vertical padding, a fixed 720px map wrapper and an aspect-ratio map overflowing that wrapper made the section exceed a screen; left insets also restricted mobile width.
+- AFTER UI STATE: Section occupies one small viewport height with responsive heading/copy and a flexible map area. The map and overlays fit the available space, retaining the full map with object-contain. Removed large left insets and matched cyan to #5CE1E6.
+- Scrolling: Confirmed About already uses the shared SectionSnap component used by BAT/STORM; the resized section remains included as a direct child section.
+- Validation: TypeScript and diff checks passed. Browser viewport/scroll interaction was not verified because the prior Edge launch failed. Graphify remains unavailable due to its uv launcher error.
+
+### Page: Leadership (/leadership)
+#### Section: Hero name title
+- BEFORE UI STATE: Opening frame hid both N and A in Vinayak; desktop title scaled to 14.2vw with a 280px cap.
+- AFTER UI STATE: N is visible immediately; A retains the scroll reveal. Slightly reduced desktop title to 13.5vw/260px for the updated image while preserving centered alignment, cyan, bold weight and existing split-scroll motion. Mobile size is unchanged.
+- Validation: TypeScript and diff checked; visual alignment in browser not rechecked.
+
+### Page: Leadership (/leadership)
+#### Section: Hero photo fitting
+- BEFORE UI STATE: Cover sizing, a negative right inset and scroll scale 1.15 cropped and zoomed the photograph.
+- AFTER UI STATE: Centered contain sizing displays the full photo without distortion; removed the extra width and scroll zoom. Black space may appear where viewport and photo aspect ratios differ.
+- Validation: Diff checked; browser preview not rechecked.
+
+### Page: Leadership (/leadership)
+#### Section: Undo hero photo fitting
+- BEFORE UI STATE: Full-photo contain sizing with no scroll zoom.
+- AFTER UI STATE: Restored the previous cover sizing, photo position, desktop right inset and 1.15 scroll scale as requested. Kept the visible N and title adjustment.
+- Validation: Diff checked; browser preview not rechecked.

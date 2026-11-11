@@ -1,229 +1,83 @@
-"use client"
+import { ArrowUpRight } from "lucide-react"
 
-import type React from "react"
-import { motion } from "framer-motion"
-import { useState } from "react"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 export default function ContactSection() {
-    const [formData, setFormData] = useState({
-        fullName: "",
-        email: "",
-        phone: "",
-        enquiryType: "",
-        message: "",
-    })
-
-    const [submitted, setSubmitted] = useState(false)
-    const [errorFields, setErrorFields] = useState<string[]>([])
-    const [isLoading, setIsLoading] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { id, value } = e.target
-        setFormData((prev) => ({ ...prev, [id]: value }))
-    }
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        const missing: string[] = []
-        Object.entries(formData).forEach(([key, value]) => {
-            if (!value.trim()) {
-                const formatted = key.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase())
-                missing.push(formatted)
-            }
-        })
-
-        if (missing.length > 0) {
-            setErrorFields(missing)
-            setSubmitted(false)
-            setErrorMessage("")
-            return
-        }
-
-        setErrorFields([])
-        setErrorMessage("")
-        setIsLoading(true)
-
-        try {
-            const response = await fetch("/api/contact", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            })
-
-            if (response.ok) {
-                setSubmitted(true)
-                setFormData({
-                    fullName: "",
-                    email: "",
-                    phone: "",
-                    enquiryType: "",
-                    message: "",
-                })
-                setTimeout(() => setSubmitted(false), 5000)
-            } else {
-                const errorData = await response.json()
-                setErrorMessage(errorData.error || "Failed to send message. Please try again.")
-            }
-        } catch (error) {
-            console.error("Error submitting form:", error)
-            setErrorMessage("Failed to send message. Please check your connection and try again.")
-        } finally {
-            setIsLoading(false)
-        }
-    }
-
     return (
-        <div className="bg-black text-white py-16 px-4 font-orbit">
-            <div className="max-w-6xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
-                >
-                    <h1 className="uppercase text-4xl md:text-6xl font-bold text-white mb-3 tracking-tight">Reach Out to Us</h1>
-                    <p className="text-lg md:text-xl font-light leading-relaxed text-neutral-400 max-w-2xl mx-auto">
-                        Got a question, idea, or collaboration in mind? Connect with our team directly via email — our team will be in touch soon.
+        // PREVIOUS UI: py-16 md:py-24 gave the content more top spacing.
+        // PREVIOUS UI: pt-12 md:pt-20.
+        <section aria-labelledby="contact-title" className="bg-black px-6 pb-16 pt-8 font-orbit text-white md:px-12 md:pb-24 md:pt-16 lg:px-16">
+            <div className="mx-auto max-w-7xl">
+                <header className="mb-12 grid gap-6 lg:mb-16 lg:grid-cols-2 lg:items-end lg:gap-16">
+                    <div>
+                        <p className="mb-5 text-xs font-normal uppercase tracking-[0.2em] text-[#5ce1e6]">Contact Tsalla Aerospace</p>
+                        {/* PREVIOUS UI: text-4xl md:text-5xl lg:text-6xl, with a forced break after Reach out. */}
+                        <h1 id="contact-title" className="whitespace-nowrap text-[clamp(1rem,6vw,2.25rem)] font-medium uppercase leading-tight tracking-tight md:text-5xl lg:text-[clamp(2rem,3.5vw,3.75rem)]">
+                            Reach out to us<span className="text-[#5ce1e6]">.</span>
+                        </h1>
+                    </div>
+                    {/* PREVIOUS UI: Introduction paragraph used default left alignment. */}
+                    <p className="max-w-lg text-justify text-lg font-light leading-relaxed text-neutral-400 md:text-xl">
+                        Have a question, an idea, or a collaboration in mind? Let’s start a conversation.
                     </p>
-                </motion.div>
+                </header>
 
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-                    {/* PREVIOUS UI (Original 5-Field Contact Form - Commented out for future reuse):
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                        className="w-full"
-                    >
-                        <form onSubmit={handleSubmit} className="space-y-8">
-                            <div className="group">
-                                <label htmlFor="fullName" className="...">Full Name</label>
-                                <Input id="fullName" placeholder="ENTER YOUR NAME" ... />
-                            </div>
-                            <div className="grid grid-cols-2 gap-8">
-                                <div><Input id="email" placeholder="EMAIL@EXAMPLE.COM" ... /></div>
-                                <div><Input id="phone" placeholder="+91 00000 00000" ... /></div>
-                            </div>
-                            <div><Input id="enquiryType" placeholder="PARTNERSHIP / GENERAL / CAREERS" ... /></div>
-                            <div><Textarea id="message" placeholder="TELL US ABOUT YOUR PROJECT..." ... /></div>
-                            <button type="submit">Send Message</button>
-                        </form>
-                    </motion.div>
-                    */}
+                <div className="grid border-y border-white/15 lg:grid-cols-2">
+                    <div className="min-w-0 py-10 lg:py-12 lg:pr-12">
+                        <p className="mb-3 text-xs uppercase tracking-[0.15em] text-neutral-400">Get in touch</p>
+                        <h2 className="text-2xl font-medium leading-snug md:text-3xl">Connect with our team</h2>
+                        <p className="mt-4 max-w-md text-base leading-relaxed text-neutral-400">
+                            For enquiries and partnerships, reach our team directly by email or phone.
+                        </p>
 
-                    {/* CURRENT UI (Direct Email Contact Card) */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                        className="w-full space-y-6"
-                    >
-                        <div className="bg-zinc-900/60 border border-zinc-800 p-8 rounded-sm space-y-6">
-                            <h2 className="text-xl font-bold uppercase tracking-wider text-[#5ce1e6] font-orbit">
-                                Direct Contact Information
-                            </h2>
-                            <p className="text-zinc-400 text-sm leading-relaxed">
-                                Our form is currently offline for scheduled maintenance. Please send your inquiries directly to our team using the email address below.
-                            </p>
-
-                            <div className="pt-4 border-t border-zinc-800 space-y-4">
-                                <div>
-                                    <span className="block text-xs uppercase tracking-widest text-zinc-500 font-bold mb-1">
-                                        Primary Email Address
-                                    </span>
-                                    <a
-                                        href="mailto:info@tsallaaerospace.com"
-                                        className="text-xl md:text-2xl font-bold text-white hover:text-[#5ce1e6] transition-colors tracking-tight font-orbit inline-block"
-                                    >
+                        <dl className="mt-10 space-y-7">
+                            <div>
+                                <dt className="mb-2 text-xs uppercase tracking-[0.15em] text-neutral-400">Email</dt>
+                                <dd>
+                                    <a href="mailto:info@tsallaaerospace.com" className="inline-block max-w-full break-words text-base font-normal leading-relaxed text-white underline decoration-white/30 underline-offset-8 transition-colors [@media(hover:hover)]:hover:text-[#5ce1e6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#5ce1e6] sm:text-xl">
                                         info@tsallaaerospace.com
                                     </a>
-                                </div>
-
-                                <div>
-                                    <span className="block text-xs uppercase tracking-widest text-zinc-500 font-bold mb-1">
-                                        Phone Support
-                                    </span>
-                                    <span className="text-base text-zinc-300 font-orbit">
+                                </dd>
+                            </div>
+                            <div>
+                                <dt className="mb-2 text-xs uppercase tracking-[0.15em] text-neutral-400">Phone</dt>
+                                <dd>
+                                    <a href="tel:+919535720540" className="inline-flex min-h-11 items-center text-lg leading-relaxed transition-colors [@media(hover:hover)]:hover:text-[#5ce1e6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ce1e6]">
                                         +91 95357 20540
-                                    </span>
-                                </div>
-
-                                <div>
-                                    <span className="block text-xs uppercase tracking-widest text-zinc-500 font-bold mb-1">
-                                        Headquarters Location
-                                    </span>
-                                    <span className="text-base text-zinc-300 font-orbit">
-                                        Bengaluru, Karnataka 560012, India
-                                    </span>
-                                </div>
+                                    </a>
+                                </dd>
                             </div>
+                        </dl>
 
-                            <div className="pt-4">
-                                <a
-                                    href="mailto:info@tsallaaerospace.com"
-                                    className="inline-flex items-center justify-center w-full h-12 bg-[#5ce1e6] text-black font-bold text-xs tracking-widest uppercase rounded-sm hover:bg-white transition-colors"
-                                >
-                                    Compose Email
-                                </a>
-                            </div>
+                        <a href="mailto:info@tsallaaerospace.com" className="mt-10 inline-flex min-h-12 items-center justify-center gap-8 border border-white px-6 py-3 text-sm font-normal transition-colors [@media(hover:hover)]:hover:bg-white [@media(hover:hover)]:hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ce1e6]">
+                            Compose email
+                            <ArrowUpRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.5} />
+                        </a>
+                    </div>
+
+                    <div className="min-w-0 border-t border-white/15 py-10 lg:border-l lg:border-t-0 lg:py-12 lg:pl-12">
+                        <div className="mb-6">
+                            <p className="mb-3 text-xs uppercase tracking-[0.15em] text-neutral-400">Our headquarters</p>
+                            {/* PREVIOUS UI: Bengaluru inherited white text. */}
+                            <h2 className="text-2xl font-medium leading-snug md:text-3xl"><span className="text-[#5ce1e6]">Bengaluru</span>, India</h2>
+                            <address className="mt-3 text-base not-italic leading-relaxed text-neutral-400">Bengaluru, Karnataka 560012</address>
                         </div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                        className="w-full h-full min-h-[500px] lg:min-h-0 relative group overflow-hidden border border-zinc-800 rounded-sm"
-                    >
-                        <iframe
-                            width="100%"
-                            height="100%"
-                            className="absolute inset-0 w-full h-full opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                            frameBorder="0"
-                            title="map"
-                            marginHeight={0}
-                            marginWidth={0}
-                            scrolling="no"
-                            src="https://maps.google.com/maps?q=13.013616,77.568779&z=15&output=embed"
-                        />
-                        <div className="absolute inset-0 pointer-events-none border border-zinc-800/50 mix-blend-overlay"></div>
-                    </motion.div>
+                        <div className="relative h-72 overflow-hidden border border-white/15 bg-neutral-900 sm:h-80">
+                            <iframe
+                                width="100%"
+                                height="100%"
+                                className="absolute inset-0 h-full w-full border-0 grayscale"
+                                title="Tsalla Aerospace headquarters location in Bengaluru"
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                src="https://maps.google.com/maps?q=13.013616,77.568779&z=15&output=embed"
+                            />
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=13.013616,77.568779" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex min-h-11 items-center gap-3 text-sm text-neutral-300 transition-colors [@media(hover:hover)]:hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#5ce1e6]">
+                            Open in Google Maps <span className="sr-only">(opens in a new tab)</span>
+                            <ArrowUpRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.5} />
+                        </a>
+                    </div>
                 </div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.6 }}
-                    className="grid md:grid-cols-2 gap-6 mt-20 text-sm"
-                >
-                    <div className="bg-zinc-900/50 border border-zinc-800/50 p-8 rounded-sm hover:bg-zinc-900 transition-colors duration-300">
-                        <h2 className="block text-sm mb-6 uppercase tracking-[0.2em] font-orbit font-bold text-white">Contact Us</h2>
-                        <p className="mb-3 font-light text-sm font-orbit text-zinc-400 group">
-                            <span className="font-semibold text-white block mb-1">Phone Number</span>
-                            <span className="group-hover:text-white transition-colors">+91 95357 20540</span>
-                        </p>
-                        <p className="font-light text-sm font-orbit text-zinc-400 group">
-                            <span className="font-semibold text-white block mb-1">Email Address</span>
-                            <span className="group-hover:text-white transition-colors">info@tsallaaerospace.com</span>
-                        </p>
-                    </div>
-                    <div className="bg-zinc-900/50 border border-zinc-800/50 p-8 rounded-sm hover:bg-zinc-900 transition-colors duration-300">
-                        <h2 className="block text-sm mb-6 uppercase tracking-[0.2em] font-orbit font-bold text-white">Headquarter</h2>
-                        <p className="font-light text-sm font-orbit text-zinc-400 group-hover:text-white transition-colors leading-relaxed">
-                            Bengaluru, Karnataka 560012
-                        </p>
-                    </div>
-                </motion.div>
             </div>
-        </div>
+        </section>
     )
 }

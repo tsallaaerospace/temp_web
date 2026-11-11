@@ -31,8 +31,9 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "next-env.d.ts",
-    ".next-wix-storm-20261104/types/**/*.ts"
+    ".next-wix-storm-20261104/types/**/*.ts",
+    ".next/types/**/*.ts",
+    "next-env.d.ts"
   ],
   "exclude": [
     "node_modules"

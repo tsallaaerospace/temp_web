@@ -16,18 +16,19 @@ const BENGALURU_LNG = 81.5946;
 
 export default function OperationsLocation() {
     return (
-        <div className="py-20 bg-white w-full font-orbit">
-            <div className="pl-12 md:pl-16 lg:pl-20 mb-12">
+        // PREVIOUS UI: py-20 plus a fixed 720px map and oversized left inset exceeded one viewport.
+        <section aria-labelledby="operations-location-title" className="h-svh min-h-0 overflow-hidden bg-white w-full font-orbit flex flex-col px-6 md:px-12 lg:px-20 pt-[max(80px,10svh)] pb-6">
+            <div className="shrink-0 mb-4 md:mb-6">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="text-3xl md:text-4xl lg:text-[3.5rem] xl:text-[4rem] font-semibold tracking-[0.05em] text-black mb-6 uppercase"
-                    style={{ lineHeight: 0.9 }}
+                    id="operations-location-title"
+                    className="text-[clamp(24px,3.5vw,64px)] font-semibold tracking-[0.05em] text-black mb-4 uppercase leading-tight"
                 >
                     OPERATIONS LOCATION
                 </motion.h2>
-                <div className="text-[10px] md:text-xs lg:text-[1.1rem] text-neutral-500 max-w-6xl text-justify">
+                <div className="text-[12px] md:text-[14px] lg:text-[16px] leading-relaxed text-neutral-500 max-w-6xl text-justify">
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -46,10 +47,11 @@ export default function OperationsLocation() {
                 </div>
             </div>
 
-            <div className="pl-40 md:pl-52 lg:pl-44 pr-12 md:pr-20 lg:pr-28">
-                <div className="max-w-6xl" style={{ height: '720px' }}>
+            {/* PREVIOUS UI: Map used pl-40/md:pl-52 and a fixed height of 720px. */}
+            <div className="flex-1 min-h-0 w-full flex items-center justify-center">
+                <div className="w-full h-full min-h-0 [&>div]:h-full [&>div]:aspect-auto [&>div>img]:object-contain">
                     <WorldMap
-                        lineColor="#00A3CC"
+                        lineColor="#5ce1e6"
                         showLabels={false}
                         tooltipLineUp={TOOLTIP_LINE_UP}
                         tooltipLineRight={TOOLTIP_LINE_RIGHT}
@@ -74,6 +76,6 @@ export default function OperationsLocation() {
                     />
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

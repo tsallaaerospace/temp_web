@@ -1,0 +1,5 @@
+Tool: built-in image_gen (background-extraction)
+Source: frontend/public/product/fenix/FENIX_Awareness-poster.jpg
+Output: frontend/public/product/fenix/fenix-awareness-transparent.png
+
+Use case: background-extraction. Edit target: the attached original FENIX sensor assembly render. Remove ONLY the uniform light grey background and make it genuinely transparent, including all background gaps between arms. Preserve exactly the original drone geometry, colours, lens reflections, materials, screws, wires, the faded arm ends, camera angle, scale and subject position within the original wide 16:9 canvas. Do not recenter, enlarge, crop, redesign, sharpen or add anything. Keep the same wide canvas and composition because precise UI highlight overlays must align to the original. No shadow on a backdrop, no white/grey backdrop, no checkerboard, no labels, no blue highlights. Output a clean PNG with actual alpha transparency; leave the drone opaque including white lights and grey surfaces.

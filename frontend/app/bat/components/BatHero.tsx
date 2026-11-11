@@ -6,16 +6,19 @@ import { ProductHeroTitle } from "@/components/ProductHeading"
 import { fetchBlobWithRetry } from "@/lib/media-retry"
 import { TANK_TRACK } from "./batHeroTankTrack"
 
-const HERO_VIDEO = "/product/T-BAT/bat-hero-scenes-scroll-clean.mp4"
+// PREVIOUS UI: /product/T-BAT/bat-hero-scenes-scroll-clean.mp4 used the old sensor close-up.
+const HERO_VIDEO = "/product/T-BAT/bat-hero-scenes-20261110.mp4"
 const HERO_POSTER = "/product/T-BAT/bat-hero-scenes-poster.webp"
 // Same footage as HERO_VIDEO, rebuilt at 1080p from the original clips in "HERO video" with a keyframe
-// every 4 frames (x264 keyint=4, bframes=0, crf 18), so a seek decodes at most 4 frames. 581 frames at 24 fps.
-const SCRUB_VIDEO = "/product/T-BAT/bat-hero-scrub.mp4"
+// every 4 frames (x264 keyint=4, bframes=0, crf 18), so a seek decodes at most 4 frames.
+// PREVIOUS UI: /product/T-BAT/bat-hero-scrub.mp4 had 581 frames. The replacement edit has 557 frames at 24 fps.
+const SCRUB_VIDEO = "/product/T-BAT/bat-hero-scrub-20261110.mp4"
 const SCRUB_FPS = 24
 // PREVIOUS UI: the zoom counter showed from scroll progress 0.756 as a bare "20×" ... "1×" number.
 
 // Detection box on the tank in the last scene. Both hero videos share one edit, so scene 7 starts at the same frame.
-const TANK_SCENE_START = 436
+// PREVIOUS UI: 436; the replacement close-up is 24 frames shorter.
+const TANK_SCENE_START = 412
 // Scene-7 frames over which the box fades out as the tank shrinks to a speck (about 36px -> 22px wide at 1280).
 const TANK_FADE_START = 60
 const TANK_FADE_FRAMES = 12

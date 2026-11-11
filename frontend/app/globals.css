@@ -938,7 +938,8 @@ html:has(.careers-page) { font-size: 100%; }
   nav .site-nav-bar { height: calc(var(--site-rem) * 4.5); padding-inline: var(--site-rem); }
   nav .site-nav-logo-link { margin-left: calc(var(--site-rem) * 3); padding-left: var(--site-rem); }
   nav .site-nav-logo { height: calc(var(--site-rem) * 4); }
-  nav .site-nav-link { padding-inline: calc(var(--site-rem) * 1.5); font-size: calc(var(--site-rem) * .875); line-height: calc(var(--site-rem) * 1.25); }
+  /* PREVIOUS UI: link font-size and line-height used --site-rem and enlarged on wide screens. */
+  nav .site-nav-link { padding-inline: calc(var(--site-rem) * 1.5); font-size: 14px; line-height: 20px; }
 }
 .careers-page > :is(section, main, div) { min-height: 100svh; }
 .careers-page .careers-section-title {

@@ -1,8 +1,9 @@
 "use client"
+// PREVIOUS UI: named text size utilities used rem units and varied with page root scaling; pixel sizes preserve the 16px-root design.
 
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion"
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring, useReducedMotion } from "framer-motion"
 import { ArrowRight, Lock } from "lucide-react"
 
 const cn = (...classes: (string | boolean | undefined | null)[]) => classes.filter(Boolean).join(' ');
@@ -41,6 +42,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
     const panelRef = useRef<HTMLDivElement>(null)
     const stageObserver = useRef<ResizeObserver | null>(null)
     const [fit, setFit] = useState<PanelFit | null>(null)
+    const reduceMotion = useReducedMotion()
 
     // Measure the detail panel and the drone stage (both untransformed) so placement can follow the screen size
     const measureFit = useCallback(() => {
@@ -79,12 +81,14 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
     // 3D Tilt Values
     const mouseX = useMotionValue(0)
     const mouseY = useMotionValue(0)
-    const tiltX = useSpring(useTransform(mouseY, [-300, 300], [15, -15]), { stiffness: 100, damping: 30 })
-    const tiltY = useSpring(useTransform(mouseX, [-300, 300], [-15, 15]), { stiffness: 100, damping: 30 })
+    // PREVIOUS UI: 15-degree tilt with stiffness 100 made large previews move too strongly.
+    const tiltX = useSpring(useTransform(mouseY, [-300, 300], [3, -3]), { stiffness: 60, damping: 28 })
+    const tiltY = useSpring(useTransform(mouseX, [-300, 300], [-3, 3]), { stiffness: 60, damping: 28 })
     const ghostX = useTransform(mouseX, [-300, 300], [10, -10])
     const ghostY = useTransform(mouseY, [-300, 300], [10, -10])
 
     const handleDroneMouseMove = (e: React.MouseEvent) => {
+        if (reduceMotion) return
         if (!imageContainerRef.current) return
         const rect = imageContainerRef.current.getBoundingClientRect()
         const x = e.clientX - (rect.left + rect.width / 2)
@@ -141,7 +145,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                     <ArrowRight className="w-3.5 h-3.5 rotate-180" />
                     BACK
                 </button>
-                <h2 className="text-xl font-bold tracking-tighter font-orbit text-center text-white">
+                <h2 className="text-[20px] font-bold tracking-tighter font-orbit text-center text-white">
                     HANGAR
                 </h2>
             </div>
@@ -223,7 +227,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
 
                                 <div className="relative z-10">
                                     <div className={cn(
-                                        "text-sm font-semibold tracking-widest transition-all duration-300 font-orbit uppercase flex items-center gap-2",
+                                        "text-[14px] font-semibold tracking-widest transition-all duration-300 font-orbit uppercase flex items-center gap-2",
                                         isLocked
                                             ? "text-white/60"
                                             : (isActive ? "text-[#5ce1e6] translate-x-1" : "text-white/90 group-hover:text-[#5ce1e6]")
@@ -297,7 +301,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
 
                                 <div className="relative z-10">
                                     <div className={cn(
-                                        "text-sm font-semibold tracking-widest transition-all duration-300 font-orbit uppercase flex items-center gap-2",
+                                        "text-[14px] font-semibold tracking-widest transition-all duration-300 font-orbit uppercase flex items-center gap-2",
                                         isActive ? "text-[#5ce1e6] translate-x-1" : "text-white/60 group-hover:text-[#5ce1e6]"
                                     )}>
                                         {link.name}
@@ -375,7 +379,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
 
                                 <div className="relative z-10">
                                     <div className={cn(
-                                        "text-sm font-semibold tracking-widest transition-all duration-300 font-orbit uppercase flex items-center gap-2",
+                                        "text-[14px] font-semibold tracking-widest transition-all duration-300 font-orbit uppercase flex items-center gap-2",
                                         isLocked
                                             ? "text-white/60"
                                             : (isActive ? "text-[#5ce1e6] translate-x-1" : "text-white/90 group-hover:text-[#5ce1e6]")
@@ -439,10 +443,11 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                     {hoveredUncrewedSystemDetails ? (
                         <motion.div
                             key={hoveredUncrewedSystemDetails.headline}
-                            initial={{ opacity: 0, filter: "blur(10px) brightness(2)" }}
-                            animate={{ opacity: 1, filter: "blur(0px) brightness(1)" }}
-                            exit={{ opacity: 0, filter: "blur(10px) brightness(0.5)" }}
-                            transition={{ duration: 0.4, ease: "easeOut" }}
+                            // PREVIOUS UI: animated blur and brightness across the entire detail panel.
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: reduceMotion ? 0 : 0.45, ease: "easeOut" }}
                             ref={panelRef}
                             className="flex-1 p-4 lg:p-12 relative flex flex-col pt-16 lg:pt-12 overflow-hidden"
                         >
@@ -463,10 +468,10 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                             <div className="flex flex-col lg:flex-row flex-1 pt-2 lg:pt-12 items-center lg:items-start justify-start lg:justify-between gap-12 lg:gap-0">
                                 <div className="w-full lg:w-1/2 z-20 text-center lg:text-left">
                                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
-                                        <h2 className="text-4xl lg:text-7xl font-bold tracking-tighter text-white mb-1 lg:mb-2 font-orbit group relative inline-block">
+                                        <h2 className="text-[36px] lg:text-[72px] font-bold tracking-tighter text-white mb-1 lg:mb-2 font-orbit group relative inline-block">
                                             {hoveredUncrewedSystemDetails.href === "/fenix" ? <>FENI<span className="text-[#5ce1e6]">x</span></> : hoveredUncrewedSystemDetails.headline}
                                         </h2>
-                                        <div className="text-[10px] lg:text-lg text-white/60 font-orbit leading-tight mb-4 lg:mb-10 max-w-sm lg:max-w-md uppercase tracking-widest mx-auto lg:mx-0" dangerouslySetInnerHTML={{ __html: hoveredUncrewedSystemDetails.subheadline }} />
+                                        <div className="text-[10px] lg:text-[18px] text-white/60 font-orbit leading-tight mb-4 lg:mb-10 max-w-sm lg:max-w-md uppercase tracking-widest mx-auto lg:mx-0" dangerouslySetInnerHTML={{ __html: hoveredUncrewedSystemDetails.subheadline }} />
                                     </motion.div>
 
                                     <div className="grid grid-cols-2 gap-2 lg:gap-4 max-w-xs lg:max-w-sm mx-auto lg:mx-0">
@@ -474,8 +479,8 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                             <motion.div key={key} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 + (i * 0.05) }}
                                                 className="bg-white/[0.03] border border-white/10 p-2 lg:p-4 rounded-sm backdrop-blur-md group hover:border-[#5ce1e6]/40 transition-colors"
                                             >
-                                                <div className="text-[8px] lg:text-xs text-white uppercase font-orbit mb-0.5 lg:mb-1 opacity-60">{key}</div>
-                                                <div className="text-xs lg:text-xl text-white font-orbit group-hover:text-[#5ce1e6] transition-colors">{val}</div>
+                                                <div className="text-[8px] lg:text-[12px] text-white uppercase font-orbit mb-0.5 lg:mb-1 opacity-60">{key}</div>
+                                                <div className="text-[12px] lg:text-[20px] text-white font-orbit group-hover:text-[#5ce1e6] transition-colors">{val}</div>
                                             </motion.div>
                                         ))}
                                     </div>
@@ -485,14 +490,14 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                         {hoveredUncrewedSystemDetails.isLocked ? (
                                             <div className="relative inline-flex items-center px-6 lg:px-10 py-2.5 lg:py-4 bg-amber-500/10 border border-amber-500/30 text-amber-400 opacity-80 cursor-not-allowed">
                                                 <Lock className="w-4 h-4 mr-2" />
-                                                <span className="text-[9px] lg:text-xs font-bold uppercase tracking-[0.3em] font-orbit">SYSTEM RESTRICTED</span>
+                                                <span className="text-[9px] lg:text-[12px] font-bold uppercase tracking-[0.3em] font-orbit">SYSTEM RESTRICTED</span>
                                             </div>
                                         ) : (
                                             <Link href={hoveredUncrewedSystemDetails.href || "#"}
                                                 onClick={onClose}
                                                 className="relative group inline-flex items-center px-6 lg:px-10 py-2.5 lg:py-4 bg-[#5ce1e6]/5 border border-[#5ce1e6]/20 text-[#5ce1e6] overflow-hidden transition-all duration-500 hover:bg-[#5ce1e6]/20 hover:border-[#5ce1e6] hover:shadow-[0_0_30px_rgba(92,225,230,0.3)]"
                                             >
-                                                <span className="relative z-10 text-[9px] lg:text-xs font-bold uppercase tracking-[0.3em] font-orbit">Initiate Mission</span>
+                                                <span className="relative z-10 text-[9px] lg:text-[12px] font-bold uppercase tracking-[0.3em] font-orbit">Initiate Mission</span>
                                                 <ArrowRight className="relative z-10 ml-3 lg:ml-4 w-3 lg:w-4 h-3 lg:h-4 group-hover:translate-x-1 transition-transform" />
                                             </Link>
                                         )}
@@ -501,7 +506,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                             onClick={onClose}
                                             className="relative group inline-flex items-center px-6 lg:px-10 py-2.5 lg:py-4 bg-[#5ce1e6]/5 border border-[#5ce1e6]/20 text-[#5ce1e6] overflow-hidden transition-all duration-500 hover:bg-[#5ce1e6]/20 hover:border-[#5ce1e6] hover:shadow-[0_0_30px_rgba(92,225,230,0.3)]"
                                         >
-                                            <span className="relative z-10 text-[9px] lg:text-xs font-bold uppercase tracking-[0.3em] font-orbit">Initiate Mission</span>
+                                            <span className="relative z-10 text-[9px] lg:text-[12px] font-bold uppercase tracking-[0.3em] font-orbit">Initiate Mission</span>
                                             <ArrowRight className="relative z-10 ml-3 lg:ml-4 w-3 lg:w-4 h-3 lg:h-4 group-hover:translate-x-1 transition-transform" />
                                         </Link>
                                     </div>
@@ -542,9 +547,11 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                     {/* Drone Entrance Animation from right to left */}
                                     <motion.div
                                         key={`drone-stage-${hoveredUncrewedSystemDetails.headline}`}
-                                        initial={{ x: 260, opacity: 0, filter: "blur(6px)" }}
-                                        animate={{ x: 0, opacity: 1, filter: "blur(0px)" }}
-                                        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                                        // PREVIOUS UI: 260px slide with blur over 0.85s.
+                                        // PREVIOUS UI: 48px offset mostly read as a fade rather than an entrance from the right.
+                                        initial={{ x: reduceMotion ? 0 : "100%", opacity: 1 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        transition={{ duration: reduceMotion ? 0 : 1.5, ease: [0.25, 0.1, 0.25, 1] }}
                                         className="w-full flex items-center justify-center relative"
                                     >
                                         <motion.div
@@ -636,10 +643,10 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                     ) : (
                         <div key="idle" className="flex-1 flex flex-col items-center justify-center p-6 lg:p-12 text-center relative">
                             <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="max-w-xl z-20">
-                                <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-white mb-4 lg:mb-6 font-orbit uppercase">
+                                <h2 className="text-[30px] lg:text-[48px] font-bold tracking-tight text-white mb-4 lg:mb-6 font-orbit uppercase">
                                     RESERVE <span className="text-[#5ce1e6]">HANGAR</span> ACTIVE
                                 </h2>
-                                <p className="text-sm lg:text-xl text-white/40 font-orbit leading-relaxed tracking-widest uppercase mb-8 lg:mb-0">
+                                <p className="text-[14px] lg:text-[20px] text-white/40 font-orbit leading-relaxed tracking-widest uppercase mb-8 lg:mb-0">
                                     {data?.description}
                                 </p>
                                 {/* PREVIOUS UI (Awaiting selection indicator):

@@ -22,7 +22,8 @@ export type Product = {
     sizeChart?: string
 }
 
-export const allProducts: Product[] = [
+// PREVIOUS UI: Exported the original product availability directly.
+const products: Product[] = [
     {
         id: "1",
         serial: "AR-15-X-HYPER",
@@ -371,3 +372,9 @@ export const allProducts: Product[] = [
     },
 
 ]
+
+export const allProducts: Product[] = products.map(product => ({
+    ...product,
+    status: "COMING SOON",
+    action: "COMING SOON",
+}))

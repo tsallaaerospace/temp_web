@@ -1,4 +1,5 @@
 "use client"
+// PREVIOUS UI: named text size utilities used rem units and varied with page root scaling; pixel sizes preserve the 16px-root design.
 
 import React from "react"
 import Link from "next/link"
@@ -47,14 +48,14 @@ export const MaverickMenu: React.FC<MaverickMenuProps> = ({ onClose }) => {
                             <ArrowRight className="w-3.5 h-3.5 rotate-180" />
                             BACK
                         </button>
-                        <h2 className="text-xl font-bold tracking-tighter font-orbit text-center">MAVERICK</h2>
+                        <h2 className="text-[20px] font-bold tracking-tighter font-orbit text-center">MAVERICK</h2>
                     </div>
 
                     {/* Desktop Title */}
-                    <h2 className="hidden xl:block text-5xl font-bold mb-4 tracking-tighter leading-none font-orbit">MAVERICK</h2>
+                    <h2 className="hidden xl:block text-[48px] font-bold mb-4 tracking-tighter leading-none font-orbit">MAVERICK</h2>
                     <h3 className="text-[9px] lg:text-[10px] uppercase tracking-[0.3em] text-gray-500 mb-2 lg:mb-4 font-mono pl-1">Mission Control Systems</h3>
 
-                    <p className="text-gray-400 leading-relaxed max-w-md mb-2 lg:mb-8 text-xs lg:text-sm font-light border-l-2 border-[#5ce1e6]/30 pl-4 lg:pl-6 font-orbit">
+                    <p className="text-gray-400 leading-relaxed max-w-md mb-2 lg:mb-8 text-[12px] lg:text-[14px] font-light border-l-2 border-[#5ce1e6]/30 pl-4 lg:pl-6 font-orbit">
                         Comprehensive mission planning and execution systems for complex autonomous operations.
                     </p>
 
@@ -66,7 +67,7 @@ export const MaverickMenu: React.FC<MaverickMenuProps> = ({ onClose }) => {
                 {menuItems.map((item, index) => {
                     const content = (
                         <div className="relative z-10 w-full">
-                            <h4 className={`text-xl lg:text-3xl font-light mb-1 font-orbit ${item.href ? "group-hover:text-[#5ce1e6] transition-colors duration-300" : "text-gray-400"}`}>{item.title}</h4>
+                            <h4 className={`text-[20px] lg:text-[30px] font-light mb-1 font-orbit ${item.href ? "group-hover:text-[#5ce1e6] transition-colors duration-300" : "text-gray-400"}`}>{item.title}</h4>
                             <p className="text-[9px] uppercase tracking-[0.2em] text-gray-400 font-mono group-hover:text-black transition-colors delay-75">{item.subtitle}</p>
                         </div>
                     )

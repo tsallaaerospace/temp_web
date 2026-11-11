@@ -1,4 +1,5 @@
 "use client"
+// PREVIOUS UI: named text size utilities used rem units and varied with page root scaling; pixel sizes preserve the 16px-root design.
 
 import React from "react"
 import Link from "next/link"
@@ -45,18 +46,18 @@ export const SpaceSystemsMenu = ({ onClose }: { onClose: () => void }) => {
                         <ArrowRight className="w-3.5 h-3.5 rotate-180" />
                         BACK
                     </button>
-                    <h2 className="text-xl font-bold tracking-tighter font-orbit text-center">
+                    <h2 className="text-[20px] font-bold tracking-tighter font-orbit text-center">
                         <span className="text-black">SPACE</span> <span className="text-[#5ce1e6]">SYSTEMS</span>
                     </h2>
                 </div>
 
                 {/* Desktop Title */}
-                <h2 className="hidden xl:block text-5xl font-bold tracking-tighter mb-4 font-orbit">
+                <h2 className="hidden xl:block text-[48px] font-bold tracking-tighter mb-4 font-orbit">
                     <span className="text-black">SPACE</span> <span className="text-[#5ce1e6]">SYSTEMS</span>
                 </h2>
 
 
-                <p className="text-black text-sm lg:text-base leading-relaxed font-orbit mb-8 max-w-md">
+                <p className="text-black text-[14px] lg:text-[16px] leading-relaxed font-orbit mb-8 max-w-md">
                     Advanced unmanned systems engineered for superiority in the field. Every component designed for reliability, performance, and tactical advantage.
                 </p>
             </div>
@@ -93,7 +94,7 @@ export const SpaceSystemsMenu = ({ onClose }: { onClose: () => void }) => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: [0.5, 1, 0.5] }}
                             transition={{ duration: 4, repeat: Infinity }}
-                            className="text-[#5ce1e6] font-bold text-2xl lg:text-4xl tracking-[0.2em] text-center relative z-20"
+                            className="text-[#5ce1e6] font-bold text-[24px] lg:text-[36px] tracking-[0.2em] text-center relative z-20"
                         >
                             COMING<br />SOON
                         </motion.div>

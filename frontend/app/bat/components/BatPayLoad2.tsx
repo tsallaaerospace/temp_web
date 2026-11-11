@@ -218,7 +218,8 @@ export default function BatPayLoad2() {
           aria-label="T-BAT payload frame animation"
           className={"bat-payload-film " + (hasFrame ? "opacity-100" : "opacity-0")}
         />
-        <div className="bat-payload-stage-caption" aria-live="polite" aria-atomic="true">
+        {/* PREVIOUS UI: className="bat-payload-stage-caption" showed a duplicate caption above the cards. */}
+        <div className="sr-only" aria-live="polite" aria-atomic="true">
           <span className="bat-payload-caption-index">0{selected + 1} <span>/ 05</span></span>
           <span>{payload.name}<small>{payload.type}</small></span>
         </div>

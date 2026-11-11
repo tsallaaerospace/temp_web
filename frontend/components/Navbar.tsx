@@ -1,4 +1,5 @@
 "use client"
+// PREVIOUS UI: named text size utilities used rem units and varied with page root scaling; pixel sizes preserve the 16px-root design.
 
 import { useState, useEffect, useRef } from "react"
 // Note: next/link, next/navigation, and next/image are not available in this environment.
@@ -118,7 +119,8 @@ const megaMenuData = {
           droneImage:
             // PREVIOUS UI: "https://cdn.sanity.io/images/e2g21cdj/production/3af09f241d205d17afd828cff54cb8aed969ea52-1707x1207.png"
             "/product/STORM/STORM%20top%20veiw.png",
-          stats: { speed: "85 km/h", range: "300 km", endurance: "12 hrs", payload: "45 kg" }
+          // PREVIOUS UI: speed 85 km/h, range 300 km, endurance 12 hrs, payload 45 kg.
+          stats: { speed: "10 m/s", range: "15+ km LOS", endurance: "30+ min", payload: "30 kg" }
         },
       },
       {
@@ -458,7 +460,7 @@ export default function Navbar() {
               {/* PREVIOUS UI: Disabled navigation items remained visible. */}
               {navigationItems.filter(item => !item.disabled).map((item, index) => {
                 if (item.disabled) return (
-                  <button key={item.name} type="button" disabled className={cn("site-nav-link px-2.5 xl:px-4 2xl:px-6 text-xs xl:text-sm font-medium tracking-wider whitespace-nowrap h-full flex items-center cursor-default opacity-60 font-orbit", darkNavText ? "text-black" : "text-white")}>
+                  <button key={item.name} type="button" disabled className={cn("site-nav-link px-2.5 xl:px-4 2xl:px-6 text-[12px] xl:text-[14px] font-medium tracking-wider whitespace-nowrap h-full flex items-center cursor-default opacity-60 font-orbit", darkNavText ? "text-black" : "text-white")}>
                     {item.name}
                   </button>
                 );
@@ -481,7 +483,7 @@ export default function Navbar() {
                           }
                         }}
                         className={cn(
-                          "site-nav-link px-2.5 xl:px-4 2xl:px-6 text-xs xl:text-sm font-medium tracking-wider whitespace-nowrap transition-colors h-full flex items-center",
+                          "site-nav-link px-2.5 xl:px-4 2xl:px-6 text-[12px] xl:text-[14px] font-medium tracking-wider whitespace-nowrap transition-colors h-full flex items-center",
                           // PREVIOUS UI: JOIN THE MISSION was an outlined cyan button:
                           // "ml-2 xl:ml-3 rounded-sm border border-[#5ce1e6]/70 px-3 xl:px-4 text-[#5ce1e6] hover:bg-[#5ce1e6]/10"
                         )}
@@ -568,7 +570,7 @@ export default function Navbar() {
                 <div className="flex flex-col xl:flex-row w-full min-h-[450px]">
                   <div className="w-full xl:w-1/2 max-w-7xl mx-auto pl-4 pr-0 py-8 md:pl-6 lg:pl-8 xl:pl-10">
                     <div className="space-y-1">
-                      <h3 className="text-sm font-semibold text-gray-400 mb-6 tracking-wider font-orbit">
+                      <h3 className="text-[14px] font-semibold text-gray-400 mb-6 tracking-wider font-orbit">
                         {(megaMenuData as any)[activeMegaMenu].title}
                       </h3>
                       <div
@@ -597,10 +599,10 @@ export default function Navbar() {
                           >
                             <div className="flex items-center justify-between">
                               <div>
-                                <div className="text-white font-medium text-lg group-hover:text-[#5ce1e6] transition-colors font-orbit">
+                                <div className="text-white font-medium text-[18px] group-hover:text-[#5ce1e6] transition-colors font-orbit">
                                   {link.name}
                                 </div>
-                                <div className="text-gray-400 text-sm mt-1 font-orbit">{link.description}</div>
+                                <div className="text-gray-400 text-[14px] mt-1 font-orbit">{link.description}</div>
                               </div>
                               <ArrowRight
                                 className="w-4 h-4 text-gray-600 group-hover:text-[#5ce1e6] group-hover:translate-x-1 transition-all"
@@ -622,18 +624,18 @@ export default function Navbar() {
                     {activeMegaMenu === "/uncrewedsystems" && hoveredUncrewedSystemDetails ? (
                       <>
                         <div className="flex-1">
-                          <h2 className="text-4xl font-bold leading-tight tracking-wide font-orbit mb-4">
+                          <h2 className="text-[36px] font-bold leading-tight tracking-wide font-orbit mb-4">
                             {hoveredUncrewedSystemDetails.headline}
                           </h2>
                           <p
-                            className="text-lg leading-relaxed mb-6 font-orbit"
+                            className="text-[18px] leading-relaxed mb-6 font-orbit"
                             dangerouslySetInnerHTML={{ __html: hoveredUncrewedSystemDetails.subheadline }}
                           />
                         </div>
                         <div className="mt-auto">
                           <Link
                             href={hoveredUncrewedSystemDetails.href || "#"}
-                            className="inline-block px-4 py-2 border border-white text-white hover:bg-white hover:text-black transition-colors text-base font-orbit"
+                            className="inline-block px-4 py-2 border border-white text-white hover:bg-white hover:text-black transition-colors text-[16px] font-orbit"
                           >
                             Explore
                           </Link>
@@ -655,10 +657,10 @@ export default function Navbar() {
                       </>
                     ) : (
                       <>
-                        <h2 className="text-3xl font-bold leading-tight font-orbit mb-4">
+                        <h2 className="text-[30px] font-bold leading-tight font-orbit mb-4">
                           {(megaMenuData as any)[activeMegaMenu]?.title}
                         </h2>
-                        <p className="text-lg leading-relaxed font-orbit">
+                        <p className="text-[18px] leading-relaxed font-orbit">
                           {(megaMenuData as any)[activeMegaMenu]?.description}
                         </p>
                       </>
@@ -747,7 +749,7 @@ export default function Navbar() {
                           router.push(item.href);
                         }
                       }}
-                      className={`px-6 py-5 text-base font-medium border-b border-white/10 transition-colors flex justify-between items-center font-orbit w-full text-left disabled:opacity-60 disabled:cursor-default
+                      className={`px-6 py-5 text-[16px] font-medium border-b border-white/10 transition-colors flex justify-between items-center font-orbit w-full text-left disabled:opacity-60 disabled:cursor-default
                         ${(pathname === item.href || (item.name === "UNCREWED SYSTEMS" && pathname.startsWith("/uncrewedsystems")))
                           ? "text-[#5ce1e6] bg-white/5"
                           : "text-white hover:text-[#5ce1e6] hover:bg-white/5"

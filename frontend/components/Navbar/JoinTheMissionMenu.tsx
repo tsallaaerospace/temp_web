@@ -1,4 +1,5 @@
 "use client"
+// PREVIOUS UI: named text size utilities used rem units and varied with page root scaling; pixel sizes preserve the 16px-root design.
 
 import React from "react"
 import Link from "next/link"
@@ -63,18 +64,18 @@ export const JoinTheMissionMenu: React.FC<JoinTheMissionMenuProps> = ({ onClose 
                             <ArrowRight className="w-3.5 h-3.5 rotate-180" />
                             BACK
                         </button>
-                        <h2 className="text-xl font-bold tracking-tighter font-orbit text-center">
+                        <h2 className="text-[20px] font-bold tracking-tighter font-orbit text-center">
                             JOIN THE <span className="text-white">MISSION</span>
                         </h2>
                     </div>
 
                     {/* Desktop Title */}
-                    <h2 className="hidden xl:block text-3xl lg:text-4xl 2xl:text-5xl font-bold mb-4 tracking-tighter leading-none font-orbit whitespace-nowrap uppercase">
+                    <h2 className="hidden xl:block text-[30px] lg:text-[36px] 2xl:text-[48px] font-bold mb-4 tracking-tighter leading-none font-orbit whitespace-nowrap uppercase">
                         JOIN THE <span className="text-white">MISSION</span>
                     </h2>
                     <h3 className="text-[9px] lg:text-[10px] uppercase tracking-[0.4em] text-gray-500 mb-2 lg:mb-6 font-mono pl-1">Push The Boundaries</h3>
 
-                    <p className="text-gray-400 leading-relaxed max-w-md mb-4 lg:mb-8 text-xs lg:text-sm font-light font-orbit border-l-2 border-[#5ce1e6]/30 pl-4 lg:pl-6 text-justify">
+                    <p className="text-gray-400 leading-relaxed max-w-md mb-4 lg:mb-8 text-[12px] lg:text-[14px] font-light font-orbit border-l-2 border-[#5ce1e6]/30 pl-4 lg:pl-6 text-justify">
                         Join a team of innovators, engineers, and visionaries pushing the boundaries of what's possible in autonomous systems and aerospace technology.
                     </p>
 
@@ -121,7 +122,8 @@ export const JoinTheMissionMenu: React.FC<JoinTheMissionMenuProps> = ({ onClose 
 
                             {/* Content */}
                             <div className="relative z-10 w-full transition-transform duration-300">
-                                <h4 className="text-xl lg:text-3xl font-light mb-2 group-hover:text-[#5ce1e6] transition-colors duration-300 font-orbit">{item.title}</h4>
+                                {/* PREVIOUS UI: text-[20px] lg:text-[30px] scaled with each page's root font size. */}
+                                <h4 className="text-[20px] leading-[28px] lg:text-[30px] lg:leading-[36px] font-light mb-2 group-hover:text-[#5ce1e6] transition-colors duration-300 font-orbit">{item.title}</h4>
                                 <p className="text-[9px] uppercase tracking-widest text-gray-400 font-mono group-hover:text-black transition-colors">{item.subtitle}</p>
                             </div>
                         </Link>

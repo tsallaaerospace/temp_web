@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react"
 import PageWrapper from "@/components/PageWrapper"
+import SectionSnap from "@/components/SectionSnap"
 import Image from "next/image"
 import { allProducts, type Product } from "./data"
 import { useGSAP } from "@gsap/react"
@@ -40,26 +41,28 @@ function ProductCard({ product }: { product: Product }) {
                 <div className="absolute bottom-1.5 right-1.5 w-1 h-1 rounded-full bg-black/10" />
 
                 {/* Header: Serial & Status */}
-                <div className="flex justify-between items-center px-4 py-3 border-b border-black/5">
-                    <div className="flex items-center gap-1.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-black/5" />
-                        <span className="font-orbit text-[8px] tracking-[0.2em] text-black/40 uppercase">
+                {/* PREVIOUS UI: the status label could wrap onto two lines in narrow cards; the serial now shortens instead. */}
+                <div className="flex justify-between items-center gap-3 px-4 py-3 border-b border-black/5">
+                    <div className="flex min-w-0 items-center gap-1.5">
+                        <div className="w-1.5 h-1.5 shrink-0 rounded-full bg-black/5" />
+                        <span className="truncate font-orbit text-[8px] tracking-[0.2em] text-black/40 uppercase">
                             Serial: {product.serial}
                         </span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex shrink-0 items-center gap-2">
                         <div className={`w-2 h-2 rounded-sm ${colors.dot}`} />
-                        <span className={`font-orbit text-[8px] tracking-[0.2em] uppercase ${colors.text}`}>
+                        <span className={`whitespace-nowrap font-orbit text-[8px] tracking-[0.2em] uppercase ${colors.text}`}>
                             Status: {product.status}
                         </span>
                         <div className="w-1.5 h-1.5 rounded-full bg-black/5" />
                     </div>
                 </div>
 
-                <div className="p-6 flex flex-col gap-4">
-                    {/* Title - fixed height for cross-card alignment */}
-                    <div className="h-[96px] xl:h-[110px] 2xl:h-[120px] flex flex-col items-start gap-1 relative">
-                        <h3 className="font-orbit text-2xl font-bold text-black leading-tight uppercase tracking-tight transition-colors duration-300">
+                <div className="p-5 sm:p-6 flex flex-col gap-4 text-left">
+                    {/* Title - fixed height for cross-card alignment (only where cards sit side by side) */}
+                    {/* PREVIOUS UI: h-[96px] on phones too (big gap under one-line titles); text-2xl at every size (AR-15 broke onto two lines in 2-column cards). */}
+                    <div className="md:h-[96px] xl:h-[110px] 2xl:h-[120px] flex flex-col items-start gap-1 relative">
+                        <h3 className="font-orbit text-xl lg:text-2xl font-bold text-black leading-tight uppercase tracking-tight transition-colors duration-300">
                             {product.title}
                         </h3>
                         {product.title === "ADVANCED STRIKE AR-15" && (
@@ -100,12 +103,14 @@ function ProductCard({ product }: { product: Product }) {
 
                     {/* Footer */}
                     <div className="mt-auto pt-4 border-t border-black/5 flex items-end justify-between">
+                        {/* PREVIOUS UI: Prices were shown on each product card.
                         <div className="flex flex-col">
                             <span className="font-orbit text-[8px] tracking-[0.2em] text-black/30 uppercase mb-0.5">Unit Value</span>
                             <span className="font-orbit text-xl font-bold text-black tracking-tight">${product.price}</span>
                         </div>
+                        */}
                         <button type="button" disabled className="px-6 py-2.5 bg-[#5ce1e6] text-black font-orbit text-[9px] tracking-[0.2em] uppercase cursor-not-allowed opacity-60">
-                            Unavailable
+                            Coming Soon
                         </button>
                     </div>
                 </div>
@@ -116,8 +121,10 @@ function ProductCard({ product }: { product: Product }) {
 
 function SectionHeader({ title }: { title: string }) {
     return (
-        <div className="mb-12">
-            <CharacterReveal as="h2" text={title} className="font-orbit text-4xl font-semibold uppercase tracking-tight text-black" stagger={0.04} />
+        <div className="mb-8 md:mb-12">
+            {/* PREVIOUS UI: CharacterReveal blinked the Accessories and Apparel headings. */}
+            {/* PREVIOUS UI: text-4xl and centred on phones (wrapped onto two lines). */}
+            <h2 className="font-orbit text-2xl sm:text-3xl md:text-4xl font-semibold uppercase tracking-tight text-black">{title}</h2>
         </div>
     )
 }
@@ -202,31 +209,39 @@ export default function MerchandisePage() {
     })
 
     return (
-        <PageWrapper hasHero={true}>
-            <div className="min-h-screen bg-white text-black font-clash text-center md:text-left relative">
+        <PageWrapper hasHero={true} className="merchandise-page">
+            <SectionSnap panels=".merchandise-page > div > section, footer" />
+            {/* PREVIOUS UI: text-center on phones (product titles that wrapped were centred, one-line ones were not). */}
+            <div className="min-h-screen bg-white text-black font-clash text-left relative">
 
                 {/* ── HERO ── */}
-                <section className="relative h-screen flex items-end justify-start overflow-hidden bg-white px-0 md:px-0">
+                {/* PREVIOUS UI: h-screen (taller than the visible area on phones with a browser toolbar). */}
+                <section className="relative h-[100svh] flex items-end justify-start overflow-hidden bg-white px-0 md:px-0">
                     {/* Background Logo */}
                     <div ref={logoRef} className="absolute inset-0 z-10 pointer-events-none opacity-0">
+                        {/* PREVIOUS UI: hidden below 1024px (phones and tablets saw an empty white screen above the title).
+                            className="absolute top-0 left-0 w-[75vw] lg:w-[50vw] max-w-[800px] aspect-square opacity-30 select-none transition-transform duration-75 ease-out origin-center -translate-x-[147px] -translate-y-[53px] -rotate-90 scale-[0.6] hidden md:hidden lg:block" */}
+                        {/* Phones/tablets: centred in the space above the title. 1024px and up: unchanged desktop placement. */}
                         <div
-                            className="absolute top-0 left-0 w-[75vw] lg:w-[50vw] max-w-[800px] aspect-square opacity-30 select-none transition-transform duration-75 ease-out origin-center -translate-x-[147px] -translate-y-[53px] -rotate-90 scale-[0.6] hidden md:hidden lg:block"
+                            className="absolute top-[14svh] left-1/2 w-[min(78vw,40svh,440px)] aspect-square opacity-30 select-none transition-transform duration-75 ease-out origin-center -translate-x-1/2 -rotate-90 lg:top-0 lg:left-0 lg:w-[50vw] lg:max-w-[800px] lg:-translate-x-[147px] lg:-translate-y-[53px] lg:scale-[0.6]"
                         >
-                            <Image src="/Logo/logo_only.png" alt="Aerospace Logo" fill className="object-contain object-left-top brightness-0" />
+                            <Image src="/Logo/logo_only.png" alt="Aerospace Logo" fill className="object-contain object-center lg:object-left-top brightness-0" />
                         </div>
                     </div>
 
                     <div className="relative z-20 w-full max-w-screen-2xl pl-0 md:pl-0 pr-8 pb-4 md:pb-4 select-none">
-                        <div className="flex items-baseline gap-6 md:gap-10 ml-6 md:ml-20">
+                        {/* PREVIOUS UI: gap-6 and an X at 45vw with ml-4 on phones (the X ran off the right edge).
+                            md+ sizes were 18vw / 40vw with no height cap (too big on landscape phones); the svh caps only bite on short screens. */}
+                        <div className="flex items-baseline gap-3 md:gap-10 ml-6 md:ml-20">
                             <CharacterReveal
                                 text="MERCH"
-                                className="font-orbit text-[24vw] md:text-[18vw] font-bold tracking-tighter text-black leading-none uppercase"
+                                className="font-orbit text-[24vw] md:text-[min(18vw,32svh)] font-bold tracking-tighter text-black leading-none uppercase"
                                 stagger={0.06}
                                 delay={1.4}
                             />
                             <CharacterReveal
                                 text="X"
-                                className="font-orbit text-[45vw] md:text-[40vw] font-extrabold text-[#5ce1e6] leading-none mt-4 md:mt-0 ml-4 md:ml-12"
+                                className="font-orbit text-[36vw] md:text-[min(40vw,72svh)] font-extrabold text-[#5ce1e6] leading-none mt-4 md:mt-0 ml-1 md:ml-12"
                                 stagger={0.06}
                                 delay={1.4}
                             />
@@ -235,24 +250,25 @@ export default function MerchandisePage() {
                 </section>
 
                 {/* ── TSALLA ACCESSORIES ── */}
-                <div className="max-w-7xl mx-auto px-10 pt-6 pb-10">
+                {/* PREVIOUS UI: Product collections were divs without section paging. */}
+                <section className="min-h-[100svh] max-w-7xl mx-auto px-6 sm:px-10 pt-6 pb-10">
                     <SectionHeader title="Tsalla Accessories" />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                         {accessoriesProducts.map((product) => (
                             <ProductCard key={product.id} product={product} />
                         ))}
                     </div>
-                </div>
+                </section>
 
                 {/* ── TSALLA APPAREL ── */}
-                <div className="max-w-7xl mx-auto px-10 pt-16 pb-24">
+                <section className="min-h-[100svh] max-w-7xl mx-auto px-6 sm:px-10 pt-16 pb-24">
                     <SectionHeader title="Tsalla Apparel" />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                         {apparelProducts.map((product) => (
                             <ProductCard key={product.id} product={product} />
                         ))}
                     </div>
-                </div>
+                </section>
 
             </div>
         </PageWrapper>

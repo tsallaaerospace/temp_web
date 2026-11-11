@@ -4,8 +4,65 @@ import type { JSX } from "react"
 import { motion } from "framer-motion"
 import GlitchX from "./GlitchX"
 import CharacterReveal from "@/components/CharacterReveal"
+import type Hls from "hls.js"
+
+const cloudinaryVideo = "https://res.cloudinary.com/w0fbhf2u/video/upload"
+const fenixAsset = "v1793859707/QsmnFp2aCayPv4DNQVxUhw"
+const fenixStream = `${cloudinaryVideo}/sp_auto:maxres_2160p/${fenixAsset}.m3u8`
+const fenixPoster = `${cloudinaryVideo}/so_0,w_1280,q_auto,f_auto/${fenixAsset}.jpg`
 
 export default function FenixHero(): React.JSX.Element {
+  const videoRef = React.useRef<HTMLVideoElement>(null)
+
+  React.useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    let disposed = false
+    let player: Hls | undefined
+    let fallbackIndex = 0
+    const fallbacks = [
+      `${cloudinaryVideo}/c_limit,w_1920,q_auto:good,vc_h264/${fenixAsset}.mp4`,
+      "/product/fenix/QsmnFp2aCayPv4DNQVxUhw.mp4",
+    ]
+    const play = () => { void video.play().catch(() => {}) }
+    const fallback = () => {
+      if (disposed || fallbackIndex >= fallbacks.length) return
+      player?.destroy()
+      player = undefined
+      video.src = fallbacks[fallbackIndex++]
+      video.load()
+      play()
+    }
+    video.addEventListener("error", fallback)
+
+    // Prefer HLS.js where supported; some Chromium builds advertise incomplete native HLS support.
+    void import("hls.js").then(({ default: Hls }) => {
+        if (disposed) return
+        if (!Hls.isSupported()) {
+          if (video.canPlayType("application/vnd.apple.mpegurl")) {
+            video.src = fenixStream
+            play()
+          } else fallback()
+          return
+        }
+        player = new Hls({ capLevelToPlayerSize: true, maxBufferLength: 10 })
+        player.on(Hls.Events.MANIFEST_PARSED, play)
+        player.on(Hls.Events.ERROR, (_event, data) => {
+          if (data.fatal) fallback()
+        })
+        player.loadSource(fenixStream)
+        player.attachMedia(video)
+      }).catch(fallback)
+
+    return () => {
+      disposed = true
+      video.removeEventListener("error", fallback)
+      player?.destroy()
+      video.pause()
+      video.removeAttribute("src")
+      video.load()
+    }
+  }, [])
   // PREVIOUS MOBILE HEIGHT: the hero used `h-screen` (`100vh`), which includes mobile browser chrome on physical phones.
   return (
     <section
@@ -30,18 +87,21 @@ export default function FenixHero(): React.JSX.Element {
         Your browser does not support the video tag.
       </video>
       */}
+      {/* PREVIOUS UI: the hero downloaded the local 24 MB 4K MP4 without a poster or adaptive quality.
+      <video autoPlay muted loop playsInline preload="auto">
+        <source src="/product/fenix/QsmnFp2aCayPv4DNQVxUhw.mp4" type="video/mp4" />
+      </video>
+      */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
+        poster={fenixPoster}
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source
-          src="/product/fenix/QsmnFp2aCayPv4DNQVxUhw.mp4"
-          type="video/mp4"
-        />
         Your browser does not support the video tag.
       </video>
 

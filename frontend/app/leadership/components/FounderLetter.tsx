@@ -6,8 +6,8 @@ import { motion, useReducedMotion } from "framer-motion"
 // Handwritten letter face for the founder's note (loaded like the site's Inter/Farro in app/layout.tsx)
 const handwriting = Caveat({ subsets: ["latin"], weight: ["400", "500", "600", "700"] })
 
-// Key phrases in the accent cyan (#00a3cc reads on white; the lighter #5ce1e6 is for dark sections)
-const Mark = ({ children }: { children: React.ReactNode }) => <span className="text-[#00a3cc]">{children}</span>
+// PREVIOUS UI: key phrases used text-[#00a3cc]. Use the requested website cyan throughout Leadership.
+const Mark = ({ children }: { children: React.ReactNode }) => <span className="text-[#5CE1E6]">{children}</span>
 
 // PREVIOUS UI: the Leadership page used about/components/AwardsAndCertification.tsx here ("GET IN TOUCH" over a
 // drone photo with Connect with us / Join the Mission buttons). That file is unchanged and still used by the About page.
@@ -29,7 +29,8 @@ export default function FounderLetter() {
           Those who protect us deserve <Mark>the best we can build.</Mark>
         </h2>
 
-        <div className={`${handwriting.className} mt-10 space-y-6 text-[1.375rem] md:text-[1.75rem] leading-[1.45] text-neutral-800`}>
+        {/* PREVIOUS UI: letter body used the default left alignment. */}
+        <div className={`${handwriting.className} mt-10 space-y-6 text-[1.375rem] md:text-[1.75rem] leading-[1.45] text-neutral-800 text-justify [text-align-last:left]`}>
           <p>
             I started Tsalla Aerospace with a conviction: <Mark>India has the talent</Mark> to build technology that our armed
             forces can depend on. Making that happen is <Mark>our responsibility</Mark>.

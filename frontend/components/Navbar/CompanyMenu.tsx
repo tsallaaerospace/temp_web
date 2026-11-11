@@ -1,4 +1,5 @@
 "use client"
+// PREVIOUS UI: named text size utilities used rem units and varied with page root scaling; pixel sizes preserve the 16px-root design.
 
 import React from "react"
 import Link from "next/link"
@@ -59,20 +60,20 @@ export const CompanyMenu: React.FC<CompanyMenuProps> = ({ onClose }) => {
                             <ArrowRight className="w-3.5 h-3.5 rotate-180" />
                             BACK
                         </button>
-                        <h2 className="text-xl font-bold tracking-tighter font-orbit text-center text-white uppercase">
+                        <h2 className="text-[20px] font-bold tracking-tighter font-orbit text-center text-white uppercase">
                             COMPANY
                         </h2>
                     </div>
 
                     {/* Desktop Title */}
                     <Link href="/about" onClick={onClose} className="group inline-block">
-                        <h2 className="hidden xl:block text-2xl lg:text-5xl font-bold mb-2 lg:mb-4 tracking-tighter uppercase font-orbit text-white group-hover:text-[#5ce1e6] transition-colors">
+                        <h2 className="hidden xl:block text-[24px] lg:text-[48px] font-bold mb-2 lg:mb-4 tracking-tighter uppercase font-orbit text-white group-hover:text-[#5ce1e6] transition-colors">
                             About Us
                         </h2>
                     </Link>
-                    <h3 className="text-[10px] lg:text-xs uppercase tracking-[0.3em] text-gray-500 mb-4 lg:mb-6 font-mono font-semibold pl-1">Innovation Without Compromise</h3>
+                    <h3 className="text-[10px] lg:text-[12px] uppercase tracking-[0.3em] text-gray-500 mb-4 lg:mb-6 font-mono font-semibold pl-1">Innovation Without Compromise</h3>
 
-                    <p className="text-gray-400 leading-relaxed max-w-md mb-4 lg:mb-8 text-sm lg:text-base font-light font-orbit border-l-2 border-[#5ce1e6]/30 pl-4 lg:pl-6 text-justify">
+                    <p className="text-gray-400 leading-relaxed max-w-md mb-4 lg:mb-8 text-[14px] lg:text-[16px] font-light font-orbit border-l-2 border-[#5ce1e6]/30 pl-4 lg:pl-6 text-justify">
                         Learn about Tsalla Aerospace's mission to revolutionize autonomous systems and create unfair advantages in modern warfare.
                     </p>
                 </motion.div>
@@ -99,7 +100,7 @@ export const CompanyMenu: React.FC<CompanyMenuProps> = ({ onClose }) => {
                         >
                             {/* Content */}
                             <div className="relative z-10 w-full">
-                                <h4 className="text-xl lg:text-3xl font-light mb-2 group-hover:text-[#5ce1e6] transition-colors duration-300 font-orbit">{item.title}</h4>
+                                <h4 className="text-[20px] lg:text-[30px] font-light mb-2 group-hover:text-[#5ce1e6] transition-colors duration-300 font-orbit">{item.title}</h4>
                                 <p className="text-[9px] lg:text-[10px] uppercase tracking-[0.2em] text-gray-400 font-mono group-hover:text-black transition-colors delay-75">{item.subtitle}</p>
                             </div>
                         </Link>

@@ -52,7 +52,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             <div className="min-h-screen bg-white text-black font-clash pt-20">
 
                 {/* ── TOP NAV BAR ── */}
-                <div className="border-b border-black/5 px-10 py-4 flex items-center justify-between">
+                {/* PREVIOUS UI: px-10 at every size. */}
+                <div className="border-b border-black/5 px-6 md:px-10 py-4 flex items-center justify-between gap-4">
                     <button
                         onClick={() => window.history.back()}
                         className="flex items-center gap-2 font-orbit text-[9px] tracking-[0.25em] uppercase text-black/40 hover:text-black transition-colors"
@@ -66,8 +67,9 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 </div>
 
                 {/* ── MAIN PRODUCT LAYOUT ── */}
-                <div className="max-w-7xl mx-auto px-10 pt-12 pb-16">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                {/* PREVIOUS UI: px-10 pt-12 and gap-16 at every size. */}
+                <div className="max-w-7xl mx-auto px-6 md:px-10 pt-8 md:pt-12 pb-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
                         {/* ── LEFT: DETAILS ── */}
                         <div className="flex flex-col gap-8">
@@ -82,7 +84,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
                             {/* Title */}
                             <div>
-                                <h1 className="font-orbit text-4xl md:text-5xl font-bold text-black leading-tight uppercase tracking-tight">
+                                <h1 className="font-orbit text-3xl sm:text-4xl md:text-5xl font-bold text-black leading-tight uppercase tracking-tight">
                                     {product.title}
                                 </h1>
                                 <p className="font-orbit text-[11px] tracking-[0.2em] text-black/30 uppercase mt-3">
@@ -186,18 +188,21 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
                             {/* Price + CTA */}
                             <div className="flex items-center justify-between pt-6 border-t border-black/5">
+                                {/* PREVIOUS UI: Product price was displayed beside the action.
                                 <div>
                                     <span className="font-orbit text-[9px] tracking-[0.2em] text-black/30 uppercase block mb-1">Unit Value</span>
                                     <span className="font-orbit text-3xl font-bold text-black tracking-tight">${product.price}</span>
                                 </div>
-                                <button className="px-10 py-4 bg-[#5ce1e6] text-black font-orbit text-[10px] tracking-[0.25em] uppercase hover:bg-[#3bcdd2] transition-all duration-300">
+                                */}
+                                <button type="button" disabled className="w-full sm:w-auto px-10 py-4 bg-[#5ce1e6] text-black font-orbit text-[10px] tracking-[0.25em] uppercase cursor-not-allowed opacity-60">
                                     {product.action}
                                 </button>
                             </div>
                         </div>
 
                         {/* ── RIGHT: IMAGE ── */}
-                        <div className="flex flex-col gap-4">
+                        {/* Phones/tablets: photo first, above the details. PREVIOUS UI: no order classes (photo came after all the text). */}
+                        <div className="flex flex-col gap-4 order-first lg:order-none">
                             {/* Main Image with Zoom Effect */}
                             <div 
                                 className="relative aspect-square w-full bg-[#f7f7f7] border border-black/5 overflow-hidden cursor-zoom-in"
@@ -227,13 +232,14 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                             </div>
 
                             {/* Thumbnail Strip - Always show 4 slots */}
-                            <div className="flex gap-3">
+                            {/* PREVIOUS UI: fixed w-20 h-20 shrink-0 thumbnails (four overflowed narrow phones). */}
+                                <div className="flex gap-2 sm:gap-3">
                                 {[...Array(Math.max(4, currentImages.length))].map((_, i) => (
                                     <button
                                         key={i}
                                         onClick={() => i < currentImages.length && setActiveImage(i)}
                                         disabled={i >= currentImages.length}
-                                        className={`relative w-20 h-20 border transition-all duration-200 overflow-hidden shrink-0
+                                        className={`relative flex-1 max-w-20 aspect-square border transition-all duration-200 overflow-hidden
                                             ${i < currentImages.length
                                                 ? activeImage === i ? "border-black" : "border-black/10 hover:border-black/30"
                                                 : "border-black/[0.05] bg-black/[0.02]"
