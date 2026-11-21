@@ -8,7 +8,7 @@ import { HERO_4K, useHeroVideoSource } from "@/lib/use-hero-video-source"
 const mobileVideo = "/product/STORM/Hero_Section/optimized/phone.mp4"
 // The phone clip ends with 4 black frames (5.433 s onwards); its last real frame is at 5.417 s.
 // The phone video is stopped on that frame so it freezes on the drone like the desktop clip, without re-encoding it.
-const MOBILE_LAST_FRAME = 5.417
+const MOBILE_LAST_FRAME = 325 / 60
 // Tablets held upright (768px+ wide, portrait) get the 2:3 tablet clip. Tablets held sideways keep the 16:9 desktop clip.
 // It has the same 4 black end frames, so it freezes on 5.417 s too.
 // PREVIOUS UI: const tabletVideo = "/product/STORM/Hero_Section/STORM_Hero_mobile_Tab-web.mp4"
@@ -31,7 +31,13 @@ export default function StormHero(): React.JSX.Element {
   // Watches every drawn frame and pauses on the last real one, before any black frame is shown.
   useEffect(() => {
     const video = videoRef.current
-    if (!video || !("requestVideoFrameCallback" in video)) return
+    if (!video) return
+    // Autoplay can finish before hydration attaches the ended/timeupdate handlers.
+    if (video.ended || (isMobileClip(video) && video.currentTime >= MOBILE_LAST_FRAME)) {
+      freezeOnLastFrame(video)
+      return
+    }
+    if (!("requestVideoFrameCallback" in video)) return
     let handle = 0
     const onFrame = (_now: number, frame: VideoFrameCallbackMetadata) => {
       if (isMobileClip(video) && frame.mediaTime >= MOBILE_LAST_FRAME - 0.005) return freezeOnLastFrame(video)

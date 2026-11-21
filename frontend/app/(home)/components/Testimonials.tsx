@@ -93,7 +93,7 @@ const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
             backgroundColor: isHovered ? "#eaeaea" : "transparent"
           }}
           transition={{ duration: 0.4 }}
-          className="absolute inset-0 z-10 flex flex-col justify-start items-start p-8 lg:p-10 text-left"
+          className="home-news-details absolute inset-0 z-10 flex flex-col justify-start items-start p-8 lg:p-10 text-left"
         >
           <span className="inline-block text-[10px] uppercase tracking-widest font-bold px-3 py-1 bg-black text-white mb-4">
             {category}
@@ -246,7 +246,7 @@ const Testimonials: React.FC = () => {
       {/* PREVIOUS UI (Standard container padding):
       <div className="w-full px-4 md:px-24 uw:px-24 mb-12 uw:mt-8">
       */}
-      <div className="w-full px-5 sm:px-12 md:px-24 uw:px-24 mb-8 sm:mb-12 uw:mt-8">
+      <div className="home-news-intro w-full px-5 sm:px-12 md:px-24 uw:px-24 mb-8 sm:mb-12 uw:mt-8">
         {/* PREVIOUS UI: <div className="max-w-4xl uw:max-w-7xl"> */}
         <div className="max-w-4xl lg:max-w-none">
           {/* PREVIOUS UI (Standard title font size):
@@ -291,7 +291,7 @@ const Testimonials: React.FC = () => {
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
             transition={{ duration: 0.85, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-5xl text-sm font-medium leading-tight tracking-tight text-black sm:text-base lg:max-w-none lg:whitespace-nowrap lg:text-[clamp(0.75rem,1.15vw,1.125rem)]"
+            className="max-w-5xl text-justify text-sm font-medium leading-tight tracking-tight text-black sm:text-left sm:text-base lg:max-w-none lg:whitespace-nowrap lg:text-[clamp(0.75rem,1.15vw,1.125rem)]"
           >
             Our integrated suite of software, hardware, and services empowers businesses to operate smarter and grow faster.
           </motion.p>
@@ -299,7 +299,7 @@ const Testimonials: React.FC = () => {
       </div>
 
       {/* PREVIOUS UI: the mobile card and navigation block had no extra top offset. */}
-      <div className="relative mx-auto flex max-w-[1600px] items-center justify-between gap-2 px-4 pt-12 sm:pt-0 md:gap-4 md:px-8">
+      <div className="home-news-carousel relative mx-auto flex max-w-[1600px] items-center justify-between gap-2 px-4 pt-12 sm:pt-0 md:gap-4 md:px-8">
         <motion.button
           whileHover={{ x: -3 }}
           whileTap={{ scale: 0.9 }}
@@ -318,7 +318,7 @@ const Testimonials: React.FC = () => {
         {/* PREVIOUS UI (Mobile carousel height h-[420px]):
         <div className="flex-1 relative h-[420px] sm:h-[420px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] overflow-hidden px-2 md:px-4">
         */}
-        <div className="flex-1 relative h-[500px] sm:h-[500px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] overflow-hidden px-2 md:px-4">
+        <div className="home-news-cards flex-1 relative h-[500px] sm:h-[500px] lg:h-[450px] 3xl:h-[520px] uw:h-[640px] overflow-hidden px-2 md:px-4">
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.ul
               key={currentPage}
@@ -361,7 +361,7 @@ const Testimonials: React.FC = () => {
         </motion.button>
       </div>
 
-      <div className="flex flex-col items-center gap-6 mt-12 3xl:mt-6">
+      <div className="home-news-controls flex flex-col items-center gap-6 mt-12 3xl:mt-6">
         <div className="flex justify-center gap-2">
           {[...Array(totalPages)].map((_, i) => (
             <div

@@ -27,7 +27,6 @@ export default function FenixTurtleMode(): React.JSX.Element {
             /* PREVIOUS UI: className="relative h-[200vh] overflow-clip bg-white font-orbit text-neutral-900 selection:bg-cyan-500/30" */
             /* PREVIOUS UI: h-[200dvh] added a second screen of scrolling on phones. */
             className="fenix-turtle-section relative h-[100dvh] overflow-clip bg-white font-orbit text-neutral-900 selection:bg-cyan-500/30 sm:h-[200dvh]"
-            data-snap-swipe
         >
             <style>{`
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');

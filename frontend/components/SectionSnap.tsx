@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { useLenis } from "lenis/react"
 
 const TOLERANCE = 2
-const SWIPE_DISTANCE = 32
+const MOBILE_SCROLL = "(width < 768px), (pointer: coarse), (hover: none)"
 const DURATION = 0.9
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
@@ -24,8 +24,8 @@ function measure(selector: string): Panel[] {
 }
 
 /**
- * Full-viewport section paging: one wheel gesture or key press moves exactly one section,
- * and any other scroll (touch, scrollbar) settles on the nearest one.
+ * Desktop section paging: one wheel gesture or key press moves one section,
+ * and a scrollbar drag settles on the nearest panel edge.
  * `panels` selects the snapping sections in page order. Leave the hero out of it:
  * everything above the first panel scrolls freely.
  */
@@ -33,145 +33,139 @@ export default function SectionSnap({ panels: selector }: { panels: string }) {
   const lenis = useLenis()
 
   useEffect(() => {
-    let animating = false
-    let touching = false
-    let swipeStart: Touch | undefined
-    let lastWheelTime = 0
-    let lastWheelDelta = 0
-    let settleTimer: ReturnType<typeof setTimeout> | undefined
-    let unlockTimer: ReturnType<typeof setTimeout> | undefined
-
-    const scrollTo = (y: number) => {
-      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      animating = true
-      clearTimeout(unlockTimer)
-      unlockTimer = setTimeout(() => (animating = false), DURATION * 1000 + 100)
-      if (lenis) {
-        lenis.scrollTo(y, { duration: DURATION, easing: easeInOutCubic, lock: true, force: true, immediate: reduced })
-      } else {
-        window.scrollTo({ top: y, behavior: reduced ? "auto" : "smooth" })
-      }
+    const mobileScroll = window.matchMedia(MOBILE_SCROLL)
+    let cleanup: (() => void) | undefined
+    const sync = () => {
+      cleanup?.()
+      cleanup = mobileScroll.matches ? undefined : enableSectionSnap(selector, lenis)
     }
-
-    // Returns the snap point one step away, or null when the scroll should stay native
-    // (inside a tall panel, held by a section's own scroll interaction, or at the page edge).
-    const nextPoint = (direction: 1 | -1): number | null => {
-      const y = window.scrollY
-      const panels = measure(selector)
-      if (!panels.length || y < panels[0].top - TOLERANCE) return null
-      const current = panels.find((p) => y >= p.top - TOLERANCE && y <= p.end + TOLERANCE)
-      if (current) {
-        const edge = direction > 0 ? current.end : current.top
-        if ((edge - y) * direction > TOLERANCE) return null
-        const hold = current.el.matches("[data-snap-hold]") ? current.el : current.el.querySelector("[data-snap-hold]")
-        if (hold?.getAttribute("data-snap-hold")?.includes(direction > 0 ? "down" : "up")) return null
-      }
-      const points = panels.flatMap((p) => [p.top, p.end])
-      const ahead = points.filter((p) => (p - y) * direction > TOLERANCE)
-      if (!ahead.length) return null
-      return direction > 0 ? Math.min(...ahead) : Math.max(...ahead)
-    }
-
-    const onWheel = (e: WheelEvent) => {
-      if (e.ctrlKey || Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return
-      const now = performance.now()
-      const delta = Math.abs(e.deltaY)
-      // A trackpad keeps emitting decaying inertia after the gesture; only a pause,
-      // a rising delta, or a full mouse-wheel notch counts as a new gesture.
-      const isNewGesture = now - lastWheelTime > 100 || delta > lastWheelDelta || delta >= 80
-      lastWheelTime = now
-      lastWheelDelta = delta
-
-      if (animating) {
-        e.preventDefault()
-        e.stopImmediatePropagation()
-        return
-      }
-      const target = nextPoint(e.deltaY > 0 ? 1 : -1)
-      if (target === null) return
-      e.preventDefault()
-      e.stopImmediatePropagation()
-      if (isNewGesture && delta >= 4) scrollTo(target)
-    }
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey) return
-      const el = e.target as HTMLElement | null
-      if (el?.closest("input, textarea, select, button, a, [contenteditable='true']")) return
-      const direction =
-        e.key === "ArrowDown" || e.key === "PageDown" || (e.key === " " && !e.shiftKey) ? 1
-        : e.key === "ArrowUp" || e.key === "PageUp" || (e.key === " " && e.shiftKey) ? -1
-        : 0
-      if (!direction) return
-      if (animating) return e.preventDefault()
-      const target = nextPoint(direction)
-      if (target === null) return
-      e.preventDefault()
-      scrollTo(target)
-    }
-
-    // Native touch, scrollbar drags and resizes settle on the nearest point.
-    const settle = () => {
-      if (animating || touching) return
-      const y = window.scrollY
-      const panels = measure(selector)
-      if (!panels.length || y < panels[0].top) return
-      if (panels.some((p) => y >= p.top - TOLERANCE && y <= p.end + TOLERANCE)) return
-      const nearest = panels
-        .flatMap((p) => [p.top, p.end])
-        .reduce((a, b) => (Math.abs(b - y) < Math.abs(a - y) ? b : a))
-      scrollTo(nearest)
-    }
-    const queueSettle = () => {
-      clearTimeout(settleTimer)
-      settleTimer = setTimeout(settle, 160)
-    }
-    const onTouchStart = (e: TouchEvent) => {
-      touching = true
-      swipeStart = undefined
-      const panel = (e.target as Element | null)?.closest("[data-snap-swipe]")
-      if (!animating && e.touches.length === 1 && panel?.matches(selector)
-        && Math.abs(panel.getBoundingClientRect().top) <= TOLERANCE
-        && getComputedStyle(panel).touchAction === "pan-x pinch-zoom") {
-        swipeStart = e.touches[0]
-      }
-    }
-    const resetTouch = () => {
-      swipeStart = undefined
-      touching = false
-      queueSettle()
-    }
-    const onTouchEnd = (e: TouchEvent) => {
-      if (e.touches.length) return
-      const start = swipeStart
-      const end = e.changedTouches[0]
-      resetTouch()
-      if (!start || !end || start.identifier !== end.identifier || animating) return
-      const dy = start.clientY - end.clientY
-      if (Math.abs(dy) < SWIPE_DISTANCE || Math.abs(dy) <= Math.abs(start.clientX - end.clientX)) return
-      const target = nextPoint(dy > 0 ? 1 : -1)
-      if (target !== null) scrollTo(target)
-    }
-
-    window.addEventListener("wheel", onWheel, { passive: false, capture: true })
-    window.addEventListener("keydown", onKeyDown)
-    window.addEventListener("scroll", queueSettle, { passive: true })
-    window.addEventListener("resize", queueSettle)
-    window.addEventListener("touchstart", onTouchStart, { passive: true })
-    window.addEventListener("touchend", onTouchEnd, { passive: true })
-    window.addEventListener("touchcancel", resetTouch, { passive: true })
+    sync()
+    mobileScroll.addEventListener("change", sync)
     return () => {
-      clearTimeout(settleTimer)
-      clearTimeout(unlockTimer)
-      window.removeEventListener("wheel", onWheel, { capture: true })
-      window.removeEventListener("keydown", onKeyDown)
-      window.removeEventListener("scroll", queueSettle)
-      window.removeEventListener("resize", queueSettle)
-      window.removeEventListener("touchstart", onTouchStart)
-      window.removeEventListener("touchend", onTouchEnd)
-      window.removeEventListener("touchcancel", resetTouch)
+      mobileScroll.removeEventListener("change", sync)
+      cleanup?.()
     }
   }, [lenis, selector])
 
   return null
+}
+
+function enableSectionSnap(selector: string, lenis: ReturnType<typeof useLenis>) {
+  let animating = false
+  let touching = false
+  let lastWheelTime = 0
+  let lastWheelDelta = 0
+  let settleTimer: ReturnType<typeof setTimeout> | undefined
+  let unlockTimer: ReturnType<typeof setTimeout> | undefined
+
+  const scrollTo = (y: number) => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    animating = true
+    clearTimeout(unlockTimer)
+    unlockTimer = setTimeout(() => (animating = false), DURATION * 1000 + 100)
+    if (lenis) {
+      lenis.scrollTo(y, { duration: DURATION, easing: easeInOutCubic, lock: true, force: true, immediate: reduced })
+    } else {
+      window.scrollTo({ top: y, behavior: reduced ? "auto" : "smooth" })
+    }
+  }
+
+  // Returns the snap point one step away, or null when the scroll should stay native
+  // (inside a tall panel, held by a section's own scroll interaction, or at the page edge).
+  const nextPoint = (direction: 1 | -1): number | null => {
+    const y = window.scrollY
+    const panels = measure(selector)
+    if (!panels.length || y < panels[0].top - TOLERANCE) return null
+    const current = panels.find((p) => y >= p.top - TOLERANCE && y <= p.end + TOLERANCE)
+    if (current) {
+      const edge = direction > 0 ? current.end : current.top
+      if ((edge - y) * direction > TOLERANCE) return null
+      const hold = current.el.matches("[data-snap-hold]") ? current.el : current.el.querySelector("[data-snap-hold]")
+      if (hold?.getAttribute("data-snap-hold")?.includes(direction > 0 ? "down" : "up")) return null
+    }
+    const points = panels.flatMap((p) => [p.top, p.end])
+    const ahead = points.filter((p) => (p - y) * direction > TOLERANCE)
+    if (!ahead.length) return null
+    return direction > 0 ? Math.min(...ahead) : Math.max(...ahead)
+  }
+
+  const onWheel = (e: WheelEvent) => {
+    if (e.ctrlKey || Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return
+    const now = performance.now()
+    const delta = Math.abs(e.deltaY)
+    // A trackpad keeps emitting decaying inertia after the gesture; only a pause,
+    // a rising delta, or a full mouse-wheel notch counts as a new gesture.
+    const isNewGesture = now - lastWheelTime > 100 || delta > lastWheelDelta || delta >= 80
+    lastWheelTime = now
+    lastWheelDelta = delta
+
+    if (animating) {
+      e.preventDefault()
+      e.stopImmediatePropagation()
+      return
+    }
+    const target = nextPoint(e.deltaY > 0 ? 1 : -1)
+    if (target === null) return
+    e.preventDefault()
+    e.stopImmediatePropagation()
+    if (isNewGesture && delta >= 4) scrollTo(target)
+  }
+
+  const onKeyDown = (e: KeyboardEvent) => {
+    if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey) return
+    const el = e.target as HTMLElement | null
+    if (el?.closest("input, textarea, select, button, a, [contenteditable='true']")) return
+    const direction =
+      e.key === "ArrowDown" || e.key === "PageDown" || (e.key === " " && !e.shiftKey) ? 1
+      : e.key === "ArrowUp" || e.key === "PageUp" || (e.key === " " && e.shiftKey) ? -1
+      : 0
+    if (!direction) return
+    if (animating) return e.preventDefault()
+    const target = nextPoint(direction)
+    if (target === null) return
+    e.preventDefault()
+    scrollTo(target)
+  }
+
+  // Native touch, scrollbar drags and resizes settle on the nearest point.
+  const settle = () => {
+    if (animating || touching) return
+    const y = window.scrollY
+    const panels = measure(selector)
+    if (!panels.length || y < panels[0].top) return
+    if (panels.some((p) => y >= p.top - TOLERANCE && y <= p.end + TOLERANCE)) return
+    const nearest = panels
+      .flatMap((p) => [p.top, p.end])
+      .reduce((a, b) => (Math.abs(b - y) < Math.abs(a - y) ? b : a))
+    scrollTo(nearest)
+  }
+  const queueSettle = () => {
+    clearTimeout(settleTimer)
+    settleTimer = setTimeout(settle, 160)
+  }
+  const onTouchStart = () => { touching = true }
+  const onTouchEnd = (e: TouchEvent) => {
+    if (e.touches.length) return
+    touching = false
+    queueSettle()
+  }
+
+  window.addEventListener("wheel", onWheel, { passive: false, capture: true })
+  window.addEventListener("keydown", onKeyDown)
+  window.addEventListener("scroll", queueSettle, { passive: true })
+  window.addEventListener("resize", queueSettle)
+  window.addEventListener("touchstart", onTouchStart, { passive: true })
+  window.addEventListener("touchend", onTouchEnd, { passive: true })
+  window.addEventListener("touchcancel", onTouchEnd, { passive: true })
+  return () => {
+    clearTimeout(settleTimer)
+    clearTimeout(unlockTimer)
+    window.removeEventListener("wheel", onWheel, { capture: true })
+    window.removeEventListener("keydown", onKeyDown)
+    window.removeEventListener("scroll", queueSettle)
+    window.removeEventListener("resize", queueSettle)
+    window.removeEventListener("touchstart", onTouchStart)
+    window.removeEventListener("touchend", onTouchEnd)
+    window.removeEventListener("touchcancel", onTouchEnd)
+  }
 }

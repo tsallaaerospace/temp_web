@@ -483,7 +483,7 @@ video[data-loading="true"] {
 }
 */
 @media (max-width: 767px) {
-  /* Dynamic Viewport Height (100dvh) ensures footer fits 100% of visible mobile screen regardless of address bar expansion or collapse on 1st vs 2nd visit */
+  /* Use the visible viewport height so the footer follows mobile browser chrome. */
   .footer-short-mobile {
     min-height: 100vh;
     min-height: 100dvh;
@@ -549,6 +549,18 @@ video[data-loading="true"] {
   .footer-short-mobile .footer-short-bottom button > div {
     padding: 0.5rem;
   }
+
+  .footer-short-mobile .footer-short-brand p {
+    text-align: justify;
+  }
+
+  .footer-short-mobile .footer-short-link-group {
+    text-align: center;
+  }
+
+  .footer-short-mobile .footer-short-links {
+    align-items: center;
+  }
 }
 
 @media (width < 400px) {
@@ -559,7 +571,9 @@ video[data-loading="true"] {
   .footer-short-mobile .footer-short-brand img { height: 40px; }
   .footer-short-mobile .footer-short-brand > :not([hidden]) ~ :not([hidden]) { margin-top: 10px; }
   .footer-short-mobile .footer-short-nav { row-gap: 14px; }
-  .footer-short-mobile .footer-short-watermark { margin-block: 8px; }
+  .footer-short-mobile .footer-short-link-group h2 { font-size: 0.6875rem; }
+  .footer-short-mobile .footer-short-links li > :is(a, [aria-disabled]) { font-size: 0.75rem; }
+  .footer-short-mobile .footer-short-watermark { margin-block: 40px 8px; }
   .footer-short-mobile .footer-short-bottom { padding-block: 8px; }
   .footer-short-mobile .footer-short-bottom-inner {
     display: grid;
@@ -743,6 +757,34 @@ video[data-loading="true"] {
   transform-style: preserve-3d;
 }
 
+/* Share the extra height between the footer link rows on tall phones. */
+@media (width < 768px) and (height >= 768px) and (orientation: portrait) {
+  .footer-short-mobile { padding-top: clamp(2.5rem, 6dvh, 4.5rem); }
+
+  .footer-short-mobile .footer-short-main {
+    display: grid;
+    flex: 1 0 auto;
+    margin-bottom: 0;
+  }
+
+  .footer-short-mobile .footer-short-grid { grid-template-rows: auto 1fr; }
+
+  .footer-short-mobile .footer-short-nav {
+    align-self: stretch;
+    align-content: space-evenly;
+  }
+
+  .footer-short-mobile .footer-short-brand > :not([hidden]) ~ :not([hidden]) {
+    margin-top: clamp(1rem, 2.2dvh, 1.5rem);
+  }
+
+  .footer-short-mobile .footer-short-links > :not([hidden]) ~ :not([hidden]) {
+    margin-top: clamp(.5rem, 1.15dvh, .875rem);
+  }
+
+  .footer-short-mobile .footer-short-watermark { margin-bottom: clamp(1rem, 2.2dvh, 1.5rem); }
+}
+
 /* Lenis Smooth Scroll Foundation */
 html.lenis,
 html.lenis body {
@@ -764,9 +806,54 @@ html.lenis body {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
+
+/* Match SectionSnap's mobile scroll mode. */
+@media (width < 768px), (pointer: coarse), (hover: none) {
+  .home-page,
+  .careers-page {
+    scroll-snap-type: none;
+  }
+}
+
 /* Homepage desktop panels fit one viewport; the second product panel stays content-sized. */
 .home-product-screen {
   display: contents;
+}
+
+@media (width < 768px) and (orientation: portrait) {
+  .home-page .home-news-screen {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto minmax(16rem, 1fr) auto;
+    gap: clamp(.75rem, 2.5dvh, 1.5rem);
+    padding: clamp(1.25rem, 6dvh, 3rem) 1.25rem clamp(1rem, 3dvh, 1.5rem);
+  }
+
+  .home-news-intro,
+  .home-news-carousel {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .home-news-cards,
+  .home-news-cards li {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .home-news-details { padding: 1rem; }
+
+  .home-news-controls {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: .75rem;
+    margin: 0;
+  }
+
+  .home-news-controls > :last-child { gap: .5rem; }
+  .home-news-controls button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; }
 }
 
 @media (min-width: 1024px) {
@@ -2187,7 +2274,7 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
   .fenix-gps-navigation picture > img { object-fit: contain; }
 
   /* PREVIOUS UI: the tablet title and status cards floated around the centered video. */
-  .fenix-page .fenix-turtle-section { height: 100dvh; touch-action: pan-x pinch-zoom; }
+  .fenix-page .fenix-turtle-section { height: 100dvh; }
   .fenix-page .fenix-turtle-stage {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
