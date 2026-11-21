@@ -7,11 +7,14 @@ interface CharacterRevealProps {
   text: string
   className?: string
   lineClassName?: string
+  staggerFrom?: "start" | "random"
+  durationScale?: number
   stagger?: number
   delay?: number
   triggerOnScroll?: boolean
   targetColor?: string
   glowColor?: string
+  onComplete?: () => void
   flickerColor?: string
 }
 
@@ -20,11 +23,14 @@ export default function CharacterReveal({
   className = "",
   lineClassName = "",
   stagger = 0.04,
+  durationScale = 1,
+  staggerFrom = "random",
   delay = 0,
   triggerOnScroll = true,
   targetColor,
   glowColor,
   flickerColor,
+  onComplete,
 }: CharacterRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const played = useRef(false)
@@ -58,12 +64,14 @@ export default function CharacterReveal({
           { opacity: 1, color: activeGlow, textShadow: `0 0 10px ${activeGlow}`, duration: 0.12, ease: "none" },
           { opacity: 1, color: finalColor, textShadow: "none", duration: 0.1, ease: "none" },
           { opacity: 1, color: finalColor, textShadow: "none", duration: 0.3, ease: "power2.out" }
-        ],
+        ].map(frame => ({ ...frame, duration: frame.duration * durationScale })),
         stagger: {
           each: stagger,
-          from: "random",
+          // PREVIOUS UI: from: "random" for every caller.
+          from: staggerFrom,
         },
         delay: delay,
+        onComplete,
         overwrite: true
       })
     }
@@ -86,7 +94,7 @@ export default function CharacterReveal({
     } else {
       animateChars()
     }
-  }, [stagger, delay, triggerOnScroll, targetColor])
+  }, [stagger, delay, triggerOnScroll, targetColor, durationScale, staggerFrom])
 
   /* PREVIOUS UI: <div ref={containerRef} className={`inline-block ${className}`}> */
   /* PREVIOUS UI: line.split("").map((char, i) => ...) */
@@ -104,15 +112,15 @@ export default function CharacterReveal({
                 {word.split("").map((char, charIdx) => (
                   <span
                     key={charIdx}
-                    className="char inline-block will-change-[opacity,color,filter]"
+                    className="char inline-block opacity-0 will-change-[opacity,color,filter]"
                   >
                     {char}
                   </span>
                 ))}
               </span>
-              {/* PREVIOUS UI: <span className="char inline-block will-change-[opacity,color,filter]">{" "}</span> */}
+              {/* PREVIOUS UI: <span className="char inline-block opacity-0 will-change-[opacity,color,filter]">{" "}</span> */}
               {wordIdx < wordArr.length - 1 && (
-                <span className="char inline-block will-change-[opacity,color,filter]">
+                <span className="char inline-block opacity-0 will-change-[opacity,color,filter]">
                   {"\u00A0"}
                 </span>
               )}

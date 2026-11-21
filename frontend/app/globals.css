@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Orbit, served from our own site (the Latin file Google Fonts served; Orbit only has weight 400).
+   PREVIOUS UI: loaded from fonts.googleapis.com in app/layout.tsx. */
+@font-face {
+  font-family: "Orbit";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/orbit-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -538,6 +549,26 @@ video[data-loading="true"] {
   .footer-short-mobile .footer-short-bottom button > div {
     padding: 0.5rem;
   }
+}
+
+@media (width < 400px) {
+  /* PREVIOUS UI: standard mobile gaps and three bottom rows could push the footer past one screen. */
+  .footer-short-mobile { padding-top: 20px; }
+  .footer-short-mobile .footer-short-main { margin-bottom: 0; }
+  .footer-short-mobile .footer-short-grid { gap: 16px; }
+  .footer-short-mobile .footer-short-brand img { height: 40px; }
+  .footer-short-mobile .footer-short-brand > :not([hidden]) ~ :not([hidden]) { margin-top: 10px; }
+  .footer-short-mobile .footer-short-nav { row-gap: 14px; }
+  .footer-short-mobile .footer-short-watermark { margin-block: 8px; }
+  .footer-short-mobile .footer-short-bottom { padding-block: 8px; }
+  .footer-short-mobile .footer-short-bottom-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 6px 0;
+  }
+  .footer-short-bottom-inner > :first-child { grid-area: 2 / 1 / 3 / -1; justify-content: center; }
+  .footer-short-bottom-inner > :nth-child(2) { grid-area: 1 / 2; }
+  .footer-short-bottom-inner > button { grid-area: 1 / 3; justify-self: end; }
 }
 
 /* Card link animations */
@@ -1168,6 +1199,10 @@ html:has(.careers-page) { font-size: 100%; }
 /* FENIx paragraphs all match the Capabilities paragraph ("Purpose-built for tight, complex spaces…"):
    text-xs md:text-sm, font-light */
 .fenix-body, .product-body { font-size: 0.75rem; line-height: 1.625; font-weight: 300; }
+@media not all and (min-width: 640px) {
+  /* Framer Motion writes the scroll scale inline for the desktop presentation. */
+  .fenix-turtle-video-card { transform: none !important; }
+}
 @media (min-width: 768px) { .fenix-body, .product-body { font-size: 0.875rem; } }
 .bat-payload-stage { position: relative; width: calc(100% + 2 * var(--bat-payload-gutter)); min-height: 16rem; aspect-ratio: 16 / 10; margin-inline: calc(-1 * var(--bat-payload-gutter)); overflow: hidden; }
 .bat-payload-film { position: absolute; top: 0; left: 0; width: 100%; height: auto; aspect-ratio: 14 / 5; object-fit: contain; mask-image: linear-gradient(to bottom, transparent, black 12%, black 80%, transparent); }
@@ -1252,16 +1287,20 @@ html:has(.careers-page) { font-size: 100%; }
   .fenix-specs-dimensions > div + div { padding-left: .75rem; }
   */
   .fenix-specs-visual { grid-column: 1; grid-row: 1; margin: 0.5rem -4vw 1rem; }
-  .fenix-specs-render { max-height: none; transform: translateX(-1%) translateY(6%) scale(1.48); }
+  /* PREVIOUS UI: .fenix-specs-render { max-height: none; transform: translateX(-1%) translateY(6%) scale(1.48); } */
+  /* About 12% bigger on phones, centred on the drone (the outer propeller guards run a little past the screen edges). */
+  .fenix-specs-render { max-height: none; transform: translateY(6%) scale(1.66); }
   .fenix-specs-performance { grid-column: 1; grid-row: 2; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; transform: none; }
   .fenix-specs-performance > div { text-align: center; }
   .fenix-specs-performance dd { font-size: clamp(1.75rem, 8vw, 3rem); }
   .fenix-specs-performance dd span, .fenix-specs-dimensions dd span { font-size: .75rem; margin-left: .3rem; }
-  .fenix-specs-dimensions { grid-column: 1; grid-row: 3; gap: .5rem; }
+  /* PREVIOUS UI: dimension cells stretched to the full row height. */
+  .fenix-specs-dimensions { grid-column: 1; grid-row: 3; gap: .5rem; align-items: start; }
   .fenix-specs-dimensions > div { text-align: center; }
   .fenix-specs-dimensions > div + div { padding-left: 0; }
 }
-@media (min-width: 768px) and (max-width: 1023px) {
+/* PREVIOUS UI: the iPad Mini specifications layout stopped at 1023px in both orientations. */
+@media (min-width: 768px) and (max-width: 1023px), (min-width: 1024px) and (max-width: 1100px) and (orientation: portrait) {
   .fenix-specs { padding: clamp(5rem, 10vh, 7rem) 5vw 3rem; grid-template-columns: 1fr; grid-template-rows: auto auto auto; gap: 2.25rem; }
   .fenix-specs-visual { grid-column: 1; grid-row: 1; margin: 0 auto; max-width: 44rem; }
   .fenix-specs-render { max-height: 48vh; transform: scale(1.15); }
@@ -1335,6 +1374,15 @@ html:has(.careers-page) { font-size: 100%; }
   .bat-multi-role-title { font-size: clamp(0.875rem, 3.5vw, 2rem); }
   /* Wider than the screen and anchored low, clear of the two-line title */
   .bat-multi-role-drone { width: 154vw; top: auto; bottom: 4%; }
+}
+@media (width < 400px) and (orientation: portrait) {
+  /* PREVIOUS UI: small phones shared the 4% bottom inset. */
+  /* PREVIOUS UI: bottom: calc(4% - 26px). */
+  /* PREVIOUS UI: bottom: calc(4% - 86px). */
+  /* PREVIOUS UI: bottom: calc(4% - 76px). */
+  /* PREVIOUS UI: bottom: calc(4% - 50px). */
+  /* PREVIOUS UI: bottom: calc(4% - 126px). */
+  .bat-multi-role-drone { bottom: calc(4% - 96px); }
 }
 
 /* T-BAT specifications: centered drone with two specifications on either side. */
@@ -1474,8 +1522,31 @@ html:has(.storm-page) { font-size: 100%; }
 }
 @media (max-width: 767px) {
   .storm-specs { padding-bottom: 20px; }
-  .storm-specs .bat-specs-drone { max-height: 34svh; }
+  /* PREVIOUS UI: .storm-specs .bat-specs-drone { max-height: 34svh; } - on short phones (iPhone SE 375x667) the
+     section came to 739px, so the last spec row sat below the screen. The drone now also shrinks to the height left
+     after the title and specs (about 470px of them on short phones). */
+  /* PREVIOUS UI: max-height: min(34svh, calc(100svh - 455px)) with the title at the shared max(88px, 10svh) top. */
+  /* PREVIOUS UI: padding-top: 72px and calc(100svh - 418px). The navbar hides while scrolling down, so the title now
+     sits 48px from the top (when the navbar shows again its logo, ~56px tall, just clears the letters). */
+  .storm-specs { padding-top: 48px; }
+  .storm-specs .bat-specs-drone { max-height: min(40svh, calc(100svh - 394px)); transform: translateY(-14px); }
   .storm-specs .bat-specs-row { min-height: 0; padding-block: 8px; }
+}
+/* Short phones (iPhone SE, Galaxy S23/S24 and similar): tighter spacing so the whole section fits one screen. */
+@media (max-width: 767px) and (max-height: 820px) {
+  .storm-specs .product-title-position { margin-bottom: 8px; }
+  .storm-specs .bat-specs-grid { gap: 12px; }
+  .storm-specs .bat-specs-dimensions { margin-top: 14px; padding-top: .7rem; }
+  .storm-specs .bat-specs-dimensions dd { margin-top: .3rem; }
+  .storm-specs .bat-specs-row { padding-block: 6px; }
+  .storm-specs .bat-specs-row dd { margin-top: .35rem; font-size: 2.125rem; }
+}
+@media (min-width: 400px) and (max-width: 767px) and (min-height: 821px) {
+  /* PREVIOUS UI: the heading had no offset from its normal position. */
+  /* PREVIOUS UI: top: 16px with no horizontal offset. */
+  /* PREVIOUS UI: left: -6px. */
+  /* PREVIOUS UI: left: -2px. */
+  .storm-specs .product-title-position { position: relative; top: 24px; left: 2px; }
 }
 /* PREVIOUS UI (Subgrid with spanning drone figure that added excess drone height):
 @media (min-width: 1024px) {
@@ -1755,7 +1826,8 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
 @media (min-width: 640px) and (max-width: 1023px) {
   .fenix-details-callouts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
 }
-@media (min-width: 1024px) {
+/* PREVIOUS UI: the annotated desktop layout also activated on portrait tablets at 1024px. */
+@media (min-width: 1024px) and (orientation: landscape), (width > 1100px) {
   .fenix-details { height: 100svh; min-height: 0; padding: 0; }
   .fenix-details-heading { position: absolute; top: var(--fenix-title-top); left: 5%; right: 5%; font-size: clamp(1.5rem, 2.9vw, 4rem); white-space: nowrap; }
   .fenix-details-image { position: absolute; left: 43%; top: 13%; width: 98%; margin: 0; }
@@ -1775,6 +1847,11 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
 .hangar-scratched-name > span { display: block; opacity: .42; filter: url(#hangar-fragmented-type); }
 .hangar-scratched-name::after { content: ""; position: absolute; width: 3px; height: 3px; right: 3px; bottom: 3px; border-radius: 1px; background: rgba(92,225,230,.45); }
 .hangar-scratched-detail { position: relative; display: inline-block; opacity: .28; filter: url(#hangar-fragmented-type); }
+/* MAVERICK menu: the same unreadable locked names, on its light grey tiles */
+.maverick-scratched-name { position: relative; display: inline-block; isolation: isolate; padding: .1rem .45rem; margin-left: -.45rem; border: 1px solid rgba(0,0,0,.08); border-radius: 3px; background: linear-gradient(110deg,rgba(0,0,0,.04),rgba(0,0,0,.01)); }
+.maverick-scratched-name > span { display: block; opacity: .45; filter: url(#maverick-fragmented-type); }
+.maverick-scratched-name::after { content: ""; position: absolute; width: 3px; height: 3px; right: 3px; bottom: 3px; border-radius: 1px; background: rgba(0,163,204,.55); }
+.maverick-scratched-detail { position: relative; display: inline-block; opacity: .55; filter: url(#maverick-fragmented-type); }
 /* Mobile hero art is composed independently from the wide desktop artwork. */
 @media (max-width: 767px) {
   .mantis-hero-drone { inset: auto; left: 50%; top: 48%; width: 155%; max-width: none; height: auto; max-height: 62svh; object-fit: contain; transform: translate(-50%, -50%); }
@@ -1822,6 +1899,73 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
     margin-top: 3rem;
   }
 }
+@media (width < 400px) {
+  /* PREVIOUS UI: an absolute heading over the drone and a 3rem gap above dimensions. */
+  .mantis-page [data-mantis-section="specs"] {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 12px;
+    padding-block: clamp(40px, 8svh, 64px) 22px;
+  }
+  .mantis-page [data-mantis-section="specs"] .product-title-position {
+    /* PREVIOUS UI: position: static; font-size: clamp(19px, 6.2vw, 24px). */
+    position: relative;
+    inset: -16px auto auto;
+    /* PREVIOUS UI: font-size: clamp(20px, 6.6vw, 26px). */
+    font-size: clamp(22px, 7.2vw, 28px);
+  }
+  .mantis-specs-title-first { display: block; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-grid { gap: 12px; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-figure { padding: 0; gap: 12px; }
+  /* PREVIOUS UI: transform: none. */
+  /* PREVIOUS UI: translateY(-6px) scale(1.06). */
+  .mantis-page [data-mantis-section="specs"] .bat-specs-drone { max-height: min(34svh, 15rem); transform: translateY(-6px) scale(1.12); }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-dimensions { margin-top: 0; padding-top: 10px; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-row { padding-block: 8px; }
+
+  /* PREVIOUS UI: the small-phone T-BAT title was absolutely positioned over the illustration. */
+  .bat-page [data-bat-section="specs"] {
+    flex-direction: column;
+    align-items: stretch;
+    /* PREVIOUS UI: the centered stack let the heading drift with the grid height. */
+    justify-content: flex-start;
+    gap: 16px;
+    /* PREVIOUS UI: padding-block: 48px 24px. The top inset is shared with Payloads & Sensors. */
+    padding-bottom: 24px;
+  }
+  .bat-page [data-bat-section="specs"] .product-title-position {
+    position: static;
+    font-size: clamp(22px, 7.4vw, 29px);
+    /* PREVIOUS UI: translate: 0 -8px. */
+  }
+  .bat-specs-title-first { display: block; }
+  .bat-page [data-bat-section="specs"] .bat-specs-grid { gap: 12px; margin-block: auto; }
+  .bat-page [data-bat-section="specs"] .bat-specs-figure { padding: 0; gap: 12px; }
+  /* PREVIOUS UI: unscaled illustration and no offset for the figures. */
+  /* PREVIOUS UI: transform: scale(1.06). */
+  .bat-page [data-bat-section="specs"] .bat-specs-drone { max-height: 28svh; transform: translateY(-8px) scale(1.12); }
+  .bat-page [data-bat-section="specs"] .bat-specs-dimensions { margin-top: 0; padding-top: 10px; }
+  .bat-page [data-bat-section="specs"] :is(.bat-specs-dimensions, .bat-specs-list) { translate: 0 32px; }
+  .bat-page [data-bat-section="specs"] .bat-specs-row { padding-block: 8px; }
+
+  /* PREVIOUS UI: the shared 48px inset applied only to Specs and Payloads & Sensors. */
+  .bat-page { --bat-compact-title-top: 48px; }
+  .bat-page :is([data-bat-section="specs"], .bat-payload-viewer, .bat-battery-section) { padding-top: var(--bat-compact-title-top); }
+  .bat-page [data-bat-section="sequence"] {
+    --bat-sequence-caption-top: var(--bat-compact-title-top);
+    --bat-sequence-caption-inset: 5%;
+  }
+  /* Keep the phase number above the shared title line. */
+  .bat-page .bat-sequence-caption-index { position: absolute; bottom: 100%; }
+  /* PREVIOUS UI: the payload heading shared the 6vw gutter of its controls. */
+  .bat-page .bat-payload-heading { translate: -1vw 0; }
+  /* PREVIOUS UI: the payload preview used the standard phone top offset. */
+  .bat-page .bat-payload-film { top: calc(clamp(2.75rem, 7svh, 5rem) + 12px); }
+  /* PREVIOUS UI: the battery title could wrap, and the video had no extra upward offset. */
+  .bat-page #bat-battery-title { font-size: min(2rem, 7vw); white-space: nowrap; translate: -1vw 0; }
+  .bat-page .bat-battery-stage video { translate: 0 -40px; }
+}
 .mantis-mobile-wing-connector { display: none; }
 @media (max-width: 767px) {
   /* Align the wing anchor (44% of the 16:9 image) with the first callout title. */
@@ -1833,12 +1977,49 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
 }
 @media (max-width: 767px) {
   .fenix-page .fenix-details { height: 100svh; min-height: 0; padding: max(5rem, 11svh) 6vw 1rem; display: flex; flex-direction: column; gap: .5rem; }
-  .fenix-details .fenix-details-heading { font-size: clamp(1.125rem, 5.5vw, 1.75rem); line-height: 1.15; flex-shrink: 0; }
-  .fenix-details .fenix-details-image { width: 94%; max-height: 22svh; object-fit: contain; margin: .25rem auto; flex-shrink: 0; }
-  .fenix-details .fenix-details-callouts { flex: 1; min-height: 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: repeat(5, minmax(min-content, 1fr)); gap: .4rem; }
-  .fenix-details-callouts > div { padding-bottom: .35rem; }
+  /* PREVIOUS UI: the heading had no vertical offset on phones. */
+  /* PREVIOUS UI: top: -16px. */
+  .fenix-details .fenix-details-heading { top: -24px; font-size: clamp(1.125rem, 5.5vw, 1.75rem); line-height: 1.15; flex-shrink: 0; }
+  /* PREVIOUS UI: width: 94%; max-height: 22svh; margin: .25rem auto; flex-shrink: 0. */
+  /* PREVIOUS UI: width: 112%; margin: 0 -6%; no horizontal offset. */
+  /* PREVIOUS UI: left: min(16px, 3.5vw); no additional scale. */
+  .fenix-details .fenix-details-image {
+    position: relative;
+    /* PREVIOUS UI: left: min(32px, 7vw). */
+    /* PREVIOUS UI: left: min(64px, 14vw). */
+    /* PREVIOUS UI: left: min(70px, 15.3vw). */
+    /* PREVIOUS UI: left: min(82px, 17.9vw). */
+    /* PREVIOUS UI: left: min(112px, 24.5vw). */
+    /* PREVIOUS UI: left: min(142px, 31.1vw). */
+    /* PREVIOUS UI: left: min(158px, 34.6vw). */
+    left: min(188px, 41.2vw);
+    flex: 1 1 0;
+    min-height: 0;
+    width: 128%;
+    object-fit: contain;
+    margin: 0 -14%;
+    scale: 2;
+    /* Keep the scaled image inside its vertical slot between the title and list. */
+    clip-path: inset(25% 0);
+  }
+  /* PREVIOUS UI: flex: 1 and repeat(5, minmax(min-content, 1fr)) stretched all five rows. */
+  /* PREVIOUS UI: gap: .65rem, with the rows directly below the image. */
+  /* PREVIOUS UI: no extra bottom clearance for the feature list. */
+  .fenix-details .fenix-details-callouts { margin-top: auto; margin-bottom: 16px; grid-template-columns: minmax(0, 1fr); gap: .8rem; }
+  /* PREVIOUS UI: padding-bottom: .35rem. */
+  .fenix-details-callouts > div { padding-bottom: .65rem; }
   .fenix-details-callouts h3 { font-size: clamp(.6875rem, 2.8vw, .875rem); }
   .fenix-details-callouts .product-body { font-size: clamp(.5625rem, 2.45vw, .75rem); line-height: 1.4; margin-top: .25rem; }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  /* PREVIOUS UI: the mobile drone appeared at its final position without an entrance. */
+  .fenix-details-image { opacity: 0; translate: 28vw 0; }
+  .fenix-details[data-in-view="true"] .fenix-details-image {
+    animation: fenix-details-drone-enter 1.2s cubic-bezier(.22, 1, .36, 1) both;
+  }
+  @keyframes fenix-details-drone-enter {
+    to { opacity: 1; translate: 0 0; }
+  }
 }
 
 /* PREVIOUS UI: Mobile gallery rotated landscape photos into the desktop portrait slots. */
@@ -1912,6 +2093,222 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
   /* PREVIOUS UI: The STORM foreground drone sat at the top of the mobile section. */
   .storm-three-drone { top: auto; bottom: -4svh; width: 133vw; }
 }
+/* Short phones (iPhone SE, Galaxy S23/S24): about 17% bigger drone, still anchored to the bottom so it stays below
+   the Ready. / Rugged. / Relentless. titles. The outer propellers run a little further past the screen edges.
+   PREVIOUS UI: 133vw on every phone. */
+@media (max-width: 767px) and (max-height: 820px) {
+  /* PREVIOUS UI: width: 155vw (bottom stayed at -4svh). Now a little bigger again and a little lower. */
+  /* PREVIOUS UI: width: 172vw; bottom: -14svh, then 185vw / -18svh, then 178vw / -16svh. */
+  .storm-three-drone { width: 170vw; bottom: -14svh; }
+}
+@media (min-width: 400px) and (max-width: 767px) and (min-height: 821px) {
+  /* PREVIOUS UI: the base 133vw width also applied to larger phones. */
+  /* PREVIOUS UI: width: 148vw. */
+  /* PREVIOUS UI: width: 156vw. */
+  /* PREVIOUS UI: width: 172vw with the shared bottom offset of -4svh. */
+  .storm-three-drone { width: 188vw; bottom: -9svh; }
+  /* PREVIOUS UI: FENIX used the standard phone image framing. */
+  /* PREVIOUS UI: translate: -3% -4%; scale: 1.05. */
+  .fenix-capabilities-drone { translate: -6% -4%; scale: 1.15; }
+  /* PREVIOUS UI: on larger phones, More could wrap onto the first line. */
+  .mantis-page #mantis-specs-title { font-size: min(2rem, 7.5vw); }
+  .mantis-specs-title-first { display: block; }
+  .mantis-specs-title-second { display: block; white-space: nowrap; }
+  /* PREVIOUS UI: the larger-phone perspective title and image used their default vertical positions. */
+  .mantis-page #mantis-perspective-title { top: calc(19% - 12px); }
+  /* PREVIOUS UI: translate: 0 -12px. */
+  /* PREVIOUS UI: translate: 0 -22px. */
+  .mantis-page [aria-labelledby="mantis-perspective-title"] > img { translate: 0 -40px; }
+  /* PREVIOUS UI: the shared phone layout wrapped the cyan phrase and crowded it with the illustration. */
+  .mantis-page .mantis-details .product-title-position { top: clamp(56px, 7.5svh, 76px); font-size: clamp(24px, 6.4vw, 30px); }
+  .mantis-details-title-line { display: block; }
+  /* PREVIOUS UI: the drone used max(95px, 11svh) and the callouts used 30svh. */
+  /* PREVIOUS UI: both positions had a 12px downward offset. */
+  .mantis-page .mantis-details-image { left: 19%; top: calc(max(95px, 11svh) + 40px); width: 215%; }
+  .mantis-page .mantis-details-callouts { top: calc(30svh + 40px); width: 35%; margin-top: 0; gap: 20px; }
+  /* The SVG already draws the underline as part of each leader. */
+  .mantis-page .mantis-details-callout { border-bottom-color: transparent; }
+  .mantis-page .mantis-details-connectors path { stroke-linejoin: round; }
+}
+
+@media (width < 400px) {
+  /* PREVIOUS UI: the shared phone layout put the oversized drone behind the heading. */
+  .mantis-page .mantis-details { min-height: 0; }
+  .mantis-page .mantis-details .product-title-position { top: clamp(48px, 8svh, 64px); font-size: clamp(20px, 6.1vw, 24px); }
+  .mantis-details-title-line { display: block; }
+  .mantis-page .mantis-details-image { left: 21%; top: max(86px, 13svh); width: 210%; }
+  /* PREVIOUS UI: top: max(228px, 41svh) left a large gap below the title. */
+  .mantis-page .mantis-details-callouts { top: max(164px, calc(41svh - 64px)); width: 35%; margin-top: 0; gap: clamp(12px, 3svh, 20px); }
+  .mantis-details-callout { padding-bottom: 10px; }
+  .mantis-details-callout h3 { font-size: 13px; }
+  .mantis-details-callout .product-body { font-size: 11px; line-height: 1.45; }
+  /* PREVIOUS UI: small phones shared translateY(6%) scale(1.66). */
+  /* PREVIOUS UI: translateY(calc(6% - 10px)) scale(1.826). */
+  .fenix-specs-render { transform: translateY(calc(6% - 18px)) scale(1.826); }
+  /* PREVIOUS UI: standard phone padding and the full portrait image frame pushed the copy below short screens. */
+  .fenix-page #capabilities { padding-block: 24px; }
+  .fenix-capabilities-layout { gap: 16px; }
+  .fenix-capabilities-image-frame { max-height: 52svh; }
+  /* PREVIOUS UI: the initial small-phone shift was 12px left. */
+  .fenix-capabilities-drone { translate: -16px 0; }
+  /* PREVIOUS UI: the title was spread across four columns and the drone used the shared mobile offset. */
+  .fenix-responder-title { display: flex; justify-content: center; gap: .65em; margin-top: -8px; }
+  /* PREVIOUS UI: bottom: calc(12vh - 56px). */
+  .fenix-responder-drone { bottom: calc(12vh - 72px); }
+  /* PREVIOUS UI: height: auto and min-height: 100svh let the close-up push the features past one screen. */
+  .fenix-page .fenix-details { padding-top: calc(max(5rem, 11svh) - 8px); }
+  /* PREVIOUS UI: left: 12vw; width: 144%; margin-inline: -22%; scale: 1.3; transform-origin: 50% 33%. */
+  .fenix-details .fenix-details-image {
+    /* PREVIOUS UI: a fixed 76vw image height. */
+    flex: 1 1 0;
+    transform-origin: 50% 42%;
+    /* PREVIOUS UI: clip-path: inset(21% 0 29%) cut the drone at the image slot edges. */
+    clip-path: none;
+  }
+  /* Keep the feature list compact below the close-up. */
+  .fenix-details .fenix-details-callouts { flex-shrink: 0; gap: .65rem; }
+  .fenix-details-callouts > div { padding-bottom: .5rem; }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) and (orientation: portrait) {
+  /* PREVIOUS UI: portrait tablets inherited the desktop columns and their horizontal offsets. */
+  #capabilities > div { padding-inline: 4vw; }
+  #capabilities .fenix-capabilities-layout { flex-direction: column; gap: clamp(32px, 5svh, 64px); }
+  #capabilities .fenix-capabilities-layout > :first-child { width: 100%; }
+  #capabilities .fenix-capabilities-image-frame { max-width: min(92vw, 60rem); aspect-ratio: 5 / 2; translate: 0 -30px; }
+  #capabilities .fenix-capabilities-drone { transform: none; object-fit: cover; }
+  /* PREVIOUS UI: the fixed 42rem column made the text appear narrower on larger tablets. */
+  #capabilities .fenix-capabilities-copy { width: 100%; max-width: 87.5vw; transform: none; }
+  #capabilities .fenix-section-title,
+  .fenix-turtle-heading .fenix-section-title { font-size: clamp(36px, 5vw, 52px); }
+  /* PREVIOUS UI: paragraph type scaled from 16px to only 18px. */
+  #capabilities .fenix-capabilities-copy p { font-size: clamp(16px, 2.0833vw, 23px); text-align: left; }
+  /* PREVIOUS UI: object-cover cropped the sides of the desktop cave image on tablets. */
+  .fenix-gps-navigation picture > img { object-fit: contain; }
+
+  /* PREVIOUS UI: the tablet title and status cards floated around the centered video. */
+  .fenix-page .fenix-turtle-section { height: 100dvh; touch-action: pan-x pinch-zoom; }
+  .fenix-page .fenix-turtle-stage {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: center;
+    align-items: stretch;
+    gap: clamp(16px, 2svh, 24px);
+    max-width: 62rem;
+    margin-inline: auto;
+    padding-inline: 4vw;
+  }
+  .fenix-turtle-stage .fenix-turtle-overlay { display: contents; }
+  .fenix-turtle-stage .fenix-turtle-heading,
+  .fenix-turtle-stage .fenix-turtle-protocol,
+  .fenix-turtle-stage .fenix-turtle-sequence {
+    position: relative;
+    inset: auto;
+    max-width: none;
+    margin: 0;
+  }
+  .fenix-turtle-stage .fenix-turtle-heading { grid-area: 1 / 1 / 2 / -1; }
+  .fenix-turtle-heading br { display: none; }
+  .fenix-turtle-stage .fenix-turtle-video-card {
+    grid-area: 2 / 1 / 3 / -1;
+    width: 100%;
+    max-height: none;
+    transform: none !important;
+  }
+  .fenix-turtle-stage .fenix-turtle-sequence { display: block; grid-area: 3 / 1; width: 100%; }
+  .fenix-turtle-stage .fenix-turtle-protocol { grid-area: 3 / 2; }
+
+  /* PREVIOUS UI: tablets cropped the wide desktop artwork and used its negative drone offset. */
+  .fenix-page .fenix-responder-title { display: flex; justify-content: center; gap: .65em; font-size: clamp(28px, 4vw, 44px); }
+  .fenix-page .fenix-responder-drone { bottom: 6svh; }
+  .fenix-page .fenix-responder-drone > div { width: min(72vw, 50svh); }
+
+  /* PREVIOUS UI: the Mini used two columns, while the iPad Pro inherited the annotated desktop layout. */
+  .fenix-details {
+    display: grid;
+    grid-template: auto 1fr auto / minmax(0, 1fr);
+    gap: clamp(16px, 2svh, 30px);
+    padding-top: calc(var(--fenix-title-top) - 30px);
+  }
+  .fenix-details .fenix-details-heading { font-size: clamp(32px, 4.2vw, 44px); }
+  .fenix-details-heading > span { display: block; text-align: center; }
+  .fenix-details-image { place-self: center; width: min(129.2%, 92.13svh); margin: 0; }
+  .fenix-details-callouts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 28px); }
+  .fenix-details-callouts :is(h3, .product-body) { font-size: clamp(14px, 1.65vw, 17px); }
+
+  .fenix-specs-visual { width: 100%; max-width: none; }
+  .fenix-specs-render { transform: scale(1.288); }
+  /* PREVIOUS UI: the dimension dividers stretched with the entire row. */
+  .fenix-specs-dimensions { max-width: none; align-items: start; }
+
+  .fenix-last-content { top: 42px; }
+
+  /* PREVIOUS UI: portrait tablets cropped the edges of the desktop triptych and its heading grid. */
+  .storm-three-phase .storm-three-art { object-fit: fill; }
+  .storm-three-phase .storm-three-heading {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    font-size: clamp(24px, 3.25vw, 36px);
+  }
+  .storm-three-phase .storm-three-drone { top: auto; bottom: -9vw; width: 120vw; }
+
+  .storm-hero { height: 100svh; }
+  .storm-hero .storm-hero-subtitle { font-size: clamp(20px, 2.6vw, 30px); }
+
+  /* PREVIOUS UI: the iPad Pro switched to the desktop three-column specifications. */
+  .storm-specs .product-title-position { display: block; font-size: clamp(34px, 4.6vw, 52px); translate: 0 -26px; }
+  .storm-specs .product-title-position > span:last-child { transform: none; }
+  .storm-specs .bat-specs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.4svh, 30px); }
+  .storm-specs .bat-specs-figure { grid-area: 1 / 1 / 2 / -1; }
+  /* PREVIOUS UI: translateY(-30px) scale(1.12). */
+  .storm-specs .bat-specs-drone { max-height: 40svh; transform: translateY(-50px) scale(1.2544); }
+  .storm-specs .bat-specs-dimensions { margin-top: 0; }
+  .storm-specs .bat-specs-left { grid-area: 2 / 1; transform: none; }
+  .storm-specs .bat-specs-right { grid-area: 2 / 2; transform: none; }
+  .storm-specs :is(.bat-specs-dimensions, .bat-specs-list) { translate: 0 20px; }
+  .storm-specs .bat-specs-row { min-height: 0; align-items: center; padding-block: clamp(10px, 1.2svh, 18px); text-align: center; }
+  .storm-specs dt { font-size: clamp(14px, 1.75vw, 20px); }
+  .storm-specs .bat-specs-row dd { font-size: clamp(32px, 4.3vw, 46px); }
+  .storm-specs .bat-specs-dimensions dd { font-size: clamp(21px, 2.6vw, 29px); }
+  .storm-specs dd span { font-size: clamp(13px, 1.65vw, 18px); }
+
+  /* PREVIOUS UI: absolute callouts and a cropped side view could run behind the title on tablets. */
+  .storm-page .storm-details {
+    display: grid;
+    grid-template: auto 1fr auto / minmax(0, 1fr);
+    gap: clamp(16px, 2.2svh, 32px);
+    height: auto;
+    min-height: 100svh;
+    padding: max(90px, 10svh) 5vw 6svh;
+  }
+  .storm-details .product-title-position { position: static; font-size: clamp(34px, 4.6vw, 52px); }
+  .storm-details .storm-details-tagline { display: block; }
+  /* PREVIOUS UI: width: min(118vw, 110svh), with no offset or tablet leaders. */
+  .storm-details .storm-details-image { position: relative; inset: auto; width: min(141.6vw, 132svh); place-self: center; }
+  .storm-details .storm-details-image > img { translate: -3.8vw -36px; }
+  /* The pale leader blended into the gray airframe before reaching its marker. */
+  .storm-details-connectors > path { stroke: #626a6c; stroke-width: 1.5px; }
+  .storm-details .storm-details-callouts { position: static; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2.5vw, 28px); }
+  .storm-details .storm-details-callouts > div { position: static; width: auto; border-top: 1px solid #d4d4d4; padding: 12px 0 0; }
+  .storm-details .storm-details-callouts :is(h3, .product-body) { font-size: clamp(14px, 1.75vw, 20px); }
+
+  .storm-maritime .storm-maritime-ocean { transform: none; object-position: center 36%; }
+  .storm-page [data-storm-section="contact"] a { font-size: clamp(14px, 1.75vw, 20px); }
+}
+
+@media (min-width: 1024px) and (max-width: 1100px) and (orientation: portrait) {
+  /* PREVIOUS UI: GPS navigation used the desktop heading and 14px body text on the iPad Pro. */
+  .fenix-gps-navigation .fenix-section-title { font-size: clamp(40px, 4.167vw, 46px); }
+  /* PREVIOUS UI: the 42rem maximum wrapped the larger copy onto a third line. */
+  .fenix-gps-navigation .fenix-body,
+  .fenix-floor-map .fenix-body { font-size: clamp(18px, 1.823vw, 20px); max-width: min(100%, 82ch); text-wrap: balance; }
+  /* PREVIOUS UI: the specification labels, units and dimensions used the smaller tablet sizes. */
+  .fenix-specs :is(.fenix-specs-performance, .fenix-specs-dimensions) dt { font-size: clamp(17px, 1.65vw, 18px); }
+  .fenix-specs-performance dd { font-size: clamp(42px, 4.2vw, 46px); }
+  .fenix-specs-dimensions dd { font-size: clamp(26px, 2.6vw, 29px); }
+  .fenix-specs :is(.fenix-specs-performance, .fenix-specs-dimensions) dd span { font-size: clamp(20px, 2vw, 22px); }
+  /* PREVIOUS UI: FENIX and STORM used 12px nav labels on all three portrait tablets. */
+  html:has(.fenix-page, .storm-page) nav .site-nav-link { font-size: 16px; }
+}
 
 /* STORM component overview, matching the MANTIS detail section. */
 .storm-details { --fenix-title-top: max(90px, 10svh); --fenix-title-inset: 5vw; }
@@ -1930,6 +2327,12 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
   .storm-details-callouts .product-body { font-size: clamp(.5625rem, 2.5vw, .75rem); line-height: 1.5; }
 }
 
+@media (max-width: 430px) {
+  /* PREVIOUS UI: the title shared the 88px minimum inset and the cyan line could wrap. */
+  .storm-details { --fenix-title-top: max(64px, calc(10svh - 24px)); }
+  .storm-details-tagline { font-size: clamp(14px, 4.8vw, 20px); white-space: nowrap; }
+}
+
 /* PREVIOUS UI: Ship bottom 0; drone width min(50vw,85svh), top 2svh. */
 /* PREVIOUS UI: Ship bottom: -3svh. */
 /* PREVIOUS UI: Ship right: -2vw on desktop and -10vw on mobile. */
@@ -1942,4 +2345,653 @@ body:has(.maverick-page) .footer-short-bottom { margin-top: auto; }
   .storm-maritime-ship { right: -12vw; width: 110vw; }
   /* PREVIOUS UI: left: 0; top: -3svh (drone sat over the logo). */
   .storm-maritime-drone { left: 8vw; top: 5svh; width: 38vw; }
+}
+
+/* MANTIS hero video fit. MantisHeroMedia.tsx picks the clip closest to the screen's shape; these rules keep the LED
+   frame, drone and title on screen for every shape. Safe crop limits: ~2% per side (side LEDs sit 3% in from the
+   edge) and ~7% top/bottom (top LED bar sits 8-9% down).
+   PREVIOUS UI: one rule for every (max-width: 767px) screen - the 9:16 clip shown whole from the top with the fade at
+   calc(177.78vw - 96px) / calc(177.78vw - 4px), and the className set object-contain / object-cover. */
+
+/* Desktop and phones held sideways: 3840x1920 clip, shown whole. */
+.mantis-hero-video {
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Portrait phones: fill the hero (crop stays inside the limits above for the clip each shape gets) and fade the
+   last ~90px of floor into the black section below. */
+@media (max-width: 767px) and (orientation: portrait) {
+  .mantis-hero-video {
+    object-fit: cover;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 96px), transparent calc(100% - 4px));
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 96px), transparent calc(100% - 4px));
+  }
+}
+
+/* Extra-tall phones (21:9, e.g. Sony Xperia): narrower than the 1080x2340 clip, so cover would cut the side LEDs.
+   Show the whole clip from the top (216.67vw tall) and fade its floor into the black below. */
+@media (max-width: 767px) and (orientation: portrait) and (max-aspect-ratio: 443/1000) {
+  .mantis-hero-video {
+    object-fit: contain;
+    object-position: top;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(216.67vw - 96px), transparent calc(216.67vw - 4px));
+    mask-image: linear-gradient(to bottom, #000 calc(216.67vw - 96px), transparent calc(216.67vw - 4px));
+  }
+}
+
+/* Wide portrait screens under 768px (small tablets): cover would cut the top LED bar, so show the whole 9:16 clip;
+   the clip's dark outer frame runs into the black side margins. */
+@media (max-width: 767px) and (orientation: portrait) and (min-aspect-ratio: 66/100) {
+  .mantis-hero-video {
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+/* Upright tablets (768px+, portrait) play the 2:3 MANTIS tablet clip. Tablets are a little wider (0.69-0.75), so fill
+   the hero; this trims ~2-6% off the top and bottom, and the ceiling light bar stays visible under the navbar. */
+@media (min-width: 768px) and (orientation: portrait) {
+  .mantis-hero-video {
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* Footer on upright tablets (iPad mini, iPad Pro, Surface Pro): one centred column that fills the screen —
+   brand block, a 4-column link row under a divider, the TSALLA watermark resting above the bottom bar, and the
+   bottom bar on one row. Sizes follow the screen height so all tablets match.
+   PREVIOUS UI: under 1024px the phone-style stack (small text, bottom bar in 3 rows); 1024px+ tablets got the desktop
+   two-column layout with the watermark floating in a large empty area. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  footer.footer-short-mobile { min-height: 100dvh; padding-top: clamp(5.5rem, 9svh, 8.5rem); justify-content: flex-start; }
+  .footer-short-mobile .footer-short-main { margin-block: 0; padding-inline: 7vw; max-width: none; flex-shrink: 0; }
+  .footer-short-mobile .footer-short-grid { grid-template-columns: 1fr; gap: clamp(3rem, 6svh, 5.5rem); }
+  .footer-short-mobile .footer-short-brand,
+  .footer-short-mobile .footer-short-nav { grid-column: 1 / -1; }
+  .footer-short-mobile .footer-short-brand { align-items: center; }
+  .footer-short-mobile .footer-short-brand > :not([hidden]) ~ :not([hidden]) { margin-top: clamp(1.5rem, 2.6svh, 2.25rem); }
+  .footer-short-mobile .footer-short-brand img { height: clamp(4.5rem, 6.5svh, 6.5rem); }
+  .footer-short-mobile .footer-short-brand p { max-width: 36rem; text-align: center; font-size: clamp(15px, 1.35svh, 19px); line-height: 1.7; }
+  .footer-short-mobile .footer-short-brand > div { justify-content: center; gap: 1rem; }
+  .footer-short-mobile .footer-short-brand > div > a { padding: clamp(.85rem, 1.2svh, 1.1rem) clamp(1.5rem, 2.6vw, 2.25rem); }
+  .footer-short-mobile .footer-short-brand > div > a span { font-size: clamp(11px, 1svh, 14px); }
+  .footer-short-mobile .footer-short-nav { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 4vw; padding-top: clamp(2rem, 4svh, 3.5rem); border-top: 1px solid rgb(255 255 255 / .1); }
+  .footer-short-mobile .footer-short-link-group > :not([hidden]) ~ :not([hidden]) { margin-top: clamp(1.25rem, 2svh, 1.75rem); }
+  .footer-short-mobile .footer-short-link-group h2 { font-size: clamp(12px, 1.05svh, 15px); }
+  .footer-short-mobile .footer-short-links > :not([hidden]) ~ :not([hidden]) { margin-top: clamp(.75rem, 1.3svh, 1.1rem); }
+  .footer-short-mobile .footer-short-links a,
+  .footer-short-mobile .footer-short-links span[aria-disabled] { font-size: clamp(14px, 1.3svh, 18px); }
+  .footer-short-mobile .footer-short-watermark { flex: 1 0 auto; align-items: flex-end; margin-block: clamp(2rem, 4svh, 4rem); padding-inline: 7vw; }
+  .footer-short-mobile .footer-short-watermark-mark { height: auto; }
+  .footer-short-mobile .footer-short-bottom { margin-top: 0; padding-block: clamp(1rem, 2svh, 1.75rem); }
+  .footer-short-mobile .footer-short-bottom-inner { flex-direction: row; justify-content: space-between; padding-inline: 7vw; }
+  .footer-short-mobile .footer-short-bottom-inner > :first-child { order: 1; }
+  .footer-short-mobile .footer-short-bottom-inner > :nth-child(2) { order: 2; }
+}
+
+/* Upright tablets: navbar (logo and links) sits 16px lower. PREVIOUS UI: bar started at the top edge (no offset). */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  nav .site-nav-bar { margin-top: 16px; }
+}
+
+/* Home "Powered by MAVERICK" on upright tablets (iPad mini, Surface Pro, iPad Pro): title plus a 2x2 grid of 4:5 cards
+   that fits one screen. Card size is the smaller of half the width and what the screen height allows, so every tablet
+   shows the same layout and the same crop of each drone.
+   PREVIOUS UI: iPad mini/Surface Pro had a 2x2 grid of fixed 520px-tall cards (taller than one screen on the iPad mini);
+   iPad Pro 13 had the desktop row of 4 narrow cards with small, contained images. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .home-page {
+    --tab-card-gap: 3vw;
+    /* screen height minus top padding (88px + 3dvh), bottom padding (4dvh), title (6.5vw x 1.1) and title gap (3dvh) */
+    --tab-grid-h: calc(90dvh - 88px - 7.15vw);
+    --tab-card-w: min(calc((88vw - var(--tab-card-gap)) / 2), calc((var(--tab-grid-h) - var(--tab-card-gap)) / 2 * 0.8));
+  }
+  .home-page .home-product-stack { width: 100%; max-width: none; padding: 0 6vw; }
+  .home-page .home-product-screen { height: 100dvh; min-height: 0; display: flex; flex-direction: column; gap: 3dvh; padding-block: calc(88px + 3dvh) 4dvh; scroll-snap-align: start; }
+  .home-page .home-product-screen > :first-child { flex-shrink: 0; margin: 0 auto; width: calc(var(--tab-card-w) * 2 + var(--tab-card-gap)); }
+  .home-page .home-product-screen .home-section-title { font-size: 6.5vw; line-height: 1.1; letter-spacing: -0.03em; font-weight: 400; }
+  .home-page .home-product-screen > .grid { flex: 1 1 auto; min-height: 0; margin: 0; gap: var(--tab-card-gap); grid-template-columns: repeat(2, var(--tab-card-w)); grid-template-rows: none; justify-content: center; align-content: center; }
+  .home-page .home-product-screen > .grid > div { height: auto; aspect-ratio: 4 / 5; min-width: 0; min-height: 0; }
+  .home-page .home-product-screen > .grid > div > .product-image-arrival img { object-fit: cover; }
+  .home-page .home-product-screen > .grid > div > .z-20 { padding: 3.4vw; }
+  .home-page .home-product-screen > .grid h2 { font-size: 3.1vw; }
+  .home-page .home-product-screen > .grid p { font-size: 1.7vw; min-height: 3.25em; }
+}
+
+/* Upright tablets: only the "Powered by MAVERICK" title moves, 56px up and 3vw left; the cards stay put.
+   PREVIOUS UI: title aligned with the cards' left edge, 3dvh above them; then 2.5vw left / 32px up; then 4vw left. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .home-page .home-product-screen > :first-child { transform: translate(-3vw, -56px); }
+  /* Cards sit 32px higher. PREVIOUS UI: no shift. */
+  .home-page .home-product-screen > .grid { transform: translateY(-32px); }
+}
+
+/* Home "Velocity Complex" on upright tablets: one full screen on every tablet (title row, tall image, tagline), with
+   sizes in vw so iPad mini, Surface Pro and iPad Pro look the same.
+   PREVIOUS UI: under 1024px a short 21:9 strip with the next section showing below; iPad Pro 13 got the desktop
+   full-screen version with fixed pixel sizes. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .home-page .home-velocity-screen { height: 100dvh; min-height: 0; display: flex; flex-direction: column; padding: calc(88px + 3dvh) 6vw 4dvh; scroll-snap-align: start; }
+  .home-page .home-velocity-screen > div { flex: 1; min-height: 0; width: 100%; max-width: none; display: flex; flex-direction: column; gap: 3dvh; }
+  .home-page .home-velocity-screen > div > :first-child { flex-direction: row; align-items: flex-end; justify-content: space-between; flex-shrink: 0; margin: 0; padding-inline: 0; gap: 0; }
+  .home-page .home-velocity-screen > div > :first-child > :first-child { font-size: 6.5vw; line-height: 1.1; letter-spacing: -0.03em; margin-left: 0; padding-left: 0; }
+  .home-page .home-velocity-screen > div > :first-child > a { margin-right: 0; font-size: 1.7vw; }
+  .home-page .home-velocity-screen > div > :nth-child(2) { flex: 1; min-height: 0; aspect-ratio: auto; margin: 0; }
+  .home-page .home-velocity-screen img { position: absolute; inset: 0; }
+  .home-page .home-velocity-screen > div > :last-child { flex-shrink: 0; margin: 0; padding-inline: 0; justify-content: flex-end; }
+  .home-page .home-velocity-screen > div > :last-child > div { margin-right: 0; }
+  .home-page .home-velocity-screen > div > :last-child p { font-size: 2.1vw; }
+}
+
+/* Home "News & Media" on upright tablets: one full screen — title and intro at the top, two 5:8 cards centred in the
+   remaining space, arrows and page dots underneath. Sizes in vw so iPad mini, Surface Pro and iPad Pro match.
+   PREVIOUS UI: content-height section with fixed 480px cards and side arrows (iPad Pro 13 showed 3 cards). */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .home-page .home-news-screen { height: 100dvh; min-height: 0; display: flex; flex-direction: column; gap: 3dvh; padding: calc(88px + 3dvh) 0 4dvh; scroll-snap-align: start; }
+  .home-page .home-news-screen > :first-child { flex-shrink: 0; margin: 0; padding-inline: 6vw; }
+  .home-page .home-news-screen > :first-child > div { max-width: none; }
+  .home-page .home-news-screen > :first-child > div > :first-child { font-size: 6vw; line-height: 1.1; margin-bottom: 2dvh; }
+  .home-page .home-news-screen > :first-child p { max-width: none; white-space: normal; font-size: 2.1vw; line-height: 1.4; }
+  .home-page .home-news-screen > :nth-child(2) { flex: 1 1 auto; min-height: 0; width: 100%; max-width: none; padding: 0 6vw; align-items: center; }
+  .home-page .home-news-screen > :nth-child(2) > button { display: none; }
+  .home-page .home-news-screen > :nth-child(2) > div { height: auto; padding-inline: 0; }
+  .home-page .home-news-screen li { width: calc(50% - 12px); height: auto; aspect-ratio: 5 / 8; margin-bottom: 0; }
+  .home-page .home-news-screen li .z-\[6\] p { font-size: 2vw; -webkit-line-clamp: 3; line-clamp: 3; }
+  .home-page .home-news-screen > :last-child { flex-shrink: 0; margin: 0; gap: 2dvh; }
+  .home-page .home-news-screen > :last-child > div:last-child { display: flex; }
+}
+
+/* Upright tablets: "Powered by MAVERICK", "Velocity Complex" and "News & Media" titles share one size (6.5vw) and one
+   position — Powered by MAVERICK's: 32px + 3dvh from the top of the screen, and 3vw left of the product cards' left edge.
+   PREVIOUS UI: Powered by MAVERICK title centred over the cards then shifted (-3vw, -56px); Velocity Complex and
+   News & Media titles at 88px + 3dvh from the top and 6vw from the left; News & Media title 6vw. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .home-page { --tab-title-left: calc(50vw - (var(--tab-card-w) * 2 + var(--tab-card-gap)) / 2 - 3vw); }
+  .home-page .home-product-screen > :first-child { width: auto; margin-left: calc(var(--tab-title-left) - 6vw); transform: translateY(-56px); }
+  .home-page .home-velocity-screen,
+  .home-page .home-news-screen { padding-top: calc(32px + 3dvh); }
+  .home-page .home-velocity-screen > div > :first-child > :first-child,
+  .home-page .home-news-screen > :first-child > div > :first-child { font-size: 6.5vw; line-height: 1.1; margin-left: calc(var(--tab-title-left) - 6vw); }
+}
+
+/* Careers hero on small phones (iPhone SE, Galaxy S23/S24...): "WORK WITH PURPOSE" lines up with the paragraph's left
+   edge, and "BUILD FOR THOSE WHO SERVE" is left-aligned.
+   PREVIOUS UI: title 16px from the edge (left-4); subtitle centred.
+   Large phones (iPhone Pro Max, Galaxy Ultra...) now get the same careers changes.
+   PREVIOUS UI: @media (max-width: 767px) and (max-height: 820px) — small phones only. */
+@media (max-width: 767px) {
+  /* PREVIOUS UI: left: calc(1rem + (100% - 2rem) * 0.05) (lined up with the paragraph, 33px on iPhone SE). */
+  .careers-page .careers-hero-layout > div:first-child { left: calc(1rem + (100% - 2rem) * 0.05 - 7px); }
+  .careers-page .careers-hero-description .careers-hero-subtitle { text-align: left; }
+  /* "WORK WITH PURPOSE": PREVIOUS UI clamp(16px, 4.4vw, 24px), then 2rem (the "MISSION RHYTHM" size); now a little smaller. */
+  .careers-page .careers-hero-title { font-size: 1.75rem; letter-spacing: -0.03em; }
+  /* "MISSION RHYTHM" paragraph uses the hero paragraph size (11px, line-height 1.625). PREVIOUS UI: 14px careers-body. */
+  /* "MISSION RHYTHM", "HOW WE OPERATE" and "JOB OPENINGS" paragraphs use the hero paragraph size (11px, line-height 1.625). PREVIOUS UI: careers-body size (14px / 12px). */
+  .careers-page .careers-rhythm-intro p.careers-body,
+  .careers-page .careers-values-intro p.careers-body,
+  .careers-page p.careers-jobs-intro { font-size: 11px; line-height: 1.625; }
+  /* "WE BUILD BUILDERS" cards: whole words only (no "citi-zens"). PREVIOUS UI: hyphens: auto. */
+  .careers-page p.careers-value-copy { hyphens: manual; -webkit-hyphens: manual; }
+  /* "A NOTE FROM THE FOUNDER" block sits 32px higher. PREVIOUS UI: centred in the screen with no shift. */
+  .careers-page #founder-note > * { transform: translateY(-32px); }
+  /* "Benefits" list fits one screen: tighter row spacing and section padding.
+     PREVIOUS UI: padding 88px / 48px, title margin 48px, rows pt-3 pb-5 (57px each); the list ran past the screen. */
+  /* Title starts at the top (same spot as "HOW WE OPERATE"). PREVIOUS UI: list centred vertically. */
+  .careers-page #benefits { height: 100svh; min-height: 0; padding-top: 72px; padding-bottom: 24px; justify-content: flex-start; }
+  .careers-page #benefits h2 { margin-bottom: 20px; }
+  .careers-page #benefits .grid > div { padding-top: 10px; padding-bottom: 11px; }
+  /* "JOB OPENINGS" title at the same spot as "HOW WE OPERATE" / "Benefits" (66px from the top). PREVIOUS UI: padding-top 88px. */
+  .careers-page #open-positions { padding-top: 72px; }
+  /* Location line, results count and job cards sit 32px higher (closer to the role tabs). PREVIOUS UI: no offset. */
+  .careers-page #open-positions p.text-xs.mb-6 { margin-top: -32px; }
+  /* Subtitle and paragraph start at the same left gap as "WORK WITH PURPOSE" (right edge unchanged).
+     PREVIOUS UI: block centred at 90% width (33px from the edge on iPhone SE). */
+  .careers-page .careers-hero-description { align-self: flex-start; margin-left: calc(5% - 7px); width: calc(90% + 7px); }
+}
+
+/* Careers "Benefits" on large phones (iPhone Pro Max, Galaxy Ultra...): title stays at the shared spot, and the 10 rows
+   share the rest of the screen evenly (label centred in each row) instead of leaving a gap at the bottom.
+   PREVIOUS UI: same tight 46px rows as small phones, list ending around 590px on a 932-956px screen. */
+@media (max-width: 767px) and (min-height: 821px) {
+  .careers-page #benefits { padding-bottom: 80px; }
+  .careers-page #benefits > div { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+  .careers-page #benefits .grid { flex: 1 1 auto; grid-auto-rows: 1fr; }
+  .careers-page #benefits .grid > div { display: flex; align-items: center; padding-block: 0; }
+}
+
+/* Careers hero on upright tablets (iPad mini, Surface Pro, iPad Pro): one layout sized in vw so all three match —
+   "WORK WITH PURPOSE" on its own line, then "BUILD FOR THOSE WHO SERVE" and the paragraph across the full width.
+   PREVIOUS UI: title and description side by side at fixed sizes (18px title and subtitle, 12px paragraph), which
+   looked small on the larger tablets. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  /* Subtitle and paragraph sit 32px lower. PREVIOUS UI: bottom padding 7svh. */
+  .careers-page section div:has(> .careers-hero-layout) { padding: 0 8vw calc(7svh - 32px); }
+  .careers-page .careers-hero-layout { flex-direction: column; align-items: flex-start; gap: 3vw; max-width: none; }
+  /* "WORK WITH PURPOSE" sits at the top of the screen, as on phones. PREVIOUS UI: on its own line just above the subtitle. */
+  /* PREVIOUS UI: left: 8vw (then moved a little left). */
+  .careers-page .careers-hero-layout > div:first-child { position: absolute; top: max(104px, 11svh); left: 6.6vw; right: 8vw; width: auto; flex: none; }
+  /* PREVIOUS UI: font-size 6vw. */
+  .careers-page .careers-hero-title { font-size: 5.2vw; letter-spacing: -0.02em; }
+  .careers-page .careers-hero-description { width: 100%; max-width: none; align-self: stretch; }
+  .careers-page .careers-hero-subtitle { font-size: 3vw; text-align: left; margin-bottom: 1.6vw; }
+  .careers-page .careers-hero-copy { font-size: 2vw; line-height: 1.65; }
+}
+
+/* Careers "MISSION RHYTHM" on upright tablets: the iPad mini layout (title, tagline and paragraph on top; two cards
+   below with their text showing and arrows visible) on every tablet, sized in vw so they match, filling one screen.
+   PREVIOUS UI: iPad mini/Surface Pro used the ≤1023px stacked rules at fixed sizes (cards 50svh tall); iPad Pro 13
+   (1032px) got the desktop side-by-side layout with three narrow cards. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .careers-page .careers-rhythm { height: 100svh; flex-direction: column; padding: calc(88px + 3svh) 0 5svh; gap: 3svh; }
+  .careers-page .careers-rhythm-intro { width: 100%; height: auto; flex-shrink: 0; padding: 0 8vw; border: 0; align-items: flex-start; justify-content: flex-start; }
+  .careers-page .careers-rhythm-intro > div { gap: 2vw; width: 100%; }
+  .careers-page .careers-rhythm-intro h1 { text-align: left; font-size: 4.2vw; }
+  .careers-page .careers-rhythm-intro .careers-rhythm-tagline { font-size: 1.6vw; }
+  .careers-page .careers-rhythm-intro p.careers-body { margin-top: 0; max-width: 62vw; font-size: 1.8vw; line-height: 1.6; }
+  .careers-page .careers-rhythm-visual { width: 100%; height: auto; flex: 1; min-height: 0; padding-inline: 8vw; }
+  .careers-page .careers-rhythm-carousel { height: 100%; }
+  .careers-page .careers-rhythm-carousel > div:first-child { --card-gap: 1.6vw; }
+  .careers-page .careers-rhythm-card { width: calc((100% - var(--card-gap)) / 2); }
+  .careers-page .careers-rhythm-card > div:first-of-type { padding: 3.5vw; }
+  .careers-page .careers-rhythm-card .careers-card-title { font-size: 2.1vw; }
+  .careers-page .careers-rhythm-card > div:last-child { transform: none; padding: 3vw 7vw; }
+  .careers-page .careers-rhythm-card .careers-card-copy { opacity: 1; font-size: 1.75vw; line-height: 1.6; }
+  .careers-page .careers-rhythm-carousel > div:has(> button) { opacity: 1; transform: none; padding-inline: 1vw; }
+  .careers-page .careers-rhythm-carousel button { display: flex; width: 5.5vw; height: 5.5vw; padding: 1.2vw; }
+}
+
+/* Careers "INSIDE TSALLA AEROSPACE" on upright tablets: bigger title (6vw) and the title + subtitle block 48px higher.
+   PREVIOUS UI: title at the shared careers size (38px on iPad mini), block centred with no shift. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .careers-page .careers-inside-title { font-size: 6vw; }
+  .careers-page .careers-culture > div:first-child > div { transform: translateY(-48px); }
+}
+
+/* Careers culture cards ("WE BUILD BUILDERS"...) on upright tablets: exactly two cards in view on every tablet, with
+   text sized in vw so they match, and the arrows always visible.
+   PREVIOUS UI: iPad mini/Surface Pro showed two 44vw cards at fixed text sizes; iPad Pro 13 (1032px) showed four
+   narrow 21.75vw cards with hover-only arrows. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .careers-page .careers-culture-carousel > div { margin-left: 5vw; }
+  .careers-page .careers-culture-window { padding-right: 5vw; }
+  /* Half of the visible window each (PREVIOUS UI: 45vw, which ran 8px past the edge when a scrollbar takes space). */
+  .careers-page .careers-culture-card.careers-culture-card { flex: 0 0 50%; min-height: 48vw; padding: 5vw 4vw; }
+  .careers-page .careers-culture-card > span { font-size: 1.6vw; margin-bottom: 1.4vw; }
+  .careers-page .careers-culture-card > div:not(.absolute) { min-height: 0; margin-bottom: 5vw; }
+  .careers-page .careers-culture-card h2.careers-card-title { min-height: 2.6em; font-size: 2.4vw; line-height: 1.25; }
+  .careers-page .careers-culture-card p.careers-body { font-size: 1.8vw; line-height: 1.65; }
+  .careers-page .careers-culture div:has(> button) { opacity: 1; transform: none; }
+  .careers-page .careers-culture button { display: flex; width: 5.5vw; height: 5.5vw; padding: 1.2vw; }
+}
+
+/* Careers "HOW WE OPERATE" on upright tablets: the iPad mini layout (title, tagline, paragraph and the 3x2 tabs on top,
+   photo card filling the rest) on every tablet, sized in vw so they match, in one screen.
+   PREVIOUS UI: iPad mini/Surface Pro stacked at fixed sizes with a 500px photo (empty space on the Surface Pro); iPad
+   Pro 13 (1032px) got the desktop side-by-side layout. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .careers-page #how-we-operate { height: 100svh; min-height: 0; justify-content: flex-start; padding-block: calc(88px + 3svh) 5svh; }
+  .careers-page #how-we-operate > div { display: flex; flex: 1; min-height: 0; padding-inline: 8vw; }
+  .careers-page #how-we-operate > div > div { display: flex; flex-direction: column; flex: 1; min-height: 0; gap: 4svh; width: 100%; max-width: none; margin: 0; }
+  .careers-page .careers-values-intro { flex-shrink: 0; width: 100%; margin: 0; }
+  .careers-page .careers-values-intro h2 { font-size: 4.2vw; margin-bottom: 2vw; }
+  .careers-page .careers-values-intro .careers-label { font-size: 1.6vw; margin-bottom: 2vw; }
+  .careers-page .careers-values-intro p.careers-body { font-size: 1.8vw; line-height: 1.6; margin-bottom: 3vw; max-width: none; }
+  .careers-page .careers-values-intro > .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4vw; }
+  .careers-page #how-we-operate button { min-height: 5.6vw; padding: 1.2vw 1.4vw; font-size: 1.5vw; }
+  .careers-page #how-we-operate button span { letter-spacing: 0.08em; }
+  .careers-page .careers-values-intro + div { height: auto; flex: 1; min-height: 0; padding: 0; }
+  .careers-page .careers-values-intro + div .careers-card-title { font-size: 2.4vw; margin-bottom: 1.6vw; }
+  .careers-page .careers-values-intro + div .careers-body { font-size: 1.8vw; line-height: 1.55; max-width: none; }
+  .careers-page .careers-values-intro + div .absolute { padding: 3.5vw; }
+}
+
+/* Careers "A NOTE FROM THE FOUNDER" on upright tablets: the iPad mini proportions on every tablet (sizes and gaps in
+   vw, so the lines break the same way), centred in the screen.
+   PREVIOUS UI: fixed 12/14/18px text in a max-w-4xl column, so it looked small and wider-set on Surface Pro/iPad Pro. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .careers-page #founder-note > div { padding-inline: 6.25vw; }
+  .careers-page #founder-note .space-y-8 { max-width: none; width: 100%; margin: 0; }
+  .careers-page #founder-note .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 4.2vw; }
+  .careers-page #founder-note .space-y-8 > p { font-size: 1.85vw; line-height: 1.6; }
+  .careers-page #founder-note .space-y-8 > p.careers-label { font-size: 1.6vw; }
+  .careers-page #founder-note .space-y-8 > p.careers-card-title { font-size: 2.35vw; }
+}
+
+/* Surface Pro (900-1023px wide, upright): founder note 64px higher. PREVIOUS UI: centred with no shift. */
+@media (min-width: 900px) and (max-width: 1023px) and (orientation: portrait) {
+  .careers-page #founder-note > div { transform: translateY(-64px); }
+}
+
+/* Careers "Benefits" on upright tablets: the iPad mini layout (two columns of five rows) on every tablet, with sizes
+   and gaps in vw so they match, aligned to the same 8vw margin as the other careers sections.
+   PREVIOUS UI: fixed 12px labels and 32px+ column gaps (iPad Pro 13 got a very wide 14rem gap and wrapped labels). */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .careers-page #benefits > h2,
+  .careers-page #benefits > div { padding-inline: 8vw; }
+  .careers-page #benefits > h2 { font-size: 4.2vw; margin-bottom: 5vw; }
+  .careers-page #benefits .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 4vw; row-gap: 0; }
+  .careers-page #benefits .grid > div { padding: 1.7vw 0 2.6vw; }
+  .careers-page #benefits .grid > div > span { font-size: 1.55vw; }
+}
+
+/* Careers "JOB OPENINGS" on upright tablets: the iPad mini layout (full-width role tabs, two columns of job cards with
+   location and role type stacked) on every tablet, sized in vw so they match, on the shared 8vw margin.
+   PREVIOUS UI: fixed sizes — iPad Pro 13 had small centred tabs and three columns; Surface Pro had tiny text with the
+   details side by side. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .careers-page #open-positions { min-height: 100svh; padding-block: calc(88px + 3svh) 6svh; }
+  .careers-page #open-positions > div:first-child { padding-inline: 8vw; max-width: none; }
+  .careers-page #open-positions h2 { font-size: 4.2vw; margin-bottom: 2.4vw; }
+  .careers-page #open-positions p.careers-jobs-intro { font-size: 1.8vw; line-height: 1.6; margin-bottom: 4.5vw; }
+  .careers-page #open-positions > div:nth-child(2) { padding-inline: 8vw; max-width: none; }
+  .careers-page #open-positions div:has(> button) { gap: 1.6vw; padding-inline: 0; margin-bottom: 6vw; }
+  .careers-page #open-positions button { flex: 1; min-height: 5.6vw; padding: 0 2vw; margin: 0; }
+  .careers-page #open-positions button span { font-size: 1.5vw; }
+  .careers-page #open-positions p.text-neutral-600 { font-size: 1.5vw; margin-bottom: 3vw; }
+  .careers-page #open-positions .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.6vw; }
+  .careers-page #open-positions .careers-job-card { padding: 3.6vw; min-height: 22vw; text-align: left; justify-content: flex-start; }
+  .careers-page #open-positions .careers-job-card h3 { font-size: 2.2vw; min-height: 2.6em; margin-bottom: 2vw; }
+  .careers-page #open-positions .careers-job-metadata { flex-direction: column; align-items: flex-start; gap: 1.6vw; font-size: 1.5vw; }
+  .careers-page #open-positions .careers-job-metadata svg { width: 1.9vw; height: 1.9vw; }
+}
+
+/* Careers "INNOVATION IN OUR DNA" on upright tablets: larger, scaled to the screen width ("INNOVATION" spans ~80%).
+   PREVIOUS UI: 10vw-equivalent clamp size (77px on iPad mini, ~57% of the width). */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .careers-page .careers-display-title { font-size: 14vw; }
+}
+
+/* Culture cards on upright tablets: draw the right-hand vertical line of the last visible card (each card only draws
+   its own left line, so the edge of the view had none). PREVIOUS UI: no line on the right edge. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .careers-page .careers-culture-window > .overflow-hidden { position: relative; }
+  .careers-page .careers-culture-window > .overflow-hidden::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 1px; background: #000; z-index: 20; pointer-events: none; }
+}
+
+/* Contact page on upright tablets (iPad mini, Surface Pro, iPad Pro): one layout sized in vw so all three match and
+   it fits one screen — heading block on top, then "Connect with our team" and "Our headquarters" side by side.
+   PREVIOUS UI: iPad mini/Surface Pro stacked everything at fixed sizes (page scrolled, justified intro left big gaps);
+   iPad Pro 13 (1032px) got the desktop two-column layout at desktop sizes. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  /* The section starts below a 72px header offset, so it fills the rest of the screen. */
+  section.contact-section { min-height: calc(100svh - 72px); padding: calc(16px + 4svh) 8vw 6svh; }
+  .contact-section > div { max-width: none; }
+  .contact-section header { grid-template-columns: 1fr; gap: 2.4vw; margin-bottom: 5vw; align-items: start; }
+  .contact-section header p:first-child { font-size: 1.5vw; margin-bottom: 2vw; }
+  .contact-section header h1 { font-size: 6vw; }
+  .contact-section header > p { max-width: 70vw; font-size: 2.2vw; text-align: left; }
+  .contact-section .border-y { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contact-section .border-y > div { padding-block: 4.5vw; }
+  .contact-section .border-y > div:first-child { padding-right: 4vw; }
+  .contact-section .border-y > div:last-child { border-top: 0; border-left: 1px solid rgb(255 255 255 / 0.15); padding-left: 4vw; }
+  .contact-section .border-y p.uppercase,
+  .contact-section .border-y dt { font-size: 1.45vw; margin-bottom: 1.2vw; }
+  .contact-section .border-y h2 { font-size: 3vw; }
+  .contact-section .border-y h2 + p,
+  .contact-section .border-y address { font-size: 1.85vw; margin-top: 1.6vw; }
+  .contact-section .border-y dl { margin-top: 4vw; }
+  .contact-section .border-y dl > :not([hidden]) ~ :not([hidden]) { margin-top: 2.6vw; }
+  .contact-section .border-y dd a { font-size: 2.1vw; min-height: 0; }
+  .contact-section .border-y > div:first-child > a { margin-top: 4vw; font-size: 1.7vw; padding: 1.6vw 3vw; min-height: 0; gap: 3vw; }
+  .contact-section .border-y > div:last-child > div:first-child { margin-bottom: 3vw; }
+  /* The two-column block stretches to the bottom of the screen and the map grows to fill it (no empty band below).
+     PREVIOUS UI: fixed 30vw (then 42vw) map with empty space under the block. */
+  section.contact-section { display: flex; flex-direction: column; }
+  .contact-section > div { flex: 1; display: flex; flex-direction: column; width: 100%; }
+  .contact-section .border-y { flex: 1; }
+  .contact-section .border-y > div:last-child { display: flex; flex-direction: column; }
+  .contact-section .border-y > div:last-child > div.relative { height: auto; flex: 1; min-height: 30vw; }
+  .contact-section .border-y > div:last-child > a { font-size: 1.6vw; margin-top: 1.6vw; }
+}
+
+/* Contact page on phones (small and large): bigger title, intro paragraph left-aligned (no stretched gaps), tighter
+   spacing so less scrolling, and no empty band under the map before the footer.
+   PREVIOUS UI: 22.5px title, justified 18px intro, 48px gaps, 64px bottom padding. */
+@media (max-width: 767px) {
+  section.contact-section { padding-top: 24px; padding-bottom: 24px; }
+  .contact-section header { gap: 16px; margin-bottom: 32px; }
+  .contact-section header h1 { font-size: 28px; }
+  .contact-section header > p { font-size: 14px; line-height: 1.6; text-align: left; }
+  .contact-section .border-y > div { padding-block: 32px; }
+  .contact-section .border-y dl { margin-top: 28px; }
+  .contact-section .border-y > div:first-child > a { margin-top: 28px; }
+  .contact-section .border-y > div:last-child > div.relative { height: 240px; }
+  .contact-section .border-y { border-bottom: 0; }
+  .contact-section .border-y > div:last-child { padding-bottom: 8px; }
+}
+
+/* T-BAT specs on large phones (iPhone Pro Max, Galaxy Ultra...): drone illustration a little bigger.
+   PREVIOUS UI: transform: scale(1.15) from the shared phone rule. */
+@media (max-width: 767px) and (min-height: 821px) {
+  /* scale(1.3) ran 12px past both screen edges; 1.22 is the largest that keeps the wingtips on screen. */
+  /* PREVIOUS UI: scale(1.22); reduced a little. */
+  .bat-page [data-bat-section="specs"] .bat-specs-drone { transform: scale(1.18); }
+  /* Dimensions and spec figures 20px lower. PREVIOUS UI: no offset. */
+  .bat-page [data-bat-section="specs"] :is(.bat-specs-dimensions, .bat-specs-list) { translate: 0 20px; }
+}
+
+/* T-BAT "Payloads & Sensors" on large phones: the five payload boxes stack one per row, a little taller, and sit 20px
+   higher. PREVIOUS UI: two columns (fifth box full width), 4.25rem boxes, raised by clamp(1.25rem, 3svh, 2rem). */
+@media (max-width: 767px) and (min-height: 821px) {
+  .bat-page .bat-payload-controls {
+    grid-template-columns: 1fr;
+    transform: translateY(calc(-1 * clamp(1.25rem, 3svh, 2rem) - 20px));
+  }
+  /* Pure black like the payload images (#000), so no lighter rectangle shows around each picture. PREVIOUS UI: #050505. */
+  .bat-page .bat-payload-button { min-height: 4.6rem; background-color: #000; }
+}
+
+/* T-BAT "Land. Swap. Redeploy" on large phones: battery-swap video 24px higher. PREVIOUS UI: scale(1.28) with no offset. */
+@media (max-width: 767px) and (min-height: 821px) {
+  /* PREVIOUS UI: translateY(-24px), then translateY(-44px) with no sideways shift. */
+  /* PREVIOUS UI: translate(8px, -44px). */
+  /* PREVIOUS UI: translate(18px, -44px). */
+  .bat-page .bat-battery-stage video { transform: translate(28px, -44px) scale(1.28); }
+}
+
+/* T-BAT flight sequence on large phones: stage caption ("07 PRECISION LANDING"...) 32px higher.
+   PREVIOUS UI: --bat-sequence-caption-top fell back to 88px. */
+@media (max-width: 767px) and (min-height: 821px) {
+  /* PREVIOUS UI: 56px (then nudged down a little). */
+  .bat-page [data-bat-section="sequence"] { --bat-sequence-caption-top: 64px; }
+}
+
+/* MANTIS "Built Beyond Boundaries" on upright tablets (iPad mini, Surface Pro, iPad Pro): the artwork is three scenes, so
+   each scene fills one equal column with its title word centred above it, and the whole drone fits on screen.
+   PREVIOUS UI: one cropped image (desert plus two thin side strips) with the drone at 225vw, wingtips cut off. */
+.mantis-three-columns { display: none; }
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .mantis-page [data-mantis-section="three-phase"] > picture { display: none; }
+  .mantis-three-columns { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mantis-three-columns > div { position: relative; overflow: hidden; }
+  /* Full artwork at section height; each column centres on its own scene (percent of the artwork's width). */
+  .mantis-three-columns img { position: absolute; top: 0; left: 50%; width: auto; max-width: none; height: 100%; transform: translateX(var(--scene-focus)); }
+  .mantis-three-columns [data-scene="ship"] { --scene-focus: -18%; }
+  .mantis-three-columns [data-scene="desert"] { --scene-focus: -49.5%; }
+  .mantis-three-columns [data-scene="mountain"] { --scene-focus: -84%; }
+  .mantis-page .mantis-three-heading.title-panel-grid { left: 0; right: 0; width: 100%; margin-left: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); font-size: 3.6vw; }
+  /* PREVIOUS UI: top 56%, width 161vw (whole drone about 96vw wide); then top 60%, width 177vw; then top 60% + 60px; then top 60% + 140px, width 194.7vw; then top 60% + 140px, width 214vw. */
+  .mantis-page .mantis-three-drone { top: calc(60% + 230px); width: 214vw; transform: translate(-50%, -47%); }
+}
+
+/* MANTIS "One platform. More possibilities." on upright tablets: one layout sized to the screen — title, drone filling
+   the free space, dimensions, then the four figures in two columns — so it fits one frame and matches on every tablet.
+   PREVIOUS UI: iPad mini/Surface Pro scaled the drone 1.28x, so it hit the title and ran past both edges; iPad Pro 13
+   got the desktop three-column layout with a small drone and a lot of empty space. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .mantis-page [data-mantis-section="specs"] { height: 100svh; min-height: 0; display: flex; flex-direction: column; align-items: stretch; gap: 2.4svh; padding: var(--fenix-title-top, 96px) 6vw 4svh; }
+  .mantis-page [data-mantis-section="specs"] .product-title-position { position: static; flex: none; font-size: 4.4vw; white-space: nowrap; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-grid { flex: 1; min-height: 0; max-width: none; margin: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr) auto; align-items: stretch; column-gap: 3vw; row-gap: 0; }
+  /* Title, drone, dimensions and figures all 18px higher. PREVIOUS UI: no offset. */
+  .mantis-page [data-mantis-section="specs"] :is(.product-title-position, .bat-specs-grid) { translate: 0 -18px; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-figure { grid-area: 1 / 1 / 2 / -1; min-height: 0; padding: 0; gap: 2svh; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-frame { position: relative; flex: 1; min-height: 0; transform: none; }
+  /* PREVIOUS UI: scale(1.08). Now 8% bigger. */
+  .mantis-page [data-mantis-section="specs"] .bat-specs-drone { position: absolute; inset: 0; width: 100%; height: 100%; max-height: none; object-fit: contain; transform: scale(1.1664); }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-dimensions { flex: none; max-width: none; margin: 0 0 2svh; padding-top: 1.6svh; transform: none; }
+  /* PREVIOUS UI: labels 1.75vw, dimensions 2.9vw, units 1.8vw, figures 5.2vw. */
+  .mantis-page [data-mantis-section="specs"] dt { font-size: 2vw; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-dimensions dd { margin-top: .8vw; font-size: 3.25vw; }
+  .mantis-page [data-mantis-section="specs"] dd span { margin-left: .8vw; font-size: 2vw; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-left { grid-area: 2 / 1; transform: none; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-right { grid-area: 2 / 2; transform: none; }
+  /* Figures centred in their boxes, and the dimensions + figures block 14px higher.
+     PREVIOUS UI: figures left-aligned, block with no offset. */
+  .mantis-page [data-mantis-section="specs"] :is(.bat-specs-dimensions, .bat-specs-list) { translate: 0 -14px; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-row { min-height: 0; padding-block: 1.3svh; align-items: center; text-align: center; }
+  .mantis-page [data-mantis-section="specs"] .bat-specs-row dd { margin-top: .7vw; font-size: 5.8vw; justify-content: center; }
+}
+
+/* MANTIS "A new perspective on Strike." on upright tablets: a bigger two-line title on every tablet, 30px lower.
+   The drone image keeps its original full-screen size and position.
+   PREVIOUS UI: 44px title at top 19% (two lines on iPad mini/Surface Pro, one on iPad Pro). */
+.mantis-perspective-break { display: none; }
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .mantis-perspective-break { display: inline; }
+  /* PREVIOUS UI: top: calc(19% + 30px), then + 50px, + 80px, + 130px, + 150px. */
+  .mantis-page #mantis-perspective-title { top: calc(19% + 120px); font-size: 6.6vw !important; line-height: 1.12; }
+  /* "Strike." enlarged 16% twice, then 30%. PREVIOUS UI: same size as the title, then 1.16em, then 1.3456em. */
+  .mantis-page #mantis-perspective-title .mantis-perspective-strike { font-size: 1.7493em; }
+}
+
+/* MANTIS "VTOL Launch. Precision strike." on upright tablets: larger two-line title clear of the drone, a bigger drone
+   centred in the space below it, and the three callouts spread down the left with leaders to their parts.
+   PREVIOUS UI: the drone sat at the top over the title, callouts were small, and the lower third was empty. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .mantis-page .mantis-details .product-title-position { font-size: 4.6vw; line-height: 1.15; }
+  .mantis-page #mantis-details-title > :last-child { display: block; }
+  /* PREVIOUS UI: left 22%, top calc(58% - 54.4vw), width 180vw; then left 20%, width 198vw; then left 20% - 20px. Now 30px left of 20% and 16px higher. */
+  .mantis-page .mantis-details-image { left: calc(20% - 30px); top: calc(58% - 59.84vw - 16px); width: 198vw; }
+  /* Evenly spaced labels, centred so the middle underline is level with the camera; the straight leaders land on the
+     upper wing, camera and propeller blade. PREVIOUS UI: list height 44svh, then 22svh + 22.8vw, with angled leaders;
+     then each label pinned to its part, which made the gaps uneven. */
+  .mantis-page .mantis-details-callouts { left: 6vw; top: 0; width: 31vw; height: calc(116% - 31.64vw - 32px); margin-top: 0; grid-template-rows: 1fr auto 1fr; gap: 11vw 0; align-content: stretch; }
+  .mantis-page .mantis-details-callout { padding-bottom: 1.6vw; border-bottom-color: transparent; }
+  .mantis-page .mantis-details-callout:nth-child(1) { align-self: end; }
+  .mantis-page .mantis-details-callout:nth-child(3) { align-self: start; }
+  .mantis-page .mantis-details-callout::after { display: none; }
+  .mantis-page .mantis-details-callout h3 { font-size: 2.3vw; line-height: 1.25; }
+  .mantis-page .mantis-details-callout .product-body { margin-top: 1vw; max-width: none; font-size: 1.8vw; line-height: 1.5; }
+  .mantis-mobile-wing-connector { display: block; }
+  .mantis-page .mantis-details-connectors path { stroke-linejoin: round; }
+}
+
+/* MANTIS "Ready to deploy where others cannot." on upright tablets: a little larger, always on its two lines.
+   PREVIOUS UI: clamp(2rem, 5.1vw, 6rem). */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .mantis-page #mantis-contact-title { font-size: 6.2vw; white-space: nowrap; }
+}
+
+/* BAT "Multi Role, Single Solution" on upright tablets: four equal terrain columns, one under each title word, with the
+   drone resting on the bottom edge. PREVIOUS UI: stacked portrait background, title on the image's panel grid, drone bottom 4%. */
+.bat-multi-role-columns { display: none; }
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .bat-page [data-bat-section="multi-role"] > picture { display: none; }
+  .bat-multi-role-columns { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .bat-multi-role-columns > div { position: relative; overflow: hidden; }
+  /* Full artwork at section height; each column centres on its own terrain (percent of the artwork's width). */
+  .bat-multi-role-columns img { position: absolute; top: 0; left: 50%; width: auto; max-width: none; height: 100%; transform: translateX(var(--scene-focus)); }
+  .bat-multi-role-columns [data-scene="forest"] { --scene-focus: -13.5%; }
+  .bat-multi-role-columns [data-scene="desert"] { --scene-focus: -37.5%; }
+  .bat-multi-role-columns [data-scene="mountain"] { --scene-focus: -62.8%; }
+  .bat-multi-role-columns [data-scene="city"] { --scene-focus: -87.5%; }
+  .bat-page [data-bat-section="multi-role"] .title-panel-grid { left: 0; right: 0; width: 100%; margin-left: 0; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  /* PREVIOUS UI: bottom 4%, then bottom 0, then bottom -120px, then bottom -260px. */
+  .bat-page .bat-multi-role-drone { bottom: -310px; }
+}
+
+/* BAT "Engineered for the mission" on upright tablets: one layout sized to the screen (title, drone filling the free space,
+   dimensions, then the four figures in two columns) so it fits one frame and matches on every tablet.
+   PREVIOUS UI: iPad mini stacked at fixed sizes; iPad Pro and larger used the small three-column desktop layout. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .bat-page [data-bat-section="specs"] { height: 100svh; min-height: 0; display: flex; flex-direction: column; align-items: stretch; gap: 2.4svh; padding: var(--fenix-title-top, 96px) 6vw 4svh; }
+  .bat-page [data-bat-section="specs"] .product-title-position { position: static; flex: none; font-size: 4.4vw; white-space: nowrap; }
+  .bat-page [data-bat-section="specs"] .bat-specs-grid { flex: 1; min-height: 0; max-width: none; margin: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr) auto; align-items: stretch; column-gap: 3vw; row-gap: 0; }
+  /* Title, drone and figures together. PREVIOUS UI: no offset. */
+  .bat-page [data-bat-section="specs"] :is(.product-title-position, .bat-specs-grid) { translate: 0 -30px; }
+  .bat-page [data-bat-section="specs"] .bat-specs-figure { grid-area: 1 / 1 / 2 / -1; min-height: 0; padding: 0; gap: 2svh; }
+  .bat-page [data-bat-section="specs"] .bat-specs-frame { position: relative; flex: 1; min-height: 0; transform: none; }
+  /* PREVIOUS UI: scale(1.09), wingtips on the page margins. */
+  .bat-page [data-bat-section="specs"] .bat-specs-drone { position: absolute; inset: 0; width: 100%; height: 100%; max-height: none; object-fit: contain; transform: scale(1.1445); }
+  .bat-page [data-bat-section="specs"] .bat-specs-dimensions { flex: none; max-width: none; margin: 0 0 2svh; padding-top: 1.6svh; transform: none; }
+  .bat-page [data-bat-section="specs"] dt { font-size: 2vw; }
+  .bat-page [data-bat-section="specs"] .bat-specs-dimensions dd { margin-top: .8vw; font-size: 3.25vw; }
+  .bat-page [data-bat-section="specs"] dd span { margin-left: .8vw; font-size: 2vw; }
+  .bat-page [data-bat-section="specs"] .bat-specs-left { grid-area: 2 / 1; transform: none; }
+  .bat-page [data-bat-section="specs"] .bat-specs-right { grid-area: 2 / 2; transform: none; }
+  .bat-page [data-bat-section="specs"] .bat-specs-row { min-height: 0; padding-block: 1.3svh; align-items: center; text-align: center; }
+  .bat-page [data-bat-section="specs"] .bat-specs-row dd { margin-top: .7vw; font-size: 5.8vw; justify-content: center; }
+}
+
+/* BAT "Payloads & Sensors" on upright tablets: drone centred in the free space, five larger cards (3 + 2) with the picture
+   above the text, all sized to the screen so the three tablets match.
+   PREVIOUS UI: drone pinned to the top of the stage, one row of five short cards with labels over the pictures. */
+/* Also covers 600-767px upright screens (foldables, small tablets). PREVIOUS UI: those got the phone's five stacked cards over the drone. */
+@media (min-width: 600px) and (max-width: 1199px) and (orientation: portrait) {
+  .bat-page .bat-payload-viewer { --bat-payload-gutter: 6vw; height: 100svh; min-height: 0; gap: 2svh; padding: var(--fenix-title-top, 96px) 6vw 4svh; }
+  .bat-page #bat-payload-title { font-size: 4.4vw; line-height: 1.15; white-space: nowrap; }
+  .bat-page .bat-payload-stage { flex: 1; min-height: 0; aspect-ratio: auto; }
+  .bat-page .bat-payload-film { top: 50%; translate: 0 -50%; transform: none; }
+  .bat-page .bat-payload-controls { flex: none; margin-bottom: 0; transform: none; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(2, 21svh); gap: 1.2vw; }
+  /* Payload art is centred in a wide black image: enlarge it and lift it clear of the text. */
+  .bat-page .bat-payload-button { grid-column: span 2; min-height: 0; background-color: #000; background-size: auto 125%; background-position: center 112%; }
+  .bat-page .bat-payload-controls > .bat-payload-button:nth-child(n + 4) { grid-column: span 3; }
+  .bat-page .bat-payload-button::before { display: none; }
+  .bat-page .bat-payload-button-index { top: 1.1vw; left: 1.3vw; font-size: 1.4vw; }
+  .bat-page .bat-payload-button-label { left: 1.3vw; right: 1.3vw; bottom: 1.2vw; font-size: 2vw; line-height: 1.2; }
+  .bat-page .bat-payload-button-label small { margin-top: .4vw; font-size: 1.6vw; line-height: 1.25; }
+}
+
+/* BAT "Land. Swap. Redeploy." on upright tablets: whole drone across the full width, centred in the free space under the
+   title, with its cut edges softly faded. Same video file, untouched.
+   PREVIOUS UI: video pinned to the bottom edge at scale 1.08 with a large gap above it and the nose cut off. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .bat-page .bat-battery-section { height: 100svh; min-height: 0; overflow: hidden; gap: 2svh; padding: var(--fenix-title-top, 96px) 6vw 4svh; }
+  .bat-page #bat-battery-title { font-size: 4.4vw; line-height: 1.15; white-space: nowrap; }
+  .bat-page .bat-battery-section header p { margin-top: 1.4vw; max-width: none; font-size: 2.2vw; line-height: 1.4; }
+  .bat-page .bat-battery-stage { flex: 1; width: calc(100% + 12vw); min-height: 0; max-width: none; margin-inline: -6vw; aspect-ratio: auto; }
+  /* The video box matches the picture exactly so the fade lands on the picture's own top and bottom edges. */
+  .bat-page .bat-battery-stage video { inset: auto 0; top: 50%; width: 100%; height: auto; aspect-ratio: 16 / 9; object-position: center; translate: 0 -50%; transform: scale(1.1); transform-origin: center; mask-image: linear-gradient(to bottom, transparent, black 9%, black 88%, transparent); }
+}
+
+/* BAT flight sequence on upright tablets: one caption at the top, a small label under each drone, and the background title
+   in the clear centre column. PREVIOUS UI: seven fixed desktop captions and a wide two-line title over the shadows. */
+@media (min-width: 768px) and (max-width: 1199px) and (orientation: portrait) {
+  .bat-page [data-bat-section="sequence"] { --bat-sequence-caption-top: var(--fenix-title-top, 96px); --bat-sequence-caption-inset: 6vw; }
+  .bat-page .bat-sequence-bg-title { transform: none; }
+  .bat-page .bat-sequence-bg-text { font-size: 4.6vw; line-height: 1.15; }
+  .bat-page .bat-sequence-caption { max-width: none; gap: .5vw; white-space: nowrap; }
+  .bat-page .bat-sequence-caption > :nth-child(1) { margin-bottom: .4vw; font-size: 2vw; }
+  .bat-page .bat-sequence-caption > :nth-child(2) { font-size: 2.5vw; }
+  .bat-page .bat-sequence-caption > :nth-child(3) { font-size: 1.6vw; }
+  /* White backing so the dashed flight path stops at the label instead of running through its text. */
+  .bat-page .bat-sequence-stop-label { width: 25vw; padding-block: .5vw; background: #fff; font-size: 1.55vw; line-height: 1.25; }
+}
+
+/* BAT "Multi Role, Single Solution" on large phones (iPhone Pro Max, Galaxy Ultra): drone 88px lower.
+   PREVIOUS UI: bottom 4%. */
+@media (min-width: 400px) and (max-width: 767px) and (min-height: 821px) {
+  /* PREVIOUS UI: bottom: calc(4% - 44px). */ .bat-page .bat-multi-role-drone { bottom: calc(4% - 88px); }
+}
+
+/* BAT "Land. Swap. Redeploy" on small phones (iPhone SE, Galaxy S22-S26): battery video 24px to the right.
+   PREVIOUS UI: no sideways offset (then 44px). The vertical offsets are the ones these phones already had. */
+@media (max-width: 767px) and (max-height: 820px) and (orientation: portrait) {
+  .bat-page .bat-battery-stage video { translate: 24px 0; }
+}
+@media (width < 400px) and (max-height: 820px) and (orientation: portrait) {
+  .bat-page .bat-battery-stage video { translate: 24px -40px; }
+}
+
+/* BAT "Payloads & Sensors" on wider, shorter large phones: cards 60px lower so they clear the drone.
+   Regular tall phones keep their position. PREVIOUS UI: translateY(calc(-1 * clamp(1.25rem, 3svh, 2rem) - 20px)). */
+@media (max-width: 599px) and (min-height: 821px) and (min-aspect-ratio: 1/2) {
+  .bat-page .bat-payload-controls { transform: translateY(calc(-1 * clamp(1.25rem, 3svh, 2rem) + 40px)); }
+}
+
+/* BAT "Payloads & Sensors" on small phones: the full-width 5th card uses pure black like its picture, so no lighter
+   strips show on either side. PREVIOUS UI: #050505. */
+@media (max-width: 767px) and (max-height: 820px) {
+  .bat-page .bat-payload-controls > .bat-payload-button:last-child { background-color: #000; }
 }

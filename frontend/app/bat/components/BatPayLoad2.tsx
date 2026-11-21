@@ -231,7 +231,8 @@ export default function BatPayLoad2() {
             key={`${item.name}-${index}`}
             type="button"
             aria-pressed={selected === index}
-            aria-label={`Select ${item.name} payload`}
+            // PREVIOUS UI: aria-label={`Select ${item.name} payload`}. Screen readers now read the button's
+            // visible text (number, name, type), so what they say matches what's on screen; aria-pressed marks the choice.
             className={`bat-payload-button ${selected === index ? "is-selected" : ""}`}
             onClick={(event) => { instantRef.current = event.detail === 0; setSelected(index) }}
             style={{ backgroundImage: `url("/product/T-BAT/${item.image}")` }}

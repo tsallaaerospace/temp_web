@@ -97,7 +97,8 @@ export default function ValuesSection() {
 
             </h2>
             <p className="careers-label text-[#5ce1e6] mb-4">{content.values.tagline}</p>
-            <p className="careers-body text-gray-300 text-justify mb-8">
+            {/* PREVIOUS UI: text-gray-300 (near-white, read as bold). Now the softer grey of the "Mission Rhythm" paragraph. */}
+            <p className="careers-body text-neutral-400 text-justify mb-8">
               {/* PREVIOUS CONTENT: Tsalla Aerospace is where visionaries and veterans converge to reimagine what's possible in flight and defense. We prototype by sunrise, refine by midnight, and never settle for ordinary. Shaped by lived experience and fearless innovation, our team transforms challenges into breakthroughs. */}
               {content.values.description}
             </p>

@@ -55,6 +55,12 @@ export default function AIDomains() {
                     .domains-image { height: auto; aspect-ratio: 16 / 9; }
                     .domains-copy { grid-template-columns: 1fr; gap: 1.25rem; }
                 }
+                /* Large upright tablets just under 1024px (Surface Pro): same layout as the iPad Pro 13 —
+                   taller image and two-column copy. PREVIOUS UI: 16:9 image and one-column copy from the rule above. */
+                @media (min-width: 900px) and (max-width: 1023px) and (orientation: portrait) {
+                    .domains-image { height: clamp(18rem, 48svh, 40rem); aspect-ratio: auto; }
+                    .domains-copy { grid-template-columns: 1fr 1fr; gap: 6vw; }
+                }
                 @media (max-width: 767px) {
                     .ai-domains { padding: 5.5rem 5vw 2.5rem; gap: 1.5rem; }
                     .domains-eyebrow { font-size: 9px; margin-bottom: .8rem; }
@@ -63,6 +69,16 @@ export default function AIDomains() {
                     .domains-copy { grid-template-columns: 1fr; gap: 1.25rem; padding-top: 1.25rem; }
                     .domains-statement { font-size: 16px; }
                     .domains-description { font-size: 13px; }
+                }
+                /* Small phones (iPhone SE, S22, S23...): content and image sit higher.
+                   PREVIOUS UI: same 5.5rem top padding as other phones. */
+                @media (max-width: 767px) and (max-height: 820px) {
+                    .ai-domains { padding-top: 2.5rem; align-content: start; }
+                }
+                /* Large phones (iPhone Pro Max, S23 Ultra...): extra bottom padding lifts the centred content by 48px.
+                   PREVIOUS UI: padding-bottom 2.5rem like other phones. */
+                @media (max-width: 767px) and (min-height: 821px) {
+                    .ai-domains { padding-bottom: 8.5rem; }
                 }
             `}</style>
         </section>

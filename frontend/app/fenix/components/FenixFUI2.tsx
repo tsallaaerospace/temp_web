@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useRef } from "react"
-import { motion, useReducedMotion } from "framer-motion"
+import { motion, useInView, useReducedMotion } from "framer-motion"
 import ProductHeading from "@/components/ProductHeading"
 
 const FEATURES = [
@@ -13,7 +13,8 @@ const FEATURES = [
   // PREVIOUS UI: Sensor Suite anchor x was 0.290.
   // PREVIOUS UI: Sensor Suite anchor x was 0.315.
   // PREVIOUS UI: Sensor Suite anchor y was 0.459.
-  { title: "Sensor Suite", detail: "Full sensor fusion integrating visual odometry, high-precision IMU, and LiDAR ranging.", anchor: [0.325, 0.469] },
+  // PREVIOUS UI: Sensor Suite anchor [0.325, 0.469], then [0.305, 0.489] (each move 4 small steps left and down), then [0.285, 0.509].
+  { title: "Sensor Suite", detail: "Full sensor fusion integrating visual odometry, high-precision IMU, and LiDAR ranging.", anchor: [0.285, 0.519] },
   // PREVIOUS UI: Payload anchor [0.343, 0.49] targeted the main lens.
   // PREVIOUS UI: Payload anchor x was 0.342.
   // PREVIOUS UI: Payload anchor x was 0.337.
@@ -23,6 +24,7 @@ const FEATURES = [
 
 export default function FenixFUI2() {
   const sectionRef = useRef<HTMLElement>(null)
+  const inView = useInView(sectionRef, { once: true, amount: 0.3 })
   const imageRef = useRef<HTMLImageElement>(null)
   const callouts = useRef<(HTMLDivElement | null)[]>([])
   const paths = useRef<(SVGPathElement | null)[]>([])
@@ -53,7 +55,7 @@ export default function FenixFUI2() {
   }, [updateConnectors])
 
   return (
-    <section ref={sectionRef} data-fenix-features aria-labelledby="fenix-features-title" className="fenix-details relative isolate w-full overflow-hidden bg-white font-orbit text-neutral-900">
+    <section ref={sectionRef} data-fenix-features data-in-view={inView} aria-labelledby="fenix-features-title" className="fenix-details relative isolate w-full overflow-hidden bg-white font-orbit text-neutral-900">
       {/* PREVIOUS UI: Explorer used an uppercase E and lowercase x. */}
       <ProductHeading id="fenix-features-title" className="fenix-details-heading">Fast Entry Navigational Intrusion <span className="text-[#5ce1e6]">eXplorer</span></ProductHeading>
       <img ref={imageRef} onLoad={updateConnectors} className="fenix-details-image" src="/product/fenix/FENIX-Specs.png" alt="FENIx drone showing its cameras, propulsion, protected airframe and onboard systems" loading="lazy" decoding="async" />

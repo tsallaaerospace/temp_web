@@ -20,7 +20,11 @@ export default function MantisSpecifications() {
   const reduceMotion = useReducedMotion()
   return (
     <section data-mantis-section="specs" className="bat-specs relative w-full overflow-hidden bg-white font-orbit text-neutral-900" aria-labelledby="mantis-specs-title">
-      <ProductHeading id="mantis-specs-title" className="product-title-position z-20">One platform. More <CharacterReveal text="possibilities." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} /></ProductHeading>
+      {/* PREVIOUS UI: both sentences shared one inline run at every width. */}
+      <ProductHeading id="mantis-specs-title" className="product-title-position z-20">
+        <span className="mantis-specs-title-first">One platform.</span>{" "}
+        <span className="mantis-specs-title-second">More <CharacterReveal text="possibilities." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} /></span>
+      </ProductHeading>
       <div className="bat-specs-grid">
         <motion.figure className="bat-specs-figure relative" initial={reduceMotion ? false : { opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: reduceMotion ? 0 : 0.8 }}>
           <div className="bat-specs-frame">

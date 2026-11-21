@@ -57,10 +57,10 @@ export default function Footer() {
 
   const footerLinks = {
     company: [
-      // PREVIOUS UI: About Us, Mission Autonomy and Our Team had disabled: true while their pages were switched off.
-      { name: "About Us", href: "/about" },
-      { name: "Mission Autonomy", href: "/about#mission" },
-      { name: "Our Team", href: "/leadership" },
+      // PREVIOUS UI: clickable from 4 Nov to 12 Nov; their pages are switched off again.
+      { name: "About Us", href: "/about", disabled: true },
+      { name: "Mission Autonomy", href: "/about#mission", disabled: true },
+      { name: "Our Team", href: "/leadership", disabled: true },
       // PREVIOUS UI: Our Culture pointed to /careers/culture.
       { name: "Our Culture", href: "/careers" },
       { name: "Careers", href: "/careers" },
@@ -82,8 +82,8 @@ export default function Footer() {
       { name: "STORM", href: "/storm" },
     ],
     media: [
-      // PREVIOUS UI: Media Coverage had disabled: true while /newsroom was switched off.
-      { name: "Media Coverage", href: "/newsroom" },
+      // PREVIOUS UI: clickable from 4 Nov to 12 Nov; /newsroom is switched off again.
+      { name: "Media Coverage", href: "/newsroom", disabled: true },
       { name: "Press Releases", href: "/press-releases" },
       { name: "Blog", href: "/blog" },
     ],
@@ -164,9 +164,10 @@ export default function Footer() {
           <div className="footer-short-nav min-w-0 lg:col-span-7 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-8 sm:gap-y-12">
             {Object.entries(footerLinks).map(([title, links]) => (
               <div key={title} className="footer-short-link-group min-w-0 flex flex-col space-y-3 sm:space-y-6">
-                <h4 className="font-orbit text-[#5ce1e6] text-xs font-bold uppercase tracking-[0.2em]">
+                {/* PREVIOUS UI: <h4> (same look). h2 never skips a heading level, whatever page the footer sits under. */}
+                <h2 className="font-orbit text-[#5ce1e6] text-xs font-bold uppercase tracking-[0.2em]">
                   {title}
-                </h4>
+                </h2>
                 {/* PREVIOUS UI: <ul className="flex flex-col space-y-1.5 sm:space-y-3"> */}
                 <ul className="footer-short-links flex flex-col space-y-2.5 sm:space-y-3">
                   {links.map((link) => {
@@ -292,7 +293,8 @@ export default function Footer() {
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#5ce1e6]/30 to-transparent" />
         <div className="footer-short-bottom-inner max-w-[90rem] mx-auto px-6 lg:px-12 flex flex-col lg:flex-row justify-between items-center gap-4 sm:gap-6 text-center">
           <div className="flex items-center space-x-8 order-2 lg:order-1">
-            <p className="text-white/30 font-orbit text-[10px] uppercase tracking-widest">
+            {/* PREVIOUS UI: text-white/30 (too faint to read: contrast 2.5:1) */}
+            <p className="text-white/50 font-orbit text-[10px] uppercase tracking-widest">
               © {new Date().getFullYear()} Tsalla Aerospace. All rights reserved.
             </p>
           </div>
@@ -300,15 +302,16 @@ export default function Footer() {
           {/* Social Icons Overlay */}
           <div className="flex items-center space-x-6 order-1 lg:order-2">
             {[
-              { icon: Instagram, href: "https://www.instagram.com/tsallaaerospace/?hl=en" },
-              { icon: Linkedin, href: "https://www.linkedin.com/company/tsallaaerospace/" },
-              { icon: Youtube, href: "https://www.youtube.com/@tsallaaerospace6378" },
-              { icon: Twitter, href: "https://x.com/TsallaAerospace" }
+              { icon: Instagram, href: "https://www.instagram.com/tsallaaerospace/?hl=en", label: "Instagram" },
+              { icon: Linkedin, href: "https://www.linkedin.com/company/tsallaaerospace/", label: "LinkedIn" },
+              { icon: Youtube, href: "https://www.youtube.com/@tsallaaerospace6378", label: "YouTube" },
+              { icon: Twitter, href: "https://x.com/TsallaAerospace", label: "X (Twitter)" }
             ].map((social, i) => (
               <Link
                 key={i}
                 href={social.href}
                 target="_blank"
+                aria-label={`Tsalla Aerospace on ${social.label}`}
                 className="text-white/40 hover:text-[#5ce1e6] transition-colors duration-300"
               >
                 <social.icon size={18} />
@@ -319,7 +322,9 @@ export default function Footer() {
           {/* Back to Top */}
           <button
             onClick={scrollToTop}
-            className="group flex items-center gap-2 font-orbit text-[10px] text-white/40 hover:text-white transition-colors duration-300 order-3 uppercase tracking-tighter"
+            aria-label="Back to top"
+            // PREVIOUS UI: text-white/40 (contrast 3.6:1, below the 4.5:1 minimum)
+            className="group flex items-center gap-2 font-orbit text-[10px] text-white/50 hover:text-white transition-colors duration-300 order-3 uppercase tracking-tighter"
           >
             <span className="hidden sm:inline">Back to top</span>
             <div className="p-2 border border-white/10 group-hover:border-[#5ce1e6]/50 transition-colors">

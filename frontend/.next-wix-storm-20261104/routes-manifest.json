@@ -16,18 +16,6 @@
       "destination": "/ai-pilot",
       "statusCode": 308,
       "regex": "^(?!/_next)/maverick/ai-pilot(?:/)?$"
-    },
-    {
-      "source": "/maverick/cortex",
-      "destination": "/cortex",
-      "statusCode": 308,
-      "regex": "^(?!/_next)/maverick/cortex(?:/)?$"
-    },
-    {
-      "source": "/maverick/mesh",
-      "destination": "/mesh",
-      "statusCode": 308,
-      "regex": "^(?!/_next)/maverick/mesh(?:/)?$"
     }
   ],
   "headers": [],
@@ -85,12 +73,6 @@
       "namedRegex": "^/contact(?:/)?$"
     },
     {
-      "page": "/cortex",
-      "regex": "^/cortex(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/cortex(?:/)?$"
-    },
-    {
       "page": "/fenix",
       "regex": "^/fenix(?:/)?$",
       "routeKeys": {},
@@ -107,24 +89,6 @@
       "regex": "^/maverick/ai\\-pilot(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/maverick/ai\\-pilot(?:/)?$"
-    },
-    {
-      "page": "/maverick/cortex",
-      "regex": "^/maverick/cortex(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/maverick/cortex(?:/)?$"
-    },
-    {
-      "page": "/maverick/mesh",
-      "regex": "^/maverick/mesh(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/maverick/mesh(?:/)?$"
-    },
-    {
-      "page": "/mesh",
-      "regex": "^/mesh(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/mesh(?:/)?$"
     },
     {
       "page": "/storm",

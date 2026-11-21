@@ -77,10 +77,11 @@ export default function HeroSection(rogg: any) {
             pt-[clamp(5rem,14dvh,9rem)] sm:pt-20 pb-10 sm:pb-32 md:pb-48
           "
         >
-          <div className="w-full max-w-4xl 3xl:max-w-5xl uw:max-w-6xl mt-0">
+          {/* Upright tablets: title and subtitle larger and raised 96px (PREVIOUS UI: sm:text-5xl title, sm:text-lg subtitle, no shift; then 48px). Surface Pro (900-1023px wide) is raised 160px (PREVIOUS UI: 96px like the other tablets). */}
+          <div className="w-full max-w-4xl 3xl:max-w-5xl uw:max-w-6xl mt-0 [@media(min-width:768px)_and_(max-width:1199px)_and_(orientation:portrait)]:-translate-y-24 [@media(min-width:900px)_and_(max-width:1023px)_and_(orientation:portrait)]:!-translate-y-40">
             <CharacterReveal
               text={"UNMANNED.\nUNMATCHED.\nUNCOMPROMISED."}
-              className="font-bold text-[clamp(1.75rem,7vw,2.5rem)] sm:text-5xl lg:text-[4.375rem] 3xl:text-[5.25rem] uw:text-[6.25rem] leading-[1.1] mb-4 sm:mb-5 font-orbit tracking-normal text-white"
+              className="font-bold text-[clamp(1.75rem,7vw,2.5rem)] sm:text-5xl lg:text-[4.375rem] 3xl:text-[5.25rem] uw:text-[6.25rem] leading-[1.1] [@media(min-width:768px)_and_(max-width:1199px)_and_(orientation:portrait)]:text-[9vw] mb-4 sm:mb-5 font-orbit tracking-normal text-white"
               lineClassName="!block"
               stagger={0.06}
             />
@@ -100,7 +101,7 @@ export default function HeroSection(rogg: any) {
             <div className="hidden sm:block">
               <CharacterReveal
                 text="Building unfair Advantages."
-                className="sm:text-lg lg:text-xl mb-6 font-orbit text-white/90 sm:max-w-[90%] md:max-w-[80%]"
+                className="sm:text-lg lg:text-xl [@media(min-width:768px)_and_(max-width:1199px)_and_(orientation:portrait)]:text-[clamp(20px,2.6vw,28px)] mb-6 font-orbit text-white/90 sm:max-w-[90%] md:max-w-[80%]"
                 delay={1.5}
                 stagger={0.04}
               />

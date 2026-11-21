@@ -34,8 +34,14 @@ These pages exist but are switched off: the file is named `disabled.tsx`, so Nex
 
 | Page | Folder | Pointer for the long address |
 |---|---|---|
+| About | `about/` | |
 | Blog | `blog/` | |
 | Coming soon | `coming-soon/` | |
+| Counter systems | `countersystems/` (+ `countersystems/detection/`) | |
+| Leadership | `leadership/` | |
+| Merchandise | `merchandise/` (+ `merchandise/[id]/`) | |
+| Newsroom | `newsroom/` | |
+| Space systems | `hardware/` | |
 | Dexter | `dexter/` | `uncrewedsystems/dexter/disabled.tsx` |
 | Documents | `documents/` | |
 | Media | `media/` | |
@@ -44,6 +50,7 @@ These pages exist but are switched off: the file is named `disabled.tsx`, so Nex
 | Storm | `storm/` (turn on by adding `page.tsx` with `export { default, metadata } from "./disabled"`) | `uncrewedsystems/storm/disabled.tsx` |
 
 To hide a navbar button, set `disabled: true` on it in `navigationItems` (`components/Navbar.tsx`); footer links use the same flag in `components/Footer.tsx`.
+COUNTER SYSTEMS, SPACE SYSTEMS and COMPANY are hidden that way, with their pages (About, Leadership, Newsroom, Merchandise, Counter systems, Space systems) switched off and their footer links (About Us, Mission Autonomy, Our Team, Media Coverage) disabled. To bring them back: remove the flags, rename those `disabled.tsx` files to `page.tsx`, and right-align the navbar buttons below 1440px again (see the comment in `Navbar.tsx`), or six centred buttons run into the logo on laptops.
 
 There is no `/maverick` page: the MAVERICK navbar button only opens its menu (AI-Pilot, Cortex, Mesh, and Integration marked "Coming soon"). The `maverick/` folder holds just the pointer files for the long addresses.
 

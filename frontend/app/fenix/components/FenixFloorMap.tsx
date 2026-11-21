@@ -1,21 +1,23 @@
 "use client"
 
 import React from "react"
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import CharacterReveal from "@/components/CharacterReveal"
 
 export default function FenixFloorMap(): React.JSX.Element {
+    const sectionRef = React.useRef<HTMLElement>(null)
+    const loadVideo = useInView(sectionRef, { once: true, margin: "400px" })
     // PREVIOUS UI:
     // <section className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden bg-black font-orbit">
     return (
-        <section className="relative w-full min-h-[100svh] md:min-h-screen flex items-center justify-center text-white overflow-hidden bg-black font-orbit">
+        <section ref={sectionRef} className="fenix-floor-map relative w-full min-h-[100svh] md:min-h-screen flex items-center justify-center text-white overflow-hidden bg-black font-orbit">
             {/* Background Video */}
             <video
         // PREVIOUS UI: src="/product/fenix/3d-mapping/Recording-2026-10-24-152408.mp4" (102.5s, 106 MB, real time).
         // Same recording speed-ramped by motion: slow map build-up 8-16x, camera moves 3x, fly-throughs 1.5x
         // (25s, 82 MB, crf 16: ~42 dB vs the original frames, visually identical).
         // PREVIOUS ramps: 3-6x / 1.5x / 1x (48s), then 5-10x / 2x / 1.25x (34s).
-        src="/product/fenix/3d-mapping/floor-map-generation.mp4"
+        src={loadVideo ? "/product/fenix/3d-mapping/floor-map-generation.mp4" : undefined}
                 autoPlay
                 loop
                 muted
@@ -96,7 +98,8 @@ export default function FenixFloorMap(): React.JSX.Element {
                         viewport={{ once: true }}
                         className="pb-6 sm:pb-0 w-full"
                     >
-                        <p className="fenix-body text-neutral-300 md:text-neutral-400 max-w-2xl 3xl:max-w-3xl text-left sm:text-justify w-full">
+                        {/* PREVIOUS UI: text-left sm:text-justify. */}
+                        <p className="fenix-body text-neutral-300 md:text-neutral-400 max-w-2xl 3xl:max-w-3xl text-justify w-full">
                             Mapping for mission planning and situational awareness — creates detailed floor layouts to support navigation, coordination, and post-op analysis.
                         </p>
                     </motion.div>

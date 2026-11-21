@@ -4,7 +4,8 @@ export default function ContactSection() {
     return (
         // PREVIOUS UI: py-16 md:py-24 gave the content more top spacing.
         // PREVIOUS UI: pt-12 md:pt-20.
-        <section aria-labelledby="contact-title" className="bg-black px-6 pb-16 pt-8 font-orbit text-white md:px-12 md:pb-24 md:pt-16 lg:px-16">
+        // contact-section: tablet and phone sizing lives in globals.css.
+        <section aria-labelledby="contact-title" className="contact-section bg-black px-6 pb-16 pt-8 font-orbit text-white md:px-12 md:pb-24 md:pt-16 lg:px-16">
             <div className="mx-auto max-w-7xl">
                 <header className="mb-12 grid gap-6 lg:mb-16 lg:grid-cols-2 lg:items-end lg:gap-16">
                     <div>

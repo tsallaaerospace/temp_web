@@ -7,7 +7,7 @@ import Footer from "@/components/Footer"
 import InitialLoader from "@/components/InitialLoader"
 import SmoothScroll from "@/components/SmoothScroll"
 import ScrollToTop from "@/components/ScrollToTop"
-import { Analytics } from "@vercel/analytics/next"
+// PREVIOUS UI: import { Analytics } from "@vercel/analytics/next" (switched off below; Vercel-only)
 import { MEDIA_RETRY_SCRIPT } from "@/lib/media-retry"
 
 // Load Inter and Farro fonts
@@ -24,6 +24,10 @@ export const metadata: Metadata = {
     "We Don't Build Drones. We Build Unfair Advantages. Leading aerospace technology company specializing in unmanned systems and AI.",
   keywords: "aerospace, drones, unmanned systems, AI, defense technology",
   generator: "Tsalla Aerospace",
+  icons: {
+    icon: { url: "/tsalla-favicon.png", type: "image/png", sizes: "512x512" },
+    apple: { url: "/tsalla-favicon.png", type: "image/png", sizes: "512x512" },
+  },
 }
 
 export default function RootLayout({
@@ -35,6 +39,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${farro.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: MEDIA_RETRY_SCRIPT }} />
+        {/* PREVIOUS UI: four Google Fonts stylesheets loaded here, and each held up the first paint.
+            Chakra Petch, Anton and Pontano Sans aren't used on any live page; Orbit now comes from
+            /fonts/orbit-latin.woff2 (same file Google served, @font-face in globals.css).
         <link
           href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
@@ -48,7 +55,8 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Orbit:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="https://cdn.sanity.io/images/e2g21cdj/production/b713e54652cf0bd1898d61a04ac7a6dc928ea9d2-512x512.png" type="image/svg+xml" />
+        */}
+        <link rel="preload" href="/fonts/orbit-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
       </head>
       <body className="bg-black text-white font-orbit" suppressHydrationWarning>
@@ -58,7 +66,10 @@ export default function RootLayout({
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Footer />
+          {/* PREVIOUS UI: <Analytics /> (Vercel Analytics). It only works on Vercel hosting; on Wix its
+              /_vercel/insights/script.js request 404s on every page and costs the Best Practices score.
           <Analytics />
+          */}
         </SmoothScroll>
       </body>
     </html>

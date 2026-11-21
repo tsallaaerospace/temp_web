@@ -17,7 +17,11 @@ export default function MantisDetails() {
     const section = sectionRef.current?.getBoundingClientRect()
     const image = imageRef.current?.getBoundingClientRect()
     if (!section || !image || !image.height) return
-    const mobile = section.width < 768
+    // Upright tablets use the same underline-then-angle leaders as phones.
+    // PREVIOUS UI: const mobile = section.width < 768
+    const uprightTablet = window.matchMedia("(min-width: 768px) and (max-width: 1199px) and (orientation: portrait)").matches
+    const mobile = section.width < 768 || uprightTablet
+    const largePhone = window.matchMedia("(min-width: 400px) and (max-width: 767px) and (min-height: 821px)").matches
 
     // Source-image anchors keep the leaders attached while the drone moves.
     ;[[0.274, 0.432], [0.249, 0.742], [0.18, 0.44]].forEach(([x, y], index) => {
@@ -27,11 +31,21 @@ export default function MantisDetails() {
       const baseline = callout.bottom - section.top - 0.5
       const startY = index === 1 && !mobile ? Math.max(baseline, image.top - section.top + image.height * 0.62) : baseline
       const bladeY = (startY + section.top - image.top) / image.height
-      const targetX = index === 1 && !mobile ? 0.270 - Math.abs(bladeY - 0.742) * (0.063 / 0.138) : x
-      const endX = image.left - section.left + image.width * targetX
-      const endY = index === 1 && !mobile ? startY : image.top - section.top + image.height * y
+      const adjustCamera = index === 0 && largePhone
+      // Upright tablets: each straight leader ends on the part level with its evenly spaced label
+      // (upper wing, camera, propeller blade).
+      // PREVIOUS UI: const targetX = index === 1 && !mobile ? 0.270 - Math.abs(bladeY - 0.742) * (0.063 / 0.138) : x
+      const targetX = uprightTablet && index === 2 ? 0.245 : uprightTablet && index === 1 ? 0.232 : index === 1 && !mobile ? 0.270 - Math.abs(bladeY - 0.742) * (0.063 / 0.138) : x
+      const endX = image.left - section.left + image.width * (adjustCamera ? targetX - 0.005 : targetX)
+      // PREVIOUS UI: the camera anchor moved 0.01 down and had no horizontal offset.
+      const targetY = adjustCamera ? y + 0.018 : y
+      // Upright tablets: all three leaders run dead straight along their label's underline.
+      // PREVIOUS UI: const endY = index === 1 && !mobile ? startY : image.top - section.top + image.height * targetY
+      const endY = uprightTablet || (index === 1 && !mobile) ? startY : image.top - section.top + image.height * targetY
+      // Give the leader room to turn outside the text column on larger phones.
+      const bendX = largePhone || uprightTablet ? startX + Math.min(16, Math.max(0, endX - startX) / 4) : startX
       connectorRefs.current[index]?.setAttribute("d", mobile
-        ? `M ${callout.left - section.left} ${startY} L ${startX} ${startY} L ${endX} ${endY}`
+        ? `M ${callout.left - section.left} ${startY} H ${bendX} L ${endX} ${endY}`
         : `M ${startX} ${startY} L ${endX} ${endY}`)
     })
   }, [])
@@ -58,13 +72,15 @@ export default function MantisDetails() {
       {/* PREVIOUS UI:
       <ProductHeading id="mantis-details-title" className="product-title-position z-20">VTOL Launch. Precision strike. <CharacterReveal text="Recoverable design." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} /></ProductHeading>
       */}
-      <ProductHeading id="mantis-details-title" className="product-title-position z-20">VTOL Launch. Precision strike. <CharacterReveal text="Recoverable by design." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} /></ProductHeading>
+      {/* PREVIOUS UI: the heading ran as one inline sentence at every width. */}
+      <ProductHeading id="mantis-details-title" className="product-title-position z-20"><span className="mantis-details-title-line">VTOL Launch.</span>{" "}<span className="mantis-details-title-line">Precision strike.</span>{" "}<CharacterReveal text="Recoverable by design." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} /></ProductHeading>
       <motion.div
         className="mantis-details-image absolute"
         initial={{ transform: reduceMotion ? "translateX(0%)" : "translateX(35%)" }}
         animate={{ transform: inView || reduceMotion ? "translateX(0%)" : "translateX(35%)" }}
         transition={{ duration: reduceMotion ? 0 : 1.4, ease: [0.16, 1, 0.3, 1] }}
         onUpdate={updateConnectors}
+        onAnimationComplete={updateConnectors}
       >
         <img ref={imageRef} onLoad={updateConnectors} src="/product/Mantis/Mantis-side.png" alt="Close side view of MANTIS entering from the right, with the rear half cropped beyond the section" className="block h-auto w-full max-w-none" loading="lazy" decoding="async" />
       </motion.div>
@@ -76,7 +92,7 @@ export default function MantisDetails() {
         </defs>
         {[0, 1, 2].map(index => <path key={index} className={index === 2 ? "mantis-mobile-wing-connector" : undefined} ref={node => { connectorRefs.current[index] = node }} fill="none" stroke="#d4d4d4" strokeWidth="1" markerEnd="url(#mantis-callout-dot)" />)}
       </motion.svg>
-      <motion.div className="mantis-details-callouts absolute z-20 mt-6" onUpdate={updateConnectors} initial={{ opacity: 0, y: reduceMotion ? 0 : 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : 0.2 }}>
+      <motion.div className="mantis-details-callouts absolute z-20 mt-6" onUpdate={updateConnectors} onAnimationComplete={updateConnectors} initial={{ opacity: 0, y: reduceMotion ? 0 : 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : 0.2 }}>
         {[
           ["Fixed-wing airframe", "A distinctive wing and body configuration."],
           ["Integrated camera.", "EO + IR"],

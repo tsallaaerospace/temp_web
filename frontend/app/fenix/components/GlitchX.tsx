@@ -13,6 +13,7 @@ const SPLIT = (px: number, glow: number, ghost = "255,255,255") =>
   `${px}px 0 0 rgba(92,225,230,0.9), ${-px}px 0 0 rgba(${ghost},0.55), 0 0 ${glow}px rgba(92,225,230,0.8)`
 
 interface GlitchXProps {
+  letter?: "x" | "X"
   /** Seconds to wait: after page load ("load") or after the letter scrolls into view ("view"). */
   delay?: number
   trigger?: "load" | "view"
@@ -22,7 +23,7 @@ interface GlitchXProps {
   onLight?: boolean
 }
 
-export default function GlitchX({ delay = 0, trigger = "load", finalColor, onLight = false }: GlitchXProps) {
+export default function GlitchX({ delay = 0, trigger = "load", finalColor, onLight = false, letter = "x" }: GlitchXProps) {
   const ref = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
@@ -72,7 +73,7 @@ export default function GlitchX({ delay = 0, trigger = "load", finalColor, onLig
 
   return (
     <span ref={ref} className="inline-block will-change-transform" style={{ opacity: 0, color: finalColor }}>
-      x
+      {letter}
     </span>
   )
 }

@@ -41,9 +41,10 @@ export const JoinTheMissionMenu: React.FC<JoinTheMissionMenuProps> = ({ onClose 
     const lenis = useLenis()
 
     return (
-        <div className="flex flex-col xl:flex-row w-full h-auto xl:h-[50vh] bg-white text-black overflow-hidden relative shadow-2xl">
+        // PREVIOUS UI: xl:flex-row / xl:w-1/3 / xl:w-2/3 kept tablets stacked; lg:p-12 and lg:py-12 enlarged the panel.
+        <div className="flex flex-col md:flex-row w-full h-auto md:h-[clamp(300px,45svh,420px)] xl:h-[50vh] bg-white text-black overflow-hidden relative shadow-2xl">
             {/* Left Side - Black Panel */}
-            <div className="w-full xl:w-1/3 bg-black text-white p-4 lg:p-12 flex flex-col justify-center relative overflow-hidden z-10 shadow-lg">
+            <div className="w-full md:w-2/5 xl:w-1/3 bg-black text-white p-4 md:p-6 xl:p-12 flex flex-col justify-center relative overflow-hidden z-10 shadow-lg">
                 {/* Background Elements */}
                 <div className="absolute top-0 left-0 w-full h-1 bg-white/10" />
                 <div className="absolute right-0 top-0 h-full w-1 bg-white/10" />
@@ -56,7 +57,7 @@ export const JoinTheMissionMenu: React.FC<JoinTheMissionMenuProps> = ({ onClose 
                     className="relative z-10"
                 >
                     {/* Mobile Header: Back Button + Centered Title */}
-                    <div className="xl:hidden flex items-center justify-center relative w-full mb-6">
+                    <div className="md:hidden flex items-center justify-center relative w-full mb-6">
                         <button
                             onClick={onClose}
                             className="absolute left-0 text-white hover:text-[#5ce1e6] text-[10px] font-orbit flex items-center gap-1 tracking-widest uppercase py-2"
@@ -70,7 +71,8 @@ export const JoinTheMissionMenu: React.FC<JoinTheMissionMenuProps> = ({ onClose 
                     </div>
 
                     {/* Desktop Title */}
-                    <h2 className="hidden xl:block text-[30px] lg:text-[36px] 2xl:text-[48px] font-bold mb-4 tracking-tighter leading-none font-orbit whitespace-nowrap uppercase">
+                    {/* PREVIOUS UI: hidden xl:block, 30px/lg:36px and whitespace-nowrap. */}
+                    <h2 className="hidden md:block text-[22px] xl:text-[36px] 2xl:text-[48px] font-bold mb-4 tracking-tighter leading-none font-orbit xl:whitespace-nowrap uppercase">
                         JOIN THE <span className="text-white">MISSION</span>
                     </h2>
                     <h3 className="text-[9px] lg:text-[10px] uppercase tracking-[0.4em] text-gray-500 mb-2 lg:mb-6 font-mono pl-1">Push The Boundaries</h3>
@@ -84,7 +86,7 @@ export const JoinTheMissionMenu: React.FC<JoinTheMissionMenuProps> = ({ onClose 
             </div>
 
             {/* Right Side - Grid - Fixed Borders */}
-            <div className="w-full xl:w-2/3 bg-white grid grid-cols-1 md:grid-cols-2 xl:grid-rows-2">
+            <div className="w-full md:w-3/5 xl:w-2/3 bg-white grid grid-cols-1 md:grid-cols-2 md:grid-rows-2">
                 {menuItems.map((item, index) => {
                     let borderClass = "border-gray-200"
                     // Border partition logic matching CompanyMenu
@@ -113,7 +115,7 @@ export const JoinTheMissionMenu: React.FC<JoinTheMissionMenuProps> = ({ onClose 
                                 }
                             }}
                             className={`
-                                relative bg-gray-100 hover:bg-white px-4 lg:px-6 py-5 lg:py-12 flex flex-col justify-center group hover:z-20 transition-all duration-500 ease-out overflow-hidden
+                                relative bg-gray-100 hover:bg-white px-4 xl:px-6 py-5 xl:py-12 flex flex-col justify-center group hover:z-20 transition-all duration-500 ease-out overflow-hidden
                                 ${borderClass}
                             `}
                         >
@@ -123,7 +125,8 @@ export const JoinTheMissionMenu: React.FC<JoinTheMissionMenuProps> = ({ onClose 
                             {/* Content */}
                             <div className="relative z-10 w-full transition-transform duration-300">
                                 {/* PREVIOUS UI: text-[20px] lg:text-[30px] scaled with each page's root font size. */}
-                                <h4 className="text-[20px] leading-[28px] lg:text-[30px] lg:leading-[36px] font-light mb-2 group-hover:text-[#5ce1e6] transition-colors duration-300 font-orbit">{item.title}</h4>
+                                {/* PREVIOUS UI: lg:text-[30px] lg:leading-[36px]; reserve large labels for wider desktops. */}
+                                <h4 className="text-[20px] leading-[28px] xl:text-[30px] xl:leading-[36px] font-light mb-2 group-hover:text-[#5ce1e6] transition-colors duration-300 font-orbit">{item.title}</h4>
                                 <p className="text-[9px] uppercase tracking-widest text-gray-400 font-mono group-hover:text-black transition-colors">{item.subtitle}</p>
                             </div>
                         </Link>

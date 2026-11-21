@@ -17,6 +17,15 @@ export default function MantisThreePhase() {
         <source media="(max-width: 767px)" srcSet="/product/Mantis/mantis-three-phase-mobile-bg.webp" />
       <img src="/product/Mantis/3_phase.png" alt="MANTIS three-phase flight overview" className="absolute inset-0 h-full w-full object-cover object-center" loading="lazy" decoding="async" />
       </picture>
+      {/* Upright tablets only (see globals.css): the ship, desert and mountain scenes each get one equal column, cut from
+          the same original image. PREVIOUS UI: the single cropped image showed the desert plus two thin side strips. */}
+      <div className="mantis-three-columns" aria-hidden="true">
+        {["ship", "desert", "mountain"].map((scene) => (
+          <div key={scene} data-scene={scene}>
+            <img src="/product/Mantis/3_phase.png" alt="" loading="lazy" decoding="async" />
+          </div>
+        ))}
+      </div>
       <div className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/50 to-transparent" />
       {/* PREVIOUS UI (Built aligned left):
       <ProductHeading className="product-title-position product-title-fit grid grid-cols-3 text-center text-white">

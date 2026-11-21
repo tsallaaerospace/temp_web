@@ -284,16 +284,6 @@
         "source": "/maverick/ai-pilot",
         "destination": "/ai-pilot",
         "permanent": true
-      },
-      {
-        "source": "/maverick/cortex",
-        "destination": "/cortex",
-        "permanent": true
-      },
-      {
-        "source": "/maverick/mesh",
-        "destination": "/mesh",
-        "permanent": true
       }
     ]
   },

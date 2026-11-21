@@ -27,6 +27,15 @@ export default function BatMultiRole(): React.JSX.Element {
           decoding="async"
         />
       </picture>
+      {/* Upright tablets only (see globals.css): forest, desert, mountains and city each get one equal column under
+          their title word, cut from the original artwork. PREVIOUS UI: the stacked portrait image at every portrait size. */}
+      <div className="bat-multi-role-columns" role="img" aria-label="T-BAT operating environments: forest, desert, mountains and city">
+        {["forest", "desert", "mountain", "city"].map((scene) => (
+          <div key={scene} data-scene={scene}>
+            <img src="/product/T-BAT/multi-role-single-solution-bg-desktop.webp" alt="" loading="lazy" decoding="async" />
+          </div>
+        ))}
+      </div>
 
       {/* Darkens the top of the photo so the title stays readable over the bright desert and sky */}
       <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-black/70 via-black/30 to-transparent" />
@@ -61,8 +70,9 @@ export default function BatMultiRole(): React.JSX.Element {
         className="bat-multi-role-drone absolute left-1/2 overflow-hidden pointer-events-none select-none max-w-[1850px] 2xl:max-w-[2120px] 3xl:max-w-[2380px] uw:max-w-[2780px]"
       >
         {/* Normalize the export's transparent padding to preserve the existing drone framing. */}
+        {/* PREVIOUS UI: src="...Transparent_3200x3840.png" (5.6 MB); same image and size as WebP (0.16 MB) */}
         <img
-          src="/product/T-BAT/Tbat_Rear_Balanced_Propellers_Transparent_3200x3840.png"
+          src="/product/T-BAT/Tbat_Rear_Balanced_Propellers_Transparent_3200x3840.webp"
           alt="T-BAT rear view with balanced propellers"
           className="absolute left-0 top-0 h-auto w-full max-w-none"
           style={{ transform: "translateY(-35.3385417%)" }}

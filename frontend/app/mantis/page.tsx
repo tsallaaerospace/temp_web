@@ -5,6 +5,7 @@ import MantisSpecifications from "./components/MantisSpecifications"
 import MantisDetails from "./components/MantisDetails"
 import MantisThreePhase from "./components/MantisThreePhase"
 import MantisLast from "./components/MantisLast"
+import MantisHeroMedia from "./components/MantisHeroMedia"
 import ProductHeading, { ProductHeroTitle } from "@/components/ProductHeading"
 import CharacterReveal from "@/components/CharacterReveal"
 
@@ -17,6 +18,7 @@ export default function MantisPage() {
     <PageWrapper hasHero className="mantis-page font-orbit">
       <SectionSnap panels=".mantis-page > section, footer" />
       <section data-mantis-section="hero" data-navbar-text="white" className="relative isolate h-[100svh] min-h-[30rem] w-full overflow-hidden bg-black">
+        {/* PREVIOUS UI: Separate hangar background and drone images on desktop/mobile.
         <picture>
           <source media="(max-width: 767px)" srcSet="/product/Mantis/mantis-hero-mobile-bg.webp" />
         <img
@@ -36,11 +38,16 @@ export default function MantisPage() {
           decoding="async"
         />
         </picture>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
+        */}
+        {/* Video, bottom shade and subtitle; the subtitle fades in 4 seconds into the video.
+            PREVIOUS UI: the <video>, shade and <p> subtitle sat here directly, with the subtitle visible from the start. */}
+        <MantisHeroMedia />
         {/* PREVIOUS UI: hero title used clamp(3.5rem,8vw,9rem). */}
+        {/* PREVIOUS UI: Lower-left product name.
         <ProductHeroTitle className="absolute bottom-[clamp(2rem,7vh,6rem)] left-[var(--fenix-title-inset)] z-30 m-0 text-white">
           MANTIS
         </ProductHeroTitle>
+        */}
       </section>
       <MantisThreePhase />
       <MantisSpecifications />
@@ -69,8 +76,9 @@ export default function MantisPage() {
           A new perspective on <CharacterReveal text="strike." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} />
         </ProductHeading>
         */}
+        {/* mantis-perspective-break: upright tablets always put "Strike." on its own line (see globals.css). */}
         <ProductHeading id="mantis-perspective-title" className="absolute inset-x-0 top-[19%] z-0 px-[var(--fenix-title-inset)] !text-[clamp(2.75rem,4.2vw,5rem)] text-center tracking-[-0.03em]">
-          A new perspective on <CharacterReveal text="Strike." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} />
+          A new perspective on <br className="mantis-perspective-break" /><CharacterReveal className="mantis-perspective-strike" text="Strike." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} />
         </ProductHeading>
       </section>
       <MantisDetails />

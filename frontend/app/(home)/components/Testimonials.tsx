@@ -71,7 +71,8 @@ const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
-            priority
+            // PREVIOUS UI: priority (made the browser fetch these far-down images first, ahead of the hero)
+            loading="lazy"
           />
           {/* dark gradient so title is readable over image */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -116,7 +117,8 @@ const TestimonialBlock: React.FC<TestimonialBlockProps> = ({
 const TESTIMONIALS_DATA = [
   // ── EVENTS ──
   {
-    backgroundImage: "/shared/news/event1-cover.png",
+    // PREVIOUS UI: "/shared/news/event1-cover.png"
+    backgroundImage: "/shared/news/event1-cover.webp",
     date: "20 February 2026",
     category: "Event",
     title: "Tsalla at the Dutch Prime Minister's Visit to IISc, Bangalore",
@@ -126,7 +128,8 @@ const TESTIMONIALS_DATA = [
     bgColor: "bg-black",
   },
   {
-    backgroundImage: "/shared/news/event2-cover.png",
+    // PREVIOUS UI: "/shared/news/event2-cover.png"
+    backgroundImage: "/shared/news/event2-cover.webp",
     date: "08 February 2026",
     category: "Event",
     title: "Demonstrating Heavy-Lift Autonomy to Greece's Defence Minister",
@@ -136,7 +139,8 @@ const TESTIMONIALS_DATA = [
     bgColor: "bg-black",
   },
   {
-    backgroundImage: "/shared/news/event3.png",
+    // PREVIOUS UI: "/shared/news/event3.png"
+    backgroundImage: "/shared/news/event3.webp",
     date: "25 November 2025",
     category: "Event",
     title: "At the Indian Navy's Table — Swavlamban 2025",
@@ -189,9 +193,12 @@ const Testimonials: React.FC = () => {
   useEffect(() => {
     const updateItemsPerPage = () => {
       const width = window.innerWidth;
+      // Upright tablets (including 1024px+ ones like the iPad Pro 13) show 2 cards, so every tablet matches.
+      // PREVIOUS UI: only widths under 1024px showed 2 cards.
+      const uprightTablet = window.matchMedia("(min-width: 768px) and (max-width: 1199px) and (orientation: portrait)").matches;
       if (width < 768) {
         setItemsPerPage(1);
-      } else if (width < 1024) {
+      } else if (width < 1024 || uprightTablet) {
         setItemsPerPage(2);
       } else {
         setItemsPerPage(3);
@@ -297,6 +304,7 @@ const Testimonials: React.FC = () => {
           whileHover={{ x: -3 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => paginate(-1)}
+          aria-label="Previous news"
           className="hidden md:flex p-4 border border-black/10 hover:border-black/30 transition-colors items-center justify-center bg-black text-white shrink-0 z-20"
         >
           <ChevronLeft size={24} />
@@ -346,6 +354,7 @@ const Testimonials: React.FC = () => {
           whileHover={{ x: 3 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => paginate(1)}
+          aria-label="Next news"
           className="hidden md:flex p-4 border border-black/10 hover:border-black/30 transition-colors items-center justify-center bg-black text-white shrink-0 z-20"
         >
           <ChevronRight size={24} />
@@ -363,8 +372,8 @@ const Testimonials: React.FC = () => {
         </div>
 
         <div className="flex md:hidden gap-6">
-          <button onClick={() => paginate(-1)} className="p-4 border border-black/10"><ChevronLeft size={24} /></button>
-          <button onClick={() => paginate(1)} className="p-4 bg-black text-white"><ChevronRight size={24} /></button>
+          <button onClick={() => paginate(-1)} aria-label="Previous news" className="p-4 border border-black/10"><ChevronLeft size={24} /></button>
+          <button onClick={() => paginate(1)} aria-label="Next news" className="p-4 bg-black text-white"><ChevronRight size={24} /></button>
         </div>
       </div>
     </section>

@@ -51,7 +51,8 @@ export default function BatSpecs(): React.JSX.Element {
   // <section data-bat-section="specs" aria-labelledby="bat-specs-title" className="bat-specs relative w-full overflow-hidden bg-white font-orbit text-neutral-900">
   return (
     <section data-bat-section="specs" aria-labelledby="bat-specs-title" className="bat-specs relative w-full overflow-hidden bg-white font-orbit text-neutral-900 max-w-[120rem] 3xl:max-w-[140rem] mx-auto">
-      <ProductHeading id="bat-specs-title" className="product-title-position z-20">Engineered for the <CharacterReveal text="mission" targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} /></ProductHeading>
+      {/* PREVIOUS UI: the heading relied on natural wrapping at every width. */}
+      <ProductHeading id="bat-specs-title" className="product-title-position z-20"><span className="bat-specs-title-first">Engineered for</span>{" "}the <CharacterReveal text="mission" targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} /></ProductHeading>
       {/* PREVIOUS UI (Measurement ticks down both edges):
       <span aria-hidden="true" className="bat-specs-ticks left-0" />
       <span aria-hidden="true" className="bat-specs-ticks right-0" />

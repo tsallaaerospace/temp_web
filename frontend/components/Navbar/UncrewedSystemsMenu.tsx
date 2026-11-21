@@ -341,6 +341,9 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                             <Link
                                 key={link.name}
                                 href={isLocked ? "#" : link.href}
+                                draggable={isLocked ? false : undefined}
+                                onDragStart={(event) => { if (isLocked) event.preventDefault(); }}
+                                aria-label={isRedacted ? "Classified system — locked" : undefined}
                                 onMouseEnter={() => {
                                     if (!window.matchMedia('(max-width: 1024px)').matches) {
                                         if (isLocked) {
@@ -360,7 +363,7 @@ export const HangarMenu: React.FC<HangarMenuProps> = ({
                                 className={cn(
                                     "group relative flex items-center justify-between p-4 rounded-sm transition-all duration-300 border border-transparent",
                                     isLocked
-                                        ? "opacity-60 cursor-not-allowed hover:bg-white/[0.02]"
+                                        ? "opacity-60 cursor-not-allowed hover:bg-white/[0.02] select-none"
                                         : (isActive ? "bg-[#5ce1e6]/10 border-[#5ce1e6]/20 cursor-pointer" : "hover:bg-white/5 cursor-pointer")
                                 )}
                             >

@@ -171,7 +171,8 @@ const InsideTsallaAerospace = () => {
                     </h2>
                   </div>
 
-                  <p className="careers-body text-gray-700 text-justify [hyphens:auto]">
+                  {/* careers-value-copy: small phones turn hyphenation off for this paragraph (see globals.css). */}
+                  <p className="careers-value-copy careers-body text-gray-700 text-justify [hyphens:auto]">
                     {item.description}
                   </p>
                 </div>

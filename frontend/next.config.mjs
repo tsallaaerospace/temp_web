@@ -70,7 +70,8 @@ const nextConfig = {
   // },
   async redirects() {
     return [
-      ...["ai-pilot", "cortex", "mesh"].map((name) => ({
+      // PREVIOUS REDIRECTS: ["ai-pilot", "cortex", "mesh"] (Cortex and Mesh pages are switched off for now)
+      ...["ai-pilot"].map((name) => ({
         source: `/maverick/${name}`,
         destination: `/${name}`,
         permanent: true,

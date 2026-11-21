@@ -194,10 +194,45 @@ export default function Bat3DSequence() {
         media.addEventListener('change', update);
         return () => media.removeEventListener('change', update);
     }, []);
-    const mobileStops = [[24, 80], [24, 51], [24, 31], [50, 25], [76, 31], [76, 51], [76, 80]];
-    const PHASES = isMobile ? DESKTOP_PHASES.map((phase, index) => {
-        const [x, y] = mobileStops[index];
-        const [previousX, previousY] = mobileStops[Math.max(0, index - 1)];
+    // Upright tablets (iPad mini, iPad Pro 13, Surface Pro 10) use the phone's single-caption layout with their own
+    // stops, so captions, shadows and the title never overlap. PREVIOUS UI: tablets used the desktop stops and seven fixed captions.
+    const [isUprightTablet, setIsUprightTablet] = useState(false);
+    useEffect(() => {
+        const media = window.matchMedia('(min-width: 768px) and (max-width: 1199px) and (orientation: portrait)');
+        const update = () => setIsUprightTablet(media.matches);
+        update();
+        media.addEventListener('change', update);
+        return () => media.removeEventListener('change', update);
+    }, []);
+    const compactLayout = isMobile || isUprightTablet;
+    // Large phones (iPhone Pro Max, Galaxy Ultra...): the 4th stop (cruise/loiter) sits 30px higher, converted to a
+    // percentage of the section height. PREVIOUS UI: every phone used y 25 for this stop.
+    const [cruiseLift, setCruiseLift] = useState(0);
+    useEffect(() => {
+        const media = window.matchMedia('(max-width: 767px) and (min-height: 821px)');
+        const smallPhone = window.matchMedia('(width < 400px)');
+        const update = () => {
+            const height = containerRef.current?.clientHeight || window.innerHeight;
+            // PREVIOUS UI: only the tall-phone layout had a lift at this stop.
+            const lift = (media.matches ? 30 : 0) + (smallPhone.matches ? 10 : 0);
+            setCruiseLift(height ? lift / height * 100 : 0);
+        };
+        update();
+        media.addEventListener('change', update);
+        smallPhone.addEventListener('change', update);
+        window.addEventListener('resize', update);
+        return () => {
+            media.removeEventListener('change', update);
+            smallPhone.removeEventListener('change', update);
+            window.removeEventListener('resize', update);
+        };
+    }, []);
+    const mobileStops = [[24, 80], [24, 51], [24, 31], [50, 25 - cruiseLift], [76, 31], [76, 51], [76, 80]];
+    const tabletStops = [[17, 84], [17, 58], [17, 35], [50, 27], [83, 35], [83, 58], [83, 84]];
+    const compactStops = isUprightTablet ? tabletStops : mobileStops;
+    const PHASES = compactLayout ? DESKTOP_PHASES.map((phase, index) => {
+        const [x, y] = compactStops[index];
+        const [previousX, previousY] = compactStops[Math.max(0, index - 1)];
         return { ...phase, drone: { ...phase.drone, x, y, via: undefined,
             pathStartX: previousX, pathStartY: previousY, pathEndX: x, pathEndY: y,
             pathMidX: (previousX + x) / 2, pathMidY: (previousY + y) / 2, pathCurve: 0 } };
@@ -209,6 +244,22 @@ export default function Bat3DSequence() {
     const [isManualMode, setIsManualMode] = useState(false);
     const [isInView, setIsInView] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
+    // Becomes true (and stays true) once the visitor is about three screens away from this section. Only then
+    // do we start the 3D canvas and download the 14 MB model, so they don't slow down the top of the page.
+    // PREVIOUS UI: the model downloaded and the canvas started as soon as the page opened.
+    const [isNear, setIsNear] = useState(false);
+    useEffect(() => {
+        const el = containerRef.current;
+        if (!el || isNear) return;
+        const observer = new IntersectionObserver((entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) setIsNear(true);
+        }, { rootMargin: "300% 0px 300% 0px" });
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [isNear]);
+    useEffect(() => {
+        if (isNear) useGLTF.preload(BAT_MODEL);
+    }, [isNear]);
 
     // Single source of truth for drone and card properties
     const [liveDrone, setLiveDrone] = useState<DroneState>(PHASES[0].drone);
@@ -224,7 +275,7 @@ export default function Bat3DSequence() {
         setTargetPhase(null);
         setPrevPhaseIndex(0);
         setCurrentPhase(0);
-    }, [isMobile]);
+    }, [isMobile, isUprightTablet]);
     const captureRequest = useRef<number | null>(null);
     // The phase the drone is currently settled at (null mid-transition); a snapshot is only valid then
     const settledPhase = useRef<number | null>(null);
@@ -272,6 +323,11 @@ export default function Bat3DSequence() {
     useEffect(() => {
         const updateScale = () => {
             const w = window.innerWidth;
+            // Upright tablets size the drone to the screen. PREVIOUS UI: a fixed 0.78 (under 1024px) or 1.
+            if (window.matchMedia('(min-width: 768px) and (max-width: 1199px) and (orientation: portrait)').matches) {
+                setScaleFactor(w / 1300);
+                return;
+            }
             if (w < 480) {
                 setScaleFactor(w / 1100);
             } else if (w < 768) {
@@ -497,15 +553,15 @@ export default function Bat3DSequence() {
                 </div>
             </div>
             */}
-            <div className="absolute inset-0 flex items-center justify-center translate-x-0 sm:translate-x-[2vw] opacity-[0.16] sm:opacity-[0.3] pointer-events-none px-4">
+            <div className="bat-sequence-bg-title absolute inset-0 flex items-center justify-center translate-x-0 sm:translate-x-[2vw] opacity-[0.16] sm:opacity-[0.3] pointer-events-none px-4">
                 {/* PREVIOUS UI: leading-[0.88] on phones too, so the four stacked lines touched. */}
-                <div className="text-[clamp(0.85rem,3.8vw,1.4rem)] sm:text-[clamp(2rem,5.2vw,5.8rem)] font-bold text-black tracking-tighter flex flex-col items-center leading-[1.8] sm:leading-[0.88] whitespace-nowrap text-center">
-                    <span className="sm:hidden">Transition</span>
-                    <span className="sm:hidden">Forward.</span>
-                    <span className="sm:hidden">Reach</span>
-                    <span className="sm:hidden">Beyond.</span>
-                    <span className="hidden sm:inline">Transition Forward.</span>
-                    <span className="hidden sm:inline">Reach Beyond.</span>
+                <div className="bat-sequence-bg-text text-[clamp(0.85rem,3.8vw,1.4rem)] sm:text-[clamp(2rem,5.2vw,5.8rem)] font-bold text-black tracking-tighter flex flex-col items-center leading-[1.8] sm:leading-[0.88] whitespace-nowrap text-center">
+                    <span className={isUprightTablet ? undefined : "sm:hidden"}>Transition</span>
+                    <span className={isUprightTablet ? undefined : "sm:hidden"}>Forward.</span>
+                    <span className={isUprightTablet ? undefined : "sm:hidden"}>Reach</span>
+                    <span className={isUprightTablet ? undefined : "sm:hidden"}>Beyond.</span>
+                    <span className={isUprightTablet ? "hidden" : "hidden sm:inline"}>Transition Forward.</span>
+                    <span className={isUprightTablet ? "hidden" : "hidden sm:inline"}>Reach Beyond.</span>
                 </div>
             </div>
 
@@ -574,6 +630,7 @@ export default function Bat3DSequence() {
                         ease: [0.65, 0, 0.35, 1] // easeInOutCubic, the same curve as the drone rotation and camera
                     }}
                 >
+                    {isNear && (
                     <Canvas
                         style={{ pointerEvents: "none" }}
                         gl={{ preserveDrawingBuffer: true }}
@@ -584,14 +641,16 @@ export default function Bat3DSequence() {
                     >
                         <ambientLight intensity={1.5} />
                         <directionalLight position={[10, 10, 5]} intensity={1} />
-                        <Environment preset="city" />
+                        {/* Same "city" lighting, served from our site. PREVIOUS UI: <Environment preset="city" />,
+                            which downloaded this 1.5 MB file from raw.githubusercontent.com on every visit. */}
+                        <Environment files="/product/T-BAT/env/potsdamer_platz_1k.hdr" />
                         {/* Between phases the controls re-aim the camera at the drone, which the phase camera
                             poses rely on; dragging, zooming and panning stay disabled so visitors can't move it. */}
                         <OrbitControls makeDefault enabled={!isAnimating} enableRotate={false} enableZoom={false} enablePan={false} />
                         <Suspense fallback={null}>
                             <SmoothDrone
                                 drone={liveDrone}
-                                centered={isMobile}
+                                centered={compactLayout}
                                 isManualMode={isManualMode}
                                 isFastTransition={isFastTransition}
                             />
@@ -609,6 +668,7 @@ export default function Bat3DSequence() {
                             isAnimating={isAnimating}
                         />
                     </Canvas>
+                    )}
                 </motion.div>
             </div>
 
@@ -734,7 +794,7 @@ export default function Bat3DSequence() {
                     </filter>
                 </defs>
                 {PHASES.map((p, idx) => {
-                    if (idx > currentPhase || isMobile) return null;
+                    if (idx > currentPhase || compactLayout) return null;
                     const d = p.drone;
                     // Phases 3 and 6 start with an in-place turn before moving, so their callouts wait for it
                     const lateStart = p.id === 3 || p.id === 6;
@@ -779,7 +839,7 @@ export default function Bat3DSequence() {
             </svg>
 
             {/* Phones also get a small title centred under each reached phase's drone/shadow */}
-            {isMobile && PHASES.map((p, idx) => {
+            {compactLayout && PHASES.map((p, idx) => {
                 if (idx > currentPhase) return null;
                 const d = p.drone;
                 return (
@@ -791,12 +851,12 @@ export default function Bat3DSequence() {
                         style={{
                             position: 'absolute',
                             left: `${d.x}%`,
-                            top: `calc(${d.y}% + ${Math.round(110 * scaleFactor)}px)`,
+                            top: isUprightTablet ? `calc(${d.y}% + 9vw)` : `calc(${d.y}% + ${Math.round(110 * scaleFactor)}px)`,
                             x: '-50%',
                             zIndex: 40,
                             pointerEvents: 'none'
                         }}
-                        className="w-[9.5rem] text-center text-black font-bold text-[8px] uppercase tracking-wide leading-tight"
+                        className="bat-sequence-stop-label w-[9.5rem] text-center text-black font-bold text-[8px] uppercase tracking-wide leading-tight"
                     >
                         {p.title}
                     </motion.div>
@@ -806,7 +866,7 @@ export default function Bat3DSequence() {
             {/* Phase captions: one per reached phase on desktop, kept on screen once shown; on phones only the
                 current phase, top left. cardX is the edge the text aligns to: left by default, right when cardAlign is "right". */}
             {PHASES.map((p, idx) => {
-                if (idx > currentPhase || (isMobile && idx !== currentPhase)) return null;
+                if (idx > currentPhase || (compactLayout && idx !== currentPhase)) return null;
                 const d = p.drone;
                 const alignRight = d.cardAlign === "right";
                 // PREVIOUS UI:
@@ -837,18 +897,19 @@ export default function Bat3DSequence() {
                 return (
                     <motion.div
                         key={`caption-${p.id}`}
-                        initial={{ opacity: 0, x: alignRight ? 10 : -10 }}
+                        // PREVIOUS UI: phones also slid each caption in from its desktop alignment side.
+                        initial={{ opacity: 0, x: compactLayout ? 0 : alignRight ? 10 : -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1.8 / SPEED, delay: (p.id === 3 || p.id === 6 ? 3.9 : 1.4) / SPEED }}
                         style={{
                             position: 'absolute',
-                            ...(isMobile ? { left: '6%', right: '6%', maxWidth: 'none', textAlign: 'left' as const, alignItems: 'flex-start' } : alignRight ? { right: `${100 - d.cardX}%` } : { left: `${d.cardX}%` }),
-                            // PREVIOUS UI: top 5% on phones sat under the navbar when it was showing
-                            top: isMobile ? '88px' : `${d.cardY}%`,
+                            ...(compactLayout ? { left: 'var(--bat-sequence-caption-inset, 6%)', right: 'var(--bat-sequence-caption-inset, 6%)', maxWidth: 'none', textAlign: 'left' as const, alignItems: 'flex-start' } : alignRight ? { right: `${100 - d.cardX}%` } : { left: `${d.cardX}%` }),
+                            // PREVIOUS UI: every phone used an 88px caption top inset and 6% side insets.
+                            top: compactLayout ? 'var(--bat-sequence-caption-top, 88px)' : `${d.cardY}%`,
                             zIndex: 40,
                             pointerEvents: 'none'
                         }}
-                        className={`flex flex-col gap-0.5 max-w-[13rem] xs:max-w-[16rem] sm:max-w-none whitespace-normal sm:whitespace-nowrap ${alignRight ? "items-end text-right" : "items-start text-left"}`}
+                        className={`bat-sequence-caption flex flex-col gap-0.5 max-w-[13rem] xs:max-w-[16rem] sm:max-w-none whitespace-normal sm:whitespace-nowrap ${alignRight ? "items-end text-right" : "items-start text-left"}`}
                     >
                         {/* PREVIOUS UI (text-[13px] sm:text-[16px], text-[11px] sm:text-[14px], text-[9.5px] sm:text-[11px]):
                         <span className="text-[#5ce1e6] font-extrabold text-[13px] sm:text-[16px] leading-none mb-0.5 sm:mb-1">
@@ -861,7 +922,7 @@ export default function Bat3DSequence() {
                             {p.subtitle}
                         </div>
                         */}
-                        <span className="text-[#5ce1e6] font-extrabold text-[9.5px] sm:text-[16px] leading-none mb-0.5 sm:mb-1">
+                        <span className="bat-sequence-caption-index text-[#5ce1e6] font-extrabold text-[9.5px] sm:text-[16px] leading-none mb-0.5 sm:mb-1">
                             {`0${p.id}`}
                         </span>
                         <div className="text-black font-bold text-[14px] uppercase tracking-wide leading-tight">
@@ -1041,7 +1102,8 @@ function Model(props: any) {
     )
 }
 
-useGLTF.preload(BAT_MODEL)
+// PREVIOUS UI: useGLTF.preload(BAT_MODEL) here started the download when the page opened; now it starts when
+// the visitor nears the section (see isNear in Bat3DSequence).
 
 function getRoundedCornerPath(start: { x: number, y: number }, mid: { x: number, y: number }, end: { x: number, y: number }, curve: number) {
     const p1x = mid.x + (start.x - mid.x) * curve;

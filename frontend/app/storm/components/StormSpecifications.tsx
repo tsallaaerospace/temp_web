@@ -24,7 +24,9 @@ export default function StormSpecifications() {
   return (
     <section className="storm-specs bat-specs relative w-full overflow-hidden bg-white font-orbit text-neutral-900" aria-labelledby="storm-specs-title">
       <ProductHeading id="storm-specs-title" className="product-title-position z-20">
-        <span>One platform.</span>{" "}<span>More <CharacterReveal text="potential." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} /></span>
+        {/* PREVIOUS UI: <span>One platform.</span>{" "}<span>More ...</span> wrapped as "One platform. More / potential." on phones.
+            Phones now show one sentence per line; wider screens are unchanged. */}
+        <span className="block md:inline">One platform.</span>{" "}<span className="block md:inline">More <CharacterReveal text="potential." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} /></span>
       </ProductHeading>
       <div className="bat-specs-grid">
         <figure className="bat-specs-figure relative">

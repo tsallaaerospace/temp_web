@@ -8,7 +8,7 @@ const assert=require('node:assert/strict');
     const hero=page.getByRole('region',{name:'STORM hero video'});
     await page.waitForFunction(()=>document.querySelector('[aria-label="STORM hero video"] video')?.readyState>=2);
     const result=await hero.locator('video').evaluate(el=>({src:decodeURI(el.currentSrc),time:el.currentTime,paused:el.paused,error:el.error?.message,width:el.videoWidth,height:el.videoHeight,muted:el.muted,loop:el.loop}));
-    assert(result.src.endsWith('/product/STORM/storm-v2-hero.mp4'));
+    assert(/\/product\/STORM\/Hero_Section\/optimized\/desktop-(1080|4k)\.mp4$/.test(result.src));
     assert(!result.paused && !result.error && result.muted && !result.loop);
     assert.equal(await hero.locator('p').count(),0,'Subtitle hidden before playback threshold');
     await hero.locator('video').evaluate(el=>{el.pause();el.currentTime=5.0});

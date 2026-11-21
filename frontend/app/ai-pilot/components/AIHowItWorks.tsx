@@ -74,6 +74,23 @@ export default function AIHowItWorks() {
                     h3 { font-size: 22px; }
                     p { font-size: 14px; line-height: 1.8; }
                 }
+                /* Tablets (iPad mini, iPad Pro, Surface Pro): the 2x2 grid now fills one screen, and each scene is scaled
+                   to the card width and cropped instead of squashed, so all tablets match.
+                   PREVIOUS UI: cards sized to their content (empty dark space below the grid) with background-size 400% 100%. */
+                @media (min-width: 768px) and (max-width: 1199px) {
+                    .ai-how-it-works { height: 100svh; min-height: 0; }
+                    .ai-how-columns { height: 100%; grid-template-rows: repeat(2, auto minmax(0, 1fr) auto); }
+                    article {
+                        padding: clamp(2rem, 4.5svh, 4rem) 4vw clamp(1.75rem, 4svh, 3.5rem);
+                        background-image: linear-gradient(180deg, rgba(0,0,0,.7), transparent 30%, transparent 55%, rgba(0,0,0,.88)), url('/ai-pilot/how_it_works.png');
+                        background-size: 100% 100%, 400% auto;
+                        background-position: center, var(--scene-position) 42%;
+                    }
+                    article:nth-child(2n) { border-right: 0; }
+                    article:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.18); padding-top: clamp(5.5rem, 7.5svh, 7rem); }
+                    h3 { font-size: clamp(20px, 2.8vw, 30px); }
+                    p { margin: 0; max-width: 40ch; font-size: clamp(14px, 1.85vw, 18px); line-height: 1.7; }
+                }
                 @media (min-width: 1200px) {
                     .ai-how-it-works { background: #111 url('/ai-pilot/how_it_works.png') center / 100% 100% no-repeat; }
                     .ai-how-it-works::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.35) 24%, transparent 45%, rgba(0,0,0,.25) 65%, rgba(0,0,0,.85) 100%); }

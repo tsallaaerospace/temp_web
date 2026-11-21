@@ -38,6 +38,18 @@ function CapabilityPanel({ index, phase }: { index: number; phase: MotionValue<n
     )
 }
 
+// Upright tablets only: a numbered progress rail under the panels that fills as the capabilities scroll past.
+function CapabilityRailItem({ index, phase }: { index: number; phase: MotionValue<number> }) {
+    const fill = useTransform(phase, value => Math.max(0, Math.min(1, value - index + 1)))
+    const opacity = useTransform(phase, value => 1 - Math.min(1, Math.abs(index - value)) * .6)
+    return (
+        <li>
+            <span className="ai-cap-rail-track"><motion.span className="ai-cap-rail-fill" style={{ scaleX: fill }} /></span>
+            <motion.span className="ai-cap-rail-label" style={{ opacity }}><b>0{index + 1}</b>{capabilities[index].title}</motion.span>
+        </li>
+    )
+}
+
 export default function AICapabilities() {
     const sectionRef = useRef<HTMLElement>(null)
     const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] })
@@ -59,8 +71,12 @@ export default function AICapabilities() {
                         {capabilities.map((item, index) => <CapabilityPanel key={item.title} index={index} phase={phase} />)}
                     </div>
                 </div>
+                <ol className="ai-cap-rail" aria-hidden="true">
+                    {capabilities.map((item, index) => <CapabilityRailItem key={item.title} index={index} phase={phase} />)}
+                </ol>
             </div>
             <style jsx global>{`
+                .ai-cap-rail { display: none; }
                 .ai-capabilities { position: relative; height: 340svh; background: #ededeb; color: #171b1d; }
                 .ai-cap-stage { position: sticky; top: 0; height: 100svh; padding: max(5rem, 9svh) 5vw 3svh; display: flex; flex-direction: column; overflow: hidden; }
                 .ai-cap-content { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1.05fr; gap: 1vw; }
@@ -109,7 +125,31 @@ export default function AICapabilities() {
                     .ai-cap-panel h3 { font-size: clamp(23px, 6.3vw, 30px); letter-spacing: -.04em; }
                     .ai-cap-panel p { font-size: 15px; line-height: 1.65; margin-top: 20px; }
                 }
+                /* Upright tablets (iPad mini, iPad Air/Pro, Surface Pro): one shared layout, sized from the screen height so
+                   every tablet looks the same. Device on an orbit ring up top, capability card below, progress rail at the bottom.
+                   PREVIOUS UI: under 1024px wide the stacked layout above (small image, big empty gaps); 1024px+ tablets
+                   (iPad Pro 13) got the side-by-side desktop layout. */
+                @media (min-width: 768px) and (orientation: portrait) {
+                    .ai-cap-stage { padding: clamp(88px, 9svh, 128px) 7vw clamp(32px, 4.5svh, 64px); }
+                    .ai-cap-content { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1.05fr) minmax(0, .95fr); gap: 0; }
+                    .ai-cap-visual { grid-row: 1; justify-content: center; align-items: center; isolation: isolate; }
+                    .ai-cap-visual::before { content: ''; position: absolute; left: 50%; top: 50%; width: min(86%, 62svh); aspect-ratio: 2.1; border: 1px solid #638b8d36; border-radius: 50%; transform: translate(-50%, -50%) rotate(-10deg); background: radial-gradient(ellipse, #5ce1e624, transparent 68%); z-index: -1; }
+                    .ai-cap-visual::after { content: ''; position: absolute; left: 50%; bottom: 12%; width: min(60%, 44svh); height: 5%; transform: translateX(-50%); background: #1d3a3c26; border-radius: 50%; filter: blur(14px); z-index: -1; }
+                    .ai-cap-visual img { position: relative; width: min(78%, 58svh); height: auto; max-height: 36svh; margin: 0; transform: none; filter: drop-shadow(0 18px 16px #122e3014); }
+                    .ai-cap-panels { grid-row: 2; margin-inline: -7vw; }
+                    .ai-cap-panel { top: 50%; width: min(66%, 34svh + 160px); padding: 0 16px; }
+                    .ai-cap-copy { max-width: none; font-size: clamp(16px, 1.45svh, 20px); }
+                    .ai-cap-panel h3 { font-size: clamp(30px, 3.4svh, 46px); white-space: nowrap; }
+                    .ai-cap-panel p { max-width: none; font-size: clamp(16px, 1.45svh, 20px); line-height: 1.7; margin-top: clamp(16px, 2svh, 28px); }
+                    .ai-cap-rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; width: min(100%, 52svh + 180px); margin: clamp(12px, 2svh, 28px) auto 0; list-style: none; padding: 0; }
+                    .ai-cap-rail li { min-width: 0; }
+                    .ai-cap-rail-track { display: block; height: 2px; background: #171b1d1a; overflow: hidden; }
+                    .ai-cap-rail-fill { display: block; height: 100%; background: #36bec5; transform-origin: left; }
+                    .ai-cap-rail-label { display: block; margin-top: 12px; font-size: clamp(10px, 1svh, 13px); letter-spacing: .12em; text-transform: uppercase; color: #3a4649; line-height: 1.4; }
+                    .ai-cap-rail-label b { display: block; margin-bottom: 4px; font-weight: 400; color: #36bec5; }
+                }
                 @media (prefers-reduced-motion: reduce), (max-height: 600px) and (orientation: landscape) {
+                    .ai-capabilities .ai-cap-rail { display: none; }
                     .ai-capabilities { height: auto; }
                     .ai-capabilities .ai-cap-stage { position: relative; height: auto; min-height: 100svh; gap: 2rem; }
                     .ai-capabilities .ai-cap-panels { display: grid; gap: 1rem; overflow: visible; margin: 0; }

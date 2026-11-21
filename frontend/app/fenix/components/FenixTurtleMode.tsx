@@ -1,12 +1,13 @@
 "use client"
 
 import React, { useRef } from "react"
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion"
 /* PREVIOUS UI: import { ShieldAlert, CheckCircle2, Cpu, Zap } from "lucide-react" */
 import { ShieldAlert, CheckCircle2, Cpu } from "lucide-react"
 
 export default function FenixTurtleMode(): React.JSX.Element {
     const containerRef = useRef<HTMLDivElement>(null)
+    const loadVideo = useInView(containerRef, { once: true, margin: "400px" })
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"],
@@ -24,7 +25,9 @@ export default function FenixTurtleMode(): React.JSX.Element {
             ref={containerRef}
             /* PREVIOUS UI: style={{ backgroundColor: sectionBg }} */
             /* PREVIOUS UI: className="relative h-[200vh] overflow-clip bg-white font-orbit text-neutral-900 selection:bg-cyan-500/30" */
-            className="relative h-[200dvh] overflow-clip bg-white font-orbit text-neutral-900 selection:bg-cyan-500/30"
+            /* PREVIOUS UI: h-[200dvh] added a second screen of scrolling on phones. */
+            className="fenix-turtle-section relative h-[100dvh] overflow-clip bg-white font-orbit text-neutral-900 selection:bg-cyan-500/30 sm:h-[200dvh]"
+            data-snap-swipe
         >
             <style>{`
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
@@ -38,7 +41,8 @@ export default function FenixTurtleMode(): React.JSX.Element {
             {/* PREVIOUS CENTERING:
             <div className="sticky top-0 flex h-[100dvh] w-full items-center justify-center overflow-hidden">
             */}
-            <div className="sticky top-0 flex h-[100dvh] w-full flex-col sm:flex-row items-center justify-center overflow-hidden">
+            {/* PREVIOUS UI: the content was sticky at every width. */}
+            <div className="fenix-turtle-stage relative top-0 flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden sm:sticky sm:flex-row">
 
                 {/* Mobile Section Identity (aligned directly above the recovery video) */}
                 <div className="sm:hidden mb-3 xs:mb-4 text-center z-20 px-4">
@@ -60,10 +64,11 @@ export default function FenixTurtleMode(): React.JSX.Element {
                     style={{
                         scale: useTransform(smoothProgress, [0, 0.18, 0.82, 1], [0.94, 1, 1, 1.04]),
                     }}
-                    className="relative z-10 flex aspect-video w-[92vw] max-w-[28rem] xs:max-w-[32rem] sm:w-[84vw] sm:max-w-none lg:w-[62vw] xl:w-[64vw] 2xl:max-w-[76rem] 3xl:max-w-[88rem] uw:max-w-[105rem] max-h-[46svh] sm:max-h-[56vh] lg:max-h-[66vh] 3xl:max-h-[72vh] items-center justify-center border border-neutral-900/10 bg-white p-1.5 shadow-[0_20px_50px_rgba(15,30,32,0.14)] sm:p-2 sm:shadow-[0_30px_80px_rgba(15,30,32,0.16)]"
+                    // PREVIOUS UI: max-sm:!transform-none. The explicit phone rule also works with mixed breakpoint units.
+                    className="fenix-turtle-video-card relative z-10 flex aspect-video w-[92vw] max-w-[28rem] xs:max-w-[32rem] sm:w-[84vw] sm:max-w-none lg:w-[62vw] xl:w-[64vw] 2xl:max-w-[76rem] 3xl:max-w-[88rem] uw:max-w-[105rem] max-h-[46svh] sm:max-h-[56vh] lg:max-h-[66vh] 3xl:max-h-[72vh] items-center justify-center border border-neutral-900/10 bg-white p-1.5 shadow-[0_20px_50px_rgba(15,30,32,0.14)] sm:p-2 sm:shadow-[0_30px_80px_rgba(15,30,32,0.16)]"
                 >
                     <video 
-                        src="/product/fenix/Turtle-Mode.mp4" 
+                        src={loadVideo ? "/product/fenix/Turtle-Mode.mp4" : undefined}
                         autoPlay 
                         loop 
                         muted 
@@ -174,19 +179,19 @@ export default function FenixTurtleMode(): React.JSX.Element {
                 </div>
                 */}
                 {/* Desktop & Tablet Overlay (hidden on mobile, visible on sm and up) */}
-                <div className="pointer-events-none absolute inset-0 z-20 hidden sm:block px-8 lg:px-[5vw]">
+                <div className="fenix-turtle-overlay pointer-events-none absolute inset-0 z-20 hidden sm:block px-8 lg:px-[5vw]">
                     {/* Section identity */}
                     <motion.div
-                        className="absolute left-8 top-8 max-w-[15rem] text-left lg:left-[3vw] lg:top-[10vh] lg:max-w-[9rem] xl:left-[4vw] xl:max-w-[11rem] 3xl:left-[max(4vw,calc((100vw-120rem)/2))] 3xl:top-[12vh] 3xl:max-w-[14rem]"
+                        className="fenix-turtle-heading absolute left-8 top-8 max-w-[15rem] text-left lg:left-[3vw] lg:top-[10vh] lg:max-w-[9rem] xl:left-[4vw] xl:max-w-[11rem] 3xl:left-[max(4vw,calc((100vw-120rem)/2))] 3xl:top-[12vh] 3xl:max-w-[14rem]"
                     >
                         <h1 className="fenix-section-title font-normal uppercase leading-[0.88] tracking-[-0.06em] text-neutral-950 sm:whitespace-normal">
-                            Turtle<br />Mode
+                            Turtle<br />{" "}Mode
                         </h1>
                     </motion.div>
 
                     {/* Recovery narrative */}
                     <motion.div
-                        className="pointer-events-auto absolute bottom-8 right-8 w-full max-w-[25rem] border border-neutral-900/10 bg-white/95 p-5 shadow-[0_14px_40px_rgba(15,30,32,0.12)] backdrop-blur-sm lg:bottom-[10vh] lg:right-[5vw] lg:max-w-[21rem] 3xl:right-[max(4vw,calc((100vw-120rem)/2))] 3xl:bottom-[12vh] 3xl:max-w-[24rem]"
+                        className="fenix-turtle-protocol pointer-events-auto absolute bottom-8 right-8 w-full max-w-[25rem] border border-neutral-900/10 bg-white/95 p-5 shadow-[0_14px_40px_rgba(15,30,32,0.12)] backdrop-blur-sm lg:bottom-[10vh] lg:right-[5vw] lg:max-w-[21rem] 3xl:right-[max(4vw,calc((100vw-120rem)/2))] 3xl:bottom-[12vh] 3xl:max-w-[24rem]"
                     >
                         <div className="mb-3 flex items-center justify-between border-b border-neutral-900/10 pb-3 text-[10px] font-bold tracking-[0.16em] text-neutral-500">
                             <span>RECOVERY PROTOCOL</span><span className="text-[#177f85]">ACTIVE</span>
@@ -197,25 +202,6 @@ export default function FenixTurtleMode(): React.JSX.Element {
                         <p className="fenix-body mt-2 text-neutral-600">
                             FENIX detects an inverted posture, calculates a recovery action, and restores operational readiness on its own.
                         </p>
-                    </motion.div>
-
-                    {/* Desktop recovery sequence */}
-                    <motion.div
-                        className="pointer-events-auto absolute bottom-[10vh] left-[5vw] 3xl:left-[max(4vw,calc((100vw-120rem)/2))] 3xl:bottom-[12vh] hidden w-[17rem] 3xl:w-[20rem] border-l-2 border-[#5ce1e6] bg-white/90 p-5 shadow-[0_14px_40px_rgba(15,30,32,0.1)] backdrop-blur-sm lg:block"
-                    >
-                        <div className="mb-4 flex items-center gap-2 text-[10px] font-bold tracking-[0.18em] text-neutral-500"><Cpu className="h-3.5 w-3.5 text-[#177f85]" /> AUTONOMOUS SEQUENCE</div>
-                        <div className="space-y-3 font-mono-tech text-[10px]">
-                            {[
-                                ["01", "ATTITUDE", "INVERTED"],
-                                ["02", "RECOVERY PATH", "CALCULATED"],
-                                ["03", "FLIGHT STATE", "RESTORED"],
-                            ].map(([index, label, value]) => (
-                                <div key={index} className="flex items-center justify-between border-b border-neutral-900/10 pb-2">
-                                    <span className="text-neutral-400">{index} / {label}</span>
-                                    <span className="font-bold text-neutral-900">{value}</span>
-                                </div>
-                            ))}
-                        </div>
                     </motion.div>
 
                     <motion.div
@@ -229,6 +215,25 @@ export default function FenixTurtleMode(): React.JSX.Element {
                         <div className="mt-4 flex items-center gap-2 border-t border-neutral-900/10 pt-3 text-[10px] font-bold tracking-[0.12em] text-neutral-600"><CheckCircle2 className="h-3.5 w-3.5 text-[#177f85]" /> RECOVERY READY</div>
                     </motion.div>
                 </div>
+
+                {/* PREVIOUS UI: the sequence card was inside the desktop overlay and only visible at lg and above. */}
+                <motion.div
+                    className="fenix-turtle-sequence relative z-20 mt-3 w-[92vw] max-w-[28rem] shrink-0 border-l-2 border-[#5ce1e6] bg-white/90 p-3.5 shadow-[0_14px_40px_rgba(15,30,32,0.1)] backdrop-blur-sm xs:mt-4 xs:max-w-[32rem] xs:p-4 sm:hidden lg:absolute lg:bottom-[10vh] lg:left-[5vw] lg:mt-0 lg:block lg:w-[17rem] lg:p-5 3xl:left-[max(4vw,calc((100vw-120rem)/2))] 3xl:bottom-[12vh] 3xl:w-[20rem]"
+                >
+                    <div className="mb-2 flex items-center gap-2 text-[10px] font-bold tracking-[0.18em] text-neutral-500 lg:mb-4"><Cpu className="h-3.5 w-3.5 text-[#177f85]" /> AUTONOMOUS SEQUENCE</div>
+                    <div className="space-y-2 font-mono-tech text-[10px] lg:space-y-3">
+                        {[
+                            ["01", "ATTITUDE", "INVERTED"],
+                            ["02", "RECOVERY PATH", "CALCULATED"],
+                            ["03", "FLIGHT STATE", "RESTORED"],
+                        ].map(([index, label, value]) => (
+                            <div key={index} className="flex items-center justify-between gap-2 border-b border-neutral-900/10 pb-2">
+                                <span className="text-neutral-400">{index} / {label}</span>
+                                <span className="font-bold text-neutral-900">{value}</span>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
 
                     {/* Stage 1 Info Card & Stage 3 Info Card - Disabled */}
             </div>

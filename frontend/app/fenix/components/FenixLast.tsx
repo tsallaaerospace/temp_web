@@ -10,6 +10,7 @@ export default function FenixLast({ backgroundVideoSrc }: { backgroundVideoSrc?:
   const textColor = backgroundVideoSrc ? "#ffffff" : "#000000"
   const videoRef = useRef<HTMLVideoElement>(null)
   const videoInView = useInView(videoRef, { amount: 0.25 })
+  const loadVideo = useInView(videoRef, { once: true, margin: "400px" })
 
   useEffect(() => {
     const video = videoRef.current
@@ -33,7 +34,7 @@ export default function FenixLast({ backgroundVideoSrc }: { backgroundVideoSrc?:
       <section className="font-orbit relative min-h-[100svh] md:min-h-screen w-full overflow-hidden bg-white flex flex-col items-center justify-center">
         {backgroundVideoSrc && <video
           ref={videoRef}
-          src={backgroundVideoSrc}
+          src={loadVideo ? backgroundVideoSrc : undefined}
           muted
           playsInline
           aria-hidden="true"
@@ -68,7 +69,7 @@ export default function FenixLast({ backgroundVideoSrc }: { backgroundVideoSrc?:
           </motion.div>
         </div>
         */}
-        <div className={`relative z-20 container mx-auto px-4 sm:px-6 text-center ${backgroundVideoSrc ? "translate-y-[4vh] xs:translate-y-[6vh] sm:translate-y-[10vh] lg:translate-y-[14vh]" : ""}`}>
+        <div className={`relative z-20 container mx-auto px-4 sm:px-6 text-center ${backgroundVideoSrc ? "fenix-last-content translate-y-[4vh] xs:translate-y-[6vh] sm:translate-y-[10vh] lg:translate-y-[14vh]" : ""}`}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

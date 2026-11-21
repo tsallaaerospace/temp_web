@@ -21,10 +21,11 @@ export default function StormThreePhase() {
     <section ref={sectionRef} data-storm-section="three-phase" aria-labelledby="storm-three-phase-title" className="storm-three-phase relative h-[100svh] w-full overflow-hidden bg-black">
       <picture>
         <source media="(max-width: 767px)" srcSet="/product/STORM/3%20phase%20mobile.png" />
+        <source media="(min-width: 768px) and (max-width: 1100px) and (orientation: portrait)" srcSet="/product/STORM/storm-three-phase-tablet.webp" />
         <img
           src="/product/STORM/3%20phase%20destop.png"
           alt="Three panels showing an offshore flight deck, desert dunes and snowy mountains"
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="storm-three-art absolute inset-0 h-full w-full object-cover object-center"
           loading="lazy"
           decoding="async"
         />

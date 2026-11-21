@@ -68,7 +68,7 @@ export default function StormMaritime() {
           button at the lower right; the new ocean.png already shows the ship's deck. */}
       {/* PREVIOUS UI: Both desktop and mobile used ocean.png. */}
       <picture>
-      <source media="(max-width: 767px)" srcSet="/product/STORM/final%20section/ocean_mobile.png" />
+      <source media="(max-width: 767px), (min-width: 768px) and (max-width: 1100px) and (orientation: portrait)" srcSet="/product/STORM/final%20section/ocean_mobile.png" />
       <Image
         src="/product/STORM/final section/ocean.png"
         alt=""

@@ -62,9 +62,12 @@ export default function VelocityComplex() {
                         className="w-full h-full object-cover shadow-2xl"
                     />
                     */}
+                    {/* PREVIOUS UI: src="/home/Velocity-Complex.jpg" (6000px wide, 7.5 MB); now a 3840px (4K) WebP */}
                     <img
-                        src="/home/Velocity-Complex.jpg"
+                        src="/home/Velocity-Complex-3840.webp"
                         alt="Velocity Complex"
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover shadow-2xl"
                     />
                 </div>

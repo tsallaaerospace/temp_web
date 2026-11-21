@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { useLenis } from "lenis/react"
 
 const TOLERANCE = 2
+const SWIPE_DISTANCE = 32
 const DURATION = 0.9
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
@@ -34,6 +35,7 @@ export default function SectionSnap({ panels: selector }: { panels: string }) {
   useEffect(() => {
     let animating = false
     let touching = false
+    let swipeStart: Touch | undefined
     let lastWheelTime = 0
     let lastWheelDelta = 0
     let settleTimer: ReturnType<typeof setTimeout> | undefined
@@ -108,7 +110,7 @@ export default function SectionSnap({ panels: selector }: { panels: string }) {
       scrollTo(target)
     }
 
-    // Touch, scrollbar drags and resizes are not paged; they settle on the nearest point.
+    // Native touch, scrollbar drags and resizes settle on the nearest point.
     const settle = () => {
       if (animating || touching) return
       const y = window.scrollY
@@ -124,10 +126,31 @@ export default function SectionSnap({ panels: selector }: { panels: string }) {
       clearTimeout(settleTimer)
       settleTimer = setTimeout(settle, 160)
     }
-    const onTouchStart = () => (touching = true)
-    const onTouchEnd = () => {
+    const onTouchStart = (e: TouchEvent) => {
+      touching = true
+      swipeStart = undefined
+      const panel = (e.target as Element | null)?.closest("[data-snap-swipe]")
+      if (!animating && e.touches.length === 1 && panel?.matches(selector)
+        && Math.abs(panel.getBoundingClientRect().top) <= TOLERANCE
+        && getComputedStyle(panel).touchAction === "pan-x pinch-zoom") {
+        swipeStart = e.touches[0]
+      }
+    }
+    const resetTouch = () => {
+      swipeStart = undefined
       touching = false
       queueSettle()
+    }
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length) return
+      const start = swipeStart
+      const end = e.changedTouches[0]
+      resetTouch()
+      if (!start || !end || start.identifier !== end.identifier || animating) return
+      const dy = start.clientY - end.clientY
+      if (Math.abs(dy) < SWIPE_DISTANCE || Math.abs(dy) <= Math.abs(start.clientX - end.clientX)) return
+      const target = nextPoint(dy > 0 ? 1 : -1)
+      if (target !== null) scrollTo(target)
     }
 
     window.addEventListener("wheel", onWheel, { passive: false, capture: true })
@@ -136,7 +159,7 @@ export default function SectionSnap({ panels: selector }: { panels: string }) {
     window.addEventListener("resize", queueSettle)
     window.addEventListener("touchstart", onTouchStart, { passive: true })
     window.addEventListener("touchend", onTouchEnd, { passive: true })
-    window.addEventListener("touchcancel", onTouchEnd, { passive: true })
+    window.addEventListener("touchcancel", resetTouch, { passive: true })
     return () => {
       clearTimeout(settleTimer)
       clearTimeout(unlockTimer)
@@ -146,7 +169,7 @@ export default function SectionSnap({ panels: selector }: { panels: string }) {
       window.removeEventListener("resize", queueSettle)
       window.removeEventListener("touchstart", onTouchStart)
       window.removeEventListener("touchend", onTouchEnd)
-      window.removeEventListener("touchcancel", onTouchEnd)
+      window.removeEventListener("touchcancel", resetTouch)
     }
   }, [lenis, selector])
 

@@ -52,6 +52,7 @@ export default function FenixResponder1(): React.JSX.Element {
         {/* Background Image: 4 Phase Operational Environments */}
         <picture className="absolute inset-0 z-0 block">
         <source media="(max-width: 767px)" srcSet="/product/fenix/responder-mobile.webp" />
+        <source media="(min-width: 768px) and (max-width: 1100px) and (orientation: portrait)" srcSet="/product/fenix/responder-tablet.webp" />
         <img
           src="/product/fenix/4-phase.png"
           alt="FENIX First Responder 4 Phase Environments"
@@ -118,7 +119,7 @@ export default function FenixResponder1(): React.JSX.Element {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="fenix-section-title fenix-title-fit title-panel-grid [--panel-aspect:5504/3072] [--panels:4] [--mid:2] absolute grid grid-cols-4 text-center font-orbit font-normal leading-[1.1] tracking-[-0.03em] z-20 select-none pointer-events-none text-[clamp(0.75rem,3.2vw,1.15rem)] sm:text-[clamp(1.1rem,2.8vw,2.25rem)] lg:text-[clamp(1.75rem,3.2vw,3.75rem)] 3xl:text-[clamp(2.5rem,3.5vw,4.5rem)]"
+          className="fenix-responder-title fenix-section-title fenix-title-fit title-panel-grid [--panel-aspect:5504/3072] [--panels:4] [--mid:2] absolute grid grid-cols-4 text-center font-orbit font-normal leading-[1.1] tracking-[-0.03em] z-20 select-none pointer-events-none text-[clamp(0.75rem,3.2vw,1.15rem)] sm:text-[clamp(1.1rem,2.8vw,2.25rem)] lg:text-[clamp(1.75rem,3.2vw,3.75rem)] 3xl:text-[clamp(2.5rem,3.5vw,4.5rem)]"
           style={{ top: "var(--fenix-title-top)", left: "var(--fenix-title-inset)", right: "var(--fenix-title-inset)" }}
         >
           <span className="flex items-center justify-center text-center">
@@ -206,7 +207,9 @@ export default function FenixResponder1(): React.JSX.Element {
           </motion.div>
         </div>
         */}
-        <div className="absolute inset-x-0 bottom-[12vh] md:bottom-[-40vh] lg:bottom-[-48vh] 3xl:bottom-[-52vh] flex justify-center pointer-events-none select-none z-10">
+        {/* PREVIOUS UI: bottom-[12vh] on phones. */}
+        {/* PREVIOUS UI: bottom-[calc(12vh-16px)] on phones. */}
+        <div className="fenix-responder-drone absolute inset-x-0 bottom-[calc(12vh-48px)] md:bottom-[-40vh] lg:bottom-[-48vh] 3xl:bottom-[-52vh] flex justify-center pointer-events-none select-none z-10">
           <motion.div
             initial={{ opacity: 0, y: reduceMotion ? 0 : "75%", scale: 0.94 }}
             animate={inView ? { opacity: 1, y: "0%", scale: 1 } : { opacity: 0, y: reduceMotion ? 0 : "75%", scale: 0.94 }}

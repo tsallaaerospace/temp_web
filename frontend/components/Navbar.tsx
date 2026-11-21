@@ -2,6 +2,7 @@
 // PREVIOUS UI: named text size utilities used rem units and varied with page root scaling; pixel sizes preserve the 16px-root design.
 
 import { useState, useEffect, useRef } from "react"
+import gsap from "gsap"
 // Note: next/link, next/navigation, and next/image are not available in this environment.
 // They have been replaced with standard web APIs and HTML tags (<a> and <img>).
 import Link from "next/link"
@@ -230,9 +231,10 @@ const navigationItems: { name: string; href: string; disabled?: boolean }[] = [
   { name: "MAVERICK", href: "/maverick" },
   { name: "UNCREWED SYSTEMS", href: "#" },
   // PREVIOUS UI: Counter Systems, Space Systems and Company were hidden with disabled: true.
-  { name: "COUNTER SYSTEMS", href: "/countersystems" },
-  { name: "SPACE SYSTEMS", href: "/hardware" },
-  { name: "COMPANY", href: "#" },
+  // PREVIOUS UI: shown (no disabled flag) from 4 Nov to 12 Nov; hidden again with their pages.
+  { name: "COUNTER SYSTEMS", href: "/countersystems", disabled: true },
+  { name: "SPACE SYSTEMS", href: "/hardware", disabled: true },
+  { name: "COMPANY", href: "#", disabled: true },
   { name: "JOIN THE MISSION", href: "#" },
 ]
 
@@ -307,6 +309,12 @@ export default function Navbar() {
     mobileMenuOpenRef.current = mobileMenuOpen
   }, [mobileMenuOpen])
 
+  // GSAP is bundled with the site (npm "gsap"), so it's ready straight away.
+  // PREVIOUS UI: the effect below downloaded a second copy from cdnjs.cloudflare.com on every page.
+  useEffect(() => {
+    setIsGsapLoaded(true);
+  }, []);
+  /* PREVIOUS UI:
   useEffect(() => {
     // This effect handles loading the external GSAP script.
     const script = document.createElement('script');
@@ -323,6 +331,7 @@ export default function Navbar() {
       document.body.removeChild(script);
     };
   }, []); // Empty dependency array ensures this runs only once on component mount.
+  */
 
 
   useEffect(() => {
@@ -331,7 +340,7 @@ export default function Navbar() {
     if (!isGsapLoaded) {
       return;
     }
-    const { gsap } = window;
+    // PREVIOUS UI: const { gsap } = window;  (now the imported gsap)
     const container = imageContainerRef.current;
     if (!container) return;
 
@@ -455,8 +464,12 @@ export default function Navbar() {
             */}
 
             {/* PREVIOUS UI (right-aligned while six buttons were shown): absolute right-6 xl:right-[56px] 2xl:right-[61px] */}
-            {/* Centred from 1440px; on smaller laptops the six centred buttons ran into the logo, so they sit right there. */}
-            <div className="hidden lg:flex items-center h-full absolute left-1/2 -translate-x-1/2 [@media(max-width:1439px)]:left-auto [@media(max-width:1439px)]:right-6 [@media(max-width:1439px)]:translate-x-0">
+            {/* Centred at every width while three buttons show.
+                PREVIOUS UI (six buttons): below 1440px they sat at the right, because six centred buttons ran into the logo:
+                [@media(max-width:1439px)]:left-auto [@media(max-width:1439px)]:right-6 [@media(max-width:1439px)]:translate-x-0
+                Put that back if the hidden buttons are shown again. */}
+            {/* PREVIOUS UI: hidden lg:flex, centered at every desktop width. Tablets now use the full menu, right-aligned until xl to clear the logo. */}
+            <div className="hidden md:flex items-center h-full absolute right-4 xl:right-auto xl:left-1/2 xl:-translate-x-1/2">
               {/* PREVIOUS UI: Disabled navigation items remained visible. */}
               {navigationItems.filter(item => !item.disabled).map((item, index) => {
                 if (item.disabled) return (
@@ -476,10 +489,15 @@ export default function Navbar() {
                   >
                       <Link
                         href={item.href}
+                        // MAVERICK only opens its menu and there is no /maverick page, so don't fetch it in the
+                        // background (PREVIOUS UI: default prefetch, which logged a 404 on every page).
+                        prefetch={item.name === "MAVERICK" ? false : undefined}
                         onClick={(event) => {
-                          if (item.name === "MAVERICK" || item.name === "JOIN THE MISSION") {
+                          // PREVIOUS UI: only MAVERICK and JOIN THE MISSION opened on click; allow tablet taps to open UNCREWED SYSTEMS too.
+                          if (item.name === "MAVERICK" || item.name === "JOIN THE MISSION" || item.name === "UNCREWED SYSTEMS") {
                             event.preventDefault()
-                            setActiveMegaMenu(item.name === "MAVERICK" ? "/maverick" : "/careers")
+                            // PREVIOUS UI: MAVERICK selected /maverick, otherwise /careers.
+                            setActiveMegaMenu(item.name === "MAVERICK" ? "/maverick" : item.name === "UNCREWED SYSTEMS" ? "/uncrewedsystems" : "/careers")
                           }
                         }}
                         className={cn(
@@ -502,7 +520,8 @@ export default function Navbar() {
               })}
             </div>
 
-            <div className="lg:hidden pr-4">
+            {/* PREVIOUS UI: lg:hidden kept the phone menu on portrait tablets. */}
+            <div className="md:hidden pr-4">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className={cn(
@@ -538,7 +557,8 @@ export default function Navbar() {
               className="hidden lg:block absolute top-full left-0 right-0 bg-black border-b border-white/20 shadow-2xl z-40 overflow-hidden"
               */
               className={cn(
-                "hidden lg:block absolute top-full left-0 right-0 shadow-2xl z-40 overflow-hidden transition-all duration-300",
+                // PREVIOUS UI: hidden lg:block, overflow-hidden without a viewport height limit.
+                "hidden md:block absolute top-full left-0 right-0 shadow-2xl z-40 max-h-[calc(100svh-4.5rem)] overflow-y-auto transition-all duration-300",
                 activeMegaMenu === "/uncrewedsystems"
                   ? "hangar-glass border-b border-white/15"
                   : "bg-black border-b border-white/20"
@@ -675,7 +695,8 @@ export default function Navbar() {
       </nav>
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden overflow-hidden">
+        // PREVIOUS UI: lg:hidden matched the previous 1024px desktop breakpoint.
+        <div className="fixed inset-0 z-40 md:hidden overflow-hidden">
           <div className={cn("absolute inset-0", activeMegaMenu === "/uncrewedsystems" ? "bg-black/10" : "bg-black/80 backdrop-blur-sm")} onClick={() => {
             setMobileMenuOpen(false);
             setActiveMegaMenu(null);

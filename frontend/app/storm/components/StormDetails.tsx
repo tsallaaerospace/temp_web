@@ -26,6 +26,21 @@ export default function StormDetails() {
     if (!section || !image?.height) return
     const boxes = calloutRefs.current.map(element => element?.getBoundingClientRect())
     if (boxes.some(box => !box)) return
+    if (window.matchMedia("(min-width: 768px) and (max-width: 1100px) and (orientation: portrait)").matches) {
+      CALLOUTS.forEach(({ anchor: [x, y] }, index) => {
+        const box = boxes[index]!
+        const startX = box.left + box.width / 2 - section.left
+        const startY = box.top - section.top
+        const [anchorX, anchorY] = index === 2 ? [0.645, 0.657] : [x, y]
+        const endX = image.left - section.left + image.width * anchorX
+        const endY = image.top - section.top + image.height * anchorY
+        let path = `M ${startX} ${startY} V ${endY} H ${endX}`
+        if (index === 1) path = `M ${endX} ${startY} V ${endY}`
+        if (index === 2) path = `M ${startX} ${startY} V ${startY - 24} H ${endX} V ${endY}`
+        pathRefs.current[index]?.setAttribute("d", path)
+      })
+      return
+    }
     const heights = boxes.map(box => box!.height)
     const centreY = image.top - section.top + image.height * 0.48
     const legY = Math.max(
@@ -79,7 +94,9 @@ export default function StormDetails() {
   return (
     <section ref={sectionRef} data-storm-section="details" aria-labelledby="storm-details-title" className="storm-details relative isolate h-[100svh] min-h-[38rem] w-full overflow-hidden bg-white font-orbit text-neutral-900">
       <ProductHeading id="storm-details-title" className="product-title-position z-20">
-        Heavy lift. Reliable delivery. <CharacterReveal text="Built for rugged missions." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} />
+        {/* PREVIOUS UI: "Heavy lift. Reliable delivery. " as one run, which wrapped as "Heavy lift. Reliable / delivery." on phones.
+            Phones now show "Heavy lift." and "Reliable delivery." on their own lines; wider screens are unchanged. */}
+        <span className="block md:inline">Heavy lift.</span>{" "}<span className="block md:inline">Reliable delivery.</span>{" "}<CharacterReveal className="storm-details-tagline" text="Built for rugged missions." targetColor="#5ce1e6" glowColor="#5ce1e6" stagger={0.06} />
       </ProductHeading>
       <motion.div
         className="storm-details-image absolute"
@@ -90,7 +107,7 @@ export default function StormDetails() {
       >
         <img ref={imageRef} onLoad={updateConnectors} src="/product/STORM/STORM_side_view.png" alt="STORM side view showing paired rotors, central airframe and landing gear" className="block h-auto w-full max-w-none" loading="lazy" decoding="async" />
       </motion.div>
-      <motion.svg aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: inView || reduceMotion ? 1 : 0 }} transition={{ duration: reduceMotion ? 0 : 0.4 }}>
+      <motion.svg aria-hidden="true" className="storm-details-connectors pointer-events-none absolute inset-0 z-10 h-full w-full" initial={{ opacity: 0 }} animate={{ opacity: inView || reduceMotion ? 1 : 0 }} transition={{ duration: reduceMotion ? 0 : 0.4 }}>
         <defs>
           <marker id="storm-callout-dot" markerUnits="userSpaceOnUse" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5"><circle cx="3.5" cy="3.5" r="3.2" fill="#36bec5" /></marker>
         </defs>

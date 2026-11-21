@@ -15,7 +15,9 @@ export default function AIOperations() {
                 <span className="text-[#5ce1e6] block sm:inline">NO COCKPIT.</span>
             </h2> */}
             {/* PREVIOUS UI: <TextReveal lines={[{ text: "THE FUTURE OF FLIGHT" }, { text: "HAS" }, { text: "NO COCKPIT.", color: "#5ce1e6" }]} ... /> */}
-            <h2 className="w-full max-w-[1800px] text-[clamp(32px,10vw,72px)] md:text-[clamp(28px,5.5vw,112px)] font-bold tracking-tighter text-black uppercase leading-[1.1] [text-wrap:balance]">
+            {/* Upright tablets: larger headline, "THE FUTURE OF FLIGHT" spans most of the width (PREVIOUS UI: md size 5.5vw, about 42-57px).
+                Also raised 32px above centre (PREVIOUS UI: exactly centred). */}
+            <h2 className="w-full max-w-[1800px] text-[clamp(32px,10vw,72px)] md:text-[clamp(28px,5.5vw,112px)] [@media(min-width:768px)_and_(orientation:portrait)]:text-[8vw] [@media(min-width:768px)_and_(orientation:portrait)]:-translate-y-8 font-bold tracking-tighter text-black uppercase leading-[1.1] [text-wrap:balance]">
                 <span className="block"><span className="block md:inline">THE FUTURE</span><span className="hidden md:inline"> </span><span className="block md:inline">OF FLIGHT</span></span>
                 <span className="block">HAS</span>
                 <TextReveal

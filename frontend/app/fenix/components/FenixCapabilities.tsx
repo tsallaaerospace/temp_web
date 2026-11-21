@@ -28,7 +28,7 @@ export default function FenixCapabilities(): React.JSX.Element {
       {/* PREVIOUS UI: <section className="font-orbit flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden bg-white py-12 text-black md:min-h-screen md:flex-row md:py-20"> */}
       <section id="capabilities" className="font-orbit flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden bg-white py-8 xs:py-12 sm:py-16 md:py-20 text-black md:min-h-screen md:flex-row">
         <ContentWrapper>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-10 sm:gap-14 md:gap-12 lg:gap-20 xl:gap-24">
+          <div className="fenix-capabilities-layout flex flex-col md:flex-row items-center justify-center gap-10 sm:gap-14 md:gap-12 lg:gap-20 xl:gap-24">
             {/* Left Column: Image */}
             {/* PREVIOUS UI:
             <motion.div
@@ -75,12 +75,12 @@ export default function FenixCapabilities(): React.JSX.Element {
               viewport={{ amount: 0.25 }}
               transition={{ duration: reduceMotion ? 0 : 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="relative w-full max-w-[20rem] xs:max-w-[24rem] sm:max-w-xs md:max-w-md 3xl:max-w-lg aspect-[1075/1433] flex items-center justify-center">
+              <div className="fenix-capabilities-image-frame relative w-full max-w-[20rem] xs:max-w-[24rem] sm:max-w-xs md:max-w-md 3xl:max-w-lg aspect-[1075/1433] flex items-center justify-center">
                 <Image
                   src="/product/fenix/FENIX_2nd_section.png"
                   alt="FENIX Drone"
                   fill
-                  className="object-contain scale-[2.4] xs:scale-[2.6] sm:scale-[1.8] -translate-x-[4%] -translate-y-[8%] xs:-translate-y-[10%] sm:translate-y-0 md:scale-[1.9] md:-translate-x-[25%] md:translate-y-0 lg:scale-[2.4] lg:-translate-x-[38%] xl:scale-[2.7] xl:-translate-x-[48%]"
+                  className="fenix-capabilities-drone object-contain scale-[2.4] xs:scale-[2.6] sm:scale-[1.8] -translate-x-[4%] -translate-y-[8%] xs:-translate-y-[10%] sm:translate-y-0 md:scale-[1.9] md:-translate-x-[25%] md:translate-y-0 lg:scale-[2.4] lg:-translate-x-[38%] xl:scale-[2.7] xl:-translate-x-[48%]"
                   priority
                 />
               </div>
@@ -107,7 +107,7 @@ export default function FenixCapabilities(): React.JSX.Element {
               </p>
             </div>
             */}
-            <div className="w-full md:w-7/12 flex flex-col justify-center text-left max-w-2xl 3xl:max-w-3xl md:translate-x-4 lg:translate-x-12 xl:translate-x-20 -translate-y-2 md:-translate-y-8 lg:-translate-y-14 xl:-translate-y-16">
+            <div className="fenix-capabilities-copy w-full md:w-7/12 flex flex-col justify-center text-left max-w-2xl 3xl:max-w-3xl md:translate-x-4 lg:translate-x-12 xl:translate-x-20 -translate-y-2 md:-translate-y-8 lg:-translate-y-14 xl:-translate-y-16">
               <h1 className="fenix-section-title font-normal leading-none tracking-tight mb-4 sm:mb-6 lg:mb-8 3xl:mb-10 text-black">
                 {/* PREVIOUS UI (block span followed by br caused double line-break and excessive vertical gap on mobile screens):
                 <span className="block xs:inline whitespace-normal sm:whitespace-nowrap">Compact Tactical</span>

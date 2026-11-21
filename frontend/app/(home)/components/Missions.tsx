@@ -31,10 +31,11 @@ export default function Missions() {
 
   return (
     <>
-      {/* Import for the 'Pontano Sans' font */}
+      {/* PREVIOUS UI: imported the 'Pontano Sans' font here, but nothing on the page uses it (extra download).
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Pontano+Sans&display=swap');
       `}</style>
+      */}
 
       {/* PREVIOUS UI (Standard section container without dynamic 100dvh for mobile):
       <section ref={sectionRef} className="relative w-full h-screen min-h-screen flex items-center justify-start bg-black text-white overflow-hidden snap-start snap-always">
@@ -63,14 +64,16 @@ export default function Missions() {
           </h2>
           <p className="text-lg md:text-2xl 3xl:text-lg uw:text-4xl font-light leading-relaxed text-neutral-600 tracking-wide font-orbit">
         */}
-        <div className="relative z-10 px-5 sm:px-10 md:px-16 lg:px-24 uw:px-24 text-left max-w-5xl uw:max-w-7xl">
-          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-5xl 3xl:text-5xl uw:text-5xl font-bold text-black mb-4 sm:mb-6 font-orbit leading-tight">
+        {/* Upright tablets: padding and text scale with the screen width so the iPad mini layout (3-line title) is the same on every tablet.
+            PREVIOUS UI: fixed md/lg sizes, so the title wrapped differently on iPad mini, Surface Pro and iPad Pro. */}
+        <div className="relative z-10 px-5 sm:px-10 md:px-16 lg:px-24 uw:px-24 text-left max-w-5xl uw:max-w-7xl [@media(min-width:768px)_and_(max-width:1199px)_and_(orientation:portrait)]:px-[8.33vw] [@media(min-width:768px)_and_(max-width:1199px)_and_(orientation:portrait)]:max-w-none">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-5xl 3xl:text-5xl uw:text-5xl font-bold text-black mb-4 sm:mb-6 font-orbit leading-tight [@media(min-width:768px)_and_(max-width:1199px)_and_(orientation:portrait)]:text-[7.8vw] [@media(min-width:768px)_and_(max-width:1199px)_and_(orientation:portrait)]:mb-[3.125vw]">
             On a mission to protect our<br />protectors.
           </h2>
           <div className="w-full">
             {/* PREVIOUS UI: <p className={`text-base sm:text-xl ...`}>Our adversaries are evolving, so must we!</p> */}
             <p
-              className={`text-base sm:text-xl md:text-2xl 3xl:text-lg uw:text-4xl font-light leading-relaxed text-neutral-600 tracking-wide font-orbit transition-all duration-700 ease-out transform ${isVisible ? "opacity-90 translate-y-0" : "opacity-0 translate-y-12"
+              className={`text-base sm:text-xl md:text-2xl 3xl:text-lg uw:text-4xl [@media(min-width:768px)_and_(max-width:1199px)_and_(orientation:portrait)]:text-[3.125vw] font-light leading-relaxed text-neutral-600 tracking-wide font-orbit transition-all duration-700 ease-out transform ${isVisible ? "opacity-90 translate-y-0" : "opacity-0 translate-y-12"
                 }`}
               style={{
                 transitionDelay: "150ms",

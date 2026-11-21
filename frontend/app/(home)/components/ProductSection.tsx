@@ -39,7 +39,8 @@ const STATIC_PRODUCTS: Product[] = [
         title: "FENIx",
         description: "Fast Entry Navigational Intrusion eXplorer",
         // PREVIOUS UI: "/product/fenix/FENIX_card.png"
-        imageUrl: "/product/fenix/FENIX_hero_v3_silver_black_1200x1440.png",
+        // PREVIOUS UI: "/product/fenix/FENIX_hero_v3_silver_black_1200x1440.png" (same image as PNG, 0.75 MB)
+        imageUrl: "/product/fenix/FENIX_hero_v3_silver_black_1200x1440.webp",
         imageClassName: "translate-x-[25%] translate-y-[20%] scale-[1.62]",
         isWide: false,
         animationType: "scan",
@@ -53,7 +54,8 @@ const STATIC_PRODUCTS: Product[] = [
         title: "T-BAT",
         description: "Battlefield Aerial Tactical UAS",
         // PREVIOUS UI: "/product/T-BAT/T-Bat%20card.png"
-        imageUrl: "/product/T-BAT/Tbat_Front_Glass_Restored_1200x1440.png",
+        // PREVIOUS UI: "/product/T-BAT/Tbat_Front_Glass_Restored_1200x1440.png" (same image as PNG, 5.6 MB)
+        imageUrl: "/product/T-BAT/Tbat_Front_Glass_Restored_1200x1440.webp",
         // Keep the propellers in frame while cropping the landing gear below the card.
         imageClassName: "translate-y-[15%] scale-[2.7]",
         isWide: false,
@@ -70,7 +72,8 @@ const STATIC_PRODUCTS: Product[] = [
         // description: "Multi-Role Single Solution",
         // description: "Mission Adaptive networked Targeting and interception system",
         description: "Mission Adaptive Networked Targeting And Interception System",
-        imageUrl: "/product/Mantis/Mantis-Card.png",
+        // PREVIOUS UI: "/product/Mantis/Mantis-Card.png" (same image as PNG, 6.4 MB)
+        imageUrl: "/product/Mantis/Mantis-Card.webp",
         imageClassName: "translate-y-[20%] scale-[3.6]",
         isWide: false,
         // animationType: "float",
@@ -83,7 +86,8 @@ const STATIC_PRODUCTS: Product[] = [
         tag: "Crisis Communications",
         title: "STORM",
         description: "Smart Transport Operations for Rugged Missions",
-        imageUrl: "/product/STORM/STORM_front_3600x4320_HQ.png",
+        // PREVIOUS UI: "/product/STORM/STORM_front_3600x4320_HQ.png" (same image as PNG, 1.4 MB)
+        imageUrl: "/product/STORM/STORM_front_3600x4320_HQ.webp",
         imageClassName: "translate-y-[5%]  scale-[2.2]",
         isWide: false,
         animationType: "pulse",
@@ -277,6 +281,8 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         <motion.img
             src={product.imageUrl}
             alt={product.title}
+            loading="lazy"
+            decoding="async"
             // PREVIOUS UI: opacity-60 group-hover:opacity-100 (dim at rest, bright on hover); now reversed
             className={cn("absolute inset-0 w-full h-full object-cover opacity-100 group-hover:opacity-60 transition-opacity duration-700", product.imageClassName)}
             animate={product.animationType === 'float' ? { y: [0, -15, 0] } : {}}
@@ -337,9 +343,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                     <div className="flex justify-between items-end gap-2 xl:gap-3">
                         {/* PREVIOUS UI: the heading also had `uppercase`, which forced "FENIx" back to "FENIX";
                             the other titles are already written in capitals */}
-                        <h3 className="text-2xl lg:text-base xl:text-lg 2xl:text-2xl uw:text-3xl font-black text-white tracking-tighter truncate" style={{ fontFamily: PONTANO_SANS }}>
+                        {/* PREVIOUS UI: <h3> (same look). h2 keeps headings in order under the section's h1. */}
+                        <h2 className="text-2xl lg:text-base xl:text-lg 2xl:text-2xl uw:text-3xl font-black text-white tracking-tighter truncate" style={{ fontFamily: PONTANO_SANS }}>
                             {product.title}
-                        </h3>
+                        </h2>
                         {/* PREVIOUS UI (Learn More Button inside Product Card - Commented out):
                         <Link href="#" onClick={(e) => e.preventDefault()} className="shrink-0">
                             <motion.button

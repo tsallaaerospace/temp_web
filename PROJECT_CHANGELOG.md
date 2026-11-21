@@ -3434,3 +3434,692 @@
 - BEFORE UI STATE: Full-photo contain sizing with no scroll zoom.
 - AFTER UI STATE: Restored the previous cover sizing, photo position, desktop right inset and 1.15 scroll scale as requested. Kept the visible N and title adjustment.
 - Validation: Diff checked; browser preview not rechecked.
+
+## November 12, 2026
+### Page: FENIx (/fenix)
+#### Section: Hero video and caption
+- BEFORE UI STATE: Cloudinary-first HLS playback served the old uploaded asset; the updated local MP4 was only a fallback. The old Cloudinary poster could also show stale imagery. A mission paragraph appeared at lower right.
+- AFTER UI STATE: Hero directly plays the updated local MP4 with a versioned URL, removing the old Cloudinary poster/player from active rendering. Removed the mission paragraph and placed Fast Entry Navigational Intrusion eXplorer at bottom center with responsive sizing. The FENIx title remains above the caption.
+- Validation: TypeScript and diff checks passed. Browser playback and deployment were not performed. The updated local MP4 must be included in deployment; adaptive Cloudinary delivery can be restored once the replacement upload URL is available. Graphify update remains blocked by its uv launcher error.
+
+### Page: FENIx (/fenix)
+#### Section: Hero caption and X animation
+- BEFORE UI STATE: Separate FENIx title remained above the full-form caption; caption appeared shortly after load.
+- AFTER UI STATE: Removed the separate title. Full form fades in after 6.2 seconds; only the uppercase X in eXplorer plays the existing three-flash cyan/white glitch, beginning 1.9 seconds after caption reveal (8.1 seconds from load). Shared GlitchX supports uppercase X while preserving lowercase x by default.
+- Validation: TypeScript and diff checks passed; browser timing not rechecked.
+
+### Page: FENIx (/fenix)
+#### Section: Hero X glitch timing
+- BEFORE UI STATE: X glitch started at 8.1 seconds, 1.9 seconds after caption reveal.
+- AFTER UI STATE: X glitch starts at 6.7 seconds, 0.5 seconds after the caption begins appearing at 6.2 seconds.
+- Validation: Diff checked; browser timing not rechecked.
+
+### Page: MANTIS (/mantis)
+#### Section: Hero background
+- BEFORE UI STATE: Separate responsive hangar and drone images formed the hero background.
+- AFTER UI STATE: Uses the supplied MANTIS_hero_vedio.mp4 as the full-cover background on desktop and mobile, with muted inline autoplay and looping. Retains the MANTIS title and bottom gradient.
+- Validation: Confirmed video exists; TypeScript and diff checks passed. Browser playback not rechecked.
+
+### Page: MANTIS (/mantis)
+#### Section: Hero caption
+- BEFORE UI STATE: A separate MANTIS title appeared at lower left over the video.
+- AFTER UI STATE: Replaced that title with Mission Adaptive Networked Targeting and Interception System, centered at the bottom using the FENIx caption typography and responsive spacing. Lettering embedded in the video remains part of the video.
+- Validation: Compared full form with navigation content; TypeScript and diff checked. Browser preview not rechecked.
+
+### Page: MANTIS (/mantis)
+#### Section: Hero video playback
+- BEFORE UI STATE: Hero video looped indefinitely.
+- AFTER UI STATE: Removed looping so autoplay runs once and the browser holds its final decoded frame. Refreshing remounts and replays the video.
+- Validation: Confirmed the hero has no loop or ended reset handler; diff checked. Browser playback not rechecked.
+
+### Page: T-BAT (/bat)
+#### Section: Hero title
+- BEFORE UI STATE: T-BAT appeared as a large lower-left heading.
+- AFTER UI STATE: T-BAT is centered at the bottom using the same responsive font sizing and bottom spacing as the FENIx, STORM and MANTIS captions. Existing subtitle, description and scroll fade remain.
+- Validation: TypeScript and diff checks passed; browser preview not rechecked.
+
+### Page: T-BAT (/bat)
+#### Section: Oversized hero title
+- BEFORE UI STATE: T-BAT used a small bottom-center caption.
+- AFTER UI STATE: T-BAT appears as oversized white Orbit lettering spanning the hero at 23vw, matching the reference title scale, with a subtle glow. Existing scroll-controlled caption visibility is retained.
+- Validation: Diff checked; browser preview not rechecked. The title is a webpage overlay; unlike lettering rendered inside the reference video, it is not depth-composited behind the moving drone.
+
+### Page: T-BAT (/bat)
+#### Section: Hero title depth treatment
+- BEFORE UI STATE: Large opaque white lettering overlapped the drone.
+- AFTER UI STATE: Raised the lettering into the landscape and applied soft-light blending so the footage's silhouettes and surface detail remain visible through intersecting letters, giving a background-title impression.
+- Validation: Diff checked; browser preview not rechecked. This is a blend treatment, not a tracked foreground matte; exact drone occlusion still requires video compositing.
+
+### Page: T-BAT (/bat)
+#### Section: Hero title position
+- BEFORE UI STATE: Title sat at 12% from the top.
+- AFTER UI STATE: Restored the previous 24% top position while retaining soft-light blending.
+- Validation: Diff checked; browser preview not rechecked.
+
+### Page: T-BAT (/bat)
+#### Section: Hero title foreground occlusion
+- BEFORE UI STATE: Large T-BAT lettering crossed the drone without hiding overlapping letter areas.
+- AFTER UI STATE: Added an opening-shot aircraft silhouette mask to the title layer. Letter portions overlapping the aircraft become transparent, with the mask using centered cover sizing to match the video crop. Existing title placement and scroll fade remain.
+- Validation: TypeScript and diff checks passed. Browser preview not rechecked. Silhouette matches the opening shot rather than tracking later video frames; a tracked matte is needed if lettering remains visible as the aircraft moves.
+
+
+### Page: T-BAT (/bat)
+#### Section: Hero full form and paragraph
+- BEFORE UI STATE: Full form appeared at lower left; an additional mission paragraph appeared at lower right.
+- AFTER UI STATE: Removed the mission paragraph. Full form is bottom-centered with the same Orbit font, clamp(14px,1.8vw,30px) size, regular weight, line height and bottom spacing as the FENIx caption.
+- Validation: TypeScript and diff checks passed; browser preview not rechecked.
+
+### Page: T-BAT (/bat)
+#### Section: Responsive hero title and foreground mask
+- BEFORE UI STATE: The mask inherited a capped content width while the video covered the viewport. Title size used viewport width with a fixed 500px ceiling, allowing the cutout and lettering to drift on larger displays.
+- AFTER UI STATE: Removed the overlay width cap. Added a full-stage size container and a centered 16:9 canvas that uses the same cover calculation as the video. Both title and aircraft mask now share that canvas. Font size is limited by canvas width, viewport width and viewport height to accommodate laptops, ultrawide monitors and taller projector layouts. Existing entrance and scroll fade remain.
+- Validation: TypeScript passed. Browser viewport verification attempted but Edge exited during launch with sandbox profile-write errors. Graphify query/update unavailable: uv trampoline failed to canonicalize script path. The silhouette still matches the opening shot, not a tracked moving matte.
+
+### Page: T-BAT (/bat)
+#### Section: Scroll-controlled hero video loading
+- BEFORE UI STATE: Desktop scrubbing was disabled until the entire 71 MB video downloaded into a blob, leaving the poster visible during that wait.
+- AFTER UI STATE: Load the video progressively so frame seeking can begin as soon as media is ready. If a video error or a seek taking over 2.5 seconds occurs, switch once to the existing retried full-file download for hosts with broken Range responses. Clean up the fallback timer and listeners on unmount.
+- Validation: TypeScript passed. Headless Edge verified scroll positions 0, 400 and 1100 select video times 0.020833, 1.729166 and 4.770833 seconds respectively. A simulated video error successfully activated the blob fallback; reverse scrolling then selected the expected earlier frame. Live hosting/network throttling not verified.
+
+### Page: T-BAT (/bat)
+#### Section: Hero title propeller occlusion
+- BEFORE UI STATE: The title mask covered the airframe silhouette but omitted the two rotor blades and the tops of their hubs, allowing letters to paint over them.
+- AFTER UI STATE: Extended the same source-coordinate mask around both propellers and hubs so they remain in front of the title at all responsive cover sizes.
+- Validation: Compared against the opening poster. SVG parsing and browser visual check recorded below; the mask remains specific to the opening shot.
+- Validation result: Browser parsed the SVG successfully (two silhouette paths). Visual capture was black while media buffered, so propeller alignment was checked against the source poster rather than claimed as verified in playback. Graphify update failed with its existing uv trampoline error.
+
+### Page: T-BAT (/bat)
+#### Section: Desktop hero title position — 2026-11-13
+- BEFORE UI STATE: The large masked T-BAT title was centered at 48% of the video canvas height.
+- AFTER UI STATE: Moved the title 40px upward from that position. Kept font size, mobile title position and video-coordinate aircraft mask unchanged.
+- Validation: TypeScript and diff checks; browser visual preview not repeated. Graphify unavailable due to its existing uv trampoline path error.
+
+### Page: T-BAT (/bat)
+#### Section: Desktop hero title — further upward adjustment
+- BEFORE UI STATE: Title was raised 40px from its 48% canvas anchor.
+- AFTER UI STATE: Raised it another 60px, for a total 100px offset. Aircraft mask and mobile placement remain unchanged.
+- Validation: Diff checked; browser preview not repeated.
+
+### Page: T-BAT (/bat)
+#### Section: Desktop hero title — size and position refinement
+- BEFORE UI STATE: 100px upward offset with min(23cqw,23vw,46svh) lettering.
+- AFTER UI STATE: Raised another 20px (120px total) and reduced font size by approximately 4% to min(22cqw,22vw,44svh). Kept the aircraft mask fixed to the footage and preserved mobile placement.
+- Validation: Diff checked. Visual browser preview not repeated.
+
+### Page: T-BAT (/bat)
+#### Section: Hero title ground-plane alignment
+- BEFORE UI STATE: Title used a center anchor and a 120px upward offset, so its lower edge changed with responsive font size.
+- AFTER UI STATE: Anchored the lower edge of the title to 55% of the source video canvas, placing the lettering against a higher ground plane behind the aircraft. Preserved the smaller font and foreground aircraft/propeller mask.
+- Validation: Diff checked; visual browser verification not repeated.
+
+### Page: T-BAT (/bat)
+#### Section: Title fixed to the opening landscape
+- BEFORE UI STATE: The main title and subtitle faded out over the first 0.1 viewport of scroll; the frame sequence waited until 0.15 viewport before starting.
+- AFTER UI STATE: Main lettering stays opaque and planted in its opening ground position during takeoff. A source-coordinate movement track moves it down with the opening camera tilt until it is outside the viewport by the sky shot. Motion follows the actual displayed frame, so buffering and reverse scrubbing preserve alignment. Frames start on the first scroll movement. The subtitle keeps its existing scroll fade and mobile playback is unchanged.
+- Validation: All five hero cache tests and TypeScript passed. Headless Edge verified full content opacity and visible lettering at frame 30, lettering below the viewport by frame 72, and restoration at frame 0. The movement anchors are calibrated to the current opening edit and need recalibration if that footage changes.
+
+### Page: T-BAT (/bat)
+#### Section: Moving foreground cutout and responsive animation
+- BEFORE UI STATE: The static opening-frame silhouette left stray cuts in the letter B as the aircraft grew during takeoff. Resizing between large viewports could leave overlay positions stale when the backing canvas stayed capped at 1920x1080.
+- AFTER UI STATE: Added calibrated source-coordinate aircraft scale/position anchors and a transparent foreground silhouette used with a subtractive mask. The displayed frame updates the cutout and the ground title together. The opaque mask base prevents clipping at the mask image boundaries. Resizing always refreshes overlay geometry, including when the backing bitmap dimensions stay unchanged. Mobile retains its separate, unmasked title.
+- Validation: Seven regression tests and TypeScript passed. Headless Edge checked title fit, cover geometry and compositing at 1366x768, 1920x1080, 2560x1440, 3440x1440, 5120x1440, 1600x1200 and 3840x2160, plus mobile title fit at 360, 390 and 430px. Inspected the frame-48 screenshot: the B is continuous except at the actual overlapping aircraft nose. Physical devices and Safari were not tested. Calibration must be revisited if opening footage changes.
+
+### Page: T-BAT (/bat)
+#### Section: Hero text entrance
+- BEFORE UI STATE: The title and full-form caption started their opacity/blur entrance after 1.8 seconds.
+- AFTER UI STATE: Both lines start together after 0.6 seconds, using a one-time one-second white/cyan flicker that settles to solid white. Preserved title position, aircraft cutout, scroll tracking and caption layout. Reduced motion shows white text immediately.
+- Validation: Seven hero regression tests and TypeScript passed. Headless Edge confirmed both lines flicker and settle to white without visible glow; reduced-motion text is fully visible and white. Graphify update failed with "uv trampoline failed to canonicalize script path". Physical devices were not tested.
+
+### Page: T-BAT (/bat)
+#### Section: Home-style character reveal
+- BEFORE UI STATE: Both hero lines flickered as whole blocks, rather than revealing letters individually like the home hero.
+- AFTER UI STATE: Reused the home hero CharacterReveal component for both lines, retaining the earlier 0.6-second start. Individual letters reveal randomly with website cyan (#5CE1E6) flashes, then settle white. Increased keyframe duration and character spacing in time by 25% at the user's request. Kept layout and moving aircraft cutout unchanged; reduced motion uses plain white text. Shared component defaults remain unchanged for existing callers; optional duration scaling and completion callback support BAT's existing mobile hold.
+- Validation: Seven BAT regression tests and TypeScript passed. Edge confirmed partially revealed individual characters on both lines, cyan flashes, final white text and reduced-motion plain text. Physical devices were not tested. Graphify query/update could not run because its launcher reports "uv trampoline failed to canonicalize script path".
+
+### Page: T-BAT (/bat)
+#### Section: Per-letter entrance delay
+- BEFORE UI STATE: Random letter order and short stagger made the title appear almost together. Server-rendered characters could briefly show before the animation effect hid them.
+- AFTER UI STATE: BAT title reveals left to right at 160ms intervals; the longer caption uses 65ms intervals. Preserved cyan flicker, slower keyframes and 0.6-second start. CharacterReveal retains random order by default for other pages, with an optional start order for BAT. Characters start hidden in markup to prevent the initial full-text flash.
+- Validation: Edge measured consecutive title starts at 150-167ms. TypeScript and seven BAT regression tests passed. Physical devices were not checked.
+
+### Page: T-BAT (/bat)
+#### Section: Hero full-form caption
+- BEFORE UI STATE: Bottom caption revealed each letter with cyan flicker.
+- AFTER UI STATE: Caption uses a simple 0.8-second opacity fade after the existing 0.6-second delay. Main T-BAT title retains its staggered cyan animation. Reduced motion remains instant; mobile hold still starts after the caption entrance completes.
+- Validation: TypeScript and diff checks passed. Browser preview was not repeated for this caption-only change.
+
+### Page: T-BAT (/bat)
+#### Section: Opening drone occlusion and steady title size
+- BEFORE UI STATE: A single hand-drawn outline was scaled across the opening frames, leaving disconnected cuts in B near the nose and rotors.
+- AFTER UI STATE: Added 61 source-frame foreground mattes for the opening ground shot and update the matte with the displayed frame. The title retains its original dimensions and ground-motion track, with no scroll scaling. Existing tracked outline remains the fallback during the brief camera tilt after frame 60. Added a reproducible matte-generation script calibrated to the current footage.
+- Validation: Eight regression tests and TypeScript passed. Edge verified identical title dimensions from frame 0 through 60, individual displayed-frame masks and fit at 1366x768, 1920x1080, 3440x1440, 5120x1440 and 1600x1200. Inspected opening/frame-48 screenshots for the B/nose overlap. Physical devices and Safari were not tested; mattes must be regenerated when footage changes.
+
+### Page: T-BAT (/bat)
+#### Section: Restore title position
+- BEFORE UI STATE: A transform override introduced during the cutout fix cancelled the existing upward offset and moved the title below the drone.
+- AFTER UI STATE: Removed that override, restoring the existing top-55% / translate-up-full title anchor while preserving per-frame foreground mattes.
+- Validation: Repeated browser checks confirmed the original placement and steady title dimensions during scroll at the desktop and monitor sizes listed above.
+
+### Page: T-BAT (/bat)
+#### Section: Image quality investigation and fixed title size
+- BEFORE UI STATE: User reported softer imagery and an apparent title zoom during scroll.
+- AFTER UI STATE: Confirmed title dimensions remain identical across opening frames 0, 12, 24, 36, 48 and 60, with the restored fixed vertical anchor. No imagery was recompressed by the matte changes. Inspected media dimensions: desktop AVIF frames and original scrub video are 1920x1080; separate mobile playback video is 1280x720. No source-resolution change was made in this follow-up.
+- Validation: Desktop title geometry and viewport checks are recorded above. Browser metadata check confirmed the two video resolutions. Physical devices were not tested; larger displays cannot obtain extra source detail from 1080p frames.
+
+### Page: T-BAT (/bat)
+#### Section: Stationary opening title, raised placement
+- BEFORE UI STATE: The camera-tilt track still translated the main title after frame 60, making it move with scrolling.
+- AFTER UI STATE: Removed title translation and raised its existing anchor by 20px. The title stays fixed in position and size through the opening landscape; it is hidden when that shot transitions to the sky, and restored on reverse scroll. Foreground mattes still follow the drone independently.
+- Validation: Eight regression tests and TypeScript passed. Edge verified identical title x/y/width/height at opening frames 0, 24, 48 and 60. Physical devices were not checked.
+
+### Page: T-BAT (/bat)
+#### Section: Takeoff visibility and ground anchoring
+- BEFORE UI STATE: Hiding at frame 60 removed the title too early. Holding its screen position longer made it appear in the sky during camera tilt.
+- AFTER UI STATE: Kept the title available throughout the opening takeoff shot and added the requested restrained 6% counter-zoom during the camera push. Its baseline now follows measured source-coordinate ground offsets during camera tilt, naturally carrying the title below the viewport as the landscape leaves view. The raised 20px opening anchor is preserved; the title is not attached to the airborne drone.
+- Validation: Nine regression tests and TypeScript passed. Edge checked frames 60/64/72: the title is over the dusty ground near the bottom at frame 64 and fully below the viewport by frame 72. Inspected frame-64 screenshot. Physical devices were not checked. Tracking remains calibrated to this footage.
+
+### Page: MANTIS (/mantis)
+#### Section: Hero responsive video fit
+- BEFORE UI STATE: The hero used object-cover at every screen width, cropping the left and right edges when laptop viewport proportions differed from the video.
+- AFTER UI STATE: Uses object-contain from 768px upward to show the complete 3840x1920 source frame, centered against the existing black background. Mobile fitting, source quality, caption behavior and one-time playback remain unchanged.
+- Validation: TypeScript passed. Edge confirmed contain fitting without cropping at 1280x800, 1366x768, 1440x900, 1536x864, 1920x1080 and 3440x1440; 390x844 retains mobile cover. Inspected the 1440x900 screenshot. Physical devices and Safari were not tested. Graphify query/update could not run because its uv trampoline failed to canonicalize the script path.
+
+### Page: All pages (shared navbar)
+#### Section: Tablet and small-laptop full navigation
+- BEFORE UI STATE: The full navigation and desktop dropdowns started at 1024px, leaving portrait tablets on the phone drawer; centered links could crowd the logo at narrower widths.
+- AFTER UI STATE: Full navigation and dropdowns start at 768px, with links right-aligned below 1280px and centered above it. Phone toggle and drawer end at the same breakpoint. UNCREWED SYSTEMS now opens its dropdown on tap/click as well as hover. Dropdowns scroll within the available viewport height.
+- Validation: TypeScript passed. Edge checks passed at 390, 767, 768, 820, 1024, 1280, 1366 and 1920px: correct full-menu/toggle visibility, no logo overlap, dropdown opens, and navbar does not overflow horizontally. Inspected tablet screenshot. Physical tablets and Safari were not tested. Graphify remains unavailable: uv trampoline failed to canonicalize script path.
+
+### Page: All pages (shared navbar)
+#### Section: Compact tablet and small-laptop dropdowns
+- BEFORE UI STATE: Join the Mission and Maverick still stacked their introduction above the link grid below 1280px, consuming most of short laptop screens and pushing lower links out of view.
+- AFTER UI STATE: Both dropdowns use side-by-side introduction and two-column link grid from 768px, with a 300-420px responsive height below 1280px. Reduced introduction padding and title sizes; Join the Mission card labels remain 20px until 1280px. Full desktop navigation remains available; phone layout and larger desktop composition are retained.
+- Validation: TypeScript and browser checks passed at 768x1024, 820x1180, 1024x600, 1180x560 and 1366x768. Both panels use row layout; all four careers links fit within the viewport. Inspected 1180x560 screenshot. Physical tablets and Safari were not tested. Graphify launcher remains broken (uv trampoline script path error).
+
+### Pages: FENIx (/fenix), STORM (/storm), MANTIS (/mantis)
+#### Section: Hero video source for mobile devices
+- BEFORE UI STATE: Each hero played only its desktop video source at every viewport size.
+- AFTER UI STATE: Added each supplied mobile MP4 as a source for viewports up to 767px; the current desktop MP4 remains the fallback for wider screens. Existing playback, framing styles, captions and end behavior are unchanged.
+- Validation: TypeScript passed; all three mobile video asset paths exist; git diff check passed. Browser/device playback was not run. Graphify update remains unavailable because its uv trampoline could not canonicalize the script path.
+
+### Page: STORM (/storm)
+#### Section: Component overview heading on compact phones
+- BEFORE UI STATE: The heading used an 88px minimum top inset, and the cyan phrase could wrap to a second line.
+- AFTER UI STATE: At widths up to 430px the heading sits 24px higher. The cyan phrase scales with viewport width and stays on one line. The rules are scoped to this section.
+
+### Page: STORM (/storm)
+#### Section: Ready / Rugged / Relentless drone on larger phones
+- BEFORE UI STATE: Larger phones used the standard 133vw drone width.
+- AFTER UI STATE: At widths of 400-767px and heights of at least 821px, the drone is 148vw wide and remains centered at the existing bottom anchor.
+
+### Page: STORM (/storm)
+#### Section: Ready / Rugged / Relentless drone size refinement
+- BEFORE UI STATE: The drone was 148vw wide on larger phones.
+- AFTER UI STATE: The drone is 156vw wide at the same viewport sizes, with the same bottom anchor.
+
+### Page: STORM (/storm)
+#### Section: Ready / Rugged / Relentless drone size, two more increments
+- BEFORE UI STATE: The drone was 156vw wide on larger phones.
+- AFTER UI STATE: The drone is 172vw wide at the same viewport sizes and bottom position.
+
+### Page: STORM (/storm)
+#### Section: Ready / Rugged / Relentless drone size and vertical placement
+- BEFORE UI STATE: The drone was 172vw wide with a -4svh bottom offset on larger phones.
+- AFTER UI STATE: At the same viewport sizes, the drone is 188vw wide with a -9svh bottom offset for a larger, slightly lower placement.
+
+### Page: STORM (/storm)
+#### Section: Specifications heading on larger phones
+- BEFORE UI STATE: The heading sat at its normal flow position close to the navbar.
+- AFTER UI STATE: The heading is 16px lower on viewports 400-767px wide and at least 821px tall. The drone and specs grid retain their positions.
+
+### Page: STORM (/storm)
+#### Section: Specifications heading position on larger phones
+- BEFORE UI STATE: The heading was 16px below its normal position, with no horizontal offset.
+- AFTER UI STATE: The heading is another 8px lower and 6px farther left at the same viewport sizes.
+
+### Page: STORM (/storm)
+#### Section: Specifications heading horizontal adjustment on larger phones
+- BEFORE UI STATE: The heading sat 6px left of its normal position.
+- AFTER UI STATE: The heading moves 4px right, leaving a 2px left offset and preserving the 24px downward offset.
+
+### Page: STORM (/storm)
+#### Section: Specifications heading alignment on larger phones
+- BEFORE UI STATE: The heading was 2px left of its normal position.
+- AFTER UI STATE: The heading moves 4px right to a 2px right offset.
+
+### Page: FENIx (/fenix)
+#### Section: Hero video on larger phones
+- BEFORE UI STATE: Every phone used the same mobile hero clip.
+- AFTER UI STATE: Viewports 400-767px wide and at least 821px tall use FENIX_Hero_large_mobile.mp4. The standard phone, tablet and desktop sources still cover their existing layouts. The hero also reselects the video when the viewport crosses the new breakpoint.
+
+### Page: FENIx (/fenix)
+#### Section: Compact Tactical Intelligence image on larger phones
+- BEFORE UI STATE: The drone used the standard phone framing.
+- AFTER UI STATE: On viewports 400–767px wide and at least 821px tall, the drone image is 5% larger and shifted up and left without repositioning the text.
+
+### Page: FENIx (/fenix)
+#### Section: Compact Tactical Intelligence image framing on larger phones
+- BEFORE UI STATE: The drone image used a 1.05 scale multiplier and a 3% left shift.
+- AFTER UI STATE: The drone image uses a 1.15 scale multiplier and a 6% left shift at the same viewport sizes. The 4% upward shift is retained.
+
+### Page: FENIx (/fenix)
+#### Section: GPS navigation paragraph on phones
+- BEFORE UI STATE: The paragraph was left aligned on narrow phones and centered from 640px upward.
+- AFTER UI STATE: The paragraph is justified below 768px and centered on wider screens.
+
+### Page: FENIx (/fenix)
+#### Section: Turtle Mode on phones
+- BEFORE UI STATE: The Autonomous Sequence card only appeared on desktop, and the recovery video card scaled during scroll on phones.
+- AFTER UI STATE: The mobile layout shows the shared Autonomous Sequence card beneath Recovery Protocol. The recovery video card stays at a fixed size while scrolling on phones. The desktop sequence and scroll zoom remain available at their existing layouts.
+
+### Page: FENIx (/fenix)
+#### Section: Turtle Mode scroll on phones
+- BEFORE UI STATE: The panel occupied two viewport heights with sticky content, delaying the next section. The phone scale override depended on a Tailwind max breakpoint variant.
+- AFTER UI STATE: Below 640px the panel occupies one viewport height and its content scrolls with the page. An explicit phone CSS rule overrides the inline video transform. The existing section snap now sees the next panel directly after Turtle Mode.
+
+### Page: FENIx (/fenix)
+#### Section: Floor Map Generation paragraph on phones
+- BEFORE UI STATE: The paragraph was left aligned below 640px and justified at wider widths.
+- AFTER UI STATE: The paragraph is justified at every width, including phones.
+
+### Page: FENIx (/fenix)
+#### Section: Awareness title, drone and sensor cards on phones
+- BEFORE UI STATE: The heading used a custom 24px minimum. The sensor cards sat 16px from the bottom and the drone had no extra vertical offset.
+- AFTER UI STATE: Phones use the shared FENIX heading size. The sensor cards sit 16px higher and the drone has a 16px upward offset. The connector and hotspots still measure the displayed image and card positions.
+
+### Page: FENIx (/fenix)
+#### Section: Awareness sensor panel on phones
+- BEFORE UI STATE: The sensor panel sat at the bottom of the mobile layout with 32px of section padding.
+- AFTER UI STATE: The sensor panel sits another 16px higher on phones. The connector follows the panel's measured position.
+
+### Page: FENIx (/fenix)
+#### Section: First Responder drone on phones
+- BEFORE UI STATE: The drone was anchored 12vh above the section bottom on phones.
+- AFTER UI STATE: The drone sits 16px lower below 768px.
+
+### Page: FENIx (/fenix)
+#### Section: First Responder drone vertical adjustment on phones
+- BEFORE UI STATE: The drone sat 16px below its original mobile position.
+- AFTER UI STATE: The drone sits another 32px lower below 768px, for a total shift of 48px.
+
+### Page: FENIx (/fenix)
+#### Section: Details heading and feature spacing on phones
+- BEFORE UI STATE: The heading sat in its normal position and five equally stretched rows left large blank gaps beneath short descriptions.
+- AFTER UI STATE: The heading is 16px higher. Mobile feature rows fit their text with consistent spacing around the dividers.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile feature list placement and spacing
+- BEFORE UI STATE: The feature rows started just below the image with a .65rem gap, leaving the extra space beneath the list.
+- AFTER UI STATE: The list uses available space above it to sit near the section bottom, with a slightly larger .8rem gap between rows.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile details image and heading
+- BEFORE UI STATE: The image was capped at 22svh, leaving unused space above the feature list. The title was shifted up 16px.
+- AFTER UI STATE: The wider image uses the available space between the heading and feature list and is centered within it. The title sits another 8px higher on phones.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile details image scale and alignment
+- BEFORE UI STATE: The image used 112% of the content width and was centered.
+- AFTER UI STATE: The image uses 128% of the content width and shifts right by up to 16px, while fitting the space between the heading and feature list.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile details drone zoom and position
+- BEFORE UI STATE: The mobile drone rendered at its fitted scale with a right offset of up to 16px.
+- AFTER UI STATE: The drone renders at twice its previous visual scale and moves up to another 16px right. The zoomed image clips to the section sides and stays within its vertical slot.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile details drone horizontal position
+- BEFORE UI STATE: The drone's right offset was capped at 32px.
+- AFTER UI STATE: The drone moves up to another 32px right, with a proportional shift on narrower phones.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile details drone rightward adjustment
+- BEFORE UI STATE: The last rightward move added up to 32px.
+- AFTER UI STATE: That move adds up to 38px relative to the same starting position, with a proportional adjustment on narrow screens.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile details drone rightward adjustment
+- BEFORE UI STATE: The rightward move added up to 38px to the earlier position.
+- AFTER UI STATE: The move adds up to 50px from the same starting position, scaling down on narrower phones.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile details drone rightward adjustment
+- BEFORE UI STATE: The rightward move added up to 50px to the earlier position.
+- AFTER UI STATE: The move adds up to 80px from the same starting position, scaling down on narrower phones.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile details drone rightward adjustment
+- BEFORE UI STATE: The rightward move added up to 80px to the earlier position.
+- AFTER UI STATE: The move adds up to 110px from the same starting position, scaling down on narrower phones.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile details drone entrance and position
+- BEFORE UI STATE: The drone appeared at its final position with no entrance. The rightward adjustment was capped at 110px relative to the earlier position.
+- AFTER UI STATE: On phones the drone enters from the right once the section is in view and settles at the updated 126px maximum adjustment. The entrance is skipped when reduced motion is enabled.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile details drone final position
+- BEFORE UI STATE: The drone settled at a rightward adjustment of up to 126px from the earlier starting position.
+- AFTER UI STATE: The entrance settles at a rightward adjustment of up to 156px from the same position, scaling down on narrower phones.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile feature list vertical position
+- BEFORE UI STATE: The list sat against the section's bottom padding.
+- AFTER UI STATE: The list sits 16px higher on phones, with the same spacing between rows.
+
+### Page: FENIx (/fenix)
+#### Section: Mobile specifications dimension dividers
+- BEFORE UI STATE: Vertical dividers between Length, Width and Height stretched through the empty space below the values.
+- AFTER UI STATE: On phones the dimension cells fit their content, so the dividers stop near the bottom of the values.
+
+### Page: FENIx (/fenix)
+#### Section: Compact Tactical Intelligence on small phones
+- BEFORE UI STATE: The full portrait image frame and standard spacing could push the copy to the bottom edge or off the screen.
+- AFTER UI STATE: Below 400px, the drone shifts 16px left, with a shorter image frame and tighter vertical spacing so the section fits the screen.
+- Validation: Edge confirmed the section and copy fit at 375x667 and 360x780. The small phone rules did not apply at 440x956 or 768x1024.
+
+### Page: FENIx (/fenix)
+#### Section: Awareness heading, drone, sensor card and dots on small phones
+- BEFORE UI STATE: Small phones used the standard mobile heading placement, upward drone offset, sensor card spacing and 8px dots.
+- AFTER UI STATE: Below 400px the title sits 8px higher, the drone is larger and lower, and the sensor card is more compact. The 6px dots have a smaller glow and retain their existing tap area. Connector routing follows the existing stacked layout on phones.
+
+### Page: FENIx (/fenix)
+#### Section: Awareness panel clearance on small phones
+- BEFORE UI STATE: The sensor panel's 16px upward offset could overlap the enlarged drone.
+- AFTER UI STATE: Below 400px, the panel is 16px lower to clear the drone image.
+
+### Page: FENIx (/fenix)
+#### Section: Awareness panel and connector on small phones
+- BEFORE UI STATE: The sensor panel sat directly below the drone with no additional offset, and its dashed connector used the general phone routing.
+- AFTER UI STATE: Below 400px the panel sits another 12px lower. The dashed connector runs from the highlighted sensor to the top center of the card with a short vertical end, and the hotspot stays attached to its sensor.
+
+### Page: FENIx (/fenix)
+#### Section: Awareness sensor panel spacing on small phones
+- BEFORE UI STATE: The sensor panel used a 12px downward offset below 400px.
+- AFTER UI STATE: The panel uses a 20px downward offset below 400px. The connector follows the card's measured position.
+
+### Page: FENIx (/fenix)
+#### Section: First Responder title and drone on small phones
+- BEFORE UI STATE: The title was spread across four equal columns, and the drone used the shared phone position.
+- AFTER UI STATE: Below 400px the title is centered as one phrase and sits 8px higher. The drone sits 8px lower.
+
+### Page: FENIx (/fenix)
+#### Section: First Responder drone on small phones
+- BEFORE UI STATE: The drone bottom offset was calc(12vh - 56px) below 400px.
+- AFTER UI STATE: The drone sits another 16px lower below 400px.
+
+### Page: FENIx (/fenix)
+#### Section: Details drone framing on small phones
+- BEFORE UI STATE: The shared mobile zoom, right shift, and clipping cut off the drone on small screens.
+- AFTER UI STATE: Below 400px the drone is centered and contained in the available image slot, with its right-to-left entrance retained.
+
+### Page: FENIx (/fenix)
+#### Section: Details drone close-up on small phones
+- BEFORE UI STATE: Below 400px the drone was centered with the full image in view.
+- AFTER UI STATE: The smaller phone layout uses a larger close-up with a rightward offset, matching the framing on larger phones. Slightly tighter feature spacing leaves more height for the drone while keeping the list in the same section.
+
+### Page: FENIx (/fenix)
+#### Section: Match the larger-phone Details drone crop
+- BEFORE UI STATE: The small-phone image was scaled less and showed more of the rear. A fixed section height also reduced the image space above the features.
+- AFTER UI STATE: Small phones inherit the same zoom and horizontal crop as larger phones. A width-based image height keeps the close-up consistent, and the section can grow on short screens so the feature list remains readable.
+
+### Page: FENIx (/fenix)
+#### Section: Small-phone Details single-screen layout
+- BEFORE UI STATE: A fixed 76vw image height made the section taller than one screen on an iPhone SE.
+- AFTER UI STATE: Below 400px, Details stays one viewport tall. The title sits 8px higher. The zoomed drone fits in the space above the tightly grouped feature rows, preserving the right-edge crop.
+
+### Page: FENIx (/fenix)
+#### Section: Small-phone Details drone overlap
+- BEFORE UI STATE: The single-screen image slot clipped the enlarged drone at its top and bottom edges.
+- AFTER UI STATE: Below 400px the drone can extend beyond the image slot behind the text while the section remains one screen tall.
+
+### Page: FENIx (/fenix)
+#### Section: Technical specifications illustration on small phones
+- BEFORE UI STATE: The illustration used the shared mobile scale of 1.66 with a 6% downward offset.
+- AFTER UI STATE: Below 400px the illustration is 10% larger and moves 10px up relative to its previous position.
+
+### Page: FENIx (/fenix)
+#### Section: Technical specifications illustration height on small phones
+- BEFORE UI STATE: The enlarged illustration sat 10px above its original mobile position.
+- AFTER UI STATE: Below 400px the illustration sits another 8px higher, 18px above the original position.
+
+### Page: MANTIS (/mantis)
+#### Section: Specifications on small phones
+- BEFORE UI STATE: The absolutely positioned title wrapped over the drone, and the dimension block had a large gap above it.
+- AFTER UI STATE: Below 400px the title uses two lines above the illustration. The illustration, dimensions, and performance rows use compact spacing so they fit together on a short screen.
+
+### Page: MANTIS (/mantis)
+#### Section: Specifications title size on small phones
+- BEFORE UI STATE: The title measured about 25px at a 375px viewport.
+- AFTER UI STATE: The title measures about 23px at the same width, with the two-line layout retained.
+
+### Page: MANTIS (/mantis)
+#### Section: Specifications title size and placement on small phones
+- BEFORE UI STATE: The title was about 23px wide at a 375px viewport and sat in its normal flow position.
+- AFTER UI STATE: Below 400px the title is about 27px at a 375px viewport and sits 16px higher, keeping the two-line layout.
+
+### Page: MANTIS (/mantis)
+#### Section: Specifications illustration on small phones
+- BEFORE UI STATE: The illustration used its fitted size and normal position below 400px.
+- AFTER UI STATE: The illustration is 6% larger and sits 6px higher at the same viewport widths.
+
+### Page: MANTIS (/mantis)
+#### Section: Specifications illustration size refinement on small phones
+- BEFORE UI STATE: The illustration was scaled to 1.06 below 400px.
+- AFTER UI STATE: The illustration scales to 1.12 at the same widths and retains its 6px upward shift.
+
+### Page: MANTIS (/mantis)
+#### Section: VTOL Launch details on small phones
+- BEFORE UI STATE: The large heading wrapped over the drone, and the larger illustration and callouts crowded the short display.
+- AFTER UI STATE: Below 400px, the heading sits higher on three lines. The drone sits lower and farther right, with tighter callouts on the left. The connector endpoints continue to follow the displayed illustration.
+
+### Page: MANTIS (/mantis)
+#### Section: Details callout spacing on small phones
+- BEFORE UI STATE: The callout group started at max(228px, 41svh), leaving a large gap below the heading.
+- AFTER UI STATE: Below 400px the three callouts sit 64px higher. Their leader lines still use the measured callout positions.
+
+### Page: MANTIS (/mantis)
+#### Section: Specifications title on larger phones
+- BEFORE UI STATE: The heading wrapped after “More” on larger phones.
+- AFTER UI STATE: Viewports 400–767px wide and at least 821px tall show “One platform.” followed by “More possibilities.” on its own line. Other viewport sizes use their existing title layouts.
+
+### Page: MANTIS (/mantis)
+#### Section: Perspective title and illustration on larger phones
+- BEFORE UI STATE: The title sat at 19% from the top and the rear-view illustration had no upward offset.
+- AFTER UI STATE: Both sit 12px higher on viewports 400–767px wide and at least 821px tall.
+
+### Page: MANTIS (/mantis)
+#### Section: Perspective illustration on larger phones
+- BEFORE UI STATE: The illustration sat 12px above its default position.
+- AFTER UI STATE: The illustration sits 22px above its default position at the same viewport sizes.
+
+### Page: MANTIS (/mantis)
+#### Section: Perspective illustration offset on larger phones
+- BEFORE UI STATE: The illustration was 22px above its default position.
+- AFTER UI STATE: The illustration is 40px above its default position at the same viewport sizes.
+
+### Page: MANTIS (/mantis)
+#### Section: VTOL Launch details on larger phones
+- BEFORE UI STATE: The cyan phrase wrapped to two lines beside the drone and the callouts sat well below the title.
+- AFTER UI STATE: At 400–767px wide and at least 821px tall, the heading has three deliberate lines with the full cyan phrase on the third. The drone is framed farther right and the callout group starts higher, with leaders still tracking the image.
+
+### Page: MANTIS (/mantis)
+#### Section: Details image and callout position on larger phones
+- BEFORE UI STATE: The drone and callouts used their initial larger-phone offsets.
+- AFTER UI STATE: Both sit 12px lower at the same viewport sizes, with the connectors following their positions.
+
+### Page: MANTIS (/mantis)
+#### Section: Details illustration and callout offset on larger phones
+- BEFORE UI STATE: The drone and callouts had a 12px downward offset.
+- AFTER UI STATE: Both now have a 40px downward offset at the same viewport sizes.
+
+### Page: MANTIS (/mantis)
+#### Section: Details connector lines on larger phones
+- BEFORE UI STATE: The callout borders duplicated the horizontal SVG lines, and the leaders bent at the text column edge.
+- AFTER UI STATE: The SVG draws a continuous line for each callout with a rounded bend just beyond the text column. Endpoints still follow their drone anchors.
+
+### Page: MANTIS (/mantis)
+#### Section: Integrated camera dot on larger phones
+- BEFORE UI STATE: The camera connector used the shared vertical anchor.
+- AFTER UI STATE: The camera dot and its connector endpoint sit 1% of the displayed image height lower on larger phones.
+
+### Page: MANTIS (/mantis)
+#### Section: Integrated camera connector on larger phones
+- BEFORE UI STATE: The dot was 1% of the image height below the base anchor, with no horizontal offset.
+- AFTER UI STATE: The dot moves another 0.8% of the image height down and 0.5% of the image width left. The leader follows the dot.
+
+### Page: All pages (shared footer)
+#### Section: Single-screen footer on small phones
+- BEFORE UI STATE: Standard mobile spacing and three stacked rows at the bottom pushed the social links and copyright past the first screen on short phones.
+- AFTER UI STATE: Below 400px, the brand and navigation use tighter spacing, and the social links share a row with the back-to-top button. The footer keeps its viewport minimum and can expand if needed for enlarged text.
+
+### Page: T-BAT (/bat)
+#### Section: Multi Role Single Solution drone on small phones
+- BEFORE UI STATE: The portrait drone sat 4% above the section bottom.
+- AFTER UI STATE: The drone sits 26px lower on portrait viewports narrower than 400px.
+
+### Page: T-BAT (/bat)
+#### Section: Multi Role Single Solution drone position on small phones
+- BEFORE UI STATE: The drone sat 26px below its original portrait position.
+- AFTER UI STATE: The drone sits another 60px lower on portrait screens narrower than 400px, for a total shift of 86px.
+
+### Page: T-BAT (/bat)
+#### Section: Multi Role Single Solution drone offset on small phones
+- BEFORE UI STATE: The follow-up move was 60px down, making the total shift 86px.
+- AFTER UI STATE: The follow-up move is 50px down, making the total shift 76px on portrait screens narrower than 400px.
+
+### Page: T-BAT (/bat)
+#### Section: Multi Role Single Solution drone offset on small phones
+- BEFORE UI STATE: The total downward shift was 76px.
+- AFTER UI STATE: The total downward shift is 50px on portrait screens narrower than 400px.
+
+### Page: T-BAT (/bat)
+#### Section: Multi Role Single Solution downward move on small phones
+- BEFORE UI STATE: The last edit used a 50px total downward shift and raised the drone compared with the prior 76px shift.
+- AFTER UI STATE: The drone moves 50px below that prior 76px position for a total shift of 126px, on portrait screens narrower than 400px.
+
+### Page: T-BAT (/bat)
+#### Section: Multi Role Single Solution upward adjustment on small phones
+- BEFORE UI STATE: The drone sat 126px below its original position.
+- AFTER UI STATE: It sits 30px higher than before, 96px below the original position, on portrait screens narrower than 400px.
+
+### Page: T-BAT (/bat)
+#### Section: Engineered for the mission specifications on small phones
+- BEFORE UI STATE: The absolute heading overlapped the technical illustration on short portrait screens.
+- AFTER UI STATE: Below 400px, the two-line heading has its own row above a centered illustration. The dimensions and performance rows use compact spacing to fit on a short screen.
+
+### Page: T-BAT (/bat)
+#### Section: Specifications spacing on small phones
+- BEFORE UI STATE: The title and figures had no vertical offset, and the drone illustration used its fitted scale.
+- AFTER UI STATE: Below 400px, the title sits 8px higher, the illustration is 6% larger, and the dimensions and performance figures sit 32px lower.
+
+### Page: T-BAT (/bat)
+#### Section: Specifications title alignment on small phones
+- BEFORE UI STATE: The heading moved with the vertically centered illustration and measurements.
+- AFTER UI STATE: Below 400px, the heading shares the STORM specifications section's 48px top inset. The drone and measurement grid center in the space beneath it.
+
+### Page: T-BAT (/bat)
+#### Section: Specifications illustration on small phones
+- BEFORE UI STATE: The illustration used a 1.06 scale with no vertical offset.
+- AFTER UI STATE: Below 400px, the illustration uses a 1.12 scale and sits 8px higher.
+
+### Page: T-BAT (/bat)
+#### Section: Payloads & Sensors title alignment on small phones
+- BEFORE UI STATE: The payload heading used the standard product inset of at least 88px from the top and 6vw from the left.
+- AFTER UI STATE: Below 400px, the payload and preceding specs headings share the 48px top inset and align at 5vw from the left.
+
+### Page: T-BAT (/bat)
+#### Section: Payloads & Sensors drone preview on small phones
+- BEFORE UI STATE: The preview used the standard mobile top offset.
+- AFTER UI STATE: Below 400px, the drone preview sits 12px lower. The still and animated frames share the offset.
+
+### Page: T-BAT (/bat)
+#### Section: Land. Swap. Redeploy on small phones
+- BEFORE UI STATE: The heading used the standard product inset and could wrap. The video used its standard mobile position.
+- AFTER UI STATE: Below 400px, the title stays on one line at the same top and left inset as Payloads & Sensors. The battery-swap video has an extra 40px upward offset.
+
+### Page: T-BAT (/bat)
+#### Section: Sequence caption alignment on phones
+- BEFORE UI STATE: Mobile phases shared the same fixed inset at rest, but their captions slid in from opposite sides based on desktop alignment.
+- AFTER UI STATE: Mobile phase captions fade in at their shared top-left inset, so Precision Landing aligns with Transition to Horizontal Position throughout its entrance.
+
+### Page: T-BAT (/bat)
+#### Section: Sequence title placement on small phones
+- BEFORE UI STATE: Phase captions started 88px from the top and 6% from the left, with the phase number in the caption flow.
+- AFTER UI STATE: Below 400px, the phase title starts at the same 48px top inset and 5% side inset as Land. Swap. Redeploy. The phase number sits just above it, and all mobile phases still share one caption position.
+
+### Page: T-BAT (/bat)
+#### Section: Cruise/Loiter Mode stop on small phones
+- BEFORE UI STATE: The sequence only added an upward offset for tall phones.
+- AFTER UI STATE: On phones narrower than 400px, the shared Cruise/Loiter Mode stop moves an additional 10px up. The drone animation, shadow, label, and dashed path all follow the same stop.
+
+### Page: FENIx (/fenix)
+#### Section: Compact Tactical Intelligence on portrait tablets
+- BEFORE UI STATE: Tablets inherited desktop columns and offsets. The drone was cropped on the left, and the copy crowded the right edge.
+- AFTER UI STATE: Portrait viewports 768–1100px wide show a wider, centered drone 30px higher above the text, with larger typography and a consistent reading width. The phone and desktop layouts retain their existing rules.
+- Follow-up: The copy width and paragraph size now scale proportionally from the iPad Mini to the larger tablets. Verified the final layout in Edge at 768x1024, 960x1440 and 1032x1376, with phone and desktop controls at 375x667, 440x956 and 1440x900.
+- Local preview recovery: Reproduced three missing JavaScript chunks on port 3000, restarted the Tsalla dev server with a clean build directory, and confirmed /fenix and all eight referenced CSS/JavaScript assets returned 200. Previous generated files were retained in the ignored .next-recovery-fenix-20261121102251 directory.
+
+### Page: FENIx (/fenix)
+#### Section: GPS navigation text on iPad Pro portrait
+- BEFORE UI STATE: The heading and paragraph used the general product font sizes, making the copy look small on the iPad Pro preview.
+- AFTER UI STATE: At portrait widths of 1024–1100px, the heading is about 43px and the paragraph about 19px at 1032px wide. The other device layouts retain their existing font rules.
+
+### Page: FENIx (/fenix)
+#### Section: GPS navigation image and paragraph on portrait tablets
+- BEFORE UI STATE: The wide desktop cave image was cropped on portrait tablets, and larger iPad Pro paragraph text wrapped onto a third line.
+- AFTER UI STATE: Portrait tablets from 768–1100px load a generated cave image with the drone on the left and the cyan mapping points on the right. The image is contained without cropping, and the larger paragraph has room for two lines.
+- Validation: Edge confirmed the tablet source, contain layout, and two paragraph lines at 768x1024, 960x1440, and 1032x1376. The existing phone and desktop sources were also confirmed. The final image revision keeps the verified slot and pixel dimensions.
+
+### Page: FENIx (/fenix)
+#### Section: Turtle Mode on portrait tablets
+- BEFORE UI STATE: The title wrapped into two lines, the video and cards were spaced apart, and the section occupied two screens of scrolling.
+- AFTER UI STATE: At portrait widths of 768–1100px, the single-line title uses the Capabilities heading size, both cards sit below a stable video, and one wheel gesture or touch swipe advances from Turtle Mode to Floor Map Generation.
+- Validation: Edge verified the tablet layout and both gestures at 768x1024, 960x1440, and 1032x1376. Phone and desktop layout rules were checked at 375x667, 440x956, and 1440x900.
+
+### Page: FENIx (/fenix)
+#### Section: Floor Map Generation and navigation on large portrait tablets
+- BEFORE UI STATE: The Floor Map paragraph used 14px type, and the top navigation labels used 12px type.
+- AFTER UI STATE: At portrait widths of 1024–1100px, the paragraph matches the GPS section's body type and wraps across two lines. FENIX navigation labels use 16px type.
+- Validation: Edge confirmed two lines and navigation clearance at 1024px, 1032px, and 1100px. The iPad Mini, Surface Pro 10, phone, and desktop sizes retained their existing type sizes.
+
+### Page: FENIx (/fenix)
+#### Section: Every detail. Greater awareness. on portrait tablets
+- BEFORE UI STATE: Portrait tablets used the desktop columns with a small heading, a narrow card, and unused vertical space below the section.
+- AFTER UI STATE: Portrait widths of 768–1100px use the Capabilities heading scale and a centered drone above the sensor details. The dashed line meets the top of the card, and the section fills one screen.
+- Validation: Edge verified the one-screen layout and all six sensor hotspots at 768x1024, 960x1440, and 1032x1376, and checked the existing phone and desktop layout modes.
+
+### Page: FENIx (/fenix)
+#### Section: First Responder on portrait tablets
+- BEFORE UI STATE: Portrait tablets cropped the four-column desktop image down to the middle two scenes, and the drone was partly or fully below the section edge.
+- AFTER UI STATE: Portrait viewports 768–1100px wide use a generated background with four full-width scenes stacked vertically. The title is centered and the drone fits inside the single-screen section.
+- Validation: Edge confirmed all four rows and the drone fit at 768x1024, 960x1440, and 1032x1376. Phones, landscape tablets, and desktops retained their existing sources.
+
+### Page: FENIx (/fenix)
+#### Section: Feature overview on portrait tablets
+- BEFORE UI STATE: The iPad Mini showed the drone above two columns of feature cards, while the iPad Pro inherited the cropped desktop drone and annotated list.
+- AFTER UI STATE: Portrait tablets 768–1100px wide share the centered drone and two-column card layout. The title ends its first line with “Intrusion” and centers “eXplorer” on line two, with a 30px total upward adjustment. The drone width includes the requested 5% and subsequent 7% increases.
+- Validation: Edge confirmed the heading, full drone, and five cards fit in one screen on the three target tablets. Existing phone, landscape tablet, and desktop layouts were checked.
+
+### Page: FENIx (/fenix)
+#### Sections: Specifications and closing video on portrait tablets
+- BEFORE UI STATE: The iPad Pro showed the desktop specifications arrangement with smaller type, and the iPad Mini's dimension dividers stretched the full row height.
+- AFTER UI STATE: All three portrait tablets use the iPad Mini layout. The technical drone is enlarged by 12%, dimension dividers stop at the text, and iPad Pro labels, values, and units are larger. The closing heading and demo button sit 42px lower after the 16px and 26px adjustments.
+- Validation: Edge confirmed the specifications fit on one screen and the closing offset at all three tablet sizes. Phone, landscape tablet, and desktop layouts were also checked.
+
+### Page: STORM (/storm)
+#### Sections: All six sections on portrait tablets
+- BEFORE UI STATE: The triptych cropped the outer scenes and labels, the drone crossed the heading, the iPad Pro inherited desktop specification columns, and the desktop maritime crop lost the aircraft.
+- AFTER UI STATE: Portrait widths of 768–1100px use a generated three-column backdrop with the drone anchored at the bottom, a consistent stacked specification layout, and a complete side view above the three feature captions. The maritime section reuses the portrait artwork to keep the drone and deck visible. Heading and body sizes scale across the tablet sizes, and navigation labels are larger on the iPad Pro.
+- Validation: Edge checked all six sections at 768x1024, 960x1440, and 1032x1376. Each section fits within one screen, the iPad Pro text is at least as large as on the other tablets, and the phone, landscape tablet, and desktop artwork sources still load.
+
+#### Section: STORM specifications spacing on portrait tablets
+- BEFORE UI STATE: The title, drone, dimensions, and metrics used the initial portrait tablet positions.
+- AFTER UI STATE: The title moves up 26px, the drone scales up 12% and moves up 30px, and the dimensions and metrics move down 20px. Edge confirmed the full section fits on one screen at all three tablet sizes.
+- Follow-up: The drone grows another 12% and moves up another 20px. Edge confirmed the section still fits on one screen at all three portrait tablet sizes.
+
+#### Section: STORM side-view feature callouts on portrait tablets
+- BEFORE UI STATE: The side-view drone sat slightly right of center and tablet captions had no leader lines.
+- AFTER UI STATE: The side view is 20% larger, 36px higher, and centered. Each caption connects to its component with a 90-degree leader and cyan dot. Edge verified the drone and captions fit on one screen on all three portrait tablets.
+- Follow-up: Darkened and thickened the tablet leaders so the line remains visible against the gray airframe all the way to the cyan dot.
+- Follow-up: The central-airframe leader is straight. The landing-gear leader turns just above the caption, then runs straight to the right-side leg. Edge verified both routes at all three portrait tablet sizes.
