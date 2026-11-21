@@ -186,7 +186,9 @@ export default function FenixAwareness() {
         </div>
       </div>
       <style jsx>{`
-        .fenix-awareness { position: relative; background: #fff; color: #171717; padding: clamp(74px, 10svh, 100px) 4vw 24px; }
+        /* PREVIOUS UI: no overflow-x. The drone SVG (overflow: visible, scaled 1.12 on small phones) made the whole page
+           wider than the screen. clip trims it sideways without turning the section into a scroll box. */
+        .fenix-awareness { position: relative; overflow-x: clip; background: #fff; color: #171717; padding: clamp(74px, 10svh, 100px) 4vw 24px; }
         .awareness-overview { width: 100%; max-width: 2200px; margin: 0 auto; }
         /* PREVIOUS UI: the custom heading size applied at every width. */
         .awareness-heading h2 { line-height: 1.15; font-weight: 400; }
@@ -204,7 +206,8 @@ export default function FenixAwareness() {
         }
         .awareness-card { display: grid; gap: 10px; }
         .awareness-sizer { display: none; }
-        @media (max-width: 767px) { .awareness-sizer { display: grid; } }
+        /* PREVIOUS UI: @media (max-width: 767px), which also matched small phones held sideways. */
+        @media (max-width: 767px) and (orientation: portrait) { .awareness-sizer { display: grid; } }
         .awareness-closeup { width: 100%; height: clamp(100px, 14svh, 140px); object-fit: cover; border-radius: 12px; }
         .awareness-copy, .awareness-details { background: #f5f5f5; border: 1px solid #e2e2e2; border-radius: 12px; padding: 16px; }
         /* A card without a close-up: on phones and tablets the text takes the image's column too. */
@@ -260,8 +263,11 @@ export default function FenixAwareness() {
         */
         /* Phones: the whole section is one screen. The drone takes whatever height is left after the heading and
            the card (the sensor dots follow it, as they are placed from its on-screen size), and the card is compact:
-           close-up beside the text, the two facts side by side underneath. */
-        @media (max-width: 767px) {
+           close-up beside the text, the two facts side by side underneath.
+           PREVIOUS UI: @media (max-width: 767px). On small phones held sideways the card filled the 375px-tall section,
+           leaving the drone no height, so it drew at full size and stretched the page to 1772px. They now use the
+           side-by-side layout. */
+        @media (max-width: 767px) and (orientation: portrait) {
           /* PREVIOUS UI: padding-bottom: 16px and no vertical drone offset. */
           .fenix-awareness { height: 100svh; display: flex; flex-direction: column; padding-bottom: 32px; }
           .awareness-overview { flex: 1; min-height: 0; display: flex; flex-direction: column; }
